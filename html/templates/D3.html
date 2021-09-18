@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+{% extends "base.html" %}
+{% block title %}Programmer5 - BL Archives{% endblock%}
+
+{% block content %}
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">D3</a>
+    </li>
+</ul>
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+    <hr/>
+
+    <div class="accordion" id="accordionGuide">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Description
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                <div class="card-body">
+                    <div class="description">
+
+                        <p> D3 is a JavaScript library and framework for creating visualizations.
+                            D3 creates visualizations by binding the data and graphical elements to the Document Object Model.
+                            D3 associates (binding) the data (stuff you want to visualize) with the DOM. This allows the user to manipulate, change or add to the DOM.
+                            Allowing direct changes to the DOM offers a lot of control on how a document (web page) will look.
+                            This level of control and how D3 manipulates the DOM makes it unique from other visualization toolkits. <br></p>
+                        <ul>
+                            <p>Advantages of D3: <br><br></p>
+                            <li> D3.js is a Javascript library. So, it can be used with any JS framework of your choice like Angular.js, React.js or Ember.js.</li>
+                            <li> D3 focuses on data, so it is the most appropriate and specialized tool for data visualizations.</li>
+                            <li> D3 is open-source. So you can work with the source code and add your own features.</li>
+                            <li> It works with web standards so you don't need any other technology or plugin other than a browser to make use of D3.</li>
+                            <li> D3 works with web standards like HTML, CSS and SVG, there is no new learning or debugging tool required to work on D3.</li>
+                            <li> D3 does not provide any specific feature, so it gives you complete control over your visualization to customize it the way you want. This gives it an edge over other popular tools like Tableau or QlikView.</li>
+                            <li> Since D3 is lightweight, and works directly with web standards, it is extremely fast and works well with large datasets.</li>
+
+
+                            <p><br><br>Disadvantages of D3: <br><br></p>
+                            <li> D3 doesn't always try to support older browsers.  If you want users on those browsers to see your visualization, you may have to use a static placeholder (in the case it doesn't load).</li>
+                            <li> D3 has some data-source limitations.</li>
+                            <li> D3 cannot easily conceal original data.  If you're using data that you don't want shared, it can be challenging to use D3.</li>
+                            <li> D3 doesn't generate predetermined visualizations for you. It can be time-inefficient to generate D3 visualizations where a quick chart from an alternative source would perform beautifully.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Installation
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+                            <h3>In this chapter, we will learn how to set up the D3.js development environment. Before we start, we need the following components −</h3>
+                            <br>
+                            <li> D3.js library</li>
+                            <li> Editor</li>
+                            <li> Web browser</li>
+                            <li> Web server</li>
+                            <p>Let us go through the steps one by one in detail.</p>
+                            <br>
+
+                            <h3>D3.js Library</h3>
+                            <br>
+                            <P>We need to include the D3.js library into your HTML webpage in order to use D3.js to create data visualization. We can do it in the following two ways −</P>
+                            <li> Include the D3.js library from your project's folder.</li>
+                            <li> Include D3.js library from CDN (Content Delivery Network).</li>
+
+                            <h3>Download D3.js Library</h3>
+                            <p>D3.js is an open-source library and the source code of the library is freely available
+                                on the web at <a href="https://d3js.org/"
+                                   target="_blank" style="color: rgb(0,0,230)"><u>https://d3js.org/</u></a> website. Visit the D3.js website and download the latest version
+                                of D3.js (d3.zip). As of now, the latest version is 4.6.0.
+                                After the download is complete, unzip the file and look for d3.min.js.
+                                This is the minified version of the D3.js source code. Copy the d3.min.js file
+                                and paste it into your project's root folder or any other folder,
+                                where you want to keep all the library files.
+                                Include the d3.min.js file in your HTML page as shown below.</p>
+
+                            <p><strong>Example </strong>− Let us consider the following example.</p>
+
+
+                            <pre>
+                            <code class="language-bash">
+                               !DOCTYPE html
+                                html lang = "en"
+                                head
+                                    script src = "/path/to/d3.min.js" /script
+                                /head
+                                body
+                                script
+                                    // write your d3 code here..
+                                /script
+                                /body
+                                /html
+                            </code>
+                            </pre><br>
+
+                            <p>D3.js is a JavaScript code, so we should write all our D3 code within “script” tag.
+                                We may need to manipulate the existing DOM elements,
+                                so it is advisable to write the D3 code just before the end of the “body” tag.</p>
+
+                            <h3>Include D3 Library from CDN</h3>
+                            <p>We can use the D3.js library by linking it directly into our HTML page
+                                from the Content Delivery Network (CDN). CDN is a network of servers where files are
+                                hosted and are delivered to a user based on their geographic location.
+                                If we use the CDN, we do not need to download the source code.</p><br>
+
+                            <P>Include the D3.js library using
+                                the CDN URL <a href="https://d3js.org/d3.v4.min.js"
+                                   target="_blank" style="color: rgb(0,0,230)"><u>https://d3js.org/d3.v4.min.js</u></a> into our page as shown below.</P>
+
+                            <p><strong>Example </strong>− Let us consider the following example.</p>
+
+                            <pre>
+                            <code class="language-bash">
+                               !DOCTYPE html
+                                html lang = "en"
+                                head
+                                    script src = "https://d3js.org/d3.v4.min.js" /script
+                                /head
+                                body
+                                script
+                                    // write your d3 code here..
+                                /script
+                                /body
+                                /html
+                            </code>
+                            </pre><br>
+
+                            <h3>D3.js Editor</h3>
+                            <p>We will need an editor to start writing your code. There are some great IDEs
+                                (Integrated Development Environment) with support for JavaScript like −</p>
+                            <li> Visual Studio Code</li>
+                            <li> WebStorm</li>
+                            <li> Eclipse</li>
+                            <li> Sublime Text</li>
+
+                            <p>These IDEs provide intelligent code completion as well as support some of the modern JavaScript
+                                frameworks. If you do not have fancy IDE,
+                                you can always use a basic editor like Notepad, VI, etc.</p>
+
+                            <h3>Web Browser</h3>
+                            <p>D3.js works on all the browsers except IE8 and lower.</p>
+
+                            <h3>Web Server</h3>
+                            <p>Most browsers serve local HTML files directly from the local file system.
+                                However, there are certain restrictions when it comes to loading external data files.
+                                In the latter chapters of this tutorial, we will be loading data from external files like
+                                <strong>CSV</strong> and <strong>JSON</strong>. Therefore, it will be easier for us,
+                                if we set up the web server right from the beginning.</p>
+                            <p>You can use any web server, which you are comfortable with − e.g. IIS, Apache, etc.</p>
+
+                            <h3>Viewing Your Page</h3>
+                            <p>In most cases, we can just open your HTML file in a web browser to view it.
+                                However, when loading external data sources, it is more reliable to
+                                run a local web server and view your page from the server <strong>(http://localhost:8080)</strong>.</p>
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Summary
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>D3 does NOT follow the template model some other visualization toolkits use. Toolkits that follow the template model,
+                            might have a functions for creating bar charts, line charts or scatter plots. With these type of toolkits,
+                            you can pass the data into the function, specify some chart attributes, and the library will generate your visualization.</p>
+                        <p>While there are plenty of D3 examples available,
+                            D3 does not provide any templates. Instead,
+                            D3 provides helper functions that work at a more general level.
+                            These helper functions can handle the messy stuff of selecting graphical elements, calculating the spacing between hash marks on your axis,
+                            generating a scale for your data, or animating graphical elements.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+
+
+{% endblock %}

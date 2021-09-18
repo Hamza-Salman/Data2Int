@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<meta charset="ISO-8859-1">
+{% extends "base.html" %}
+{% block title %}Programmmer3 Archives{% endblock%}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+</head>
+<h2> Code Changes - Edited By HS</h2>
+
+<h1>Progress Update</h1><br>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-updates-tab" data-toggle="pill" href="#pills-updates" role="tab" aria-controls="pills-d3script" aria-selected="true">Basic Updates</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-files-tab" data-toggle="pill" href="#pills-files" role="tab" aria-controls="pills-gantt" aria-selected="false">Uploading Files to Website</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-geo-tab" data-toggle="pill" href="#pills-geo" role="tab" aria-controls="pills-geoInfo" aria-selected="false">Updating Geo Map</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-file-type-tab" data-toggle="pill" href="#pills-fileType" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">File Upload Research</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-json-type-tab" data-toggle="pill" href="#pills-filejson" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">JSON Upload</a>
+  </li>
+</ul>
+</div>
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-updates" role="tabpanel" aria-labelledby="pills-updates-tab">
+      <hr/>
+      <p>-Setup Pycharm IDE to interface with the server. <br>
+    -Implemented code to upload file to local directory.</p>
+
+</div>
+<div class="tab-pane fade" id="pills-files" role="tabpanel" aria-labelledby="pills-files-tab">
+      <hr/>
+      <h3>This section covers the implementation of the file upload feature.</h3>
+        <ol>
+            <li>Creating the upload page and implementing the file input form:
+                <pre>
+                    <code  class="language-javascript">
+                        <script type="prism-html-markup">
+
+                            <h1>Upload A File</h1>
+                            <h2>Please Select a file to upload using the Choose CSV button<br>Please make sure that your CSV is saved as "CSV UTF-8 (Comma delimited)"</h2><br><br>
+
+                            <!-- This is the code for the upload file button-->
+                            <form method="post" enctype="multipart/form-data">
+                                <input oninput="filesize(this);" type="file" name="file" accept=".csv"/><br><br>
+                            <!--    <label style="background: #fff;color: #7386D5; height: 40px; width: 210px; display: flex; justify-content: center; align-items: center;border-radius: 5px; cursor: pointer;" for="uploadedFile">Choose CSV</label>-->
+                                <input type="submit" value="Upload" id="uploadButton" style="background: #fff;color: #7386D5; height: 40px; width: 210px; border-radius: 5px;"/>
+                            </form>
+
+                            <script>
+                                   function filesize(elem) {
+                                        document.cookie = `filesize=${elem.files[0].size}`;
+                                    }
+
+                        </script>
+                    </code>
+                </pre>
+            </li>
+            <li>Submitting the form with file data and checking it in the main app.py file. Checking if its valid and saving it to the web server:
+                <pre>
+                    <code  class="language-javascript">
+                        <script type="prism-python">
+
+                            @app.route('/Upload', methods=['POST'])
+def upload_file():
+    if request.method == 'POST':
+
+        # if max_filesize(request.cookies.get("filesize")):
+        #     return render_template('ErrorFileUpload.html')
+
+        uploaded_file = request.files['file']
+
+        if uploaded_file.filename == "":
+            return render_template('ErrorFileUpload.html')
+
+        uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename))
+        return render_template('SuccessfulUpload.html')
+
+@app.route('/ErrorFileUpload')
+def error_file_upload():
+    return render_template('ErrorFileUpload.html')
+
+@app.route('/Upload')
+def upload_file_page():
+    return render_template('UploadPage.html')
+
+@app.route('/SuccessfulUpload')
+def success_file_upload():
+    return render_template('SuccessfulUpload.html')
+
+                        </script>
+                    </code>
+                </pre>
+            </li>
+        </ol>
+</div>
+<div class="tab-pane fade" id="pills-geo" role="tabpanel" aria-labelledby="pills-files-tab">
+      <hr/>
+      <h3>This section covers Uploading data for the Geo Map.</h3>
+        <ol>
+            <li>Issues with file size:<br>
+                413 Request Entity Too Large error is displayed when trying to upload Stats Can data. The limit needs to be increased in the Njinx.conf file,
+                Reference:<a style="color: blue" href="https://stackoverflow.com/questions/16312079/nginx-413-entity-too-large-file-does-not-reach-the-application"> Upload Error Info</a>
+                <br><br>
+                <img src="{{url_for('static', filename='NginxError.jpg')}}" alt="NginxError" style="border: 5px solid black">
+            </li>
+            <br>
+            <li>Issues with the data: <br>
+                We were unable to determine a way to properly find an element that could be used for the location element. The CSV that was requested had many subdivisions and went into high details for the different areas. They are using Dissemination area (DA) ids for detailed locations which would not be implementable on the current chart.
+                Reference:<a style="color: blue" href="http://canue.ca/wp-content/uploads/2018/03/CanALE_UserGuide.pdf"> Link to the Stat Canada Website</a>
+                <br><br>
+                <img src="{{url_for('static', filename='provincialData.png')}}" alt="ProvintialDataCSV" style="border: 5px solid black">
+                <br><br>
+                The issue with this however was even with a small data set, the file would not upload. The limit is very low, and it would not cover much of the data.
+            </li>
+        </ol>
+
+        <h1>Canada Map Test</h1>
+        <p>This map has clickable elements that will prompt you with the 2016 StatsCan Population data for each province. (NOTE: It takes a long time to load)<br>Use scroll wheel to zoom in and out.</p>
+        <style>
+            .division {
+                fill: #bada55;
+                stroke: black;
+                stroke-width: 0.5;
+            }
+            .selected {
+                fill: lightgray;
+            }
+            .low {
+                fill: lightyellow;
+            }
+            .lowmid {
+                fill: rgb(255, 255, 175);
+            }
+            .mid {
+                fill: rgb(255, 255, 129);
+            }
+            .midhigh {
+                fill: lightsalmon;
+            }
+            .high {
+                fill: salmon;
+            }
+            .extreme {
+                fill: darkred;
+            }
+            #map {
+                border: 1px solid #000000;
+            }
+        </style>
+        <body>
+            <div id="map" style="border:2px black;"></div>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <script src="https://d3js.org/topojson.v1.min.js"></script>
+            <script src="/static/js/hamzaGeoMap.js"></script>
+        </body>   
+        <h1>HTML for GeoMap</h1>
+        <pre>
+            <code  class="language-javascript">
+                <script type="prism-html-markup">
+                    <style>
+                        .province {
+                            fill: #bada55;
+                            stroke: black;
+                            stroke-width: 0.5;
+                        }
+                        .selected {
+                            fill: orange;
+                        }
+                    </style>
+                    <body>
+                        <div id="map"></div>
+                        This is a placeholder
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"><script>
+                        <script src="https://d3js.org/d3.v4.min.js"><script>
+                        <script src="https://d3js.org/topojson.v1.min.js"><script>
+                        <script src="/static/js/hamzaGeoMap.js"><script>
+                    </body>   
+                </script>
+            </code>
+        </pre>
+        <h1>JavaScript for GeoMap (hamzaGeoMap.js)</h1>
+        <pre>
+            <code  class="language-javascript">
+                <script type="prism-javascript">
+                    (function() {
+                        var margin = {top: 50, left: 50, right: 50, bottom: 50},
+                        height = 1000 - margin.top - margin.bottom,
+                        width = 1000 - margin.left - margin.right;
+                    
+                        var svg = d3.select("#map")
+                            .append("svg")
+                            .attr("height", height + margin.top + margin.bottom)
+                            .attr("width", width + margin.left + margin.right)
+                            .append("g")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                    
+                        d3.queue()
+                          .defer(d3.json, "/static/geojson/canada.topo.json")
+                          .defer(d3.csv, "/templates/uploadedFiles/StatCanPopulationData.csv")
+                          .await(ready)
+                    
+                        var projection = d3.geoMercator()
+                            .translate([ width, height])
+                            .scale(300)
+                    
+                        var path = d3.geoPath()
+                            .projection(projection)
+                    
+                    
+                        function ready (error, data, StatCanPopulationData) {
+                            console.log(data)
+                    
+                            var provinces = topojson.feature(data, data.objects.canada).features
+                    
+                            console.log(provinces)
+                    
+                            svg.selectAll(".province")
+                                .data(provinces)
+                                .enter().append("path")
+                                .attr("class", "province")
+                                .attr("d", path)
+                                .attr("id", function(d) { 
+                                    return d.id; 
+                                })
+                                .attr("title", "Province Name Placeholder")
+                                .on('mouseenter', function(d){
+                                    d3.select(this).classed("selected", true)
+                                })
+                                .on('mouseout', function(d){
+                                    d3.select(this).classed("selected", false)
+                                })
+                                .on('click', function(d) {
+                                    var thisProvince = provinces.find(x => x.id === this.id)
+                                    var provinceName = thisProvince.properties.name
+                                    var thisData = StatCanPopulationData.find(x => x.GEO_NAME === provinceName)
+                                    var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    var malePopulation = thisData["Dim: Sex (3): Member ID: [2]: Male"]
+                                    var femalePopulation = thisData["Dim: Sex (3): Member ID: [3]: Female"]
+                                    alert(provinceName + "\nTotal Population: " + totalPopulation + "\nMale Population: " + malePopulation + "\nFemale Population: " + femalePopulation)
+                                })
+                    
+                            console.log(StatCanPopulationData)
+                    
+                        }
+                    
+                    })();  
+                </script>
+            </code>
+        </pre>
+        <h1>HTML for GeoMap with Divisions</h1>
+        <pre>
+            <code  class="language-javascript">
+                <script type="prism-html-markup">
+                    <style>
+                        .division {
+                            fill: #bada55;
+                            stroke: black;
+                            stroke-width: 0.5;
+                        }
+                        .selected {
+                            fill: lightgray;
+                        }
+                        .low {
+                            fill: lightyellow;
+                        }
+                        .lowmid {
+                            fill: rgb(255, 255, 175);
+                        }
+                        .mid {
+                            fill: rgb(255, 255, 129);
+                        }
+                        .midhigh {
+                            fill: lightsalmon;
+                        }
+                        .high {
+                            fill: salmon;
+                        }
+                        .extreme {
+                            fill: darkred;
+                        }
+                        #map {
+                            border: 1px solid #000000;
+                        }
+                    </style>
+                    <body>
+                        <div id="map" style="border:2px black;"></div>
+                        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""><script>
+                        <script src="https://code.jquery.com/jquery-3.1.1.min.js"><script>
+                        <script src="https://d3js.org/d3.v4.min.js"><script>
+                        <script src="https://d3js.org/topojson.v1.min.js"><script>
+                        <script src="/static/js/hamzaGeoMap.js"><script>
+                    </body>   
+                </script>
+            </code>
+        </pre>
+        <h1>JavaScript for GeoMap with Divisions (hamzaGeoMap.js)</h1>
+        <pre>
+            <code  class="language-javascript">
+                <script type="prism-javascript">
+                    (function() {
+                        var margin = {top: 50, left: 50, right: 50, bottom: 50},
+                        height = 1000 - margin.top - margin.bottom,
+                        width = 1000 - margin.left - margin.right;
+                        
+                        //selects the html elemt map to use for svg elements
+                        var svg = d3.select("#map")
+                            .append("svg")
+                            .attr("height", height + margin.top + margin.bottom)
+                            .attr("width", width*1.5 + margin.left + margin.right)
+                            .append("g")
+                            .attr("transform", "translate(" + width/1.5 + "," + height/2.5 + ")");
+                    
+                        //queues up the data for the map
+                        d3.queue()
+                          .defer(d3.json, "/static/geojson/canada_divisions.json")
+                          .defer(d3.csv, "/templates/Programmer3Files/98-401-X2016060_English_CSV_data.csv")
+                          .await(ready)
+                    
+                        //creates a projection for the map
+                        var projection = d3.geoMercator()
+                            .translate([ width, height])
+                            .scale(600)
+                    
+                        //creates a path to the projection
+                        var path = d3.geoPath()
+                            .projection(projection)
+                    
+                        //main function that takes in all the data and creates the map
+                        function ready (error, data, StatCanPopulationData) {
+                    
+                            //creates the main svg element
+                            const g = svg.append('g')
+                    
+                            //gets all the division data from the csv
+                            var divisions = topojson.feature(data, data.objects.canada_divisions).features
+
+                            //logs all the divisions for testing
+                            console.log(divisions)
+                    
+                            //creates the map using the svg elements
+                            g.selectAll(".division")
+                                .data(divisions)
+                                .enter().append("path")
+                                .attr("class", "division")
+                                .attr("d", path)
+                                .attr("id", function(d) {
+                                    return d.properties.CDUID; 
+                                })
+                                .attr("colorClass", "test") // classes each level of data to be used for color coordination
+                                .classed("low", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population < 10000) {
+                                        this.setAttribute("colorClass", "low")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })
+                                .classed("lowmid", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population < 50000 && population >= 10000) {
+                                        this.setAttribute("colorClass", "lowmid")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })
+                                .classed("mid", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population < 100000 && population >= 50000) {
+                                        this.setAttribute("colorClass", "mid")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })
+                                .classed("midhigh", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population < 500000 && population >= 100000) {
+                                        this.setAttribute("colorClass", "midhigh")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })
+                                .classed("high", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population < 1000000 && population >= 500000) {
+                                        this.setAttribute("colorClass", "high")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })
+                                .classed("extreme", function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    if (population >= 1000000) {
+                                        this.setAttribute("colorClass", "extreme")
+                                        return true
+                                    }else {
+                                        return false
+                                    }
+                                })//mouse enter event to make it gray and show the division name
+                                .on('mouseenter', function(d){
+                                    d3.select(this).classed("low", false)
+                                    d3.select(this).classed("lowmid", false)
+                                    d3.select(this).classed("mid", false)
+                                    d3.select(this).classed("midhigh", false)
+                                    d3.select(this).classed("high", false)
+                                    d3.select(this).classed("extreme", false)
+                                    d3.select(this).classed("selected", true)
+                                })//mouse out sets it back to the color
+                                .on('mouseout', function(d){
+                                    d3.select(this).classed(this.getAttribute("colorClass"), true)
+                                    d3.select(this).classed("selected", false)
+                                })//on click gets the data that is required and shows it in an alert
+                                .on('click', function(d) {
+                                    var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
+                                    var divisionId = thisDivision.properties.CDUID
+                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var divisonName = thisData.GEO_NAME
+                                    var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    alert(divisonName + "\nTotal Population: " + totalPopulation)
+                    
+                            //sets the name for each division so it can be seen when we hover over divisions
+                            svg.selectAll(".division")
+                                .append('title')
+                                .text(d => d.properties.CDNAME)
+                    
+                            //sets up the zoom properties for the map
+                            svg.call(d3.zoom().on('zoom', () => {
+                                g.attr('transform', d3.event.transform)
+                            }))
+                    
+                        })
+                                //logs the data for testing
+                                console.log(StatCanPopulationData)
+                        }  
+                </script>
+            </code>
+        </pre>
+</div>
+<div class="tab-pane fade" id="pills-fileType" role="tabpanel" aria-labelledby="pills-files-tab">
+    <hr/>
+    <h3>Pickle Python Library</h3><br>
+    <p>Pickle is a library in python used for serializing and de-serializing Python object structures<br>
+    This can be very useful if a user is trying to extract a large dataset from a python program.<br>
+    Having this extracted data can be very useful, not only to make backups, but also to use it for analysis purposes.<br>
+    An example of this would be if a user had a python program used for machine learning, they could extract this data<br>
+    used for training the model and also the results produced by the Model itself.<br>
+    This data can then be used as a backup for the model and also as a data set that can be used to analyze the model.</p><br>
+    <h3>What data types can be pickled?</h3><br>
+    <ul>
+        <li>Booleans</li>
+        <li>Integers</li>
+        <li>Floats</li>
+        <li>Complex Numbers</li>
+        <li>Strings (normal and Unicode)</li>
+        <li>Tuples</li>
+        <li>Lists</li>
+        <li>Sets</li>
+        <li>Dictionaries that are built using other pickle supported data types</li>
+    </ul>
+    <h3>Pickle vs JSON</h3><br>
+    <p>Pickle is very similar to JSON in its functionality, however there are some benefits to JSON. JSON is <br>
+    language independent unlike Pickle and it is also more secure than Pickle. The advantage to Pickle however<br>
+    become evident if you are solely using a Python based application as it can take the data from the Pickle<br>
+    files and reconstruct objects that can be used in your program.</p><br>
+    <h3>References:</h3>
+    <ol>
+        <li>Article that explains the Pickle library: <a style="color: blue" href="https://www.datacamp.com/community/tutorials/pickle-python-tutorial?utm_source=adwords_ppc&utm_campaignid=898687156&utm_adgroupid=48947256715&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=&utm_creative=229765585186&utm_targetid=dsa-429603003980&utm_loc_interest_ms=&utm_loc_physical_ms=9000684&gclid=CjwKCAjwlrqHBhByEiwAnLmYUJIltcTS6uB181crDXOkiZ4gqeZN0c8Syz36ycP0UJ4Kd4ITg29FCBoCuUgQAvD_BwE"> Here</a></li>
+        <li>Video that explains the Pickle library and its uses: <a style="color: blue" href="https://www.youtube.com/watch?v=2Tw39kZIbhs"> Here</a></li>
+
+    </ol>
+</div>
+<div class="tab-pane fade" id="pills-filejson" role="tabpanel" aria-labelledby="pills-files-tab">
+    <hr/>
+    <h3>Uploading a JSON File</h3><br>
+    <p>The following shows how I uploaded a json file to MongoDB using Python.</p><br>
+    <br>
+    <pre>
+    <code  class="language-javascript">
+        <script type="prism-python">
+from flask import Flask
+from pymongo import MongoClient
+import json
+
+MONGODB_HOST = 'localhost'
+MONGODB_PORT = 27017
+DBS_NAME = 'donorschoose'
+
+connection = MongoClient(MONGODB_HOST, MONGODB_PORT) //connects to MongoDB
+
+database = connection[DBS_NAME] //selects the database
+
+jsonCollection = database["jsonCollection"] //Creates a new collection
+
+testFile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json") //reads the input file
+
+jsonData = json.load(testFile) //loads the data from json into a Python dictionary
+
+for i in jsonData:
+    jsonCollection.insert_many(i) //loops over dictionary and uploads into the database
+
+//closes the file and connection
+testFile.close()
+connection.close()
+
+
+                        </script>
+                    </code>
+                </pre>
+    <ol>
+        This script would automatically be run when an upload is called on a json file. The data would be uploaded into MongoDB for us to access.
+    </ol>
+    <ol>
+        We tested this by just implementing it directly to a page and running the script in the main program, but ideally we would have this as a separate script.
+        <pre>
+        <code  class="language-javascript">
+        <script type="prism-python">
+@app.route('/AccessingData')
+def AccessingData():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    json_collection = connection[DBS_NAME]["test"]
+    testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
+    json_data = json.load(testfile)
+    for i in json_data:
+        json_collection.insert_one(i)
+    testfile.close()
+    connection.close()
+    return render_template('AccessingData.html')
+                        </script>
+                    </code>
+                </pre>
+    </ol>
+    <ol>
+        The result looks like this in MongoDB:
+        <img src="{{url_for('static', filename='MongoDBtest1.jpg')}}" alt="ProvintialDataCSV" style="border: 5px solid black">
+    </ol>
+    <ol>
+        <li>Article that explains uploading a json file using python: <a style="color: blue" href="https://www.geeksforgeeks.org/read-json-file-using-python/"> Here</a></li>
+        <li>Video that explains uploading json data into MongoDB: <a style="color: blue" href="https://www.youtube.com/watch?v=rE_bJl2GAY8&t=1133s"> Here</a></li>
+
+    </ol>
+</div>
+</div>
+
+{% endblock %}

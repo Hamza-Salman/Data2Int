@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Programmmer4 Archives{% endblock%}
+
+{% block content %}
+
+<h1> Code Changes</h1>
+
+<h1>Progress Update</h1>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="pills-research-tab" data-toggle="pill" href="#pills-research" role="tab" aria-controls="pills-research" aria-selected="true">Research</a>
+  </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-upload-research-tab" data-toggle="pill" href="#pills-upload-research" role="tab" aria-controls="pills-upload-research" aria-selected="false">File Upload Research</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-research" role="tabpanel" aria-labelledby="pills-research-tab">
+      <hr/>
+      <strong><a data-toggle="collapse" href="#data-analysis-techniques">Data Analysis Techniques</a></strong>
+      <div id="data-analysis-techniques" class="collapse">
+          <a target="_blank" href="https://careerfoundry.com/en/blog/data-analytics/data-analysis-techniques/">Link</a>
+          <p>Quantative data – anything measurable usually numerical figures and quantities. Ex. Sales figures, website visitors, and percents of revenue increase.<br>
+              Quantative data analysis techniques – focuses on statistical, mathematical, or numerical analysis. Uses algorithms and computational techniques to explain patterns and make predictions<br>
+              Qualitative data – cannot be measured objectively and more open to interpretation. Qualitative data can include comments on a survey, product reviews, and social media posts<br>
+              Qualitative data analysis techniques – makes sense of the unstructured data and is organized into themes.<br>
+              Covers 7 most useful methods of data analysis:</p>
+          <ul>
+              <li>Regression analysis – estimate how one or more variables might impact the dependent variable, in order to identify trends and patterns. This is especially useful for making predictions and forecasting future trends.</li>
+              <li>Monte Carlo simulation - a computerized technique used to generate models of possible outcomes and their probability distributions. It considers a range of possible outcomes and then calculates how likely it is that each particular outcome will be realized. Used by data analysts to conduct advanced risk analysis.</li>
+              <li>Factor analysis - a technique used to reduce a large number of variables to a smaller number of factors. It works on the basis that multiple separate, observable variables correlate with each other because they are all associated with an underlying construct; this is called covariance. This allows datasets to be compressed into smaller samples and uncover hidden patterns, like concepts that aren’t easily measured.</li>
+              <li>Cohort analysis – a technique that divides data that has common characteristics into related groups for analysis. Often used to target more specific customer segments and personalized experience.</li>
+              <li>Cluster analysis – sorts different data points into groups that are similar to each other and not similar to data points in another cluster. Seeks to find structures within the dataset</li>
+              <li>Time series analysis – a sequence of data points which measure the same variable at different points in time. Used to identify trends and cycles over time and allows analysts to forecast how they may fluctuate in the future.</li>
+              <li>Sentiment analysis – the process of sorting and understanding textual data to interpret and classify the emotions conveyed within the textual data. This allows to gain a feeling of how your customers satisfaction about the brand or service.</li>
+          </ul>
+      </div>
+      <br>
+
+      <strong><a data-toggle="collapse" href="#hashing-python">Hashing Algorithms in Python</a></strong>
+      <div id="hashing-python" class="collapse">
+          <a target="_blank" href="https://docs.python.org/3/library/hashlib.html">Link</a>
+          <p>Covers the following hashing library in Python called hashlib</p>
+          <p>Types of hash algorithms included:</p>
+          <ul>
+              <li>SHA1</li>
+              <li>SHA224</li>
+              <li>SHA256</li>
+              <li>SHA384</li>
+              <li>SHA512</li>
+              <li>MD5</li>
+          </ul>
+
+          <strong>Hashlib Properties</strong>
+          <ul>
+              <li>algorithms_guaranteed - a set containing the list of algorithms that are supported by the module on all platforms</li>
+              <li>algorithms_available - a set of algorithms that are available in the running Python interpreter.</li>
+          </ul>
+
+          <strong>Hash Properties - Constants</strong>
+          <ul>
+              <li>digest_size - the byte size of the hash result</li>
+              <li>block_size - the internal block size of the hash algorithm in bytes</li>
+          </ul>
+
+          <strong>Hash Properties - instance variables</strong>
+          <ul>
+              <li>name - the canonical name of the hash in lowercase. Can be used with <i>new()</i> as a parameter to make an instance of a hash of the corresponding type</li>
+          </ul>
+
+          <strong>Hash Functions</strong>
+          <ul>
+              <li>update(data) - updates the object with bytes-like object (ex: bytes, byte array, etc)</li>
+              <li>digest() - returns a digest of data passed to update() method. Acceptable range is 0 to 255</li>
+              <li>hexdigest() - similar to digest() except it returns a string only containing hexadecimal digits</li>
+              <li>copy() - makes a copy of the object</li>
+          </ul>
+      </div>
+      <br>
+
+      <strong><a data-toggle="collapse" href="#geomaps-with-python">PyCon - Finding a Home in Singapore Using a Data Driven Approach</a></strong>
+      <div id="geomaps-with-python" class="collapse">
+          <a target="_blank" href="https://www.youtube.com/watch?v=PInO2Cluu2E">Link</a>
+          <p>A woman used open data to find an ideal home in Singapore<br><br>
+              99.co – property search portal, used to look up rental/Airbnb<br><br>
+              Even after entering search parameters, still faced with thousands of listings<br><br>
+              Problem: how do you choose best possible listing?<br><br>
+              First, looked at MRT station is cheapest to live around. Made a map visualization<br><br>
+              Used geolocation file of MRT map around Singapore. Data comes in both .shp and .dbf file types, which are read by shapefile. Reader in Python to read the records<br><br>
+              Next, she checked how many shape objects are in the shape file, corresponds to the number of MRT stations in Singapore. Then check the type of shapes in the shape file.<br><br>
+              Next, she prints the fields of the object. Prints out [variable name, the type of field as an abbreviation, the max size of the field, number of decimal places (if applicable. If not, default value is 0)]<br><br>
+              Next she iterates through the first 3 records, which prints out coordinates for the object, which is a train station in Singapore, in latitude/longitude. Singapore has it’s own coordinate system which she then converts the coordinates to, to get a more accurate location, within the city, using an SVY package library in Python.<br><br>
+              Now that the coordinates are converted, she uses Basemap (another Python library to plot maps) to plot the maps coordinates and draw the outline of the country, and add markers to the map. Then she uses Folium, a Python package, to make the map. Next iterate through the list of coordinates and add a marker for each record, and adds the name attribute as a pop-up for each coordinate.<br><br>
+              Next she computes the price per square foot around each station. To do this, she retrieves open source data about housing and development prices. Problem is the data doesn’t contain coordinate information; to compensate for this, she uses an API to submit an address, which returns the coordinates. Now she uses GeoPy to compute the distances between addresses. She also filters out coordinates that are more than 1km from the stations.<br>
+              She then iterates through the stations and uses pre-computed transactions over the past 3 months, 1 km from the stations, and normalizes them. If zero, the markers are color coded as white; otherwise, she uses the 0-1 scale value to determine a hue based on the price. Blue for lowest cost and red for highest. Finally, she adds a price to the marker.<br><br>
+              The result is that the prices in the central business districts are more expensive than elsewhere, which is not surprising. But the rate at which the prices decline at a further rate closer to the border at about x2 vs closer to the central business district x4. As a result, she was able to make a data driven decision about where to live. <br><br>
+              The rest of the video is just her going over source code on both Github and jupyter. Also live editing code to display visual changes to the map to the audience, like changing the marker shapes and colors
+          </p>
+      </div>
+      <br>
+
+      <strong><a data-toggle="collapse" href="#download-csv-url">Downloading CSV from a URL in Python</a></strong>
+      <div id="download-csv-url" class="collapse">
+          <a target="_blank" href="https://www.kite.com/python/answers/how-to-download-a-csv-file-from-a-url-in-python">Link</a>
+          <br>Basic steps of downloading a csv file from URL:
+          <ol>
+              <li>Use a GET request with the CSV url</li>
+              <li>Generate the content from the response</li>
+              <li>Open the the file using <i>wb</i> mode</li>
+              <li>Write the contents of the file to he desired location</li>
+              <li>Close the file</li>
+          </ol>
+      </div>
+      <br>
+
+      <strong><a data-toggle="collapse" href="#multiple-linear-regression">Multiple Linear Regression using Python</a></strong>
+      <div id="multiple-linear-regression" class="collapse">
+          <a target="_blank" href="https://www.youtube.com/watch?v=BETGdxOA1ss">Link</a>
+          <br>Basic steps:
+          <ol>
+              <li>Import the data</li>
+              <li>Check for data that has null values (NaN). If any records appear with null values, replace it with constant(numerical value)</li>
+              <li>Split data into coordinates; input values as <i>x</i> and output as <i>y</i>, as a numpy array</li>
+              <li>Split the coordinates into random train and test subsets, using a percentage floating point value that defines the subset to use</li>
+              <li>Use model.score() using xTest and yTest values to calculate your accuracy percentage</li>
+              <li>Perform a linear regression on the object and perform a fit using the X and Y train values</li>
+              <li>Use model.predict() using the xTest to return an array of prediction values </li>
+              <li>Iterate through the array of test values and use the yTest values (at the current index) minus the test value to get the margin of error</li>
+          </ol>
+      </div>
+
+  </div>
+    <div class="tab-pane fade" id="pills-upload-research" role="tabpanel" aria-labelledby="pills-upload-research-tab">
+        <h2>Uploading JSON Files</h2>
+        <a target="_blank" href="https://www.freecodecamp.org/news/python-read-json-file-how-to-load-json-from-a-file-and-parse-dumps/">Link</a>
+        <p>To read the contents of a JSON file, use the statement <i>import json</i> to use a Python library dedicated to JSON files. Use a <i>with</i> statement
+            and the function <i>open(filename)</i> to open the JSON as a file. Then use <i>json.loads(myString)</i> to parse the data into a dictionary. From there,
+         you can manipulate the data to create your own Python objects.</p>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

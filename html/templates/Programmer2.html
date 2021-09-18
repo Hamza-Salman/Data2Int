@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+{% extends "base.html" %}
+{% block title %}Programmer2 Archives{% endblock%}
+
+{% block content %}
+
+<h1>Code Changes - Edited by KT </h1>
+
+<h1>Progress Update</h1><br/>
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-1-tab" data-toggle="pill" href="#pills-tab-1" role="tab"
+           aria-controls="pills-tab-1" aria-selected="true">Start SSH using shell script</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-2-tab" data-toggle="pill" href="#pills-tab-2" role="tab"
+           aria-controls="pills-tab-2" aria-selected="false">XML to JSON</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-3-tab" data-toggle="pill" href="#pills-tab-3" role="tab"
+           aria-controls="pills-tab-3" aria-selected="false">CSV to JSON</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-4-tab" data-toggle="pill" href="#pills-tab-4" role="tab"
+           aria-controls="pills-tab-4" aria-selected="false">XLSX (Excel) to JSON</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+
+    <div class="tab-pane fade show active" id="pills-tab-1" role="tabpanel" aria-labelledby="pills-1-tab">
+        <hr/>
+        <h3>How to start a SSH session using shell script<br/></h3>
+        Note: this method is outdated, although it is necessary that we documented our progress<br/><br/>
+        <p>For your convenience, you can download this .sh file
+            <a href="https://www.data2int.com/templates/resources/launch.sh" target="_blank"
+               style="color: rgb(0,0,230)"><u>here</u><br/></a>
+            Or you can copy and paste it into your .sh file<br/>
+        </p>
+        <pre>
+        <code class="language-bash">
+            #!/bin/bash
+            USERNAME="{@username}"
+            IP="{@host}"
+            PORT="22"
+            ssh ${USERNAME}@${IP} -${PORT} -t "{cd /your/working/folder/here} ; bash --login"
+        </code>
+    </pre>
+    </div>
+
+    <div class="tab-pane fade" id="pills-tab-2" role="tabpanel" aria-labelledby="pills-2-tab">
+        <hr/>
+        <h3>Why do we choose to convert all files to JSON?</h3>
+        <p>
+        <ul>
+            <li>As a developer, we have to think of a way to do thing efficiently and wisely. My motto is to work <b>smarter</b>
+                not harder.
+            </li>
+            <li>I decided to convert all files to JSON after uploading then upload to MongoDB. Some changes have been
+                made to the user case diagram so here is a quick review:
+            </li>
+            <br/>
+            <img style="width:100%" src="templates/resources/UMLDiagram.png"/>
+            <li>Here is an example of how to convert XML file to JSON file:</li>
+            <ol>
+                <li>First, I installed <a href="https://pypi.org/project/xmltodict/" target="_blank"
+                                          style="color: rgb(0,0,230)"><u>xmltodict</u></a> library
+                </li>
+                <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                    <code class="language-bash">
+                        <span class="command-line-prompt">
+                            <span data-user="root" data-host="localhost"></span>
+                            <span class="token builtin class-name">pip3</span> install xmltodict
+                        </span>
+                    </code>
+                </pre>
+                <br/>
+                <li>Second, I created a new python file called <b>xmlToJson.py</b></li>
+                <pre>
+                    <code class="language-javascript">
+                        <script type="prism-python">
+                            import json
+                            import xmltodict
+
+                            with open("/var/www/data2int.com/html/templates/uploadedFiles/sampleXML.xml") as xml_file:  # Open targeted file
+                                data_dict = xmltodict.parse(xml_file.read())  # Load XML data into dictionary datatype
+                                # In python, you can have something like this: map = { "1" : "Kevin", "2" : "Hamza"}
+                                xml_file.close();  # Close XML file to reduce the risk of being unwarranted modified or read.
+
+                                json_data = json.dumps(data_dict)  # json.dumps() take a json object and returns a string
+
+                                with open("/var/www/data2int.com/html/templates/uploadedFiles/sampleXMLtoJSON.json", "w") as json_file:
+                                    # Create new file and write our data into that file
+                                    json_file.write(json_data)
+                                    json_file.close()
+                        </script>
+                    </code>
+                </pre>
+                <br/>
+                <li>Third, let's look at our brand new converted file</li>
+                <table>
+                    <tr>
+                        <th>Before:</th>
+                        <th>After</th>
+                    </tr>
+                    <tr>
+                        <th><img src="/templates/uploadedFiles/sampleXML.png" height="660" width="391"/></th>
+                        <th><img src="/templates/uploadedFiles/sampleXMLtoJSON.png" height="702" width="359"/></th>
+                    </tr>
+                </table>
+            </ol>
+            <br/>
+            <h4>Side notes:</h4>
+            <li>Check out something I have discovered while editing this HTML file. <br/>In Pycharm, you can drag and
+                drop your image in your project explorer onto to code editor itself.
+            </li>
+            <img src="/templates/resources/discovery.gif" height="325" width="600"/>
+        </ul>
+        </p>
+    </div>
+    <div class="tab-pane fade" id="pills-tab-3" role="tabpanel" aria-labelledby="pills-3-tab">
+        <hr/>
+        <h3>Convert CSV to JSON using Pandas</h3>
+        <ol>
+            <li>First, install <a href="https://pandas.pydata.org/" target="_blank"
+                                  style="color: rgb(0,0,230)"><u>pandas</u></a> library
+            </li>
+            <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                    <code class="language-bash">
+                        <span class="command-line-prompt">
+                            <span data-user="root" data-host="localhost"></span>
+                            <span class="token builtin class-name">pip3</span> install pandas
+                        </span>
+                    </code>
+            </pre>
+            <br/>
+            <li>Second, I created a new python file called <b>csvToJson.py</b></li>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as pd
+
+                        df = pd.read_csv(r'/var/www/data2int.com/html/templates/uploadedFiles/sampleCSV.csv')  # Read CSV file
+                        df.to_json(r'/var/www/data2int.com/html/templates/uploadedFiles/sampleCSVToJson.json')  # Write output in JSON file
+                    </script>
+                </code>
+            </pre>
+            <br/>
+            <li>Third, let's look at our brand new converted file</li>
+                <table>
+                    <tr>
+                        <th>Before:</th>
+                        <th>After</th>
+                    </tr>
+                    <tr>
+                        <th><img src="/templates/uploadedFiles/sampleCSV.png" height="183" width="342"/></th>
+                        <th><img src="/templates/uploadedFiles/sampleCSVToJson.png" height="465" width="363"/></th>
+                    </tr>
+                </table>
+        </ol>
+    </div>
+    <div class="tab-pane fade" id="pills-tab-4" role="tabpanel" aria-labelledby="pills-4-tab"><hr/>
+        <h3>Convert XLSX (Excel) to JSON using Pandas</h3>
+        <ol>
+            <li>First, install <a href="https://pandas.pydata.org/" target="_blank"
+                                  style="color: rgb(0,0,230)"><u>pandas</u></a> library
+            </li>
+            <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                    <code class="language-bash">
+                        <span class="command-line-prompt">
+                            <span data-user="root" data-host="localhost"></span>
+                            <span class="token builtin class-name">pip3</span> install pandas
+                        </span>
+                    </code>
+            </pre>
+            <br/>
+            <li>Second, I created a new python file called <b>xlsxToJson.py</b></li>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas
+
+                        excel_data_df = pandas.read_excel('/var/www/data2int.com/html/templates/uploadedFiles/sampleXLSX.xlsx')
+                        json_str = excel_data_df.to_json('/var/www/data2int.com/html/templates/uploadedFiles/sampleXLSXToJson.json')
+                    </script>
+                </code>
+            </pre>
+            <br/>
+            <li>Third, let's look at our brand new converted file</li>
+                <table>
+                    <tr>
+                        <th>Before:</th>
+                        <th>After</th>
+                    </tr>
+                    <tr>
+                        <th><img src="/templates/uploadedFiles/sampleXLSX.png" width="100%"/></th>
+                        <th><img src="/templates/uploadedFiles/sampleXLSXToJson.png" height="448" width="389"/></th>
+                    </tr>
+                </table>
+        </ol>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,702 @@
+{% extends "base.html" %}
+{% block title %}Programmmer1 - DB Archives{% endblock%}
+
+{% block content %}
+
+<h1> Code Changes - Edited By DB</h1>
+<h2> This is a test to see if changes are saved </h2>
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-d3script-tab" data-toggle="pill" href="#pills-d3script" role="tab"
+           aria-controls="pills-d3script" aria-selected="true">D3.JS Test Script</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-gantt-tab" data-toggle="pill" href="#pills-gantt" role="tab"
+           aria-controls="pills-gantt" aria-selected="false">Gantt Chart</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-upload-tab" data-toggle="pill" href="#pills-upload" role="tab"
+           aria-controls="pills-upload" aria-selected="false">Uploading Files</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">PyCharm</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-jupyter-tab" data-toggle="pill" href="#pills-jupyter" role="tab"
+           aria-controls="pills-jupyter" aria-selected="false">Jupyter Notebook</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-rstudio-tab" data-toggle="pill" href="#pills-rstudio" role="tab"
+           aria-controls="pills-rstudio" aria-selected="false">RStudio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-file-tab" data-toggle="pill" href="#pills-file" role="tab"
+           aria-controls="pills-file" aria-selected="false">File Upload Research</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-d3script" role="tabpanel" aria-labelledby="pills-d3script-tab">
+        <hr/>
+        <!-- Load d3.js -->
+        <script src="https://d3js.org/d3.v4.js"></script>
+
+        <!-- Create a div where the graph will take place -->
+        <div id="my_dataviz"></div>
+
+        <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js">
+
+<!-- Create a div where the graph will take place -->
+<div id="my_dataviz"></div>
+</script>
+
+</code>
+</pre>
+
+        <pre>
+<code class="language-javascript">
+
+
+<script>
+
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 40},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
+var svg = d3.select("#my_dataviz")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+// get the data
+d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/1_OneNum.csv", function (data) {
+
+    // X axis: scale and draw:
+    var x = d3.scaleLinear()
+        .domain([0, 1000])     // can use this instead of 1000 to have the max of data: d3.max(data, function(d) { return +d.price })
+        .range([0, width]);
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    // set the parameters for the histogram
+    var histogram = d3.histogram()
+        .value(function (d) {
+            return d.price;
+        })   // I need to give the vector of value
+        .domain(x.domain())  // then the domain of the graphic
+        .thresholds(x.ticks(70)); // then the numbers of bins
+
+    // And apply this function to data to get the bins
+    var bins = histogram(data);
+
+    // Y axis: scale and draw:
+    var y = d3.scaleLinear()
+        .range([height, 0]);
+    y.domain([0, d3.max(bins, function (d) {
+        return d.length;
+    })]);   // d3.hist has to be called before the Y axis obviously
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+    // append the bar rectangles to the svg element
+    svg.selectAll("rect")
+        .data(bins)
+        .enter()
+        .append("rect")
+        .attr("x", 1)
+        .attr("transform", function (d) {
+            return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+        })
+        .attr("width", function (d) {
+            return x(d.x1) - x(d.x0) - 1;
+        })
+        .attr("height", function (d) {
+            return height - y(d.length);
+        })
+        .style("fill", "#69b3a2")
+
+});
+</script>
+</code>
+</pre>
+    </div>
+    <div class="tab-pane fade" id="pills-gantt" role="tabpanel" aria-labelledby="pills-gantt-tab">
+        <hr/>
+        <h3>The following is the Data Patterns Gantt Chart in PDF Format:</h3>
+        <a class="btn btn-primary view-pdf" href="/templates/resources/Data_Patterns_Gantt_Chart.pdf " target="_blank">View
+            PDF</a>
+    </div>
+    <div class="tab-pane fade" id="pills-upload" role="tabpanel" aria-labelledby="pills-upload-tab">
+        <hr/>
+        <h3>This section will detail how to copy files from a local machine to the remote server we used for our
+            project. <br></h3>
+
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-windows-tab" data-toggle="pill" href="#v-pills-windows"
+                       role="tab" aria-controls="v-pills-windows" aria-selected="true">Windows</a>
+                    <a class="nav-link" id="v-pills-mac-tab" data-toggle="pill" href="#v-pills-mac" role="tab"
+                       aria-controls="v-pills-mac" aria-selected="false">MacOSX</a>
+                    <a class="nav-link" id="v-pills-linux-tab" data-toggle="pill" href="#v-pills-linux" role="tab"
+                       aria-controls="v-pills-linux" aria-selected="false">Linux</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-windows" role="tabpanel"
+                         aria-labelledby="v-pills-windows-tab">
+                        <ol>
+                            <li>
+                                <p>Open a command prompt in the directory where you wish to upload the file/folder(s)
+                                    from </p> <br/>
+
+                            </li>
+                            <li>
+                                <p>Enter the following command, however make sure to update the fields with the
+                                    necessary fields</p>
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+scp {file_name} {host_username}@{Remote_Computer_IP}:{/path/to/file/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+
+                            </li>
+                            <li>
+                                <p>To upload an entire directory, enter the following command (make sure your terminal
+                                    is in the directory itself) </p>
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+scp -r {/path/to/folder/you/want/to/copy} {host_username}@{Remote_Computer_IP}:{/path/to/folder/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-mac" role="tabpanel" aria-labelledby="v-pills-mac-tab">
+                        <ol>
+                            <li>
+                                <p>Open a terminal in the directory where you wish to upload the file/folder(s)
+                                    from </p> <br/>
+
+                            </li>
+                            <li>
+                                <p>Enter the following command, however make sure to update the fields with the
+                                    necessary fields</p>
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+ scp {file_name} {host_username}@{Remote_Computer_IP}:{/path/to/file/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+
+                            </li>
+                            <li>
+                                <p>To upload an entire directory, enter the following command (make sure your terminal
+                                    is in the directory itself) </p>
+
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+ scp -r {/path/to/folder/you/want/to/copy} {host_username}@{Remote_Computer_IP}:{/path/to/folder/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-linux" role="tabpanel" aria-labelledby="v-pills-linux-tab">
+                        <ol>
+                            <li>
+                                <p>Open a terminal in the directory where you wish to upload the file/folder(s)
+                                    from </p> <br/>
+
+                            </li>
+                            <li>
+                                <p>Enter the following command, however make sure to update the fields with the
+                                    necessary fields</p>
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+sudo scp {file_name} {host_username}@{Remote_Computer_IP}:{/path/to/file/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+
+                            </li>
+                            <li>
+                                <p>To upload an entire directory, enter the following command (make sure your terminal
+                                    is in the directory itself) </p>
+                                <pre>
+<code class="language-markup">
+<script type="prism-html-markup">
+sudo scp -r {/path/to/folder/you/want/to/copy} {host_username}@{Remote_Computer_IP}:{/path/to/folder/you/want/to/copy/to}
+</script>
+
+</code>
+</pre>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> PyCharm is an integrated development environment used in computer programming,
+                                specifically for the Python language. <br></p>
+                            <ul>
+                                <p>Advantages of PyCharm: <br><br></p>
+                                <li>A plethora of productive shortcuts.</li>
+                                <li> to view the entire Python source code with a single click.</li>
+                                <li> of an array of plugins.</li>
+                                <li> Easy-to-use.</li>
+                                <li> Excellent community support.</li>
+                                <li> Facilitates faster code development.</li>
+                                <p><br><br>Disadvantages of PyCharm: <br><br></p>
+                                <li>The main disadvantage of using PyCharm is, it takes more space than other text
+                                    editors which degrade the functionality of code.
+                                </li>
+                                <li> The community version is idle for python development only and does not allow to use
+                                    other programming languages.
+                                </li>
+                                <li> The professional version is somewhat expensive.</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Installation and Setup
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how we setup our project using PyCharm IDE:</h3>
+                                <br><br>
+                                <ol>
+                                    <li>Download PyCharm Professional IDE <a
+                                            href="https://www.jetbrains.com/pycharm/download/#section=windows"
+                                            target="_blank" style="color: rgb(0,0,230)"><u>Here</u></a></li>
+                                    <br>
+                                    <li>JetBrains offers a free license for students that are attending school, however
+                                        you can start a 30-day free trial and get started
+                                    </li>
+                                    <br>
+                                    <li>Once setup, create a new project</li>
+                                    <br>
+                                    <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                                        <li style="margin-left:2em">Accept the defaults, make sure to uncheck "create a
+                                            main.py welcome script" box <br><img
+                                                    src="/templates/resources/pycharmss/create_new_project.PNG"
+                                                    alt="Create New Project" min-width="50%" height="50%"></li>
+                                    </ol>
+                                    <br>
+                                    <li>Once your project is created, navigate to Tools --> Deployment ---> Browse
+                                        Remote Host
+                                    </li>
+                                    <br><img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/browse_remote_host.PNG"
+                                             alt="Browse Remote Host" min-width="50%" height="50%"> <br>
+
+
+                                    <br>
+                                    <li>Create a new remote host, select the "..." button to open the popup window. Make
+                                        sure you select "SFTP" as the type (name can be anything)
+                                    </li>
+                                    <br><img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/create_remote_host.PNG"
+                                             alt="Create Remote Host" min-width="50%" height="50%"> <br> <br>
+
+                                    <li>Now its time to configure the SSH connection, first select the "..." button.
+                                    </li>
+                                    <br><img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/remote_host_config.PNG"
+                                             alt="Remote Host Config" min-width="50%" height="50%"> <br> <br>
+                                    <li>Select the "+" button and fill in the required fields (actual fields have been
+                                        blurred for security reasons)
+                                    </li>
+                                    <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                                        <li style="margin-left:2em">Set "Host" to the servers IP<br></li>
+                                        <li style="margin-left:2em">Leave port at "22"<br></li>
+                                        <li style="margin-left:2em">For "User name", enter the servers user login<br>
+                                        </li>
+                                        <li style="margin-left:2em">Now, enter the password for the server<br></li>
+                                        <li style="margin-left:2em">Finally, select apply and click ok <br><br><img
+                                                src="/templates/resources/pycharmss/ssh_configuration.PNG"
+                                                alt="SSH Configuration" min-width="50%" height="50%"></li>
+                                    </ol>
+                                    <br>
+                                    <li>Now, Set the Root Path to "/var/www/data2int.com/html" and the Web server URL to
+                                        "https://www.data2int.com/"<br><br><img style="margin-left:2em"
+                                                                                src="/templates/resources/pycharmss/remote_host_config.PNG"
+                                                                                alt="Remote host Config" min-width="50%"
+                                                                                height="50%"><br></li>
+                                    <br>
+                                    <li>Lastly, Select OK</li>
+                                    <br>
+                                    <li>Now you will be able to access the server and all files located on the server
+                                        <br><br><img src="/templates/resources/pycharmss/view_remote_host.PNG"
+                                                     alt="View Remote Host" min-width="400px" height="800"></li>
+
+                                    <br>
+                                    <li>To setup the SSH terminal in PyCharm, Select Tools --> Start SSH Session
+                                        <br><br><img src="/templates/resources/pycharmss/start_ssh.PNG"
+                                                     alt="Start SSH Session" min-width="50%" height="50%"></li>
+                                    <br>
+                                    <li>Select the SSH configuration you created <br><br><img
+                                            src="/templates/resources/pycharmss/select_gurby.PNG"
+                                            alt="Select SSH Config" width="500px" height="150px"></li>
+                                    <br>
+                                    <li>Now you will be able to access the the project from the terminal!<br><br><img
+                                            src="/templates/resources/pycharmss/view_ssh_terminal.PNG"
+                                            alt="View SSH Terminal" min-width="100%" height="150px"></li>
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Using PyCharm for the development of this project will be highly beneficial to the
+                                development of the Data Patterns Project. Here are some examples of how this is
+                                possible:</p>
+                            <ul>
+                                <li>Using an IDE(integrated development environment) for development of the project will
+                                    follow best practices of developing a project
+                                </li>
+                                <li>All developers can work on the project simultaneously and set up the project so we
+                                    can make real time changes
+                                </li>
+                                <li>with PyCharm we can connect to the server through ssh, edit the source code of the
+                                    project through a remote host at the same time all in one session.
+                                </li>
+                            </ul>
+                            <p>In conclusion, using Pycharm would seriously enhance the development process of Data
+                                Patterns. Therefore, we should continue to use it long term since we are given a
+                                professional license for free. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="tab-pane fade" id="pills-jupyter" role="tabpanel" aria-labelledby="pills-jupyter-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionJupyter">
+            <div class="card">
+                <div class="card-header" id="heading1">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1"
+                                aria-expanded="true" aria-controls="collapse1">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordionJupyter">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> Jupyter Notebook is an open-source web application that allows you to create and share
+                                documents that contain live code, equations, visualizations and narrative text. <br></p>
+                            <ul>
+                                <p>Advantages of Jupyter Notebook: <br><br></p>
+                                <li>They’re great for showcasing your work. You can see both the code and the results
+                                </li>
+                                <li> It’s easy to use other people’s work as a starting point. You can run cell by cell
+                                    to better get an understanding of what the code does
+                                </li>
+                                <li> Very easy to host server side, which is useful for security purposes. A lot of data
+                                    is sensitive and should be protected, and one of the steps toward that is no data is
+                                    stored on local machines. A server-side Jupyter Notebook setup gives you that for
+                                    free
+                                </li>
+                                <p><br><br>Disadvantages of Jupyter Notebook: <br><br></p>
+                                <li>When we’re writing code in cells instead of functions/classes/objects, you quickly
+                                    end up with duplicate code that does the same thing, which is very hard to maintain
+                                </li>
+                                <li> Don’t get the support from a powerful IDE</li>
+                                <li> It’s hard to actually collaborate on code with Jupyter — as we’re copying snippets
+                                    from each other it’s very easy to get out of sync
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading2">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                Setup
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how we setup our project using Jupyter
+                                    Notebook:</h3>
+                                <br><br>
+                                <ol>
+                                    <li>Open a terminal and connect to a the project using "ssh"</li>
+                                    <br>
+                                    <li>Once connected, navigate to the directory where your project is located and
+                                        enter the following command
+                                    </li>
+                                    <br>
+                                    <pre>
+            <code class="language-markup">
+            <script type="prism-html-markup">
+             jupyter notebook --no-browser --port=8888
+            </script>
+            </code>
+          </pre>
+                                    <li>The Jupyter Notebook server will start, click on one of the links that is
+                                        provided in the console
+                                    </li>
+                                    <br>
+                                    <li>Once the link open's, you will be redirected to the home page where you will see
+                                        your project.
+                                    </li>
+                                    <br><img style="margin-left:2em" src="/templates/resources/jupyter/home.PNG"
+                                             alt="Jupyter Home" min-width="50%" height="50%"> <br>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="heading3">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Using Jupyter Notebook for the development of this project could be better than the
+                                current method that we are using. Here are some examples.</p>
+                            <ul>
+                                <li>Using Jupyter Notebook will allow for the project to be edited solely on the server
+                                    side, resolving the problem of storing local versions of the project
+                                </li>
+                                <li>All developers can work on the project simultaneously and set up the project so we
+                                    can make real time changes
+                                </li>
+                                <li>The feature of running the code cell by cell, this will give the user a better
+                                    understanding of what the code does
+                                </li>
+                            </ul>
+                            <p>Taking into account the pros and cons of using Jupyter Notebook, we can consider using
+                                this as our development environment. However, they may be other options that are more
+                                capable and can accomplish more.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-rstudio" role="tabpanel" aria-labelledby="pills-rstudio-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionR">
+            <div class="card">
+                <div class="card-header" id="head1">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#hide1"
+                                aria-expanded="true" aria-controls="hide1">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="hide1" class="collapse show" aria-labelledby="head1" data-parent="#accordionR">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> RStudio is an integrated development environment (IDE) for R. It includes a console,
+                                syntax-highlighting editor that supports direct code execution, as well as tools for
+                                plotting, history, debugging and workspace management.<br></p>
+                            <ul>
+                                <p>Advantages of RStudio: <br><br></p>
+                                <li>RStudio is designed to make it easy to write scripts</li>
+                                <li> Convenient to view and interact with the objects stored in your environment</li>
+                                <li>RStudio makes it easy to set your working directory and access files on your
+                                    computer
+                                </li>
+                                <p><br><br>Disadvantages of RStudio: <br><br></p>
+                                <li> RStudio may crash when working with big datasets.</li>
+                                <li> Rstudio is not exactly a lightweight IDE, so it is not ideal for computationally
+                                    intensive tasks.
+                                </li>
+                                <li>Project sharing is a great feature, but only works if RStudio Server is configured
+                                    to use local accounts, not when using other authentication methods
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head2">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide2" aria-expanded="false" aria-controls="hide2">
+                                Setup
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide2" class="collapse" aria-labelledby="head2" data-parent="#accordionR">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how we setup our the projects RStudio Server
+                                    Environment:</h3>
+                                <br>
+                                <p>NOTE: This guide assumes that you already have RStudio Server setup with your
+                                    project.</p>
+                                <br><br>
+                                <ol>
+                                    <li>In your web browser, enter the host, followed by ":8787"</li>
+                                    <br>
+                                    <li>If successful, you will be redirected to the login screen for RStudio</li>
+                                    <br>
+                                    <li>Next, enter your credentials</li>
+                                    <br><img style="margin-left:2em" src="/templates/resources/rss/loginRStudio.png"
+                                             alt="Login RStudio" min-width="50%" height="50%"> <br>
+
+                                    <li>Upon successful entry, you will now be able to play around in the environment!
+                                    </li>
+                                    <br><img style="margin-left:2em" src="/templates/resources/rss/interfaceRStudio.png"
+                                             alt="Home RStudio" min-width="50%" height="50%"> <br>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head3">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide3" aria-expanded="false" aria-controls="hide3">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide3" class="collapse" aria-labelledby="head3" data-parent="#accordionR">
+                        <div class="card-body">
+                            <p>Using RStudio for the development of this project would not be an ideal solution. Here is
+                                why:</p>
+                            <ul>
+                                <li>RStudio only supports development in R language, we use Python for the development
+                                    of the project
+                                </li>
+                                <li>Although it is somewhat compatible with D3.JS, it does not compare to the support
+                                    python has with it
+                                </li>
+                                <li>R has a steep learning curve, taking time to overcome that curve and understand it
+                                    will delay the development of the project
+                                </li>
+                            </ul>
+                            <p>While taking it both pros and cons of R language, we can make the conclusion that it
+                                would not be beneficial to the completion of this project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="tab-pane fade" id="pills-file" role="tabpanel" aria-labelledby="pills-file-tab">
+        <hr/>
+
+
+    </div>
+
+</div>
+<button  onclick="location.href = '#pills-pycharm';">my button</button>
+</div>
+
+<script>
+    $(function () {
+        var hash = window.location.hash;
+        hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+        });
+    });
+</script>
+{% endblock %}

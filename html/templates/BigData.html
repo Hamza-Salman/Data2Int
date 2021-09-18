@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+{% extends "base.html" %}
+{% block title %}Programmer5 - BL Archives{% endblock%}
+
+{% block content %}
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">BigData</a>
+    </li>
+</ul>
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+    <hr/>
+
+    <div class="accordion" id="accordionGuide">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Description
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                <div class="card-body">
+                    <div class="description">
+
+                        <p> Big data is a field that treats ways to analyze, systematically extract
+                            information from,
+                            or otherwise deal with <a href="https://en.wikipedia.org/wiki/Data_set"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>data sets</u></a> that are too large or complex to
+                            be dealt with by traditional <a href="https://en.wikipedia.org/wiki/Data_processing"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>data-processing</u></a>
+                            <a href="https://en.wikipedia.org/wiki/Application_software"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>application software</u></a>.  <br></p>
+                        <ul>
+                            <p>Advantages of BigData: <br><br></p>
+                            <li> Opportunities to Make Better Decisions.</li>
+
+                            <li> Increasing Productivity and Efficiency.</li>
+                            <li> Reducing Costs.</li>
+                            <li> Improving Customer Service and Customer Experience.</li>
+                            <li> Fraud and Anomaly Detection.</li>
+                            <li> Greater Agility and Speed to Market.</li>
+
+
+                            <p><br><br>Disadvantages of BigData: <br><br></p>
+                            <li> Questionable Data Quality</li>
+                            <li> Heightened Security Risks</li>
+                            <li> Compliance Headaches</li>
+                            <li> Cost and Infrastructure Issues</li>
+                            <li> Big Data Skills Shortage</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Summary
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>The dictionary definition of big data is extremely large data sets that may
+                            be analyzed computationally to reveal patterns, trends, and associations,
+                            especially relating to human behavior and interactions. Data with many fields (columns)
+                            offer greater <a href="https://en.wikipedia.org/wiki/Power_of_a_test"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>statistical power</u></a>, while data with higher complexity (more attributes or columns)
+                            may lead to a higher <a href="https://en.wikipedia.org/wiki/False_discovery_rate"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>false discovery rate</u></a>.Big data analysis challenges include
+                            <a href="https://en.wikipedia.org/wiki/Automatic_identification_and_data_capture"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>capturing data</u></a>,
+                            <a href="https://en.wikipedia.org/wiki/Computer_data_storage"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>data storage</u></a>,
+                            <a href="https://en.wikipedia.org/wiki/Data_analysis"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>data analysis</u></a>, search,
+                            <a href="https://en.wikipedia.org/wiki/Data_sharing"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>sharing</u></a>,
+                            <a href="https://en.wikipedia.org/wiki/Data_communication"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>transfer</u></a>,
+                            <a href="https://en.wikipedia.org/wiki/Data_visualization"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>visualization</u></a>,
+                            <a href="https://en.wikipedia.org/wiki/Query_language"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>querying</u></a>,
+                            updating,
+                            <a href="https://en.wikipedia.org/wiki/Information_privacy"
+                                        target="_blank" style="color: rgb(0,0,230)"><u>information privacy</u></a>, and data source. Big data was originally associated
+                            with three key concepts: volume, variety, and velocity. The analysis of big data
+                            presents challenges in sampling, and thus previously allowing for only observations
+                            and sampling. Therefore, big data often includes data with sizes that exceed the capacity
+                            of traditional software to process within an acceptable time and value.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+
+
+{% endblock %}

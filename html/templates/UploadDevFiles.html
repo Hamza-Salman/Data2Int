@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+{% extends "base.html" %}
+
+{% block content %}
+
+<head>
+<body>
+
+<h1>Upload A File</h1><br><br>
+
+<!-- This is the code for the upload file button-->
+<form method="post" enctype="multipart/form-data">
+<!--    accept=".csv"   add this for csv only-->
+    <input oninput="filesize(this);" type="file" name="file"/><br><br>
+<!--    <label style="background: #fff;color: #7386D5; height: 40px; width: 210px; display: flex; justify-content: center; align-items: center;border-radius: 5px; cursor: pointer;" for="uploadedFile">Choose CSV</label>-->
+    <input type="submit" value="Upload" id="uploadButton" style="background: #fff;color: #7386D5; height: 40px; width: 210px; border-radius: 5px;"/>
+</form>
+
+<script>
+        function filesize(elem) {
+            document.cookie = `filesize=${elem.files[0].size}`;
+        }
+</script>
+
+</body>
+</head>
+
+{% endblock %}
+

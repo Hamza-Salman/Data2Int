@@ -1,0 +1,14 @@
+#canada {
+    border: 1px solid #000000;
+    height: 950px;
+    width: 1500px;
+}
+
+#usa {
+    border: 2px solid #EDA552;
+    height: 1200px;
+    width: 1500px;
+}
+.selected{
+    fill:lightblue;
+}

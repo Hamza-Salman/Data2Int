@@ -1,0 +1,12 @@
+<!DocType HTML>
+
+<-- To Delete Records or documents -->
+<p>db.getCollection('myCollection').find({}).limit(N).forEach(function(doc){
+    db.getCollection('myCollection').remove({_id: doc._id});
+})</p>
+
+<-- To count rows -->
+<p>db.projectname.count()</p>
+
+<-- To view some rows -->
+<p> db.projectname.find().pretty()
