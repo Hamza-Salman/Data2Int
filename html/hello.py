@@ -47,9 +47,7 @@ def upload_file():
         # File name can not be null
         if uploaded_file.filename == "":
             return render_template('ErrorFileUpload.html')
-
-        # Scan files here
-        # Mark's part
+            
         # Kevin's edit
         # Get the extension
         extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
