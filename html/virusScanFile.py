@@ -7,7 +7,7 @@ def virus_scan(uploaded_file) -> bool:
     # create the end point to send the request to
     endpoint = "https://api.virusscannerapi.com/virusscan"
 
-    filepath = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles/"
+    filepath: str = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles/"
     # filepath: string = "/var/www/data2int.com/html/templates/uploadedFiles"
 
     # create the request header with the ID and secret key from your account

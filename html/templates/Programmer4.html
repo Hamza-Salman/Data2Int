@@ -8,16 +8,19 @@
 <h1>Progress Update</h1>
 
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-research-tab" data-toggle="pill" href="#pills-research" role="tab" aria-controls="pills-research" aria-selected="true">Research</a>
-  </li>
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-research-tab" data-toggle="pill" href="#pills-research" role="tab" aria-controls="pills-research" aria-selected="true">Research</a>
+    </li>
     <li class="nav-item">
         <a class="nav-link" id="pills-upload-research-tab" data-toggle="pill" href="#pills-upload-research" role="tab" aria-controls="pills-upload-research" aria-selected="false">File Upload Research</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pills-virus-scanning-files-tab" data-toggle="pill" href="#pills-virus-scan" role="tab" aria-controls="pills-virus-scan" aria-selected="false">Virus Scanning Files</a>
     </li>
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
-  <div class="tab-pane fade show active" id="pills-research" role="tabpanel" aria-labelledby="pills-research-tab">
+    <div class="tab-pane fade show active" id="pills-research" role="tabpanel" aria-labelledby="pills-research-tab">
       <hr/>
       <strong><a data-toggle="collapse" href="#data-analysis-techniques">Data Analysis Techniques</a></strong>
       <div id="data-analysis-techniques" class="collapse">
@@ -138,7 +141,179 @@
         <p>To read the contents of a JSON file, use the statement <i>import json</i> to use a Python library dedicated to JSON files. Use a <i>with</i> statement
             and the function <i>open(filename)</i> to open the JSON as a file. Then use <i>json.loads(myString)</i> to parse the data into a dictionary. From there,
          you can manipulate the data to create your own Python objects.</p>
+    </div>
+    <div class="tab-pane fade" id="pills-virus-scan" role="tabpanel" aria-labelledby="pills-virus-scan-tab">
+        <h2>Virus Scanning Files</h2>
+        <hr>
 
+
+        <p>If your website allows users to upload files to a server, your server needs to be protected from any malicious hackers out there.
+            There's no easy solution to implementing virus scanning protection on your website outside of purchasing your own virus scanning software. Fortunately, SharpAPIs provides a more cost effective solution.</p>
+
+        <p>Free to use, sharpapis allows you to send the file for a virus scan via a POST request and the response contains the result. However, the free plan only
+            contains 100 free scans, which refresh every 21 days, but it can be upgraded to 1000, or more as needed for an added cost.</p>
+
+        <p>
+        <ol>
+        <li>Sign up for an account and confirm your account using the email they send. Be sure to check your Junk mail folder!</li>
+        <li>Grab your X-ApplicationID and your X-Secret Key from your account and record them for later.</li><br>
+
+        <h3>Python version</h3>
+        <li>Install the request and json libraries</li>
+
+        <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+            <code class="language-bash">
+                <span class="command-line-prompt">
+                    <span data-user="root" data-host="localhost"></span>
+                    <span class="token builtin class-name">pip3</span> install request
+                    <span class="token builtin class-name">pip3</span> install json
+                </span>
+            </code>
+        </pre>
+
+        <li>Next I created a new script called <b>virusScanFile.py</b></li>
+
+        <li>Create the url and the directory to fetch the file. Then, in the header of the request,
+        use the X-ApplicationID and X-SecretKey you wrote down earlier as strings in the header.</li>
+        <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                import requests
+                import json
+
+
+                        # End point we're sending the request to
+                        endpoint = "https://api.virusscannerapi.com/virusscan"
+
+                        # Give the directory files will be sent to
+                        filepath = "C:/Users/<YourName>/<directory>"
+
+                        # create the request header with the ID and secret key from your account
+                        headers = {
+                        'X-ApplicationID': 'myFakeID',
+                        'X-SecretKey': 'myFakeSecretKey'
+                       }
+
+                </script>
+            </code>
+        </pre>
+        <br/>
+
+        <li>Open the file using "rb" mode, define data and files using the filename and reading the file in.</li>
+                <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+
+                # open the file
+                file = open(filepath + filename, "rb")
+
+                # define as a synchronous process
+                data = {
+                'async': 'false',
+                }
+
+                # add the file to the array of files to send
+                files = {
+                'inputFile': ('\'' + filename + '\'', file.read())
+                }
+
+</script>
+            </code>
+        </pre>
+        <br/>
+
+        <li>Send as a POST request using the 4 parameters, and check the response for the result</li>
+        <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                       # await the response using a POST request
+                       r = requests.post(url=endpoint, data=data, headers=headers, files=files)
+
+                       # convert the JSON response text into a dictionary
+                       response = json.loads(r.text)
+
+                       # Check the string for the status. Files without any issues will return "File is clean"
+                       if response["status"] != "File is clean":
+                       #do something
+</script>
+            </code>
+        </pre>
+        <br/>
+    </ol></p>
+
+        <h3>C# version</h3>
+        <p>
+            <ol start="3">
+        <li>Install the Newtonsoft.Json library from the NuGet Package Manager.</li>
+        <li>Setup the function in your controller</li>
+        <li>Create the url and the directory to fetch the file. Then, in the header of the request,
+        use the X-ApplicationID and X-SecretKey you wrote down earlier as strings in the header.</li>
+        <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                    namespace MyProgram {
+                        public class VirusScanResponse {
+                            public int id;
+                            public string userId;
+                            public string fileName;
+                            public DateTime startedAt;
+                            public DateTime finishedAt;
+                            public string status;
+                            public string userIpAddress;
+
+                        }
+
+                        public class MyController : BaseController {
+
+                            public async Task<bool> VirusScanFile() {
+                            using (HttpClient client = new HttpClient())
+                            {
+
+                            // Adding authentication headers
+                            client.DefaultRequestHeaders.Add("X-ApplicationID", "myFakeID");
+                            client.DefaultRequestHeaders.Add("X-SecretKey", "myFakeSecretKey");
+                </script>
+            </code>
+        </pre>
+        <br/>
+        <li>Open the file using "rb" mode, define data and files using the filename and reading the file in.</li>
+                <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                            filepath = "C:/Users/<YourName>/<directory>"
+
+                            using (var requestContent = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture)))
+                            {
+                            // Setting body parameters
+                            requestContent.Add(new StringContent(filepath), "inputFile");
+                            requestContent.Add(new StringContent("false"), "async");
+                </script>
+            </code>
+        </pre>
+        <br/>
+
+        <li>Send as a POST request using the 4 parameters, and check the response for the result</li>
+        <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                // Sending a POST request to DCA API
+                using (var requestResultTask = await client.PostAsync("https://api.virusscannerapi.com/virusscan", requestContent))
+                {
+                    var result = await requestResultTask.content.ReadAsStringAsync();
+                    var response = Newtonsoft.Json.JsonConvert.DeserializeObject<VirusScanResponse>(result);
+
+                    if (response.status != "File is clean")
+                    {
+                        //do something
+                    }
+                </script>
+            </code>
+        </pre>
+        <br/>
+    </ol>
+
+        <a href="https://www.docconversionapi.com/blog/scan-file-virus-using-python/">Source</a>
+        </p>
     </div>
 </div>
 
