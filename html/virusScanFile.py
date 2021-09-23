@@ -3,11 +3,11 @@ import os
 import json
 
 
-def virus_scan(uploaded_file) -> bool:
+def virus_scan(uploaded_file, filepath) -> bool:
     # create the end point to send the request to
     endpoint = "https://api.virusscannerapi.com/virusscan"
 
-    filepath: str = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles/"
+    # filepath: str = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles/"
     # filepath: string = "/var/www/data2int.com/html/templates/uploadedFiles"
 
     # create the request header with the ID and secret key from your account
@@ -20,7 +20,7 @@ def virus_scan(uploaded_file) -> bool:
     filename = uploaded_file.filename
 
     # open the file
-    file = open(filepath + filename, "rb")
+    file = open(filepath + "/" + filename, "rb")
 
     # define as a synchronous process
     data = {
@@ -31,6 +31,8 @@ def virus_scan(uploaded_file) -> bool:
     files = {
         'inputFile': ('\'' + filename + '\'', file.read())
     }
+
+    file.close()
 
     # await the response using a POST request
     r = requests.post(url=endpoint, data=data, headers=headers, files=files)

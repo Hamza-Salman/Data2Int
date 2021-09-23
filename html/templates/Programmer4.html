@@ -150,15 +150,18 @@
         <p>If your website allows users to upload files to a server, your server needs to be protected from any malicious hackers out there.
             There's no easy solution to implementing virus scanning protection on your website outside of purchasing your own virus scanning software. Fortunately, SharpAPIs provides a more cost effective solution.</p>
 
-        <p>Free to use, sharpapis allows you to send the file for a virus scan via a POST request and the response contains the result. However, the free plan only
+        <p>Free to use, <a target="_blank" href="https://app.sharpapis.com/#/login">sharpapis</a> allows you to send the file for a virus scan via a POST request and the response contains the result. However, the free plan only
             contains 100 free scans, which refresh every 21 days, but it can be upgraded to 1000, or more as needed for an added cost.</p>
 
         <p>
         <ol>
         <li>Sign up for an account and confirm your account using the email they send. Be sure to check your Junk mail folder!</li>
         <li>Grab your X-ApplicationID and your X-Secret Key from your account and record them for later.</li><br>
+        </ol>
 
         <h3>Python version</h3>
+
+        <ol start="3">
         <li>Install the request and json libraries</li>
 
         <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
@@ -170,6 +173,7 @@
                 </span>
             </code>
         </pre>
+        <br>
 
         <li>Next I created a new script called <b>virusScanFile.py</b></li>
 
@@ -240,9 +244,8 @@
         </pre>
         <br/>
     </ol></p>
-
-        <h3>C# version</h3>
         <p>
+        <h3>C# version</h3>
             <ol start="3">
         <li>Install the Newtonsoft.Json library from the NuGet Package Manager.</li>
         <li>Setup the function in your controller</li>
@@ -253,20 +256,19 @@
                 <script type="prism-python">
                     namespace MyProgram {
                         public class VirusScanResponse {
-                            public int id;
-                            public string userId;
-                            public string fileName;
-                            public DateTime startedAt;
-                            public DateTime finishedAt;
-                            public string status;
-                            public string userIpAddress;
-
+                            public int id { get; set; }
+                            public string userId { get; set; }
+                            public string fileName { get; set; }
+                            public DateTime startedAt { get; set; }
+                            public DateTime finishedAt { get; set; }
+                            public string status { get; set; }
+                            public string userIpAddress { get; set; }
                         }
 
                         public class MyController : BaseController {
 
                             public async Task<bool> VirusScanFile() {
-                            using (HttpClient client = new HttpClient())
+                            await using (HttpClient client = new HttpClient())
                             {
 
                             // Adding authentication headers
@@ -280,7 +282,7 @@
                 <pre>
             <code class="language-javascript">
                 <script type="prism-python">
-                            filepath = "C:/Users/<YourName>/<directory>"
+                            var filepath = @"C:/Users/<YourName>/<directory>";
 
                             using (var requestContent = new MultipartFormDataContent("Upload----" + DateTime.Now.ToString(CultureInfo.InvariantCulture)))
                             {
