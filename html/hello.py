@@ -7,12 +7,14 @@ from pymongo import MongoClient
 from convertFile import convert_file
 from jsonUpload import json_upload
 from uploadInterfaceTwo import upload
+from virusScanFile import virus_scan
 
 app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = {'csv'}
 
-app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+# app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -59,13 +61,28 @@ def upload_file():
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
-            upload(extension, fileName, uploaded_file, app.config["UPLOAD_FOLDER"])
+            upload_success = upload(extension, fileName, uploaded_file, app.config["UPLOAD_FOLDER"])
+
+            if not upload_success:
+                return render_template("ErrorFileUpload.html")
+
         # If the file extension .json
         elif extension == ".json":
             print("Case 2: This file extension is " + extension)
             uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], fileName))
             with open(app.config["UPLOAD_FOLDER"] + "/" + fileName) as json_file:
                 json_data = json.load(json_file)
+
+            # scan the file for a virus
+            has_virus = virus_scan(uploaded_file, app.config["UPLOAD_FOLDER"])
+
+            # check the scan result
+            if has_virus:
+                # Check if the file exists at the specified directory first before deleting
+                if os.path.exists(app.config["UPLOAD_FOLDER"] + "/" + fileName):
+                    os.remove(app.config["UPLOAD_FOLDER"] + "/" + fileName)
+                    return render_template("ErrorFileUpload.html")
+
             json_upload(json_data, fileName)
             # Json file upload
         # Everything else
@@ -87,10 +104,10 @@ def upload_file_page():
     return render_template('UploadPage.html')
 
 
-
 @app.route('/SuccessfulUpload')
 def success_file_upload():
     return render_template('SuccessfulUpload.html')
+
 
 @app.route('/UploadDev', methods=['POST'])
 def upload_file_dev():
@@ -104,9 +121,11 @@ def upload_file_dev():
         uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename))
         return render_template('SuccessfulUpload.html')
 
+
 @app.route('/UploadDev')
 def upload_file_page_dev():
     return render_template('UploadDevFiles.html')
+
 
 @app.route('/AccessingData')
 def AccessingData():
@@ -195,30 +214,35 @@ def Flask():
 def D3():
     return render_template('D3.html')
 
+
 @app.route('/Dc')
 def Dc():
     return render_template('Dc.html')
+
 
 @app.route('/Folium')
 def Folium():
     return render_template('Folium.html')
 
+
 @app.route('/Prism')
 def Prism():
     return render_template('Prism.html')
+
 
 @app.route('/BigData')
 def BigData():
     return render_template('BigData.html')
 
+
 @app.route('/Paraquet')
 def Paraquet():
     return render_template('Paraquet.html')
 
+
 @app.route('/Clusters')
 def Clusters():
     return render_template('Clusters.html')
-
 
 
 @app.route('/UsefulResources')
