@@ -4,9 +4,8 @@ import os
 from bson import json_util
 from flask import Flask, render_template, request
 from pymongo import MongoClient
-from convertFile import convert_file
 from jsonUpload import json_upload
-from uploadInterfaceTwo import upload
+from uploadData import upload
 from virusScanFile import virus_scan
 
 app = Flask(__name__)
