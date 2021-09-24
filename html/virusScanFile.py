@@ -19,6 +19,8 @@ def virus_scan(uploaded_file, filepath) -> bool:
     # grab the file name
     filename = uploaded_file.filename
 
+    filesize = os.path.getsize(filepath + "/" + filename)
+
     # open the file
     file = open(filepath + "/" + filename, "rb")
 
