@@ -54,13 +54,13 @@ def upload_file():
         # Kevin's edit
         # Get the extension
         extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
-        fileName = os.path.basename(uploaded_file.filename)
+        filename = os.path.basename(uploaded_file.filename)
 
         # Sanitary check the file extension
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
-            upload_success = upload(extension, fileName, uploaded_file, app.config["UPLOAD_FOLDER"])
+            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"])
 
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
@@ -68,8 +68,8 @@ def upload_file():
         # If the file extension .json
         elif extension == ".json":
             print("Case 2: This file extension is " + extension)
-            uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], fileName))
-            with open(app.config["UPLOAD_FOLDER"] + "/" + fileName) as json_file:
+            uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            with open(app.config["UPLOAD_FOLDER"] + "/" + filename) as json_file:
                 json_data = json.load(json_file)
 
             # scan the file for a virus
@@ -78,11 +78,11 @@ def upload_file():
             # check the scan result
             if has_virus:
                 # Check if the file exists at the specified directory first before deleting
-                if os.path.exists(app.config["UPLOAD_FOLDER"] + "/" + fileName):
-                    os.remove(app.config["UPLOAD_FOLDER"] + "/" + fileName)
+                if os.path.exists(app.config["UPLOAD_FOLDER"] + "/" + filename):
+                    os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
                     return render_template("ErrorFileUpload.html")
 
-            json_upload(json_data, fileName)
+            json_upload(json_data, filename)
             # Json file upload
         # Everything else
         # Render error file upload page
