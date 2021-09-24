@@ -314,6 +314,16 @@
         <br/>
     </ol>
 
+        <h4>Implementation notes: </h4>
+        <ul>
+            <li>Files need to be uploaded to the server first before they can be read and scanned, unless you are sending a file from a URL.</li>
+            <li>If the file size is over 50000KB, your request may return a response with a 400 series error because there is too much content in the request.
+                You may want to consider scanning portions of the file instead of the whole thing at a time</li>
+            <li>If you are reading directly from the file, the file content needs to be read as binary format before being inserted into the request content.</li>
+            <li>SharpApis also provides ways to get statuses from previous virus scans if you send the id of the scan as a GET request. This is particularly useful for auditing
+            if you are storing all scans in a database and want to search on the status of a particular scan in the future.</li>
+        </ul>
+
         <a href="https://www.docconversionapi.com/blog/scan-file-virus-using-python/">Source</a>
         </p>
     </div>

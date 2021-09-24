@@ -12,8 +12,8 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = {'csv'}
 
-app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-# app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles"
+# app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
