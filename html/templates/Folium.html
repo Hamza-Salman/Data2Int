@@ -5,129 +5,132 @@
 
 {% block content %}
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
            aria-controls="pills-pycharm" aria-selected="false">Folium</a>
-    </li>
-</ul>
-<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
-    <hr/>
+        </li>
+    </ul>
+    <div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
 
-    <div class="accordion" id="accordionGuide">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                        Description
-                    </button>
-                </h5>
-            </div>
+        <hr/>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
-                <div class="card-body">
-                    <div class="description">
-
-                        <p> Folium is a Python library used for visualizing geospatial data.
-                            It is easy to use and yet a powerful library. Folium is a Python wrapper
-                            for Leaflet.js which is a leading open-source JavaScript library for plotting interactive maps. <br></p>
-                        <p>It has the power of Leaflet.js and the simplicity of Python,
-                            which makes it an excellent tool for plotting maps. Folium is designed with simplicity,
-                            performance, and usability in mind. It works efficiently, can be extended with a lot of plugins,
-                            has a beautiful and easy-to-use API.</p>
-                        <ul>
-                            <p>Advantages of PyCharm: <br><br></p>
-                            <li> With Folium, one can create a map of any location in the world as long as its latitude and longitude values are known. </li>
-                            <li> The maps created by Folium are interactive in nature, so one can zoom in and out after the map is rendered,
-                                which is a super useful feature.</li>
-
-
-                            <p><br><br>Disadvantages of PyCharm: <br><br></p>
-                            <li> The disadvantages are that basemap expects you to obtain and manage shapefiles,
-                                and the output are static images (like the plots in matplotlib). </li>
-                            <li>This is easy to work with in an interactive environment,
-                                but makes it difficult to just the results of your work to someone else.</li>
-
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        <div class="accordion" id="accordionGuide">
             <div class="card">
-                <div class="card-header" id="headingTwo">
+                <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Installation
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            Description
                         </button>
                     </h5>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
                     <div class="card-body">
-                        <div class="guide">
-                            <h3>Python Data, Leaflet.js Maps</h3>
-                            <br>
-                            <p>folium builds on the data wrangling strengths of the Python ecosystem and the mapping strengths of the Leaflet.js library.
+                        <div class="description">
+
+                            <p> Folium is a Python library used for visualizing geospatial data.
+                            It is easy to use and yet a powerful library. Folium is a Python wrapper
+                            for Leaflet.js which is a leading open-source JavaScript library for plotting interactive maps. <br></p>
+
+                            <p>It has the power of Leaflet.js and the simplicity of Python,
+                            which makes it an excellent tool for plotting maps. Folium is designed with simplicity,
+                            performance, and usability in mind. It works efficiently, can be extended with a lot of plugins,
+                            has a beautiful and easy-to-use API.</p>
+
+                            <p>Advantages of PyCharm: <br><br></p>
+
+                            <ul>
+                                <li> With Folium, one can create a map of any location in the world as long as its latitude and longitude values are known. </li>
+                                <li> The maps created by Folium are interactive in nature, so one can zoom in and out after the map is rendered,
+                                which is a super useful feature.</li>
+                            </ul>
+
+                            <p><br><br>Disadvantages of PyCharm: <br><br></p>
+
+                            <ul>
+                                <li> The disadvantages are that basemap expects you to obtain and manage shapefiles,
+                                and the output are static images (like the plots in matplotlib). </li>
+                                <li>This is easy to work with in an interactive environment,
+                                but makes it difficult to just the results of your work to someone else.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Installation
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>Python Data, Leaflet.js Maps</h3>
+                                <br>
+                                <p>folium builds on the data wrangling strengths of the Python ecosystem and the mapping strengths of the Leaflet.js library.
                                 Manipulate your data in Python, then visualize it in a Leaflet map via folium.</p>
 
-                            <h3>Installation</h3>
-                            <br>
+                                <h3>Installation</h3>
+                                <br>
 
-                            <pre>
-                            <code class="language-bash">
+                                <pre>
+                                    <code class="language-bash">
                                 $ pip install folium
-                            </code>
-                            </pre><br>
+                                    </code>
+                                </pre><br>
 
-                            <h3>Or</h3>
+                                <h3>Or</h3>
 
-                            <pre>
-                            <code class="language-bash">
-                                $ conda install -c conda-forge folium
-                            </code>
-                            </pre><br>
+                                <pre>
+                                    <code class="language-bash">
+                                        $ conda install -c conda-forge folium
+                                    </code>
+                                </pre><br>
 
-                            <h3>Documentation</h3>
-                            <p><a href="https://python-visualization.github.io/folium/"
+                                <h3>Documentation</h3>
+                                <p><a href="https://python-visualization.github.io/folium/"
                                         target="_blank" style="color: rgb(0,0,230)"><u>https://python-visualization.github.io/folium/</u></a></p>
 
 
 
 
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Summary
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                     data-parent="#accordionExample">
-                    <div class="card-body">
-                        <p>Folium is a tool that makes you look like a mapping professional
+                                Summary
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Folium is a tool that makes you look like a mapping professional
                             while all the work is done in the back end.</p>
-                        <p>It's a Python wrapper for a tool called leaflet.js.
+                            <p>It's a Python wrapper for a tool called leaflet.js.
                             We basically give it minimal instructions, JS does loads of work
                             in the background and we get some very,
                             very cool maps. It's great stuff.</p>
 
+                        </div>
                     </div>
                 </div>
             </div>
-
-            </div>
         </div>
-
-
-
+    </div>
 {% endblock %}

@@ -33,20 +33,22 @@
                             Parquet operates well with complex data in large volumes.
                             It is known for its both performant data compression
                             and its ability to handle a wide variety of encoding types.  <br></p>
-                        <ul>
+
                             <p>Advantages of Parquet: <br><br></p>
-                            <li> Columnar storage limits IO operations.</li>
-                            <li> Columnar storage can fetch specific columns that you need to access.</li>
-                            <li> Columnar storage consumes less space.</li>
-                            <li> Columnar storage gives better-summarized data and follows type-specific encoding.</li>
+                            <ul>
+                                <li> Columnar storage limits IO operations.</li>
+                                <li> Columnar storage can fetch specific columns that you need to access.</li>
+                                <li> Columnar storage consumes less space.</li>
+                                <li> Columnar storage gives better-summarized data and follows type-specific encoding.</li>
+                            </ul>
 
                             <p><br><br>Disadvantages of Parquet: <br><br></p>
-                            <li> Parquet stores the file schema in the file metadata. CSV files don't store file metadata,
+                            <ul>
+                                <li> Parquet stores the file schema in the file metadata. CSV files don't store file metadata,
                                 so readers need to either be supplied with the schema or the schema needs to be inferred.
                                 Supplying a schema is tedious and inferring a schema is error prone / expensive.</li>
+                            </ul>
 
-
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -74,8 +76,11 @@
 
                             <h3>Features</h3>
                             <br>
-                            <li> Read Parquet data (local file or file on S3)</li>
-                            <li> Read Parquet metadata/schema (local file or file on S3)</li>
+
+                            <ul>
+                                <li> Read Parquet data (local file or file on S3)</li>
+                                <li> Read Parquet metadata/schema (local file or file on S3)</li>
+                            </ul>
 
                             <br><h3>Installation</h3>
 
@@ -94,7 +99,7 @@
                                 parquet CLI tools
                                 positional arguments:
                                 {show,csv,inspect}
-                                show              Show human readble format. see `show -h`
+                                show              Show human readable format. see `show -h`
                                 csv               Cat csv style. see `csv -h`
                                 inspect           Inspect parquet file. see `inspect -h`
                                 optional arguments:
@@ -197,9 +202,9 @@
                     </div>
                 </div>
             </div>
-
-            </div>
         </div>
+    </div>
+</div>
 
 
 

@@ -127,7 +127,7 @@ def upload_file_page_dev():
 
 
 @app.route('/AccessingData')
-def AccessingData():
+def accessing_data():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
     json_collection = connection[DBS_NAME]["test"]
     testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
@@ -160,92 +160,92 @@ def map():
 
 
 @app.route('/MeetingMinutes')
-def MeetingMinutes():
+def meeting_minutes():
     return render_template('MeetingMinutes.html')
 
 
 @app.route('/DocumentLibrary')
-def DocumentLibrary():
+def document_library():
     return render_template('DocumentLibrary.html')
 
 
 @app.route('/Programmer1')
-def Programmer1():
+def programmer1():
     return render_template('Programmer1.html')
 
 
 @app.route('/Programmer2')
-def Programmer2():
+def programmer2():
     return render_template('Programmer2.html')
 
 
 @app.route('/Programmer3')
-def Programmer3():
+def programmer3():
     return render_template('Programmer3.html')
 
 
 @app.route('/Programmer4')
-def Programmer4():
+def programmer4():
     return render_template('Programmer4.html')
 
 
 @app.route('/Programmer5')
-def Programmer5():
+def programmer5():
     return render_template('Programmer5.html')
 
 
 @app.route('/DevEnv')
-def DevEnv():
+def dev_env():
     return render_template('DevEnv.html')
 
 
 @app.route('/MongoDB')
-def MongoDB():
+def mongo_db():
     return render_template('MongoDB.html')
 
 
 @app.route('/Flask')
-def Flask():
+def flask():
     return render_template('Flask.html')
 
 
 @app.route('/D3')
-def D3():
+def d3():
     return render_template('D3.html')
 
 
 @app.route('/Dc')
-def Dc():
+def dc():
     return render_template('Dc.html')
 
 
 @app.route('/Folium')
-def Folium():
+def folium():
     return render_template('Folium.html')
 
 
 @app.route('/Prism')
-def Prism():
+def prism():
     return render_template('Prism.html')
 
 
 @app.route('/BigData')
-def BigData():
+def big_data():
     return render_template('BigData.html')
 
 
 @app.route('/Paraquet')
-def Paraquet():
+def paraquet():
     return render_template('Paraquet.html')
 
 
 @app.route('/Clusters')
-def Clusters():
+def clusters():
     return render_template('Clusters.html')
 
 
 @app.route('/UsefulResources')
-def UsefulResources():
+def useful_resources():
     return render_template('UsefulResources.html')
 
 
