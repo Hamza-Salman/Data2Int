@@ -1,12 +1,235 @@
-<!DocType HTML>
+{% extends "base.html" %}
+{% block title %}MongoDB{% endblock %}
 
-<-- To Delete Records or documents -->
-<p>db.getCollection('myCollection').find({}).limit(N).forEach(function(doc){
-    db.getCollection('myCollection').remove({_id: doc._id});
-})</p>
+{% block content %}
 
-<-- To count rows -->
-<p>db.projectname.count()</p>
+    <h1>MongoDB</h1>
 
-<-- To view some rows -->
-<p> db.projectname.find().pretty()
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+               aria-controls="pills-pycharm" aria-selected="false">MongoDB</a>
+        </li>
+    </ul>
+
+    <div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> MongoDB is an open source NoSQL database management program. NoSQL is used as an
+                                alternative to traditional relational databases.
+                                NoSQL databases are quite useful for working with large sets of distributed data.
+                                MongoDB is a tool that can manage document-oriented information, store or retrieve
+                                information. <br></p>
+                            <p>Advantages of MongoDB: <br><br></p>
+                            <ul>
+                                <li> Flexible document schemas.</li>
+                                <li> Code-native data access.</li>
+                                <li> Change-friendly design.</li>
+                                <li> Powerful querying and analytics.</li>
+                                <li> Easy horizontal scale-out.</li>
+                            </ul>
+                            <p><br><br>Disadvantages of MongoDB: <br><br></p>
+                            <ul>
+                                <li> MongoDB uses high memory for data storage.</li>
+                                <li> There is a limit for document size, i.e. 16mb.</li>
+                                <li> There is no transaction support in MongoDB.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Install and Run MongoDB
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how to using MongoDB</h3>
+                                <br><br>
+
+                                <h5>Install MongoDB</h5><br><br>
+                                <p>Download the binaries from the <a href="https://www.mongodb.com/try#production"
+                                                                     target="_blank">MongoDB
+                                    Download Center</a></p>
+                                <br>
+                                <p>1. Open Windows Explorer/File Explorer.</p>
+                                <p>2. Change the directory path to where you downloaded the MongoDB .msi file. By
+                                    default, this is %HOMEPATH%\Downloads.</p>
+                                <p>3. Double-click the .msi file.</p>
+                                <p>4. The Windows Installer guides you through the installation process.
+                                    If you choose the Custom installation option, you may specify an installation
+                                    directory.
+                                    MongoDB does not have any other system dependencies. You can install and run MongoDB
+                                    from any folder you choose.</p>
+
+                                <p>Note</p>
+                                <br>
+                                <p>This tutorial assumes that you installed MongoDB in C:\Program
+                                    Files\MongoDB\Server\4.2\.
+                                </p>
+                                <br><br>
+
+
+                                <h5>Run MongoDB</h5><br>
+                                <h5>First Step</h5><br>
+                                <p>Set up the MongoDB environment.</p>
+                                <p>MongoDB requires a data directory to store all data.
+                                    MongoDB’s default data directory path is the absolute path \data\db on the drive
+                                    from which you start MongoDB.
+                                    Create this folder by running the following command in a Command Prompt:</p>
+
+                                <pre>
+                            <code class="language-bash">
+                                md \data\db
+                            </code>
+                            </pre>
+                                <br>
+
+                                <p>You can specify an alternate path for data files using the
+                                    <a href="https://docs.mongodb.com/manual/reference/program/mongod/#std-option-mongod.--dbpath" target="_blank">--dbpath</a>
+                                    option to
+                                    <a href="https://docs.mongodb.com/manual/reference/program/mongod.exe/#mongodb-binary-bin.mongod.exe" target="_blank">mongod.exe</a>
+                                    , for example:</p>
+
+                                <pre>
+                                    <code class="language-bash">
+                                        "C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath d:\test\mongodb\data
+                                    </code>
+                                </pre>
+                                <br>
+
+                                <p>If your path includes spaces, enclose the entire path in double quotes, for
+                                    example:</p>
+
+                                <pre>
+                            <code class="language-bash">
+                            "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe" --dbpath "d:\test\mongo db data"
+                            </code>
+                            </pre>
+                                <br>
+
+                                <p>You may also specify the dbpath in a <a
+                                        href="https://docs.mongodb.com/manual/reference/configuration-options/"
+                                        target="_blank">configuration file</a>.</p>
+
+                                <h5>Second Step</h5><br>
+                                <p>Start MongoDB.</p>
+                                <p>To start MongoDB, run
+                                    <a href="https://docs.mongodb.com/manual/reference/program/mongod.exe/#mongodb-binary-bin.mongod.exe"
+                                       target="_blank">mongod.exe</a>. For example,
+                                    from the Command Prompt:</p>
+
+                                <pre>
+                            <code class="language-bash">
+                            "C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe"
+                            </code>
+                            </pre>
+                                <br>
+
+                                <p>This starts the main MongoDB database process. The waiting for connections message in
+                                    the console output indicates that the
+                                    <a href="https://docs.mongodb.com/manual/reference/program/mongod.exe/#mongodb-binary-bin.mongod.exe"
+                                       target="_blank">mongod.exe</a> process is
+                                    running successfully.</p><br><br><br>
+
+                                <p>Depending on the security level of your system, Windows may pop up a Security Alert
+                                    dialog box about blocking “some features”
+                                    of C:\Program Files\MongoDB\Server\4.0\bin\mongod.exe from communicating on
+                                    networks.
+                                    All users should select Private Networks, such as my home or work network and click
+                                    Allow access.
+                                    For additional information on security and MongoDB, please see the <a
+                                            href="https://docs.mongodb.com/manual/security/"
+                                            target="_blank">Security
+                                        Documentation</a>.</p>
+
+                                <h5>Third Step</h5><br>
+                                <p>Verify that MongoDB has started successfully</p>
+                                <p>Verify that MongoDB has started successfully by checking the process output for the
+                                    following line:</p>
+
+                                <pre>
+                            <code class="language-bash">
+                            [initandlisten] waiting for connections on port 27017
+                            </code>
+                            </pre>
+                                <br>
+
+                                <p>The output should be visible in the terminal or shell window.</p><br>
+
+                                <p>You may see non-critical warnings in the process output. As long as you see the log
+                                    line shown above, you can safely ignore these warnings during your initial
+                                    evaluation of MongoDB.</p>
+
+                                <h5>Fourth Step</h5><br>
+                                <p>Connect to MongoDB.</p>
+                                <p>To connect to MongoDB through the <a
+                                        href="https://docs.mongodb.com/manual/reference/program/mongo/#mongodb-binary-bin.mongo"
+                                        target="_blank">~bin.mongo.exe</a> shell,
+                                    open another Command Prompt.</p>
+
+                                <pre>
+                            <code class="language-bash">
+                            "C:\Program Files\MongoDB\Server\4.0\bin\mongo.exe"
+                            </code>
+                            </pre>
+                                <br>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Summary
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Like any other database management language, MongoDB is based on a NoSQL database that is
+                                used for storing data in a key-value pair.
+                                Its working is based on the concept of document and collection.
+                                It is also an open-source, a document-oriented, cross-platform database system that is
+                                written using C++.</p><br>
+                            <p>Mongo DB can be defined as a document-oriented database system that uses the concept of
+                                NoSQL. It also provides high availability, high performance, along with automatic
+                                scaling. This open-source product was developed by the company - 10gen in October 2007,
+                                and the company also maintains it. MongoDB exists under the General Public License (GPL)
+                                as a free database management tool as well as available under Commercial license as of
+                                the manufacturer.
+                                MongoDB was also intended to function with commodity servers.
+                                Companies of different sizes all over the world across all industries are using MongoDB
+                                as their database. </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
