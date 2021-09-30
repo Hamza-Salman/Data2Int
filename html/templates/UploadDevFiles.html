@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 {% extends "base.html" %}
+{% block title %}Upload Dev{% endblock%}
 
 {% block content %}
-
-<head>
-<body>
 
 <h1>Upload A File</h1><br><br>
 
@@ -22,9 +18,6 @@
             document.cookie = `filesize=${elem.files[0].size}`;
         }
 </script>
-
-</body>
-</head>
 
 {% endblock %}
 
