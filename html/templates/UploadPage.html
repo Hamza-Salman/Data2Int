@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 {% extends "base.html" %}
+{% block title %}Upload Your Data{% endblock%}
 
 {% block content %}
-
-<head>
-<body>
 
 <h1>Upload A File</h1>
 <h2>Please Select a file to upload using the Choose CSV button<br>Please make sure that your CSV is saved as "CSV UTF-8 (Comma delimited)"</h2><br><br>
@@ -23,9 +19,6 @@
             document.cookie = `filesize=${elem.files[0].size}`;
         }
 </script>
-
-</body>
-</head>
 
 {% endblock %}
 

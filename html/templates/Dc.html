@@ -1,99 +1,112 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 {% extends "base.html" %}
-{% block title %}Programmer5 - BL Archives{% endblock%}
+{% block title %}DC{% endblock %}
 
 {% block content %}
+    <h1>DC</h1>
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
-           aria-controls="pills-pycharm" aria-selected="false">DC</a>
-    </li>
-</ul>
-<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
-    <hr/>
+    <hr>
 
-    <div class="accordion" id="accordionGuide">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                        Description
-                    </button>
-                </h5>
-            </div>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+               aria-controls="pills-pycharm" aria-selected="false">DC</a>
+        </li>
+    </ul>
+    <div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
-                <div class="card-body">
-                    <div class="description">
-
-                        <p> Pdc.js is a javascript charting library with native <a href="http://crossfilter.github.io/crossfilter/"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>crossfilter</u></a> support, allowing highly efficient exploration o
-                            n large multi-dimensional datasets (inspired by crossfilter's demo). It leverages <a href="https://d3js.org/"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>d3</u></a>
-                            to render charts in CSS-friendly SVG format. Charts rendered using dc.js are data driven and
-                            reactive and therefore provide instant feedback to user interaction. <br></p>
-                        <ul>
-                            <p>Advantages of DC: <br><br></p>
-                            <li> Great data visualization.</li>
-                            <li> Performs graphical filtering.</li>
-                            <li> Fast creation of charts and dashboards.</li>
-                            <li> Creation of highly interactive dashboards.</li>
-
-
-                            <p><br><br>Disadvantages of DC: <br><br></p>
-                            <li> Some functions in the D3.js is not supported in the older browsers.</li>
-                            <li> It has data-source limitations.</li>
-                            <li> Concealing original data is not easy with D3.js.</li>
-                            <li> The biggest disadvantage is it has a very steep learning curve.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        <div class="accordion" id="accordionGuide">
             <div class="card">
-                <div class="card-header" id="headingTwo">
+                <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Installation
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Description
                         </button>
                     </h5>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
                     <div class="card-body">
-                        <div class="guide">
-                            <h3>In this chapter, we will learn how to set up the DC.js development environment. Before we start, we need the following components −</h3>
-                            <br>
-                            <li> DC.js library</li>
-                            <li> Editor</li>
-                            <li> Web browser</li>
-                            <li> Web server</li>
-                            <p>Let us go through the steps one by one in detail.</p>
-                            <br>
+                        <div class="description">
 
-                            <h3>DC.js Installation</h3>
-                            <p>DC installation is very easy to set up.
-                                Follow the below steps to install DC on your machine.</p>
+                            <p> Pdc.js is a javascript charting library with native <a
+                                    href="http://crossfilter.github.io/crossfilter/"
+                                    target="_blank">crossfilter</a> support, allowing
+                                highly efficient exploration o
+                                n large multi-dimensional datasets (inspired by crossfilter's demo). It leverages <a
+                                        href="https://d3js.org/"
+                                        target="_blank">d3</a>
+                                to render charts in CSS-friendly SVG format. Charts rendered using dc.js are data driven
+                                and
+                                reactive and therefore provide instant feedback to user interaction. <br></p>
+                            <p>Advantages of DC: <br><br></p>
+
+                            <ul>
+                                <li> Great data visualization.</li>
+                                <li> Performs graphical filtering.</li>
+                                <li> Fast creation of charts and dashboards.</li>
+                                <li> Creation of highly interactive dashboards.</li>
+                            </ul>
 
 
+                            <p><br><br>Disadvantages of DC: <br><br></p>
+                            <ul>
+                                <li> Some functions in the D3.js is not supported in the older browsers.</li>
+                                <li> It has data-source limitations.</li>
+                                <li> Concealing original data is not easy with D3.js.</li>
+                                <li> The biggest disadvantage is it has a very steep learning curve.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                            <h3>Download DC.js Library</h3>
-                            <p>DC is an open-source library; use the link
-                                <a href="https://github.com/dc-js/dc.js/releases"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>https://github.com/dc-js/dc.js/releases</u></a> to download the file.</p>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Installation
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>In this chapter, we will learn how to set up the DC.js development environment.
+                                    Before we start, we need the following components −</h3>
+                                <br>
 
-                            <p>Download the latest version of the DC file.
-                                (As of now, the latest version is 2.0.2.).
-                                After the download is completed, unzip the DC folder and paste it to your project's
-                                root folder or any other folder,
-                            where you want to keep all your library files.</p>
+                                <ul>
+                                    <li> DC.js library</li>
+                                    <li> Editor</li>
+                                    <li> Web browser</li>
+                                    <li> Web server</li>
+                                </ul>
 
-                            <p>The sample HTML page is as shown below.</p>
+                                <p>Let us go through the steps one by one in detail.</p>
+                                <br>
 
-                            <pre>
+                                <h3>DC.js Installation</h3>
+                                <p>DC installation is very easy to set up.
+                                    Follow the below steps to install DC on your machine.</p>
+
+
+                                <h3>Download DC.js Library</h3>
+                                <p>DC is an open-source library; use the link
+                                    <a href="https://github.com/dc-js/dc.js/releases"
+                                       target="_blank">https://github.com/dc-js/dc.js/releases</a>
+                                    to download the file.</p>
+
+                                <p>Download the latest version of the DC file.
+                                    (As of now, the latest version is 2.0.2.).
+                                    After the download is completed, unzip the DC folder and paste it to your project's
+                                    root folder or any other folder,
+                                    where you want to keep all your library files.</p>
+
+                                <p>The sample HTML page is as shown below.</p>
+
+                                <pre>
                             <code class="language-bash">
                                !DOCTYPE html
                                 html lang = "en"
@@ -109,89 +122,96 @@
                                 /body
                                 /html
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <p>DC is a JavaScript code, so we have to write all the DC codes within the “script” tag.
-                                We may need to manipulate the existing DOM elements,
-                                hence it is advisable to write the DC code just before the end of the “body” tag.</p>
+                                <p>DC is a JavaScript code, so we have to write all the DC codes within the “script”
+                                    tag.
+                                    We may need to manipulate the existing DOM elements,
+                                    hence it is advisable to write the DC code just before the end of the “body”
+                                    tag.</p>
 
-                            <h3>DC.js Editor</h3>
-                            <p>We will need an editor to start writing the code. There are some great IDEs
-                                (Integrated Development Environment) with support for JavaScript such as −</p><br>
+                                <h3>DC.js Editor</h3>
+                                <p>We will need an editor to start writing the code. There are some great IDEs
+                                    (Integrated Development Environment) with support for JavaScript such as −</p><br>
 
-                            <li> Visual Studio Code</li>
-                            <li> WebStorm</li>
-                            <li> Eclipse</li>
-                            <li> SublimeText</li>
+                                <ul>
+                                    <li> Visual Studio Code</li>
+                                    <li> WebStorm</li>
+                                    <li> Eclipse</li>
+                                    <li> SublimeText</li>
+                                </ul>
 
-                            <p>These IDEs provide intelligent code completion as well as support some of the modern
-                                JavaScript frameworks. If we do not have any fancy IDE,
-                                we can always use a basic editor such as Notepad, VI, etc.</p>
-
-
-                            <h3>Web Browser</h3>
-                            <p>DC.js works on all browsers except IE8 and lower.</p>
-
-                            <h3>Web Server</h3>
-                            <p>Most browsers serve local HTML files directly from the local file system.
-                                However, there are certain restrictions when it comes to loading external data files.
-                                In the subsequent chapters of this tutorial, we will be loading data from external files
-                                such as CSV and JSON. Therefore, it will be easier for us,
-                                if we set up the web server right from the beginning.</p>
-
-                            <p>We can use any web server, which we are comfortable with. For example – IIS, Apache, etc.</p>
-
-                            <h3>Viewing Your Page</h3>
-                            <p>In most cases, we can just open the HTML file in a web browser to view it. However,
-                                when loading external data sources, it is more reliable to
-                                run a local webserver and view the page from the server <strong>(http://localhost:8080)</strong>.</p>
+                                <p>These IDEs provide intelligent code completion as well as support some of the modern
+                                    JavaScript frameworks. If we do not have any fancy IDE,
+                                    we can always use a basic editor such as Notepad, VI, etc.</p>
 
 
+                                <h3>Web Browser</h3>
+                                <p>DC.js works on all browsers except IE8 and lower.</p>
+
+                                <h3>Web Server</h3>
+                                <p>Most browsers serve local HTML files directly from the local file system.
+                                    However, there are certain restrictions when it comes to loading external data
+                                    files.
+                                    In the subsequent chapters of this tutorial, we will be loading data from external
+                                    files
+                                    such as CSV and JSON. Therefore, it will be easier for us,
+                                    if we set up the web server right from the beginning.</p>
+
+                                <p>We can use any web server, which we are comfortable with. For example – IIS, Apache,
+                                    etc.</p>
+
+                                <h3>Viewing Your Page</h3>
+                                <p>In most cases, we can just open the HTML file in a web browser to view it. However,
+                                    when loading external data sources, it is more reliable to
+                                    run a local webserver and view the page from the server <strong>(http://localhost:8080)</strong>.
+                                </p>
 
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Summary
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>DC.js is a charting library for exploring large multi-dimensional datasets.
+                                It relies on the D3.js engine to render charts in a CSS-friendly SVG format.
+                                It allows complex data visualization to be rendered and has a designed dashboard having
+                                Bar Charts,
+                                Scatter Plots, Heat Maps, etc. DC.js is built to work with Crossfilter for data
+                                manipulation.
+                                DC.js enables a single (large) dataset to be visualized with many interconnected charts
+                                with an advanced auto-filtering option.</p>
 
+                            <h3>Why Do We Need DC.js?</h3>
+                            <p>In general, data visualization is quite a complex process and carrying it out on the
+                                client side requires extra skill. DC.js enables us to create almost any kind of complex
+                                data visualization using a simpler programming model. It is an open source,
+                                extremely easy to pick up JavaScript library,
+                                which allows us to implement neat custom visualizations in a very short time.</p>
+                            <p>DC.js charts are data driven and very reactive.
+                                In addition, it delivers instant
+                                feedback to user interaction using the <strong>Crossfilter Library</strong>.</p>
 
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Summary
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                     data-parent="#accordionExample">
-                    <div class="card-body">
-                        <p>DC.js is a charting library for exploring large multi-dimensional datasets.
-                            It relies on the D3.js engine to render charts in a CSS-friendly SVG format.
-                            It allows complex data visualization to be rendered and has a designed dashboard having Bar Charts,
-                            Scatter Plots, Heat Maps, etc. DC.js is built to work with Crossfilter for data manipulation.
-                            DC.js enables a single (large) dataset to be visualized with many interconnected charts
-                            with an advanced auto-filtering option.</p>
-
-                        <h3>Why Do We Need DC.js?</h3>
-                        <p>In general, data visualization is quite a complex process and carrying it out on the
-                            client side requires extra skill. DC.js enables us to create almost any kind of complex
-                            data visualization using a simpler programming model. It is an open source,
-                            extremely easy to pick up JavaScript library,
-                            which allows us to implement neat custom visualizations in a very short time.</p>
-                        <p>DC.js charts are data driven and very reactive.
-                            In addition, it delivers instant
-                            feedback to user interaction using the <strong>Crossfilter Library</strong>.</p>
-
-                    </div>
-                </div>
-            </div>
 
             </div>
         </div>
+    </div>
 
 
 

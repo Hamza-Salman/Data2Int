@@ -1,111 +1,127 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 {% extends "base.html" %}
-{% block title %}Programmer5 - BL Archives{% endblock%}
+{% block title %}Paraquet{% endblock %}
 
 {% block content %}
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
-           aria-controls="pills-pycharm" aria-selected="false">Parquet</a>
-    </li>
-</ul>
-<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
-    <hr/>
+    <h1>Paraquet</h1>
 
-    <div class="accordion" id="accordionGuide">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                        Description
-                    </button>
-                </h5>
-            </div>
+    <hr>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
-                <div class="card-body">
-                    <div class="description">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+               aria-controls="pills-pycharm" aria-selected="false">Parquet</a>
+        </li>
+    </ul>
+    <div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
 
-                        <p> Parquet is an open source file format built to handle flat columnar storage data formats.
-                            Parquet operates well with complex data in large volumes.
-                            It is known for its both performant data compression
-                            and its ability to handle a wide variety of encoding types.  <br></p>
-                        <ul>
-                            <p>Advantages of Parquet: <br><br></p>
-                            <li> Columnar storage limits IO operations.</li>
-                            <li> Columnar storage can fetch specific columns that you need to access.</li>
-                            <li> Columnar storage consumes less space.</li>
-                            <li> Columnar storage gives better-summarized data and follows type-specific encoding.</li>
-
-                            <p><br><br>Disadvantages of Parquet: <br><br></p>
-                            <li> Parquet stores the file schema in the file metadata. CSV files don't store file metadata,
-                                so readers need to either be supplied with the schema or the schema needs to be inferred.
-                                Supplying a schema is tedious and inferring a schema is error prone / expensive.</li>
-
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
+        <div class="accordion" id="accordionGuide">
             <div class="card">
-                <div class="card-header" id="headingTwo">
+                <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Installation
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Description
                         </button>
                     </h5>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
                     <div class="card-body">
-                        <div class="guide">
-                            <h3>parquet-tools</h3>
-                            <br>
-                            <p>This is a pip installable <a href="https://github.com/apache/parquet-mr"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>parquet-tools</u></a>. In other words, parquet-tools is a CLI tools of
-                                <a href="https://github.com/apache/arrow"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>Apache Arrow</u></a>.
-                                You can show parquet file content/schema on local disk or on Amazon S3.
-                                It is incompatible with original parquet-tools.</p>
+                        <div class="description">
 
-                            <h3>Features</h3>
-                            <br>
-                            <li> Read Parquet data (local file or file on S3)</li>
-                            <li> Read Parquet metadata/schema (local file or file on S3)</li>
+                            <p> Parquet is an open source file format built to handle flat columnar storage data
+                                formats.
+                                Parquet operates well with complex data in large volumes.
+                                It is known for its both performant data compression
+                                and its ability to handle a wide variety of encoding types. <br></p>
 
-                            <br><h3>Installation</h3>
+                            <p>Advantages of Parquet: <br><br></p>
+                            <ul>
+                                <li> Columnar storage limits IO operations.</li>
+                                <li> Columnar storage can fetch specific columns that you need to access.</li>
+                                <li> Columnar storage consumes less space.</li>
+                                <li> Columnar storage gives better-summarized data and follows type-specific encoding.
+                                </li>
+                            </ul>
 
-                            <pre>
+                            <p><br><br>Disadvantages of Parquet: <br><br></p>
+                            <ul>
+                                <li> Parquet stores the file schema in the file metadata. CSV files don't store file
+                                    metadata,
+                                    so readers need to either be supplied with the schema or the schema needs to be
+                                    inferred.
+                                    Supplying a schema is tedious and inferring a schema is error prone / expensive.
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Installation
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>parquet-tools</h3>
+                                <br>
+                                <p>This is a pip installable <a href="https://github.com/apache/parquet-mr"
+                                                                target="_blank" style="color: rgb(0,0,230)"><u>parquet-tools</u></a>.
+                                    In other words, parquet-tools is a CLI tools of
+                                    <a href="https://github.com/apache/arrow"
+                                       target="_blank" style="color: rgb(0,0,230)"><u>Apache Arrow</u></a>.
+                                    You can show parquet file content/schema on local disk or on Amazon S3.
+                                    It is incompatible with original parquet-tools.</p>
+
+                                <h3>Features</h3>
+                                <br>
+
+                                <ul>
+                                    <li> Read Parquet data (local file or file on S3)</li>
+                                    <li> Read Parquet metadata/schema (local file or file on S3)</li>
+                                </ul>
+
+                                <br>
+                                <h3>Installation</h3>
+
+                                <pre>
                             <code class="language-bash">
                                $ pip install parquet-tools
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <h3>Usage</h3>
+                                <h3>Usage</h3>
 
-                            <pre>
+                                <pre>
                             <code class="language-bash">
                                $ parquet-tools --help
                                 usage: parquet-tools [-h] {show,csv,inspect} ...
                                 parquet CLI tools
                                 positional arguments:
                                 {show,csv,inspect}
-                                show              Show human readble format. see `show -h`
+                                show              Show human readable format. see `show -h`
                                 csv               Cat csv style. see `csv -h`
                                 inspect           Inspect parquet file. see `inspect -h`
                                 optional arguments:
                                 -h, --help          show this help message and exit
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <h3>Usage Examples</h3><br>
-                            <h5>Show local parquet file</h5>
+                                <h3>Usage Examples</h3><br>
+                                <h5>Show local parquet file</h5>
 
-                            <pre>
+                                <pre>
                             <code class="language-bash">
                                $ parquet-tools show test.parquet
                                 +-------+-------+---------+
@@ -116,11 +132,12 @@
                                 |   2.5 | baz   | True    |
                                 +-------+-------+---------+
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <h3>Show parquet file on S3</h3>
+                                <h3>Show parquet file on S3</h3>
 
-                            <pre>
+                                <pre>
                             <code class="language-bash">
                                $ parquet-tools show s3://bucket-name/prefix/*
                                 +-------+-------+---------+
@@ -131,21 +148,24 @@
                                 |   2.5 | baz   | True    |
                                 +-------+-------+---------+
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <h3>Inspect parquet file schema</h3>
+                                <h3>Inspect parquet file schema</h3>
 
-                            <pre>
+                                <pre>
                             <code class="language-bash">
                                $ parquet-tools inspect /path/to/parquet
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
-                            <p>Inspect output</p>
+                                <p>Inspect output</p>
 
-                            <h3>Cat CSV parquet and transform <a href="https://github.com/mithrandie/csvq"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>csvq</u></a></h3>
-                            <pre>
+                                <h3>Cat CSV parquet and transform <a href="https://github.com/mithrandie/csvq"
+                                                                     target="_blank"
+                                                                     style="color: rgb(0,0,230)"><u>csvq</u></a></h3>
+                                <pre>
                             <code class="language-bash">
                                $ parquet-tools csv s3://bucket-name/test.parquet |csvq "select one, three where three"
                                 +-------+-------+
@@ -155,51 +175,53 @@
                                 | 2.5   | True  |
                                 +-------+-------+
                             </code>
-                            </pre><br>
+                            </pre>
+                                <br>
 
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Summary
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Parquet is built from the ground up with complex nested data structures in mind, and uses
+                                the
+                                <a href="https://github.com/julienledem/redelm/wiki/The-striping-and-assembly-algorithms-from-the-Dremel-paper"
+                                   target="_blank" style="color: rgb(0,0,230)"><u>record shredding and assembly
+                                    algorithm</u></a> described in the Dremel paper.
+                                They believe this approach is superior to simple flattening of nested name spaces.</p>
 
-
+                            <p>Parquet is built to support very efficient compression and encoding schemes.
+                                Multiple projects have demonstrated the performance impact of applying the right
+                                compression and encoding scheme to the data. Parquet allows compression schemes to be
+                                specified on a per-column level,
+                                and is future-proofed to allow adding more encodings as they are invented and
+                                implemented.</p>
+                            <p>Parquet is built to be used by anyone. The Hadoop ecosystem is rich with data processing
+                                frameworks,
+                                and they are not interested in playing favorites.
+                                They believe that an efficient, well-implemented columnar storage substrate
+                                should be useful to all frameworks without the cost of extensive and difficult to set up
+                                dependencies.</p>
 
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Summary
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                     data-parent="#accordionExample">
-                    <div class="card-body">
-                        <p>Parquet is built from the ground up with complex nested data structures in mind, and uses the
-                            <a href="https://github.com/julienledem/redelm/wiki/The-striping-and-assembly-algorithms-from-the-Dremel-paper"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>record shredding and assembly algorithm</u></a> described in the Dremel paper.
-                            They believe this approach is superior to simple flattening of nested name spaces.</p>
-
-                        <p>Parquet is built to support very efficient compression and encoding schemes.
-                            Multiple projects have demonstrated the performance impact of applying the right
-                            compression and encoding scheme to the data. Parquet allows compression schemes to be
-                            specified on a per-column level,
-                            and is future-proofed to allow adding more encodings as they are invented and implemented.</p>
-                        <p>Parquet is built to be used by anyone. The Hadoop ecosystem is rich with data processing frameworks,
-                            and they are not interested in playing favorites.
-                            They believe that an efficient, well-implemented columnar storage substrate
-                            should be useful to all frameworks without the cost of extensive and difficult to set up dependencies.</p>
-
-                    </div>
-                </div>
-            </div>
-
-            </div>
         </div>
+    </div>
 
 
 

@@ -19,7 +19,11 @@ def virus_scan(uploaded_file, filepath) -> bool:
     # grab the file name
     filename = uploaded_file.filename
 
-    filesize = os.path.getsize(filepath + "/" + filename)
+    # Grab the size of the file at the requested location's size in bytes
+    file_byte_size = os.path.getsize(filepath + "/" + filename)
+
+    # Convert to kilobytes by dividing by 1024
+    filesize: int = file_byte_size / 1024
 
     # open the file
     file = open(filepath + "/" + filename, "rb")
@@ -29,10 +33,17 @@ def virus_scan(uploaded_file, filepath) -> bool:
         'async': 'false',
     }
 
-    # add the file to the array of files to send
-    files = {
-        'inputFile': ('\'' + filename + '\'', file.read())
-    }
+    # Check if the estimated filesize is greater than or equal to 50000 KB
+    if filesize >= 50000:
+        # Read the file up to half the filesize to insert into the request content
+        files = {
+            'inputFile': ('\'' + filename + '\'', file.read(int(filesize/2)))
+        }
+    else:
+        # add the file to the dictionary, reading the whole file to insert as the request content
+        files = {
+            'inputFile': ('\'' + filename + '\'', file.read())
+        }
 
     file.close()
 

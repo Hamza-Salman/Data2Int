@@ -1,189 +1,200 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
 {% extends "base.html" %}
-{% block title %}Programmer1 - DB Archives{% endblock%}
+{% block title %}Dev Environment{% endblock %}
 
 {% block content %}
+    <h1>Development Environment</h1>
 
-<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
-           aria-controls="pills-pycharm" aria-selected="false">PyCharm</a>
-    </li>
-</ul>
+    <hr>
 
-<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
-    <hr/>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+               aria-controls="pills-pycharm" aria-selected="false">PyCharm</a>
+        </li>
+    </ul>
 
-    <div class="accordion" id="accordionGuide">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                            aria-expanded="true" aria-controls="collapseOne">
-                        Description
-                    </button>
-                </h5>
-            </div>
+    <div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
 
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
-                <div class="card-body">
-                    <div class="description">
-
-                        <p> PyCharm is an integrated development environment used in computer programming,
-                            specifically for the Python language. <br></p>
-                        <ul>
-                            <p>Advantages of PyCharm: <br><br></p>
-                            <li>A plethora of productive shortcuts.</li>
-                            <li> to view the entire Python source code with a single click.</li>
-                            <li> of an array of plugins.</li>
-                            <li> Easy-to-use.</li>
-                            <li> Excellent community support.</li>
-                            <li> Facilitates faster code development.</li>
-                            <p><br><br>Disadvantages of PyCharm: <br><br></p>
-                            <li>The main disadvantage of using PyCharm is, it takes more space than other text
-                                editors which degrade the functionality of code.
-                            </li>
-                            <li> The community version is idle for python development only and does not allow to use
-                                other programming languages.
-                            </li>
-                            <li> The professional version is somewhat expensive.</li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="accordion" id="accordionGuide">
             <div class="card">
-                <div class="card-header" id="headingTwo">
+                <div class="card-header" id="headingOne">
                     <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Installation and Setup
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Description
                         </button>
                     </h5>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
                     <div class="card-body">
-                        <div class="guide">
-                            <h3>This section contains a guide for how we setup our project using PyCharm IDE:</h3>
-                            <br><br>
-                            <ol>
-                                <li>Download PyCharm Professional IDE <a
-                                        href="https://www.jetbrains.com/pycharm/download/#section=windows"
-                                        target="_blank" style="color: rgb(0,0,230)"><u>Here</u></a></li>
-                                <br>
-                                <li>JetBrains offers a free license for students that are attending school, however
-                                    you can start a 30-day free trial and get started
-                                </li>
-                                <br>
-                                <li>Once setup, create a new project</li>
-                                <br>
-                                <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
-                                    <li style="margin-left:2em">Accept the defaults, make sure to uncheck "create a
-                                        main.py welcome script" box <br><img
-                                                src="/templates/resources/pycharmss/create_new_project.PNG"
-                                                alt="Create New Project" min-width="50%" height="50%"></li>
-                                </ol>
-                                <br>
-                                <li>Once your project is created, navigate to Tools --> Deployment ---> Browse
-                                    Remote Host
-                                </li>
-                                <br><img style="margin-left:2em"
-                                         src="/templates/resources/pycharmss/browse_remote_host.PNG"
-                                         alt="Browse Remote Host" min-width="50%" height="50%"> <br>
+                        <div class="description">
 
+                            <p> PyCharm is an integrated development environment used in computer programming,
+                                specifically for the Python language. <br></p>
 
-                                <br>
-                                <li>Create a new remote host, select the "..." button to open the popup window. Make
-                                    sure you select "SFTP" as the type (name can be anything)
-                                </li>
-                                <br><img style="margin-left:2em"
-                                         src="/templates/resources/pycharmss/create_remote_host.PNG"
-                                         alt="Create Remote Host" min-width="50%" height="50%"> <br> <br>
+                            <p>Advantages of PyCharm: <br><br></p>
+                            <ul>
+                                <li>A plethora of productive shortcuts.</li>
+                                <li> to view the entire Python source code with a single click.</li>
+                                <li> of an array of plugins.</li>
+                                <li> Easy-to-use.</li>
+                                <li> Excellent community support.</li>
+                                <li> Facilitates faster code development.</li>
+                            </ul>
 
-                                <li>Now its time to configure the SSH connection, first select the "..." button.
+                            <p><br><br>Disadvantages of PyCharm: <br><br></p>
+
+                            <ul>
+                                <li>The main disadvantage of using PyCharm is, it takes more space than other text
+                                    editors which degrade the functionality of code.
                                 </li>
-                                <br><img style="margin-left:2em"
-                                         src="/templates/resources/pycharmss/remote_host_config.PNG"
-                                         alt="Remote Host Config" min-width="50%" height="50%"> <br> <br>
-                                <li>Select the "+" button and fill in the required fields (actual fields have been
-                                    blurred for security reasons)
+                                <li> The community version is idle for python development only and does not allow to use
+                                    other programming languages.
                                 </li>
-                                <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
-                                    <li style="margin-left:2em">Set "Host" to the servers IP<br></li>
-                                    <li style="margin-left:2em">Leave port at "22"<br></li>
-                                    <li style="margin-left:2em">For "User name", enter the servers user login<br>
+                                <li> The professional version is somewhat expensive.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Installation and Setup
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how we setup our project using PyCharm IDE:</h3>
+                                <br><br>
+                                <ol>
+                                    <li>Download PyCharm Professional IDE <a
+                                            href="https://www.jetbrains.com/pycharm/download/#section=windows"
+                                            target="_blank">Here</a></li>
+
+                                    <li>JetBrains offers a free license for students that are attending school, however
+                                        you can start a 30-day free trial and get started
                                     </li>
-                                    <li style="margin-left:2em">Now, enter the password for the server<br></li>
-                                    <li style="margin-left:2em">Finally, select apply and click ok <br><br><img
-                                            src="/templates/resources/pycharmss/ssh_configuration.PNG"
-                                            alt="SSH Configuration" min-width="50%" height="50%"></li>
+
+                                    <li>Once setup, create a new project
+                                        <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+                                            <li style="margin-left:2em">Accept the defaults, make sure to uncheck
+                                                "create a
+                                                main.py welcome script" box <br>
+                                                <img src="/templates/resources/pycharmss/create_new_project.PNG"
+                                                     alt="Create New Project" width="50%" height="50%">
+                                                <br>
+                                            </li>
+                                        </ol>
+                                    </li>
+
+                                    <li>Once your project is created, navigate to Tools --> Deployment ---> Browse
+                                        Remote Host<br>
+                                        <img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/browse_remote_host.PNG"
+                                             alt="Browse Remote Host" width="50%" height="50%">
+                                    </li>
+
+
+                                    <li>Create a new remote host, select the "..." button to open the popup window. Make
+                                        sure you select "SFTP" as the type (name can be anything)
+                                        <img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/create_remote_host.PNG"
+                                             alt="Create Remote Host" width="50%" height="50%">
+                                    </li>
+
+
+                                    <li>Now its time to configure the SSH connection, first select the "..." button.<br>
+                                        <img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/remote_host_config.PNG"
+                                             alt="Remote Host Config" width="50%" height="50%">
+                                    </li>
+
+                                    <li>Select the "+" button and fill in the required fields (actual fields have been
+                                        blurred for security reasons)
+
+                                        <ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+
+                                            <li style="margin-left:2em">Set "Host" to the servers IP<br></li>
+                                            <li style="margin-left:2em">Leave port at "22"<br></li>
+                                            <li style="margin-left:2em">For "User name", enter the servers user
+                                                login<br></li>
+                                            <li style="margin-left:2em">Now, enter the password for the server<br></li>
+                                            <li style="margin-left:2em">Finally, select apply and click ok <br><br>
+                                                <img src="/templates/resources/pycharmss/ssh_configuration.PNG"
+                                                     alt="SSH Configuration" width="50%" height="50%"></li>
+                                        </ol>
+                                    </li>
+
+                                    <li>Now, Set the Root Path to "/var/www/data2int.com/html" and the Web server URL to
+                                        "https://www.data2int.com/"<br><br>
+                                        <img style="margin-left:2em"
+                                             src="/templates/resources/pycharmss/remote_host_config.PNG"
+                                             alt="Remote host Config" width="50%" height="50%"><br></li>
+
+                                    <li>Lastly, Select OK</li>
+
+                                    <li>Now you will be able to access the server and all files located on the server
+                                        <br><br><img src="/templates/resources/pycharmss/view_remote_host.PNG"
+                                                     alt="View Remote Host" width="400px" height="800"></li>
+
+
+                                    <li>To setup the SSH terminal in PyCharm, Select Tools --> Start SSH Session
+                                        <br><br><img src="/templates/resources/pycharmss/start_ssh.PNG"
+                                                     alt="Start SSH Session" width="50%" height="50%"></li>
+
+                                    <li>Select the SSH configuration you created <br><br><img
+                                            src="/templates/resources/pycharmss/select_gurby.PNG"
+                                            alt="Select SSH Config" width="500px" height="150px"></li>
+
+                                    <li>Now you will be able to access the the project from the terminal!<br><br><img
+                                            src="/templates/resources/pycharmss/view_ssh_terminal.PNG"
+                                            alt="View SSH Terminal" width="100%" height="150px"></li>
+
                                 </ol>
-                                <br>
-                                <li>Now, Set the Root Path to "/var/www/data2int.com/html" and the Web server URL to
-                                    "https://www.data2int.com/"<br><br><img style="margin-left:2em"
-                                                                            src="/templates/resources/pycharmss/remote_host_config.PNG"
-                                                                            alt="Remote host Config" min-width="50%"
-                                                                            height="50%"><br></li>
-                                <br>
-                                <li>Lastly, Select OK</li>
-                                <br>
-                                <li>Now you will be able to access the server and all files located on the server
-                                    <br><br><img src="/templates/resources/pycharmss/view_remote_host.PNG"
-                                                 alt="View Remote Host" min-width="400px" height="800"></li>
-
-                                <br>
-                                <li>To setup the SSH terminal in PyCharm, Select Tools --> Start SSH Session
-                                    <br><br><img src="/templates/resources/pycharmss/start_ssh.PNG"
-                                                 alt="Start SSH Session" min-width="50%" height="50%"></li>
-                                <br>
-                                <li>Select the SSH configuration you created <br><br><img
-                                        src="/templates/resources/pycharmss/select_gurby.PNG"
-                                        alt="Select SSH Config" width="500px" height="150px"></li>
-                                <br>
-                                <li>Now you will be able to access the the project from the terminal!<br><br><img
-                                        src="/templates/resources/pycharmss/view_ssh_terminal.PNG"
-                                        alt="View SSH Terminal" min-width="100%" height="150px"></li>
-
-                            </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionExample">
+                        <div class="card-body">
+                            <p>Using PyCharm for the development of this project will be highly beneficial to the
+                                development of the Data Patterns Project. Here are some examples of how this is
+                                possible:</p>
+                            <ul>
+                                <li>Using an IDE(integrated development environment) for development of the project will
+                                    follow best practices of developing a project
+                                </li>
+                                <li>All developers can work on the project simultaneously and set up the project so we
+                                    can make real time changes
+                                </li>
+                                <li>with PyCharm we can connect to the server through ssh, edit the source code of the
+                                    project through a remote host at the same time all in one session.
+                                </li>
+                            </ul>
+                            <p>In conclusion, using Pycharm would seriously enhance the development process of Data
+                                Patterns. Therefore, we should continue to use it long term since we are given a
+                                professional license for free. </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Summary/Findings
-                        </button>
-                    </h5>
-                </div>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                     data-parent="#accordionExample">
-                    <div class="card-body">
-                        <p>Using PyCharm for the development of this project will be highly beneficial to the
-                            development of the Data Patterns Project. Here are some examples of how this is
-                            possible:</p>
-                        <ul>
-                            <li>Using an IDE(integrated development environment) for development of the project will
-                                follow best practices of developing a project
-                            </li>
-                            <li>All developers can work on the project simultaneously and set up the project so we
-                                can make real time changes
-                            </li>
-                            <li>with PyCharm we can connect to the server through ssh, edit the source code of the
-                                project through a remote host at the same time all in one session.
-                            </li>
-                        </ul>
-                        <p>In conclusion, using Pycharm would seriously enhance the development process of Data
-                            Patterns. Therefore, we should continue to use it long term since we are given a
-                            professional license for free. </p>
-                    </div>
-                </div>
-            </div>
         </div>
-
     </div>
-</div>
 {% endblock %}

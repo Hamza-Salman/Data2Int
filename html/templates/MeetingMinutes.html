@@ -1,420 +1,474 @@
-<!DOCTYPE html>
-<meta charset="utf-8" xmlns="http://www.w3.org/1999/html">
-
 {% extends "base.html" %}
 
 {% block title %}Meeting Minutes{% endblock %}
 
 {% block content %}
 
-<h1>Welcome your visit, enjoy your stay</h1>
-<h3>Here is the weekly meeting notes of our group</h3>
-<h4>The following is the weekly meeting record for each month</h4>
+    <h1>Meeting Minutes</h1>
+    <hr>
 
- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="pills-updates-tab" data-toggle="pill" href="#may27" role="tab" aria-controls="pills-d3script" aria-selected="true">May 27th 2021</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="pills-files-tab" data-toggle="pill" href="#june3" role="tab" aria-controls="pills-gantt" aria-selected="false">June 3rd 2021</a>
-  </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab1" data-toggle="pill" href="#june10" role="tab" aria-controls="pills-gantt" aria-selected="false">June 10th 2021</a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab2" data-toggle="pill" href="#june17" role="tab" aria-controls="pills-gantt" aria-selected="false">June 17th 2021</a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab3" data-toggle="pill" href="#june24" role="tab" aria-controls="pills-gantt" aria-selected="false">June 24th 2021</a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab4" data-toggle="pill" href="#july8" role="tab" aria-controls="pills-gantt" aria-selected="false">July 8th 2021</a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab5" data-toggle="pill" href="#july22" role="tab" aria-controls="pills-gantt" aria-selected="false">July 22th 2021</a>
-     </li>
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab6" data-toggle="pill" href="#august5" role="tab" aria-controls="pills-gantt" aria-selected="false">August 5th 2021</a>
-     </li>
+    <h3>Welcome your visit, enjoy your stay. Here is the weekly meeting notes of our group</h3>
+    <h4>The following is the weekly meeting record for each month</h4>
 
-     <li class="nav-item">
-         <a class="nav-link" id="pills-files-tab7" data-toggle="pill" href="#september9" role="tab" aria-controls="pills-gantt" aria-selected="false">September 9th 2021</a>
-     </li>
-</ul>
+    <hr>
 
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-updates-tab" data-toggle="pill" href="#may27" role="tab"
+               aria-controls="pills-d3script" aria-selected="true">May 27th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab" data-toggle="pill" href="#june3" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">June 3rd 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab1" data-toggle="pill" href="#june10" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">June 10th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab2" data-toggle="pill" href="#june17" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">June 17th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab3" data-toggle="pill" href="#june24" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">June 24th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab4" data-toggle="pill" href="#july8" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">July 8th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab5" data-toggle="pill" href="#july22" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">July 22th 2021</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab6" data-toggle="pill" href="#august5" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">August 5th 2021</a>
+        </li>
 
-
-
-<div class="tab-content" id="pills-tabContent">
-<div class="tab-pane fade show active" id="may27" role="tabpanel" aria-labelledby="pills-updates-tab">
-    <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-          May 27th 2021 - Intro Meeting With Client
-        </button>
-      </h5>
-    </div>
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>data2int.com official website name</p>
-          <p>Introductions from the all person</p>
-          <p>Skeletal Model provided to us of the project</p>
-          <p>Went into detail about the projects purpose, goal</p>
-          <ul>
-          <li>purpose: for researchers  and masters students to analyze and make sense of data. Supposed to give them a direction of where to go with the data.</li>
-          <li>goal: Cost Effective Solution, Easily upload and understand data, Allow users to learn while exploring.</li>
-          </ul>
-          <p>Kaggel - a lot of data science projects there that transform the data into visual form</p>
-          <ul>
-          <li>upload csv/json to the backend.</li>
-          <li>manipulate data</li>
-              <li>allow people to build intelligence (statistical analysis, visual forms (graphs, charts), predictive/artificial intelligence</li>
-          </ul>
-          <p>talked about all software that will be used for the project</p>
-          <ul>
-          <li>Ubuntu 21.04 - for development because it is readily available and free</li>
-          <li>Python 3.8.5 - its is powerful and well supported</li>
-              <li>Flask - simple and easy to learn and deploy JavaScript Framework</li>
-              <li>MongoDb - Database that can store unstructured data</li>
-              <li>D3.js - wonderful visualization</li>
-              <li>DC.js - interactive visualization</li>
-              <li>crossfilter.js</li>
-              <li>prism.js</li>
-              <li>BootStrap and CSS - simple and effective website display controls</li>
-
-          </ul>
-
-      </div>
-    </div>
-  </div>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-files-tab7" data-toggle="pill" href="#september9" role="tab"
+               aria-controls="pills-gantt" aria-selected="false">September 9th 2021</a>
+        </li>
+    </ul>
 
 
 
 
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="may27" role="tabpanel" aria-labelledby="pills-updates-tab">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            May 27th 2021 - Intro Meeting With Client
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>data2int.com official website name</p>
+                        <p>Introductions from the all person</p>
+                        <p>Skeletal Model provided to us of the project</p>
+                        <p>Went into detail about the projects purpose, goal</p>
+                        <ul>
+                            <li>purpose: for researchers and masters students to analyze and make sense of data.
+                                Supposed to give them a direction of where to go with the data.
+                            </li>
+                            <li>goal: Cost Effective Solution, Easily upload and understand data, Allow users to learn
+                                while exploring.
+                            </li>
+                        </ul>
+                        <p>Kaggel - a lot of data science projects there that transform the data into visual form</p>
+                        <ul>
+                            <li>upload csv/json to the backend.</li>
+                            <li>manipulate data</li>
+                            <li>allow people to build intelligence (statistical analysis, visual forms (graphs, charts),
+                                predictive/artificial intelligence
+                            </li>
+                        </ul>
+                        <p>talked about all software that will be used for the project</p>
+                        <ul>
+                            <li>Ubuntu 21.04 - for development because it is readily available and free</li>
+                            <li>Python 3.8.5 - its is powerful and well supported</li>
+                            <li>Flask - simple and easy to learn and deploy JavaScript Framework</li>
+                            <li>MongoDb - Database that can store unstructured data</li>
+                            <li>D3.js - wonderful visualization</li>
+                            <li>DC.js - interactive visualization</li>
+                            <li>crossfilter.js</li>
+                            <li>prism.js</li>
+                            <li>BootStrap and CSS - simple and effective website display controls</li>
 
-</div>
+                        </ul>
 
-
-<div class="tab-pane fade" id="june3" role="tabpanel" aria-labelledby="pills-files-tab">
-    <div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          June 3rd 2021 - Requirement Gathering / Project Explanation
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>We will email the meetings agenda to the client before the meeting begins</p>
-          <p>Went over software that will be used for the application.</p>
-          <p>Team will discuss what what cloud server we want to use.</p>
-          <p>Use developer 1 as an example and that's how we are going to develop and update our codes\ using prism.js</p>
-          <p>Learn to use sudo nano</p>
-          <p>365 data science to learn statistics</p>
-          <p>Data analysis is run by: Flask (web server that will manage the data analysis)</p>
-          <p>JavaScript and website will be run by: Nginx (web server that will manage the website navigation)</p>
-          <p>Pick one specification from the business analysis and predictive analysis that we want to do and at the end we will work on creating an app that we want using the tool create.</p>
-          <p></p>
-          <p></p>
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-    <div class="tab-pane fade" id="june10" role="tabpanel" aria-labelledby="pills-files-tab">
-         <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          June 10th 2021 - High Level Requirement Gathering / Further Project Explanation
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>Systemctl restart gunicorn Command to update the website by restarting web server</p>
-          <p>High Level Requirements:</p>
-          <ul>
-              <li>Accomplish data visualization to better understand data sets and the relationships between data.</li>
-              <li>Accomplish data visualization to assist researchers and help researchers recognize patterns in their data using d3.js</li>
-              <li>We do this through D3.js.</li>
-              <li>Using python because it already has a lot of data analysis libraries.</li>
-              <li>Using python cause of the data manipulation libraries that exist within the language</li>
-              <li>Utilize python to manipulate visualizations.</li>
-              <li>types of data: -interval -ordinal -relational -nominal</li>
-              <li>Choose 10 D3.js applications to begin with.</li>
-              <li>Show all possible visualizations of their data and see what they like.</li>
-              <li>Data uploading step. (First task) Make sure it is secure and make sure that it is only saved for 24 hours.</li>
-              <li>Analyze each row of data and figure out what can be done.</li>
-              <li>Present each visualization possible.</li>
-              <li>Leave website as is. No added options. All the usage is on the main page.</li>
-
-          </ul>
-          <p>Professor wants a UML Outlining how everything on the website works together.</p>
-          <p>page should spit out different visualizations that apply to the dataset</p>
-          <ul>
-              <li>If the technique doesn't apply to the dataset, skip to the next technique and try the next one</li>
-              <li>Data visualizations should appear all on the same page together</li>
-          </ul>
-
-          <p>Timeline:</p>
-          <p>page should spit out different visualizations that apply to the dataset</p>
-          <ul>
-              <li>Find out how is data is uploaded and make it secure; stick to 10MG files</li>
-              <li>Business/predictive analysis - relating to the topic on statistics to teach end users how to use</li>
-          </ul>
-
-          <p><a href="https://blog.hubspot.com/sales/sales-statistics">Website for statistics analysis(Click to view)</a></p>
-          <p><a href="https://mirri66.github.io/rent_price_by_mrt.html">Vega-Lite. A website used for analysis based on data that is selected.(Click to view)</a></p>
-          <p>This is a project that is like something he wants Done by Singapore PHD Student Grace Tang.</p>
-          <p><a href="https://pycon.sg/archive/2016/schedule/presentation/100/index.html">Example project by a grad student on map visualizations using Python(Click to view)</a></p>
-      </div>
-    </div>
-         </div>
-    </div>
+                    </div>
+                </div>
+            </div>
 
 
+        </div>
 
 
+        <div class="tab-pane fade" id="june3" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            June 3rd 2021 - Requirement Gathering / Project Explanation
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>We will email the meetings agenda to the client before the meeting begins</p>
+                        <p>Went over software that will be used for the application.</p>
+                        <p>Team will discuss what what cloud server we want to use.</p>
+                        <p>Use developer 1 as an example and that's how we are going to develop and update our codes\
+                            using prism.js</p>
+                        <p>Learn to use sudo nano</p>
+                        <p>365 data science to learn statistics</p>
+                        <p>Data analysis is run by: Flask (web server that will manage the data analysis)</p>
+                        <p>JavaScript and website will be run by: Nginx (web server that will manage the website
+                            navigation)</p>
+                        <p>Pick one specification from the business analysis and predictive analysis that we want to do
+                            and at the end we will work on creating an app that we want using the tool create.</p>
+                        <p></p>
+                        <p></p>
 
-    <div class="tab-pane fade" id="june17" role="tabpanel" aria-labelledby="pills-files-tab">
-         <div class="card">
-    <div class="card-header" id="headingFour">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-          June 17th 2021 - Additional Information regarding the Project
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>We need hash coding for uploading the data.</p>
-                    <p>Apache codec libraries as a reference for how to hash our data.</p>
-                    <p>Paul worked with similar stuff but not with python.</p>
-                    <p>Figure out how to hash data in the backend.</p>
-                    <p>They will go through the UML with us so that we can verify our steps we take are correct.</p>
-                    <p>Do not worry about crashing the website. He has a backup of the website and can bring it back up.</p>
-                    <p>He WANTS at least one of us doing genetics analysis.</p>
-          <ul>
-              <li><a href="https://vega.github.io/voyager2/">Vega Voyager as an example of what he wants(Click to view)</a></li>
-              <li><a href="https://idl.cs.washington.edu/">Who is working on the above project(Click to view)</a></li>
 
-          </ul>
-          <p>Upload from URL if possible.</p>
-                    <p>All fields will be attached with an attribute that shows what type of data it is.</p>
-                    <p>Missing Data, the user will get a few options to automatically generate data.</p>
-                    <p>Professor will show us some modules later as to what we should do for missing data.</p>
-                    <p>Professor will tell us how to manage the outliers.</p>
-                    <p>Outliers can skew the data.</p>
-                    <p>Make sure our data is good. Make sure the data is valuable.</p>
-                    <p>Month or two to decide what we want to do on our personal data project. Ideally predictive data analysis. Has many levels of data. Like a hierarchy.</p>
-                    <p>Bayesian analysis is on the Washington Edu website. It is an AI replicates how humans think and we could use that as a reference for our projects.</p>
-                    <p>One of us he wants in someone in finance.</p>
-                    <p>Professor wants one or two of us in multiple regression for different issues. Can use survey data.</p>
-                    <p>Structural equation modeling! To him, it is the future of stats. He believes it is very valuable for us.</p>
-          <ul>
-              <li><a href="https://careerfoundry.com/en/blog/data-analytics/data-analysis-techniques/">This website has many different case studies for different projects. Can be helpful to choose our project.(Click to view)</a></li>
-          </ul>
-          <p>Look at the folium library.</p>
-                    <p>Map based libraries.</p>
-                    <p>Not really a good database on property sale transactions in Canada.</p>
-                    <p>Otherwise pretty good data analysis for other stuff Canada.</p>
-                    <p>Show us Stats Canada next week</p>
-                    <p>SCP COMMAND TO COPY WEBSITE DIRECTORIES</p>
-                    <p>USE JUPITER NOTEBOOK TO WORK ON THE WEBSITE</p>
-                    <p>JUPITER NOTEBOOK IS ONE OF THE BEST DEVELOPMENT ENVIRONMENT FOR PYTHON DEVELOPMENT</p>
-      </div>
-    </div>
-         </div>
-    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="june10" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            June 10th 2021 - High Level Requirement Gathering / Further Project Explanation
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Systemctl restart gunicorn Command to update the website by restarting web server</p>
+                        <p>High Level Requirements:</p>
+                        <ul>
+                            <li>Accomplish data visualization to better understand data sets and the relationships
+                                between data.
+                            </li>
+                            <li>Accomplish data visualization to assist researchers and help researchers recognize
+                                patterns in their data using d3.js
+                            </li>
+                            <li>We do this through D3.js.</li>
+                            <li>Using python because it already has a lot of data analysis libraries.</li>
+                            <li>Using python cause of the data manipulation libraries that exist within the language
+                            </li>
+                            <li>Utilize python to manipulate visualizations.</li>
+                            <li>types of data: -interval -ordinal -relational -nominal</li>
+                            <li>Choose 10 D3.js applications to begin with.</li>
+                            <li>Show all possible visualizations of their data and see what they like.</li>
+                            <li>Data uploading step. (First task) Make sure it is secure and make sure that it is only
+                                saved for 24 hours.
+                            </li>
+                            <li>Analyze each row of data and figure out what can be done.</li>
+                            <li>Present each visualization possible.</li>
+                            <li>Leave website as is. No added options. All the usage is on the main page.</li>
+
+                        </ul>
+                        <p>Professor wants a UML Outlining how everything on the website works together.</p>
+                        <p>page should spit out different visualizations that apply to the dataset</p>
+                        <ul>
+                            <li>If the technique doesn't apply to the dataset, skip to the next technique and try the
+                                next one
+                            </li>
+                            <li>Data visualizations should appear all on the same page together</li>
+                        </ul>
+
+                        <p>Timeline:</p>
+                        <p>page should spit out different visualizations that apply to the dataset</p>
+                        <ul>
+                            <li>Find out how is data is uploaded and make it secure; stick to 10MG files</li>
+                            <li>Business/predictive analysis - relating to the topic on statistics to teach end users
+                                how to use
+                            </li>
+                        </ul>
+
+                        <p><a href="https://blog.hubspot.com/sales/sales-statistics">Website for statistics
+                            analysis(Click to view)</a></p>
+                        <p><a href="https://mirri66.github.io/rent_price_by_mrt.html">Vega-Lite. A website used for
+                            analysis based on data that is selected.(Click to view)</a></p>
+                        <p>This is a project that is like something he wants Done by Singapore PHD Student Grace
+                            Tang.</p>
+                        <p><a href="https://pycon.sg/archive/2016/schedule/presentation/100/index.html">Example project
+                            by a grad student on map visualizations using Python(Click to view)</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="june17" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            June 17th 2021 - Additional Information regarding the Project
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>We need hash coding for uploading the data.</p>
+                        <p>Apache codec libraries as a reference for how to hash our data.</p>
+                        <p>Paul worked with similar stuff but not with python.</p>
+                        <p>Figure out how to hash data in the backend.</p>
+                        <p>They will go through the UML with us so that we can verify our steps we take are correct.</p>
+                        <p>Do not worry about crashing the website. He has a backup of the website and can bring it back
+                            up.</p>
+                        <p>He WANTS at least one of us doing genetics analysis.</p>
+                        <ul>
+                            <li><a href="https://vega.github.io/voyager2/">Vega Voyager as an example of what he
+                                wants(Click to view)</a></li>
+                            <li><a href="https://idl.cs.washington.edu/">Who is working on the above project(Click to
+                                view)</a></li>
+
+                        </ul>
+                        <p>Upload from URL if possible.</p>
+                        <p>All fields will be attached with an attribute that shows what type of data it is.</p>
+                        <p>Missing Data, the user will get a few options to automatically generate data.</p>
+                        <p>Professor will show us some modules later as to what we should do for missing data.</p>
+                        <p>Professor will tell us how to manage the outliers.</p>
+                        <p>Outliers can skew the data.</p>
+                        <p>Make sure our data is good. Make sure the data is valuable.</p>
+                        <p>Month or two to decide what we want to do on our personal data project. Ideally predictive
+                            data analysis. Has many levels of data. Like a hierarchy.</p>
+                        <p>Bayesian analysis is on the Washington Edu website. It is an AI replicates how humans think
+                            and we could use that as a reference for our projects.</p>
+                        <p>One of us he wants in someone in finance.</p>
+                        <p>Professor wants one or two of us in multiple regression for different issues. Can use survey
+                            data.</p>
+                        <p>Structural equation modeling! To him, it is the future of stats. He believes it is very
+                            valuable for us.</p>
+                        <ul>
+                            <li><a href="https://careerfoundry.com/en/blog/data-analytics/data-analysis-techniques/">This
+                                website has many different case studies for different projects. Can be helpful to choose
+                                our project.(Click to view)</a></li>
+                        </ul>
+                        <p>Look at the folium library.</p>
+                        <p>Map based libraries.</p>
+                        <p>Not really a good database on property sale transactions in Canada.</p>
+                        <p>Otherwise pretty good data analysis for other stuff Canada.</p>
+                        <p>Show us Stats Canada next week</p>
+                        <p>SCP COMMAND TO COPY WEBSITE DIRECTORIES</p>
+                        <p>USE JUPITER NOTEBOOK TO WORK ON THE WEBSITE</p>
+                        <p>JUPITER NOTEBOOK IS ONE OF THE BEST DEVELOPMENT ENVIRONMENT FOR PYTHON DEVELOPMENT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="tab-pane fade" id="june24" role="tabpanel" aria-labelledby="pills-files-tab">
-         <div class="card">
-    <div class="card-header" id="headingFive">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-          June 24th 2021 - First Deliverable review + New Tasks for next
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>Reviewed Hamza's solution for uploading files</p>
-        <p>Reviewed Mark's research on his developer page</p>
-        <p>Reviewed Dante's solution for development environment</p>
-        <p>Client mentioned R language and R Studio</p>
-        <p>Reviewed GeoMap that client created</p>
-        <p>Client asked us to import census data onto the website and display it as a map</p>
-        <p>Make sure data is secure. And then we can upload it to MongoDB.</p>
-          <ul>
-              <li>Learn more about MongoDB.<li>
-              <li>Learn how to merge tables.<li>
-              <li>Learn how to convert rows into columns, columns into rows, stuff like that.</li>
+            <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            June 24th 2021 - First Deliverable review + New Tasks for next
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Reviewed Hamza's solution for uploading files</p>
+                        <p>Reviewed Mark's research on his developer page</p>
+                        <p>Reviewed Dante's solution for development environment</p>
+                        <p>Client mentioned R language and R Studio</p>
+                        <p>Reviewed GeoMap that client created</p>
+                        <p>Client asked us to import census data onto the website and display it as a map</p>
+                        <p>Make sure data is secure. And then we can upload it to MongoDB.</p>
+                        <ul>
+                            <li>Learn more about MongoDB.
+                            <li>
+                            <li>Learn how to merge tables.
+                            <li>
+                            <li>Learn how to convert rows into columns, columns into rows, stuff like that.</li>
 
-          </ul>
-          <p>R Studio something he will mention as a potential IDE solution.</p>
-        <p>Everyone working on the same stuff at the same time.</p>
-        <p>Everyone can learn what we are doing in each sprint (i.e MongoDB, Uploading Files, etc.)</p>
-        <p>Mark doing C# equivalent on his page.</p>
+                        </ul>
+                        <p>R Studio something he will mention as a potential IDE solution.</p>
+                        <p>Everyone working on the same stuff at the same time.</p>
+                        <p>Everyone can learn what we are doing in each sprint (i.e MongoDB, Uploading Files, etc.)</p>
+                        <p>Mark doing C# equivalent on his page.</p>
 
-      </div>
-    </div>
-         </div>
-    </div>
-
-
-
-
-    
-
-    <div class="tab-pane fade" id="july8" role="tabpanel" aria-labelledby="pills-files-tab">
-         <div class="card">
-    <div class="card-header" id="headingSix">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-          July 8th 2021 - Catching Up With Client / Update on Geomap
-        </button>
-      </h5>
-    </div>
-    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-      <div class="card-body">
-
-          <p>Professor wants us to try with provincial first, then move to full Canadian Data.</p>
-        <p>Professor wants us all to research the different types of data types to upload to our website/MongoDB.</p>
-        <p>Amazon Lambda / Scala used for data streams.</p>
-        <p>Update the tabs at the top.</p>
-
-
-      </div>
-    </div>
-         </div>
-    </div>
-
-
-    <div class="tab-pane fade" id="july22" role="tabpanel" aria-labelledby="pills-files-tab">
-    <div class="card">
-    <div class="card-header" id="headingSeven">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-            July 22th 2021 - Meeting Update on File Uploading/Project Progress
-        </button>
-      </h5>
-    </div>
-    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
-      <div class="card-body">
-          <p>Taking 2 weeks off from development to finish documentation and presentation preparation</p>
-          <p>Went over Hamza's development on implementing JSON file uploading</p>
-          <p>Discussed the approach of uploading and verifying the file to the server before uploading to MongoDB</p>
-          <p>Need to look into lazy loading</p>
-          <p>Look into uploading HTML or plain text files to database</p>
-          <p></p>
-          <p></p>
-          <p></p>
-          <p></p>
-
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div class="tab-pane fade" id="august5" role="tabpanel" aria-labelledby="pills-files-tab">
-        <div class="card">
-            <div class="card-header" id="headingEight">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
-                        July 22th 2021 - Meeting Update on File Uploading/Project Progress
-                    </button>
-                </h5>
-            </div>
-
-            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
-                <div class="card-body">
-                    <p>Things to bring up:</p>
-                    <ul>
-                        <li>The documentation is all finished</li>
-                        <li>Show him the project plan</li>
-                        <li>We can fix up the top bar and make sure all the links work</li>
-                        <li>We will also be documenting all the links and resources that he has shared with us, Bochi is going to work on this.</li>
-                        <li>Kevin will talk about the UML</li>
-                        <li>Presentation that he is invited to on Friday the 13th. Project Presentation that is basically covering everything. We will be presenting that to the chair as well.</li>
-                    </ul>
-
-                    <p>Questions:</p>
-                    <ul>
-                        <li>Have a constant way of uploading files JSON/XML</li>
-                        <li>Shared repository? He is ok with us using GitHub but make sure to keep it private.</li>
-                    </ul>
-                    <p>Notes:</p>
-                    <ul>
-                        <li>Update UML to show full output. It is currently incomplete. I t needs to be a full design of the website</li>
-                        <li>Links on top: show everything that we learn</li>
-                        <li>He wants us to think about an outline of all the individual projects that we will be working on.</li>
-                        <li>Include personal projects on out project plan as well as the presentation.</li>
-
-                    </ul>
-                    <p></p>
-                    <p></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
+        <div class="tab-pane fade" id="july8" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            July 8th 2021 - Catching Up With Client / Update on Geomap
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
 
-    <div class="tab-pane fade" id="september9" role="tabpanel" aria-labelledby="pills-files-tab">
-        <div class="card">
-            <div class="card-header" id="headingNine">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
-                        September 9th 2021 - Meeting
-                    </button>
-                </h5>
-            </div>
-
-            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
-                <div class="card-body">
-                    <p>Reviewed Geo-Map Progression</p>
-                    <ul>
-                        <li> Geo-map solution supports largest possible census file</li>
-                        <li> Loading time is slow because data is not being pulled from database</li>
-                    </ul>
+                        <p>Professor wants us to try with provincial first, then move to full Canadian Data.</p>
+                        <p>Professor wants us all to research the different types of data types to upload to our
+                            website/MongoDB.</p>
+                        <p>Amazon Lambda / Scala used for data streams.</p>
+                        <p>Update the tabs at the top.</p>
 
 
-                    <p>Reviewed File Upload Progression</p>
-                    <ul>
-                        <li> In final stages, made significant progress.</li>
-                    </ul>
-
-                    <p>Reviewed Top Navigation Tabs</p>
-                    <ul>
-                        <li> Tabs have been updated to show detailed summaries of each of the technologies.</li>
-                    </ul><br><br>
-                    <p>Discussions:</p>
-                    <ul>
-                        <li> We have made significant progress in the Managing Data Phase (90% completed)</li>
-                        <li> After careful consideration, we are not going to encrypt the data in the database. (no more hashing)</li>
-                        <li> Since classes are resuming pace will slow down due to classes resuming, but not to the point of the previous semester.
-                            We will always make sure to make to have steady progression each week and no delays.</li>
-                    </ul>
-                    <p></p>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="tab-pane fade" id="july22" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            July 22th 2021 - Meeting Update on File Uploading/Project Progress
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Taking 2 weeks off from development to finish documentation and presentation preparation</p>
+                        <p>Went over Hamza's development on implementing JSON file uploading</p>
+                        <p>Discussed the approach of uploading and verifying the file to the server before uploading to
+                            MongoDB</p>
+                        <p>Need to look into lazy loading</p>
+                        <p>Look into uploading HTML or plain text files to database</p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="august5" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            July 22th 2021 - Meeting Update on File Uploading/Project Progress
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Things to bring up:</p>
+                        <ul>
+                            <li>The documentation is all finished</li>
+                            <li>Show him the project plan</li>
+                            <li>We can fix up the top bar and make sure all the links work</li>
+                            <li>We will also be documenting all the links and resources that he has shared with us,
+                                Bochi is going to work on this.
+                            </li>
+                            <li>Kevin will talk about the UML</li>
+                            <li>Presentation that he is invited to on Friday the 13th. Project Presentation that is
+                                basically covering everything. We will be presenting that to the chair as well.
+                            </li>
+                        </ul>
+
+                        <p>Questions:</p>
+                        <ul>
+                            <li>Have a constant way of uploading files JSON/XML</li>
+                            <li>Shared repository? He is ok with us using GitHub but make sure to keep it private.</li>
+                        </ul>
+                        <p>Notes:</p>
+                        <ul>
+                            <li>Update UML to show full output. It is currently incomplete. I t needs to be a full
+                                design of the website
+                            </li>
+                            <li>Links on top: show everything that we learn</li>
+                            <li>He wants us to think about an outline of all the individual projects that we will be
+                                working on.
+                            </li>
+                            <li>Include personal projects on out project plan as well as the presentation.</li>
+
+                        </ul>
+                        <p></p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="september9" role="tabpanel" aria-labelledby="pills-files-tab">
+            <div class="card">
+                <div class="card-header" id="headingNine">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            September 9th 2021 - Meeting
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Reviewed Geo-Map Progression</p>
+                        <ul>
+                            <li> Geo-map solution supports largest possible census file</li>
+                            <li> Loading time is slow because data is not being pulled from database</li>
+                        </ul>
+
+
+                        <p>Reviewed File Upload Progression</p>
+                        <ul>
+                            <li> In final stages, made significant progress.</li>
+                        </ul>
+
+                        <p>Reviewed Top Navigation Tabs</p>
+                        <ul>
+                            <li> Tabs have been updated to show detailed summaries of each of the technologies.</li>
+                        </ul>
+                        <br><br>
+                        <p>Discussions:</p>
+                        <ul>
+                            <li> We have made significant progress in the Managing Data Phase (90% completed)</li>
+                            <li> After careful consideration, we are not going to encrypt the data in the database. (no
+                                more hashing)
+                            </li>
+                            <li> Since classes are resuming pace will slow down due to classes resuming, but not to the
+                                point of the previous semester.
+                                We will always make sure to make to have steady progression each week and no delays.
+                            </li>
+                        </ul>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-
-
-
-</div>
 
 
 {% endblock %}
