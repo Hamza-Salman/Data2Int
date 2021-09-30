@@ -1,15 +1,12 @@
 from pymongo import MongoClient, collection
 import json
 
-def json_upload(json_data, uploaded_file):
-    MONGODB_HOST = 'localhost'
-    MONGODB_PORT = 27017
-    DBS_NAME = 'donorschoose'
+def json_upload(json_data, uploaded_file, DB_HOST, DB_PORT, DB_Name):
     COLLECTION_NAME = uploaded_file.split('.')[0]
 
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    connection = MongoClient(DB_HOST, DB_PORT)
 
-    collection = connection[DBS_NAME][COLLECTION_NAME]
+    collection = connection[DB_Name][COLLECTION_NAME]
 
     if json_data == "":
         return ""

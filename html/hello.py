@@ -13,7 +13,7 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/pythonProject/venv/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -36,7 +36,6 @@ def home():
 
 
 @app.route('/Upload', methods=['POST'])
-@app.route('/Upload', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
 
@@ -49,8 +48,6 @@ def upload_file():
         if uploaded_file.filename == "":
             return render_template('ErrorFileUpload.html')
 
-        # Scan files here
-        # Mark's part
         # Kevin's edit
         # Get the extension
         extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
@@ -60,8 +57,8 @@ def upload_file():
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
-            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"])
-
+        upload_success = upload(extension, fileName, uploaded_file, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+        
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
 
