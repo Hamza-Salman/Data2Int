@@ -13,7 +13,8 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -80,7 +81,7 @@ def upload_file():
                     os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
                     return render_template("ErrorFileUpload.html")
 
-            json_upload(json_data, filename)
+            json_upload(json_data, filename, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             # Json file upload
         # Everything else
         # Render error file upload page
@@ -258,6 +259,24 @@ def donorschoose_projects():
     json_projects = json.dumps(json_projects, default=json_util.default)
     connection.close()
     return json_projects
+
+@app.route("/donorschoose/mapdata")
+def donorschoose_mapdata():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME]["AllData"]
+
+    #MAP_FIELDS = {'GEO_CODE (POR)': True, 'GEO_NAME': True, 'DIM: Profile of Census Divisions (2247)': True, 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
+    #projects = collection.find(projection=FIELDS, limit=100000)
+
+    mapData = collection.find({ "DIM: Profile of Census Divisions (2247)": "Population, 2016" })
+    
+    json_mapdata = []
+    for data in mapData:
+        json_mapdata.append(data)
+    json_mapdata = json.dumps(json_mapdata, default=json_util.default)
+    connection.close()
+    #print(json_mapdata)
+    return json_mapdata
 
 
 if __name__ == '__main__':

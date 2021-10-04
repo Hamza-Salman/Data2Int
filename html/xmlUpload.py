@@ -3,17 +3,14 @@ import xml.etree.ElementTree as ET
 from pymongo import MongoClient
 
 
-def xml_upload(uploaded_file, path_to_file):
+def xml_upload(uploaded_file, path_to_file, DB_HOST, DB_PORT, DB_Name):
     # Define constants
-    MONGODB_HOST = 'localhost'
-    MONGODB_PORT = 27017
-    DBS_NAME = 'donorschoose'
     COLLECTION_NAME = uploaded_file.split('.')[0]
     # print(COLLECTION_NAME)
 
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    connection = MongoClient(DB_HOST, DB_PORT)
 
-    collection = connection[DBS_NAME][COLLECTION_NAME]
+    collection = connection[DB_Name][COLLECTION_NAME]
 
     with open(path_to_file + "/" + uploaded_file) as xml_file:  # Open targeted file
         tree = ET.parse(path_to_file + "/" + uploaded_file)
