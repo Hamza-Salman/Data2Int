@@ -10,9 +10,14 @@ def json_upload(json_data, uploaded_file, DB_HOST, DB_PORT, DB_Name):
 
     if json_data == "":
         return ""
-
-    print(json_data)
+    
+    no_dupes = []
+    #print(json_data)
     for i in json_data:
-        collection.insert_one(i)
+        if i not in no_dupes:
+            no_dupes.append(i)
+    
+    for each in no_dupes:
+        collection.insert(each)
 
     connection.close()

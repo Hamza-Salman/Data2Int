@@ -19,9 +19,15 @@ def csv_upload(uploaded_file, path_to_file, DB_HOST, DB_PORT, DB_Name):
             list_of_columns.append(row)
             break
 
+    #print(reader)
+    no_dupes = []
     for each in reader:
         row = {}
         for field in list_of_columns[0]:
             row[field] = each[field]
-        collection.insert(row)
-        # print(row)
+            
+        if row not in no_dupes:
+            no_dupes.append(row)
+            
+    for each in no_dupes:
+        collection.insert(each)
