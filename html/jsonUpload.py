@@ -1,6 +1,7 @@
 from pymongo import MongoClient, collection
 import json
 
+
 def json_upload(json_data, uploaded_file, DB_HOST, DB_PORT, DB_Name):
     COLLECTION_NAME = uploaded_file.split('.')[0]
 
