@@ -9,7 +9,7 @@
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
 </head>
-<h2> Code Changes - Edited By HS This is a test github commit #2</h2>
+<h2> Code Changes - Edited By HS</h2>
 
 <h1>Progress Update</h1><br>
 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -27,6 +27,9 @@
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-json-type-tab" data-toggle="pill" href="#pills-filejson" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">JSON Upload</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-perProject-tab" data-toggle="pill" href="#pills-personalProject" role="tab" aria-controls="pills-personalProject" aria-selected="false">Personal Project</a>
   </li>
 </ul>
 </div>
@@ -164,7 +167,7 @@ def success_file_upload():
             <script src="https://d3js.org/d3.v4.min.js"></script>
             <script src="https://d3js.org/topojson.v1.min.js"></script>
             <script src="/static/js/hamzaGeoMap.js"></script>
-        </body>   
+        </body>
         <h1>HTML for GeoMap</h1>
         <pre>
             <code  class="language-javascript">
@@ -186,7 +189,7 @@ def success_file_upload():
                         <script src="https://d3js.org/d3.v4.min.js"><script>
                         <script src="https://d3js.org/topojson.v1.min.js"><script>
                         <script src="/static/js/hamzaGeoMap.js"><script>
-                    </body>   
+                    </body>
                 </script>
             </code>
         </pre>
@@ -198,41 +201,41 @@ def success_file_upload():
                         var margin = {top: 50, left: 50, right: 50, bottom: 50},
                         height = 1000 - margin.top - margin.bottom,
                         width = 1000 - margin.left - margin.right;
-                    
+
                         var svg = d3.select("#map")
                             .append("svg")
                             .attr("height", height + margin.top + margin.bottom)
                             .attr("width", width + margin.left + margin.right)
                             .append("g")
                             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                    
+
                         d3.queue()
                           .defer(d3.json, "/static/geojson/canada.topo.json")
                           .defer(d3.csv, "/templates/uploadedFiles/StatCanPopulationData.csv")
                           .await(ready)
-                    
+
                         var projection = d3.geoMercator()
                             .translate([ width, height])
                             .scale(300)
-                    
+
                         var path = d3.geoPath()
                             .projection(projection)
-                    
-                    
+
+
                         function ready (error, data, StatCanPopulationData) {
                             console.log(data)
-                    
+
                             var provinces = topojson.feature(data, data.objects.canada).features
-                    
+
                             console.log(provinces)
-                    
+
                             svg.selectAll(".province")
                                 .data(provinces)
                                 .enter().append("path")
                                 .attr("class", "province")
                                 .attr("d", path)
-                                .attr("id", function(d) { 
-                                    return d.id; 
+                                .attr("id", function(d) {
+                                    return d.id;
                                 })
                                 .attr("title", "Province Name Placeholder")
                                 .on('mouseenter', function(d){
@@ -250,12 +253,12 @@ def success_file_upload():
                                     var femalePopulation = thisData["Dim: Sex (3): Member ID: [3]: Female"]
                                     alert(provinceName + "\nTotal Population: " + totalPopulation + "\nMale Population: " + malePopulation + "\nFemale Population: " + femalePopulation)
                                 })
-                    
+
                             console.log(StatCanPopulationData)
-                    
+
                         }
-                    
-                    })();  
+
+                    })();
                 </script>
             </code>
         </pre>
@@ -301,7 +304,7 @@ def success_file_upload():
                         <script src="https://d3js.org/d3.v4.min.js"><script>
                         <script src="https://d3js.org/topojson.v1.min.js"><script>
                         <script src="/static/js/hamzaGeoMap.js"><script>
-                    </body>   
+                    </body>
                 </script>
             </code>
         </pre>
@@ -313,7 +316,7 @@ def success_file_upload():
                         var margin = {top: 50, left: 50, right: 50, bottom: 50},
                         height = 1000 - margin.top - margin.bottom,
                         width = 1000 - margin.left - margin.right;
-                        
+
                         //selects the html elemt map to use for svg elements
                         var svg = d3.select("#map")
                             .append("svg")
@@ -321,34 +324,34 @@ def success_file_upload():
                             .attr("width", width*1.5 + margin.left + margin.right)
                             .append("g")
                             .attr("transform", "translate(" + width/1.5 + "," + height/2.5 + ")");
-                    
+
                         //queues up the data for the map
                         d3.queue()
                           .defer(d3.json, "/static/geojson/canada_divisions.json")
                           .defer(d3.csv, "/templates/Programmer3Files/98-401-X2016060_English_CSV_data.csv")
                           .await(ready)
-                    
+
                         //creates a projection for the map
                         var projection = d3.geoMercator()
                             .translate([ width, height])
                             .scale(600)
-                    
+
                         //creates a path to the projection
                         var path = d3.geoPath()
                             .projection(projection)
-                    
+
                         //main function that takes in all the data and creates the map
                         function ready (error, data, StatCanPopulationData) {
-                    
+
                             //creates the main svg element
                             const g = svg.append('g')
-                    
+
                             //gets all the division data from the csv
                             var divisions = topojson.feature(data, data.objects.canada_divisions).features
 
                             //logs all the divisions for testing
                             console.log(divisions)
-                    
+
                             //creates the map using the svg elements
                             g.selectAll(".division")
                                 .data(divisions)
@@ -356,7 +359,7 @@ def success_file_upload():
                                 .attr("class", "division")
                                 .attr("d", path)
                                 .attr("id", function(d) {
-                                    return d.properties.CDUID; 
+                                    return d.properties.CDUID;
                                 })
                                 .attr("colorClass", "test") // classes each level of data to be used for color coordination
                                 .classed("low", function(d) {
@@ -451,21 +454,21 @@ def success_file_upload():
                                     var divisonName = thisData.GEO_NAME
                                     var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     alert(divisonName + "\nTotal Population: " + totalPopulation)
-                    
+
                             //sets the name for each division so it can be seen when we hover over divisions
                             svg.selectAll(".division")
                                 .append('title')
                                 .text(d => d.properties.CDNAME)
-                    
+
                             //sets up the zoom properties for the map
                             svg.call(d3.zoom().on('zoom', () => {
                                 g.attr('transform', d3.event.transform)
                             }))
-                    
+
                         })
                                 //logs the data for testing
                                 console.log(StatCanPopulationData)
-                        }  
+                        }
                 </script>
             </code>
         </pre>
@@ -572,6 +575,15 @@ def AccessingData():
         <li>Video that explains uploading json data into MongoDB: <a style="color: blue" href="https://www.youtube.com/watch?v=rE_bJl2GAY8&t=1133s"> Here</a></li>
 
     </ol>
+</div>
+<div class="tab-pane fade show active" id="pills-personalProject" role="tabpanel" aria-labelledby="pills-perProject-tab">
+    <hr/>
+    <h1>Personal Project: Geo Map Data</h1>
+    <p>For my personal project I will be taking a more in-depth look on how to create GeoMaps.<br>
+       The goal for this will be to find a way to implement the ability to create GeoMaps that dont conform to regular world maps.<br>
+       I want to implement the ability to work with unconventional geo data and try to create useful visualizations.<br>
+       The other thing I want to look into is, how to create GeoJSON files based on custom maps.</p>
+
 </div>
 </div>
 
