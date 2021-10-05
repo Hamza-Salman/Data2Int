@@ -57,7 +57,7 @@ def upload_file():
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
-        #fixed this (test Dante)
+        # fixed this (test Dante)
             upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         
             if not upload_success:
@@ -136,7 +136,11 @@ def accessing_data():
     connection.close()
     return render_template('AccessingData.html')
 
-
+# added new page - DB
+@app.route('/MovingData')
+def moving_data():
+    return render_template('MovingData.html')
+    
 @app.route('/new')
 def new():
     return render_template('new.html')

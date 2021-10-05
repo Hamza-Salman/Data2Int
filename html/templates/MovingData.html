@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Moving Data{% endblock%}
+
+{% block content %}
+
+    <h1>Moving Data</h1>
+
+
+        <hr/>
+
+        <div class="accordion" id="accordion">
+            <div class="card">
+                <div class="card-header" id="head1">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#hide1"
+                                aria-expanded="true" aria-controls="hide1">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="hide1" class="collapse show" aria-labelledby="head1" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> The second portion of the managing data phase is moving the data. T
+                                his process involves moving your raw data into the applications database from which it can be accessed after<br></p>
+                            <ul>
+                                <p>Here is how we completed this: <br><br></p>
+                                <li>Setup upload page</li>
+                                <li>Set file upload restrictions beforehand</li>
+                                <li>Upload raw data onto web server to be stored and accessed at a later point</li>
+                                
+                                
+                                <p><br><br>Issues we ran into at this phase: <br><br></p>
+                                <li>Upload times for large files.</li>
+                                <li>Ability to distinguish between file types</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head2">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide2" aria-expanded="false" aria-controls="hide2">
+                                Breakdown
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide2" class="collapse" aria-labelledby="head2" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a guide for how we setup our the projects RStudio Server
+                                    Environment:</h3>
+                                <br>
+                                <p>NOTE: This guide assumes that you already have RStudio Server setup with your
+                                    project.</p>
+                                <br><br>
+                                <ol>
+                                    <li>In your web browser, enter the host, followed by ":8787"</li>
+                                    <br>
+                                    <li>If successful, you will be redirected to the login screen for RStudio</li>
+                                    <br>
+                                    <li>Next, enter your credentials</li>
+                                    <br><img style="margin-left:2em" src="/templates/resources/rss/loginRStudio.png"
+                                             alt="Login RStudio" min-width="50%" height="50%"> <br>
+
+                                    <li>Upon successful entry, you will now be able to play around in the environment!
+                                    </li>
+                                    <br><img style="margin-left:2em" src="/templates/resources/rss/interfaceRStudio.png"
+                                             alt="Home RStudio" min-width="50%" height="50%"> <br>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head3">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide3" aria-expanded="false" aria-controls="hide3">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide3" class="collapse" aria-labelledby="head3" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>Using RStudio for the development of this project would not be an ideal solution. Here is
+                                why:</p>
+                            <ul>
+                                <li>RStudio only supports development in R language, we use Python for the development
+                                    of the project
+                                </li>
+                                <li>Although it is somewhat compatible with D3.JS, it does not compare to the support
+                                    python has with it
+                                </li>
+                                <li>R has a steep learning curve, taking time to overcome that curve and understand it
+                                    will delay the development of the project
+                                </li>
+                            </ul>
+                            <p>While taking it both pros and cons of R language, we can make the conclusion that it
+                                would not be beneficial to the completion of this project.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+{% endblock %}
