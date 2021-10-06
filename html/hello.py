@@ -50,7 +50,7 @@ def upload_file():
 
         # Kevin's edit
         # Get the extension
-        extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
+        extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
 
         # Sanitary check the file extension
