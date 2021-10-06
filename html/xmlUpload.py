@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from pymongo import MongoClient
 
 
-def xml_upload(uploaded_file, path_to_file, DB_HOST, DB_PORT, DB_Name):
+def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, DB_Name):
     # Define constants
     COLLECTION_NAME = uploaded_file.split('.')[0]
     # print(COLLECTION_NAME)
@@ -31,17 +31,25 @@ def xml_upload(uploaded_file, path_to_file, DB_HOST, DB_PORT, DB_Name):
 
         # for item in childTags:
         #    print(item)
-        no_dupes = []
-        for rows in stud:
-            data_dict = {}
-            for cols in childTags:
-                data_dict[cols] = rows.find(cols).text
 
-            if data_dict not in no_dupes:
-                no_dupes.append(data_dict)
-            
-        for each in no_dupes:
-            collection.insert(each)
+        if (duplicatesInput == "NoDupes"):
+            no_dupes = []
+            for rows in stud:
+                data_dict = {}
+                for cols in childTags:
+                    data_dict[cols] = rows.find(cols).text
+
+                if data_dict not in no_dupes:
+                    no_dupes.append(data_dict)
+                
+            for each in no_dupes:
+                collection.insert(each)
+        else:
+            for rows in stud:
+                data_dict = {}
+                for cols in childTags:
+                    data_dict[cols] = rows.find(cols).text
+                x = collection.insert(data_dict)
 
         xml_file.close()  # Close XML file to reduce the risk of being unwarranted modified or read.
         connection.close()
