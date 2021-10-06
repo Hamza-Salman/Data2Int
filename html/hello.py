@@ -45,6 +45,10 @@ def upload_file():
 
         uploaded_file = request.files['file']
 
+        duplicatesInput = request.form['radioButton']
+
+        print(duplicatesInput)
+
         # File name can not be null
         if uploaded_file.filename == "":
             return render_template('ErrorFileUpload.html')
@@ -59,7 +63,7 @@ def upload_file():
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
             # fixed this (test Dante)
-            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
@@ -81,7 +85,7 @@ def upload_file():
                     os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
                     return render_template("ErrorFileUpload.html")
 
-            json_upload(json_data, filename, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            json_upload(json_data, filename, duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             # Json file upload
         # Everything else
         # Render error file upload page

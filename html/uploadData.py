@@ -14,7 +14,7 @@ MONGODB_PORT = 27017
 DBS_NAME = 'donorschoose'
 
 
-def upload(extension, filename, uploaded_file, upload_path, DB_HOST, DB_PORT, DB_Name) -> bool:
+def upload(extension, filename, uploaded_file, upload_path, duplicatesInput, DB_HOST, DB_PORT, DB_Name) -> bool:
     print("Case 1: This file extension is " + extension)
     print(filename)
 
@@ -30,14 +30,14 @@ def upload(extension, filename, uploaded_file, upload_path, DB_HOST, DB_PORT, DB
         return False
 
     if extension == ".xml":
-        xml_upload(uploaded_file.filename, upload_path, DB_HOST, DB_PORT, DB_Name)
+        xml_upload(uploaded_file.filename, upload_path, duplicatesInput, DB_HOST, DB_PORT, DB_Name)
     # Convert file method goes here
     elif extension == ".csv":
         # json_data = convert_file(uploaded_file.filename, app.config["UPLOAD_FOLDER"])
-        csv_upload(uploaded_file.filename, upload_path, DB_HOST, DB_PORT, DB_Name)
+        csv_upload(uploaded_file.filename, upload_path, duplicatesInput, DB_HOST, DB_PORT, DB_Name)
     elif extension == ".xlsx":
         # json_data = convert_file(uploaded_file.filename, app.config["UPLOAD_FOLDER"])
         # print(json_data)
-        xlsx_upload(uploaded_file.filename, upload_path, DB_HOST, DB_PORT, DB_Name)
+        xlsx_upload(uploaded_file.filename, upload_path, duplicatesInput, DB_HOST, DB_PORT, DB_Name)
 
     return True
