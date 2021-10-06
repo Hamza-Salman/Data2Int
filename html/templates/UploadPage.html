@@ -4,13 +4,19 @@
 {% block content %}
 
 <h1>Upload A File</h1>
-<h2>Please Select a file to upload using the Choose CSV button<br>Please make sure that your CSV is saved as "CSV UTF-8 (Comma delimited)"</h2><br><br>
+<h2>Please Select a file to upload using the Choose File button</h2><br><br>
 
 <!-- This is the code for the upload file button-->
 <form method="post" enctype="multipart/form-data">
 <!--    accept=".csv"   add this for csv only-->
     <input oninput="filesize(this);" type="file" name="file"/><br><br>
 <!--    <label style="background: #fff;color: #7386D5; height: 40px; width: 210px; display: flex; justify-content: center; align-items: center;border-radius: 5px; cursor: pointer;" for="uploadedFile">Choose CSV</label>-->
+    <input type="radio" id="NoDupes" name="radioButton" value="NoDupes" checked>
+    <label for="computer">Remove duplicate rows of data</label>
+    <br>
+    <input type="radio" id="KeepDupes" name="radioButton" value="KeepDupes">
+    <label for="earth">Keep duplicate rows of data</label>    
+    <br><br>
     <input type="submit" value="Upload" id="uploadButton" style="background: #fff;color: #7386D5; height: 40px; width: 210px; border-radius: 5px;"/>
 </form>
 
