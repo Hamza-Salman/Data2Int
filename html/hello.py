@@ -55,7 +55,7 @@ def upload_file():
 
         # Kevin's edit
         # Get the extension
-        extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
+        extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
 
         # Sanitary check the file extension
@@ -250,6 +250,41 @@ def clusters():
 @app.route('/UsefulResources')
 def useful_resources():
     return render_template('UsefulResources.html')
+
+
+@app.route('/numpy')
+def num_py():
+    return render_template('numpy.html')
+
+
+@app.route('/pandas')
+def pandas():
+    return render_template('pandas.html')
+
+
+@app.route('/scipy')
+def scipy():
+    return render_template('scipy.html')
+
+
+@app.route('/keras')
+def keras():
+    return render_template('keras.html')
+
+
+@app.route('/scikitlearn')
+def scikitlearn():
+    return render_template('scikitlearn.html')
+
+
+@app.route('/pytorch')
+def pytorch():
+    return render_template('pytorch.html')
+
+
+@app.route('/tensorflow')
+def tensorflow():
+    return render_template('tensorflow.html')
 
 
 @app.route("/donorschoose/projects")
