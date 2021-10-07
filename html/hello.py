@@ -4,6 +4,7 @@ import os
 from bson import json_util
 from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
+from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
 from uploadData import upload
@@ -95,7 +96,8 @@ def upload_file():
             return render_template("ErrorFileUpload.html")
 
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        return render_template('SuccessfulUpload.html', raw_data = raw_data)
+        preview_data = getPreviewData(raw_data)
+        return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
 
 
 @app.route('/ErrorFileUpload')

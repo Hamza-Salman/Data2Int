@@ -6,7 +6,7 @@
 <h1>SUCCESS!</h1>
 <h2>The file was uploaded successfully.</h2>
 <hr/>
-{% for data in raw_data %}
-    <p>{{ data }}</p>
+{% for table in tables %}
+    {{ table|safe }}
 {% endfor %}
 {% endblock %}
