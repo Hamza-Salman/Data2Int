@@ -18,30 +18,14 @@ def xlsx_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, 
 
     csvFile = open(path_to_file + "/" + COLLECTION_NAME + ".csv", 'r')
     reader = csv.DictReader(csvFile)
-    with open(path_to_file + "/" + COLLECTION_NAME + ".csv") as csv_file:
-        csvReader = csv.reader(csv_file, delimiter=',')
-        list_of_columns = []
-        for row in csvReader:
-            list_of_columns.append(row)
-            break
 
     if (duplicatesInput == "NoDupes"):
         #print(reader)
         no_dupes = []
         for each in reader:
-            row = {}
-            for field in list_of_columns[0]:
-                row[field] = each[field]
+            if each not in no_dupes:
+                no_dupes.append(each)
                 
-            if row not in no_dupes:
-                no_dupes.append(row)
-                
-        for each in no_dupes:
-            collection.insert(each)
+        collection.insert_many(no_dupes)
     else:
-        for each in reader:
-            row={}
-            for field in list_of_columns[0]:
-                row[field]=each[field]
-            collection.insert(row)
-            #print(row)
+        collection.insert_many(reader)

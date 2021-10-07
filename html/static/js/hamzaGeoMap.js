@@ -13,7 +13,6 @@
 
     d3.queue()
       .defer(d3.json, "/static/geojson/canada_divisions.json")
-      //.defer(d3.csv, "/static/geojson/98-401-X2016060_English_CSV_data.csv")
       .defer(d3.json, "/donorschoose/mapdata")
       .await(ready)
 
@@ -144,43 +143,5 @@
         }))
 
     })
-            //console.log(StatCanPopulationData)
     }
-
-    // function ready (error, data, StatCanPopulationData) {
-    //     console.log(data)
-
-    //     var provinces = topojson.feature(data, data.objects.canada).features
-
-    //     console.log(provinces)
-
-    //     svg.selectAll(".province")
-    //         .data(provinces)
-    //         .enter().append("path")
-    //         .attr("class", "province")
-    //         .attr("d", path)
-    //         .attr("id", function(d) { 
-    //             return d.id; 
-    //         })
-    //         .attr("title", "Province Name Placeholder")
-    //         .on('mouseenter', function(d){
-    //             d3.select(this).classed("selected", true)
-    //         })
-    //         .on('mouseout', function(d){
-    //             d3.select(this).classed("selected", false)
-    //         })
-    //         .on('click', function(d) {
-    //             var thisProvince = provinces.find(x => x.id === this.id)
-    //             var provinceName = thisProvince.properties.name
-    //             var thisData = StatCanPopulationData.find(x => x.GEO_NAME === provinceName)
-    //             var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
-    //             var malePopulation = thisData["Dim: Sex (3): Member ID: [2]: Male"]
-    //             var femalePopulation = thisData["Dim: Sex (3): Member ID: [3]: Female"]
-    //             alert(provinceName + "\nTotal Population: " + totalPopulation + "\nMale Population: " + malePopulation + "\nFemale Population: " + femalePopulation)
-    //         })
-
-    //     console.log(StatCanPopulationData)
-
-    // }
-
 })();

@@ -19,10 +19,8 @@ def json_upload(json_data, uploaded_file, duplicatesInput, DB_HOST, DB_PORT, DB_
             if i not in no_dupes:
                 no_dupes.append(i)
         
-        for each in no_dupes:
-            collection.insert(each)
+        collection.insert_many(no_dupes)
     else:
-        for i in json_data:
-            collection.insert_one(i)
+        collection.insert_many(json_data)
 
     connection.close()
