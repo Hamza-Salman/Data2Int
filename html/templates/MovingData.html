@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Moving Data{% endblock%}
+
+{% block content %}
+
+    <h1>Moving Data</h1>
+
+
+        <hr/>
+
+        <div class="accordion" id="accordion">
+            <div class="card">
+                <div class="card-header" id="head1">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#hide1"
+                                aria-expanded="true" aria-controls="hide1">
+                            Description
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="hide1" class="collapse show" aria-labelledby="head1" data-parent="#accordion">
+                    <div class="card-body">
+                        <div class="description">
+
+                            <p> The second portion of the managing data phase is moving the data. T
+                                his process involves moving your raw data into the applications database from which it can be accessed after<br></p>
+                            <ul>
+                                <p>Here is how we completed this: <br><br></p>
+                                <li>Setup upload page</li>
+                                <li>Set file upload restrictions beforehand</li>
+                                <li>Upload raw data onto web server to be stored and accessed at a later point</li>
+                                
+                                
+                                <p><br><br>Issues we ran into at this phase: <br><br></p>
+                                <li>Upload times for large files.</li>
+                                <li>Ability to distinguish between file types</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head2">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide2" aria-expanded="false" aria-controls="hide2">
+                                Breakdown:
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide2" class="collapse" aria-labelledby="head2" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="guide">
+                                <h3>This section contains a breakdown of how we completed this phase.</h3>
+                                <br><br>
+                                <ul>
+                                    
+                                    <li>We ran into a lot of issues deciding how we were going to move the data onto the file server.
+                                         The initial idea was to have a light box element that we would add a button and upload that onto the server.
+                                        however, because the post request had to be done on a separate page. We decided to make a separate page designated for uploading.
+                                        and where able to successfully move the data onto the file server.
+                                    </li>
+                                    <br><img style="margin-left:2em" src="\Data2Int\html\templates\resources\rss\uploadPage.PNG"
+                                    alt="Upload Page" min-width="50%" height="50%"> <br>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="head3">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                    data-target="#hide3" aria-expanded="false" aria-controls="hide3">
+                                Summary/Findings
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="hide3" class="collapse" aria-labelledby="head3" data-parent="#accordion">
+                        <div class="card-body">
+                            <p>Here is a summary of what we could do next time:</p>
+                            <ul>
+                                <li>In the future we would prefer to find another way to upload the files without having the user to be redirected onto a different page.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+{% endblock %}
