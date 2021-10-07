@@ -2,8 +2,10 @@ import json
 import os
 
 from bson import json_util
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
+from prepareData import getPreviewData
+from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
 from uploadData import upload
 from virusScanFile import virus_scan
@@ -14,14 +16,14 @@ ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
 app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
 DBS_NAME = 'donorschoose'
 COLLECTION_NAME = 'projects'
-FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True,
-          'total_donations': True, '_id': False}
+FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True, 'total_donations': True, '_id': False}
 
 
 # def max_filesize(filesize):
@@ -44,21 +46,25 @@ def upload_file():
 
         uploaded_file = request.files['file']
 
+        duplicatesInput = request.form['radioButton']
+
+        print(duplicatesInput)
+
         # File name can not be null
         if uploaded_file.filename == "":
             return render_template('ErrorFileUpload.html')
 
         # Kevin's edit
         # Get the extension
-        extension = os.path.splitext(uploaded_file.filename)[1]  # extension = '.txt'
+        extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
+        collectionName = os.path.splitext(uploaded_file.filename)[0]
 
         # Sanitary check the file extension
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
-        # fixed this (test Dante)
-            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
@@ -80,7 +86,7 @@ def upload_file():
                     os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
                     return render_template("ErrorFileUpload.html")
 
-            json_upload(json_data, filename)
+            json_upload(json_data, filename, duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             # Json file upload
         # Everything else
         # Render error file upload page
@@ -88,7 +94,9 @@ def upload_file():
             print("Case 3: This file extension is '" + extension + "'. File upload error")
             return render_template("ErrorFileUpload.html")
 
-        return render_template('SuccessfulUpload.html')
+        raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+        preview_data = getPreviewData(raw_data)
+        return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
 
 
 @app.route('/ErrorFileUpload')
@@ -126,21 +134,25 @@ def upload_file_page_dev():
 
 @app.route('/AccessingData')
 def accessing_data():
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    json_collection = connection[DBS_NAME]["test"]
-    testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
-    json_data = json.load(testfile)
-    for i in json_data:
-        json_collection.insert_one(i)
-    testfile.close()
-    connection.close()
+    # connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    # json_collection = connection[DBS_NAME]["test"]
+    # testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
+    # json_data = json.load(testfile)
+    # for i in json_data:
+    #    json_collection.insert_one(i)
+    # testfile.close()
+    # connection.close()
     return render_template('AccessingData.html')
 
 # added new page - DB
 @app.route('/MovingData')
 def moving_data():
     return render_template('MovingData.html')
-    
+
+@app.route('/FindingData')
+def finding_data():
+    return render_template('FindingData.html')
+
 @app.route('/new')
 def new():
     return render_template('new.html')
@@ -251,6 +263,41 @@ def useful_resources():
     return render_template('UsefulResources.html')
 
 
+@app.route('/numpy')
+def num_py():
+    return render_template('numpy.html')
+
+
+@app.route('/pandas')
+def pandas():
+    return render_template('pandas.html')
+
+
+@app.route('/scipy')
+def scipy():
+    return render_template('scipy.html')
+
+
+@app.route('/keras')
+def keras():
+    return render_template('keras.html')
+
+
+@app.route('/scikitlearn')
+def scikitlearn():
+    return render_template('scikitlearn.html')
+
+
+@app.route('/pytorch')
+def pytorch():
+    return render_template('pytorch.html')
+
+
+@app.route('/tensorflow')
+def tensorflow():
+    return render_template('tensorflow.html')
+
+
 @app.route("/donorschoose/projects")
 def donorschoose_projects():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
@@ -262,6 +309,26 @@ def donorschoose_projects():
     json_projects = json.dumps(json_projects, default=json_util.default)
     connection.close()
     return json_projects
+
+
+@app.route("/donorschoose/mapdata")
+def donorschoose_mapdata():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME]["AllData"]
+
+    # MAP_FIELDS = {'GEO_CODE (POR)': True, 'GEO_NAME': True, 'DIM: Profile of Census Divisions (2247)': True,
+    # 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
+    # projects = collection.find(projection=FIELDS, limit=100000)
+
+    mapData = collection.find({ "DIM: Profile of Census Divisions (2247)": "Population, 2016" })
+    
+    json_mapdata = []
+    for data in mapData:
+        json_mapdata.append(data)
+    json_mapdata = json.dumps(json_mapdata, default=json_util.default)
+    connection.close()
+    # print(json_mapdata)
+    return json_mapdata
 
 
 if __name__ == '__main__':

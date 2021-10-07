@@ -23,10 +23,21 @@
     <a class="nav-link" id="pills-geo-tab" data-toggle="pill" href="#pills-geo" role="tab" aria-controls="pills-geoInfo" aria-selected="false">Updating Geo Map</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" id="pills-geomap-tab" data-toggle="pill" href="#pills-geomap" role="tab"
+       aria-controls="pills-geomap" aria-selected="false">Creating Geo Map</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" id="pills-file-type-tab" data-toggle="pill" href="#pills-fileType" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">File Upload Research</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" id="pills-json-type-tab" data-toggle="pill" href="#pills-filejson" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">JSON Upload</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-perProject-tab" data-toggle="pill" href="#pills-personalProject" role="tab" aria-controls="pills-personalProject" aria-selected="false">Personal Project</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="pills-fileupload-tab" data-toggle="pill" href="#pills-fileupload" role="tab"
+       aria-controls="pills-fileupload" aria-selected="false">File Uploads</a>
   </li>
 </ul>
 </div>
@@ -164,7 +175,7 @@ def success_file_upload():
             <script src="https://d3js.org/d3.v4.min.js"></script>
             <script src="https://d3js.org/topojson.v1.min.js"></script>
             <script src="/static/js/hamzaGeoMap.js"></script>
-        </body>   
+        </body>
         <h1>HTML for GeoMap</h1>
         <pre>
             <code  class="language-javascript">
@@ -186,7 +197,7 @@ def success_file_upload():
                         <script src="https://d3js.org/d3.v4.min.js"><script>
                         <script src="https://d3js.org/topojson.v1.min.js"><script>
                         <script src="/static/js/hamzaGeoMap.js"><script>
-                    </body>   
+                    </body>
                 </script>
             </code>
         </pre>
@@ -198,41 +209,41 @@ def success_file_upload():
                         var margin = {top: 50, left: 50, right: 50, bottom: 50},
                         height = 1000 - margin.top - margin.bottom,
                         width = 1000 - margin.left - margin.right;
-                    
+
                         var svg = d3.select("#map")
                             .append("svg")
                             .attr("height", height + margin.top + margin.bottom)
                             .attr("width", width + margin.left + margin.right)
                             .append("g")
                             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                    
+
                         d3.queue()
                           .defer(d3.json, "/static/geojson/canada.topo.json")
                           .defer(d3.csv, "/templates/uploadedFiles/StatCanPopulationData.csv")
                           .await(ready)
-                    
+
                         var projection = d3.geoMercator()
                             .translate([ width, height])
                             .scale(300)
-                    
+
                         var path = d3.geoPath()
                             .projection(projection)
-                    
-                    
+
+
                         function ready (error, data, StatCanPopulationData) {
                             console.log(data)
-                    
+
                             var provinces = topojson.feature(data, data.objects.canada).features
-                    
+
                             console.log(provinces)
-                    
+
                             svg.selectAll(".province")
                                 .data(provinces)
                                 .enter().append("path")
                                 .attr("class", "province")
                                 .attr("d", path)
-                                .attr("id", function(d) { 
-                                    return d.id; 
+                                .attr("id", function(d) {
+                                    return d.id;
                                 })
                                 .attr("title", "Province Name Placeholder")
                                 .on('mouseenter', function(d){
@@ -250,12 +261,12 @@ def success_file_upload():
                                     var femalePopulation = thisData["Dim: Sex (3): Member ID: [3]: Female"]
                                     alert(provinceName + "\nTotal Population: " + totalPopulation + "\nMale Population: " + malePopulation + "\nFemale Population: " + femalePopulation)
                                 })
-                    
+
                             console.log(StatCanPopulationData)
-                    
+
                         }
-                    
-                    })();  
+
+                    })();
                 </script>
             </code>
         </pre>
@@ -301,11 +312,11 @@ def success_file_upload():
                         <script src="https://d3js.org/d3.v4.min.js"><script>
                         <script src="https://d3js.org/topojson.v1.min.js"><script>
                         <script src="/static/js/hamzaGeoMap.js"><script>
-                    </body>   
+                    </body>
                 </script>
             </code>
         </pre>
-        <h1>JavaScript for GeoMap with Divisions (hamzaGeoMap.js)</h1>
+        <h1>JavaScript for GeoMap with Divisions using database (hamzaGeoMap.js)</h1>
         <pre>
             <code  class="language-javascript">
                 <script type="prism-javascript">
@@ -314,7 +325,7 @@ def success_file_upload():
                         height = 1000 - margin.top - margin.bottom,
                         width = 1000 - margin.left - margin.right;
                         
-                        //selects the html elemt map to use for svg elements
+                    
                         var svg = d3.select("#map")
                             .append("svg")
                             .attr("height", height + margin.top + margin.bottom)
@@ -322,34 +333,27 @@ def success_file_upload():
                             .append("g")
                             .attr("transform", "translate(" + width/1.5 + "," + height/2.5 + ")");
                     
-                        //queues up the data for the map
                         d3.queue()
                           .defer(d3.json, "/static/geojson/canada_divisions.json")
-                          .defer(d3.csv, "/templates/Programmer3Files/98-401-X2016060_English_CSV_data.csv")
+                          .defer(d3.json, "/donorschoose/mapdata")
                           .await(ready)
                     
-                        //creates a projection for the map
                         var projection = d3.geoMercator()
                             .translate([ width, height])
                             .scale(600)
                     
-                        //creates a path to the projection
                         var path = d3.geoPath()
                             .projection(projection)
                     
-                        //main function that takes in all the data and creates the map
-                        function ready (error, data, StatCanPopulationData) {
+                        function ready (error, data, mapData) {
                     
-                            //creates the main svg element
                             const g = svg.append('g')
                     
-                            //gets all the division data from the csv
                             var divisions = topojson.feature(data, data.objects.canada_divisions).features
-
-                            //logs all the divisions for testing
-                            console.log(divisions)
                     
-                            //creates the map using the svg elements
+                            console.log(divisions)
+                            console.log(mapData)
+                    
                             g.selectAll(".division")
                                 .data(divisions)
                                 .enter().append("path")
@@ -358,11 +362,11 @@ def success_file_upload():
                                 .attr("id", function(d) {
                                     return d.properties.CDUID; 
                                 })
-                                .attr("colorClass", "test") // classes each level of data to be used for color coordination
+                                .attr("colorClass", "test")
                                 .classed("low", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population < 10000) {
                                         this.setAttribute("colorClass", "low")
@@ -374,7 +378,7 @@ def success_file_upload():
                                 .classed("lowmid", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population < 50000 && population >= 10000) {
                                         this.setAttribute("colorClass", "lowmid")
@@ -386,7 +390,7 @@ def success_file_upload():
                                 .classed("mid", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population < 100000 && population >= 50000) {
                                         this.setAttribute("colorClass", "mid")
@@ -398,7 +402,7 @@ def success_file_upload():
                                 .classed("midhigh", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population < 500000 && population >= 100000) {
                                         this.setAttribute("colorClass", "midhigh")
@@ -410,7 +414,7 @@ def success_file_upload():
                                 .classed("high", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population < 1000000 && population >= 500000) {
                                         this.setAttribute("colorClass", "high")
@@ -422,7 +426,7 @@ def success_file_upload():
                                 .classed("extreme", function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId)
                                     var population = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
                                     if (population >= 1000000) {
                                         this.setAttribute("colorClass", "extreme")
@@ -430,7 +434,7 @@ def success_file_upload():
                                     }else {
                                         return false
                                     }
-                                })//mouse enter event to make it gray and show the division name
+                                })
                                 .on('mouseenter', function(d){
                                     d3.select(this).classed("low", false)
                                     d3.select(this).classed("lowmid", false)
@@ -439,36 +443,39 @@ def success_file_upload():
                                     d3.select(this).classed("high", false)
                                     d3.select(this).classed("extreme", false)
                                     d3.select(this).classed("selected", true)
-                                })//mouse out sets it back to the color
+                                })
                                 .on('mouseout', function(d){
                                     d3.select(this).classed(this.getAttribute("colorClass"), true)
                                     d3.select(this).classed("selected", false)
-                                })//on click gets the data that is required and shows it in an alert
+                                })
                                 .on('click', function(d) {
                                     var thisDivision = divisions.find(x => x.properties.CDUID === this.id)
                                     var divisionId = thisDivision.properties.CDUID
-                                    var thisData = StatCanPopulationData.find(x => x["GEO_CODE (POR)"] === divisionId)
-                                    var divisonName = thisData.GEO_NAME
-                                    var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]
+                                    var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId) //THIS IS NEEDED
+                                    var divisonName = thisData.GEO_NAME//THIS IS NEEDED
+                                    var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]//THIS IS NEEDED
                                     alert(divisonName + "\nTotal Population: " + totalPopulation)
                     
-                            //sets the name for each division so it can be seen when we hover over divisions
                             svg.selectAll(".division")
                                 .append('title')
                                 .text(d => d.properties.CDNAME)
                     
-                            //sets up the zoom properties for the map
                             svg.call(d3.zoom().on('zoom', () => {
                                 g.attr('transform', d3.event.transform)
                             }))
                     
                         })
-                                //logs the data for testing
-                                console.log(StatCanPopulationData)
-                        }  
+                        }
+                    })();
                 </script>
             </code>
         </pre>
+</div>
+<div class="tab-pane fade" id="pills-geomap" role="tabpanel" aria-labelledby="pills-geomap-tab">
+    <hr/>
+    <h3>The following is the PowerPoint that walks you through the creation of a GeoMap using D3:</h3>
+        <a class="btn btn-primary view-pdf" href="/templates/resources/Data_Patterns_Gantt_Chart.pdf " target="_blank">View PowerPoint</a>
+
 </div>
 <div class="tab-pane fade" id="pills-fileType" role="tabpanel" aria-labelledby="pills-files-tab">
     <hr/>
@@ -572,6 +579,253 @@ def AccessingData():
         <li>Video that explains uploading json data into MongoDB: <a style="color: blue" href="https://www.youtube.com/watch?v=rE_bJl2GAY8&t=1133s"> Here</a></li>
 
     </ol>
+</div>
+<div class="tab-pane fade" id="pills-personalProject" role="tabpanel" aria-labelledby="pills-perProject-tab">
+    <hr/>
+    <h1>Personal Project: Geo Map Data</h1>
+    <p>For my personal project I will be taking a more in-depth look on how to create GeoMaps.<br>
+       The goal for this will be to find a way to implement the ability to create GeoMaps that dont conform to regular world maps.<br>
+       I want to implement the ability to work with unconventional geo data and try to create useful visualizations.<br>
+       The other thing I want to look into is, how to create GeoJSON files based on custom maps.</p>
+
+</div>
+<div class="tab-pane fade" id="pills-fileupload" role="tabpanel" aria-labelledby="pills-fileupload-tab">
+    <hr/>
+    For the file upload process our team decided to focus on four main data types: CSV, XSLX, JSON, XML<br>
+    The upload function in our main python file identifies the file type and redirects it to the correct upload function<br>
+    so that the data can be uploaded into MongoDB. The following are the four files used to manage the different file type uploads.<br>
+
+    <div class="accordion" id="accordionGuide">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        CSV
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                <div class="card-body">
+                    <div class="description">
+                        <pre>
+                            <code  class="language-javascript">
+                            <script type="prism-python">
+                                from os import dup
+                                from pymongo import MongoClient, collection
+                                import json
+                                import csv
+                                import sys, getopt, pprint
+                                
+                                
+                                def csv_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, DB_Name):
+                                    COLLECTION_NAME = uploaded_file.split('.')[0]
+                                
+                                    connection = MongoClient(DB_HOST, DB_PORT)
+                                
+                                    collection = connection[DB_Name][COLLECTION_NAME]
+                                    csvFile = open(path_to_file + "/" + uploaded_file, 'r')
+                                    reader = csv.DictReader(csvFile)
+                                
+                                    if (duplicatesInput == "NoDupes"):
+                                        #print(reader)
+                                        no_dupes = []
+                                        for each in reader:
+                                            if each not in no_dupes:
+                                                no_dupes.append(each)
+                                                
+                                        collection.insert_many(no_dupes)
+                                    else:
+                                        collection.insert_many(reader)
+                                
+                                            </script>
+                                        </code>
+                                    </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            XLSX
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+                            <pre>
+                                <code  class="language-javascript">
+                                <script type="prism-python">
+                                    from pymongo import MongoClient, collection
+import pandas as pd
+import json
+import csv
+import sys, getopt, pprint
+
+
+def xlsx_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, DB_Name):
+    COLLECTION_NAME = uploaded_file.split('.')[0]
+
+    connection = MongoClient(DB_HOST, DB_PORT)
+
+    collection = connection[DB_Name][COLLECTION_NAME]
+
+    excel_file = pd.read_excel(path_to_file + "/" + uploaded_file, engine='openpyxl', index_col=None)
+
+    excel_file.to_csv(path_to_file + "/" + COLLECTION_NAME + ".csv", encoding='utf-8', index=False)
+
+    csvFile = open(path_to_file + "/" + COLLECTION_NAME + ".csv", 'r')
+    reader = csv.DictReader(csvFile)
+
+    if (duplicatesInput == "NoDupes"):
+        #print(reader)
+        no_dupes = []
+        for each in reader:
+            if each not in no_dupes:
+                no_dupes.append(each)
+                
+        collection.insert_many(no_dupes)
+    else:
+        collection.insert_many(reader)
+                                    </script>
+                                </code>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            JSON
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <pre>
+                            <code  class="language-javascript">
+                            <script type="prism-python">
+                                from pymongo import MongoClient, collection
+import json
+
+def json_upload(json_data, uploaded_file, duplicatesInput, DB_HOST, DB_PORT, DB_Name):
+    COLLECTION_NAME = uploaded_file.split('.')[0]
+
+    connection = MongoClient(DB_HOST, DB_PORT)
+
+    collection = connection[DB_Name][COLLECTION_NAME]
+
+    if json_data == "":
+        return ""
+    
+
+    if (duplicatesInput == "NoDupes"):
+        no_dupes = []
+        #print(json_data)
+        for i in json_data:
+            if i not in no_dupes:
+                no_dupes.append(i)
+        
+        collection.insert_many(no_dupes)
+    else:
+        collection.insert_many(json_data)
+
+    connection.close()
+
+                                </script>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            XML
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                     data-parent="#accordionExample">
+                    <div class="card-body">
+                        <pre>
+                            <code  class="language-javascript">
+                            <script type="prism-python">
+                                import xml.etree.ElementTree as ET
+
+from pymongo import MongoClient
+
+
+def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, DB_Name):
+    # Define constants
+    COLLECTION_NAME = uploaded_file.split('.')[0]
+    # print(COLLECTION_NAME)
+
+    connection = MongoClient(DB_HOST, DB_PORT)
+
+    collection = connection[DB_Name][COLLECTION_NAME]
+
+    with open(path_to_file + "/" + uploaded_file) as xml_file:  # Open targeted file
+        tree = ET.parse(path_to_file + "/" + uploaded_file)
+        # print(tree)
+
+        root = tree.getroot()
+        # print(rootName)
+
+        elementName = root[0].tag
+        # print(elementName)
+
+        stud = tree.findall(elementName)
+        for i in stud:
+            print(i)
+
+        childTags = []
+        for child in stud[1]:
+            childTags.append(child.tag)
+
+        # for item in childTags:
+        #    print(item)
+
+        if (duplicatesInput == "NoDupes"):
+            no_dupes = []
+            for rows in stud:
+                data_dict = {}
+                for cols in childTags:
+                    data_dict[cols] = rows.find(cols).text
+
+                if data_dict not in no_dupes:
+                    no_dupes.append(data_dict)
+                
+            collection.insert_many(no_dupes)
+        else:
+            for rows in stud:
+                data_dict = {}
+                for cols in childTags:
+                    data_dict[cols] = rows.find(cols).text
+                collection.insert(data_dict)
+
+        xml_file.close()  # Close XML file to reduce the risk of being unwarranted modified or read.
+        connection.close()
+
+                                </script>
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 </div>
 
