@@ -131,15 +131,20 @@ def upload_file_page_dev():
 
 @app.route('/AccessingData')
 def accessing_data():
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    json_collection = connection[DBS_NAME]["test"]
-    testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
-    json_data = json.load(testfile)
-    for i in json_data:
-        json_collection.insert_one(i)
-    testfile.close()
-    connection.close()
+    # connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    # json_collection = connection[DBS_NAME]["test"]
+    # testfile = open("/var/www/data2int.com/html/templates/uploadedFiles/Test.json")
+    # json_data = json.load(testfile)
+    # for i in json_data:
+    #    json_collection.insert_one(i)
+    # testfile.close()
+    # connection.close()
     return render_template('AccessingData.html')
+
+
+@app.route('/FindingData')
+def finding_data():
+    return render_template('FindingData.html')
 
 
 @app.route('/new')
@@ -299,13 +304,15 @@ def donorschoose_projects():
     connection.close()
     return json_projects
 
+
 @app.route("/donorschoose/mapdata")
 def donorschoose_mapdata():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
     collection = connection[DBS_NAME]["AllData"]
 
-    #MAP_FIELDS = {'GEO_CODE (POR)': True, 'GEO_NAME': True, 'DIM: Profile of Census Divisions (2247)': True, 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
-    #projects = collection.find(projection=FIELDS, limit=100000)
+    # MAP_FIELDS = {'GEO_CODE (POR)': True, 'GEO_NAME': True, 'DIM: Profile of Census Divisions (2247)': True,
+    # 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
+    # projects = collection.find(projection=FIELDS, limit=100000)
 
     mapData = collection.find({ "DIM: Profile of Census Divisions (2247)": "Population, 2016" })
     
@@ -314,7 +321,7 @@ def donorschoose_mapdata():
         json_mapdata.append(data)
     json_mapdata = json.dumps(json_mapdata, default=json_util.default)
     connection.close()
-    #print(json_mapdata)
+    # print(json_mapdata)
     return json_mapdata
 
 

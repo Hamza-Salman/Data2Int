@@ -7,6 +7,282 @@
 
     <hr>
 
+        <div class="accordion" id="accordionGuide-python">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            Introduction
+                        </button>
+                    </h5>
+                </div>
 
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionGuide-python">
+                    <div class="card-body">
+                        <div class="description">
+                            <p>It's great that you've found your data, but now you need to be able to utilize and analyze it. That starts with inputting
+                            the data into the application. This involves a series of steps to send the data from the client to server.</p>
+
+                            <ol>
+                                <li>Create the webpage</li>
+                                <li>Import packages</li>
+                                <li>Set an upload endpoint</li>
+                                <li>Grab the filename</li>
+                                <li>Check the file extension</li>
+                                <li>Check for a virus</li>
+                                <li>Manage the data...</li>
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Walkthrough
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionGuide-python">
+                    <div class="card-body">
+                        <div class="description">
+                            <h3>Create the webpage</h3>
+
+                            <p>Build the webpage your user will interface with. You'll need a form with multipart form-data. The button will be
+                            linked to handle the event to upload the file to the server.</p>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                        <title>Upload Dev</title>
+
+                                        <h1>Upload A File</h1><br><br>
+
+                                        <form method="post" enctype="multipart/form-data">
+
+                                        <input oninput="filesize(this);" type="file" name="file"/><br><br>
+                                        <input type="submit" value="Upload" id="uploadButton" style="background: #fff;color: #7386D5; height: 40px; width: 210px; border-radius: 5px;"/>
+                                        </form>
+
+                                        <script>
+                                            function filesize(elem) {
+                                                document.cookie = `filesize=${elem.files[0].size}`
+                                            }
+                                        /script
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <h3>Import packages</h3>
+
+                            <p>To be able to manipulate the server's file system and files, you'll need to import a new Python library called <i>os</i>.
+                            You'll also need the request package from the Flask library to be able to access the file reference in your scripts.</p>
+
+                            <p>To install the os library, install onto your version of Python from command line using the following command:</p>
+
+                            <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                                <code class="language-bash">
+                                    <span class="command-line-prompt">
+                                        <span data-user="root" data-host="localhost"></span>
+                                        <span class="token builtin class-name">pip</span> install os
+                                    </span>
+                                </code>
+                            </pre><br>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    import os
+                                    import json
+
+                                    from flask import Flask, render_template, request
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <h3>Set an upload endpoint</h3>
+
+                            <p>You'll need to establish an a directory to which users with upload the file to the server. It's a good idea
+                            to save this as a constant variable, since this theoretically should never change, except with changing dev environments.
+                            Note that you should save this path as a relative path from the project root. This way migrating the app from one server
+                            to another server won't cause routing issues.</p>
+
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    app.config["UPLOAD_FOLDER"] = "/var/www/somewebsite.com/html/uploadedFiles"
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <h3>Grab the file name and file extension</h3>
+
+                            <p>You'll need to create a function that receives a POST request to upload the file to the server. To grab the file name, as long as
+                            you have the path to the file, you can access the file name as property and can split the the text to get the name and extension.</p>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    @app.route('/Upload', methods=['POST'])
+                                    def upload_file():
+                                        if request.method == 'POST':
+                                            uploaded_file = request.files['file']
+
+                                        # Get the extension
+                                        extension = os.path.splitext(uploaded_file.filename)[1]
+                                        filename = os.path.basename(uploaded_file.filename)
+
+                                        uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                                    </script>
+                                </code>
+                            </pre><br>
+
+
+                            <h3>Check for a virus</h3>
+
+                            <p>After the file is uploaded and saved to the server, the file is then virus scanned. While there are several ways to approach this,
+                            we took an approach of using a virus scanning API. The result that comes back says the file has a virus or not. We used stored the result
+                            from our virus scan as a bool and tell the server to delete the file.</p>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    def upload(extension, filename, uploaded_file, upload_path) -> bool:
+                                        if has_virus:
+                                            # Check if the file exists at the specified directory first before deleting
+                                            if os.path.exists(upload_path + "/" + filename):
+                                                os.remove(upload_path + "/" + filename)
+                                            return False
+                                        return True
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <p>If the check returns false, bring the user to the error page.</p>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                        upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"])
+
+                                        if not upload_success:
+                                            return render_template("ErrorFileUpload.html")
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <h3>Converting the file</h3>
+
+                            <p>To prepare the file for cleanup, we decided to approach this task in strategic way. We are double checking the file extension specifically
+                            for preparing the data for cleanup before it's entered into the database. The approach we took was to convert supported file types to JSON
+                            and to clean up the data using one method rather than a different way for each different file type; however, we discovered that this process is harder
+                            than expected and therefore stuck with the traditional methods. The supported file types for the Data2Int site are CSV, JSON, XLSX, and XML.</p>
+
+                            <h5>JSON</h5>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    if extension == ".json":
+                                        uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                                        with open(app.config["UPLOAD_FOLDER"] + "/" + filename) as json_file:
+                                        json_data = json.load(json_file)
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <h5>CSV</h5>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    import csv
+
+                                    elif extension == ".csv":
+                                        csvFile = open(path_to_file + "/" + uploaded_file, 'r')
+                                        reader = csv.DictReader(csvFile)
+                                        with open(path_to_file + "/" + uploaded_file) as csv_file:
+                                            csvReader = csv.reader(csv_file, delimiter=',')
+                                    </script>
+                                </code>
+                            </pre><br>
+
+
+                            <h5>XML</h5>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    import xml.etree.ElementTree as ET
+
+                                    elif extension == ".xml":
+                                        with open(path_to_file + "/" + uploaded_file) as xml_file:  # Open targeted file
+                                        tree = ET.parse(path_to_file + "/" + uploaded_file)
+                                    </script>
+                                </code>
+                            </pre><br>
+
+
+                            <h5>XLSX</h5>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                    import csv
+
+                                    elif extension == ".xlsx":
+                                        excel_file = pd.read_excel(path_to_file + "/" + uploaded_file, engine='openpyxl', index_col=None)
+
+                                        excel_file.to_csv(path_to_file + "/" + COLLECTION_NAME + ".csv", encoding='utf-8', index=False)
+                                        csvFile = open(path_to_file + "/" + COLLECTION_NAME + ".csv", 'r')
+
+                                        reader = csv.DictReader(csvFile)
+
+                                        with open(path_to_file + "/" + COLLECTION_NAME + ".csv") as csv_file:
+                                                csvReader = csv.reader(csv_file, delimiter=',')
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                            <p>Last step is to upload to the database. This would involve setting up variables such as the host, port, database namem and collection name.
+                            Just like the file upload directory, these are best saved as constants. The process is relatively simple for uploading to a MongoDB:
+                            You instantiate a MongoClient object using the host and the port number. Then establish the connection using the database and collection names.
+                            Finally, you read the file into a data structure before inserting as a row of data.</p>
+
+                            <pre>
+                                <code class="language-javascript">
+                                    <script type="prism-python">
+                                        from pymongo import MongoClient
+
+                                        MONGODB_HOST = 'localhost'
+                                        MONGODB_PORT = 2080
+                                        DBS_NAME = 'donorschoose'
+                                        COLLECTION_NAME = 'projects'
+
+                                        connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+
+                                        collection = connection[DBS_NAME][COLLECTION_NAME]
+                                        csvFile = open(path_to_file + "/" + uploaded_file, 'r')
+
+                                        reader = csv.DictReader(csvFile)
+
+                                        with open(path_to_file + "/" + uploaded_file) as csv_file:
+                                            csvReader = csv.reader(csv_file, delimiter=',')
+                                    </script>
+                                </code>
+                            </pre><br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
 {% endblock %}
