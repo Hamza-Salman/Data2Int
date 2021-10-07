@@ -2,8 +2,10 @@ import json
 import os
 
 from bson import json_util
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from pymongo import MongoClient
+from prepareData import getPreviewData
+from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
 from uploadData import upload
 from virusScanFile import virus_scan
@@ -13,16 +15,15 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-# app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
-app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
 DBS_NAME = 'donorschoose'
 COLLECTION_NAME = 'projects'
-FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True,
-          'total_donations': True, '_id': False}
+FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True, 'total_donations': True, '_id': False}
 
 
 # def max_filesize(filesize):
@@ -57,6 +58,7 @@ def upload_file():
         # Get the extension
         extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
+        collectionName = os.path.splitext(uploaded_file.filename)[0]
 
         # Sanitary check the file extension
         # If the file extension .csv or .xlsx or .xml
@@ -93,7 +95,9 @@ def upload_file():
             print("Case 3: This file extension is '" + extension + "'. File upload error")
             return render_template("ErrorFileUpload.html")
 
-        return render_template('SuccessfulUpload.html')
+        raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+        preview_data = getPreviewData(raw_data)
+        return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
 
 
 @app.route('/ErrorFileUpload')

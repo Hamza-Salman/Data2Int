@@ -29,3 +29,5 @@ def xlsx_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, 
         collection.insert_many(no_dupes)
     else:
         collection.insert_many(reader)
+
+    connection.close()
