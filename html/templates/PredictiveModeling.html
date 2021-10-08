@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Predictive Modeling{% endblock %}
+
+{% block content %}
+
+    <h1>Predictive Modeling</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <p>Predictive modelling is a statistical technique which works, in conjunction with machine learning
+            and data mining, to make predictions and forecasts based on existing and historical data. Like the name implies,
+            it is used predict any sort of statistic like the weather patterns or stock market predictions. </p>
+
+            <p>Predictive models are known for being efficient and fast-executing, which perform computations in real time, which
+            provide end users with an instant result, to make a decision on-the-spot. For example, a banker would assess an applicant for a credit card
+            or a mortgage, and use predictive modelling application to instantly risk assess and approve an applicant based on that result.</p>
+
+            <p>There are 5 different types of Predictive Models:</p>
+
+            <ul>
+                <li>Classification model</li>
+                <li>Clustering model</li>
+                <li>Forecast model</li>
+                <li>Outliers model</li>
+                <li>Time series model</li>
+            </ul>
+
+            <h4>Classification Model</h4>
+            <p>Classification models seek to categorize and draw a conclusion about the data being analyzed, for a particular query or question.
+            Outcomes are given labels which are then applied to datasets. ex. classifying a credit card transaction as "fraudulent" or "authorized".</p>
+
+
+            <h4>Clustering Model</h4>
+            <p>Clustering models are similar in their objective as classification models; however, they differ in that cluster
+                models don't use labelled data and analyze groupings of common attributes within a dataset. They also look for patterns,
+                similarities, and outliers within a dataset. ex. used in fields like pattern recognition, bioinformatics, image analysis, etc.</p>
+
+            <h4>Forecast Model</h4>
+            <p>One of the most commonly used models, forecast models use historical data to make predictions based on the past. It can be applied to both
+            numerical datasets and non-numerical historical data. ex sales projections on previous year's sales</p>
+
+            <h4>Outliers Model</h4>
+            <p>As the name suggests, this model analyzes outliers and anomalies in datasets, or data points that fall outside a common trend.
+            ex. flagging fraudulent transactions based on abnormal spending habits.</p>
+
+            <h4>Time Series Model</h4>
+            <p>This model is a a series of data points ordered in time. Time is usually an independent variable, and a chosen metric is compared over time.
+                It's usually seeking to make a forecast for the future. ex. graphs that predict the future spread of Covid-19 over time.</p>
+
+
+        </div>
+
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+
+            <div class="accordion" id="accordionGuide-links">
+
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Predictive Modeling: Types, Benefits, and Algorithms
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank" href="https://www.netsuite.com/portal/resource/articles/financial-management/predictive-modeling.shtml">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An overview of predictive modeling</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                Top 5 Predictive Analytics Models and Algorithms
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.logianalytics.com/predictive-analytics/predictive-algorithms-and-models/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>A walkthrough of common models and algorithms within predictive modeling.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                Selecting the Correct Predictive Modeling Technique
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://towardsdatascience.com/selecting-the-correct-predictive-modeling-technique-ba459c370d59">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An article on how to select the the right predictive modeling technique for your project</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -298,6 +298,21 @@ def tensorflow():
     return render_template('tensorflow.html')
 
 
+@app.route('/MachineLearning')
+def machine_learning():
+    return render_template('MachineLearning.html')
+
+
+@app.route('/PredictiveModeling')
+def predictive_modeling():
+    return render_template('PredictiveModeling.html')
+
+
+@app.route('/DataMining')
+def data_mining():
+    return render_template('DataMining.html')
+
+
 @app.route("/donorschoose/projects")
 def donorschoose_projects():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
