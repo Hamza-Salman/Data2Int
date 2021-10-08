@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Data Mining{% endblock %}
+
+{% block content %}
+
+    <h1>Data Mining</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <p>Data mining is the process of analyzing a large datasets of information to discern trends and patterns,
+                using algorithms and statistical methods to help answer business questions. These techniques are used
+                in industries such as fraud detection, risk management, medical diagnoses, marketing, and cybersecurity.
+            </p>
+
+            <p>Here are 5 of the most common data mining techniques:</p>
+
+            <ul>
+                <li>Classification Analysis</li>
+                <li>Association Rule Learning</li>
+                <li>Anomaly or Outlier Detection</li>
+                <li>Clustering Analysis</li>
+                <li>Regression Analysis</li>
+            </ul>
+
+            <h4>Classification Analysis</h4>
+            <p>Classification analysis identifies and assigns categories to a collection of data to allow for more
+                accurate analysis. Classification analysis can be used to question, make a decision, or predict
+                behavior through the use of an algorithm. It is commonly used in email applications for classifying email
+                as spam or not.</p>
+
+            <h4>Association Rule Learning</h4>
+            <p>Association rules are used to find correlations and co-occurrences between datasets. They are also used
+            to identify data patterns between seemingly unrelated data sources or repositories. They are used in machine learning
+            to help the application learn new associations.</p>
+
+            <h4>Anomaly or Outlier Detection</h4>
+            <p>Outlier detection is the process of detecting and subsequently excluding outliers from a given set of data.
+            When a data point deviates dramatically from the normal trend of the dataset, it is considered an outlier or anomaly. Looking
+            specifically for outliers means you're looking for something out of the ordinary to analyze.</p>
+
+
+            <h4>Clustering Analysis</h4>
+            <p>Clustering analysis sorts different data points into groups that are similar to each other and not similar
+                data points in another cluster. It seeks to find structures within the dataset. Its results can be used to perform
+                customer profiling.</p>
+
+            <h4>Regression Analysis</h4>
+            <p>Regression analysis identifies and analyzes the relationships between variables. This technique estimates
+                how one or more variables might impact the dependent variable, in order to identify trends and patterns.
+                This is especially used for making predictions and forecasting future trends.</p>
+
+        </div>
+
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+
+            <div class="accordion" id="accordionGuide-links">
+
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Top 5 Data Mining Techniques
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank" href="https://www.infogix.com/top-5-data-mining-techniques/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An article describing data mining techniques and when to use them.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                Data Mining Tutorial with Python | Data Mining For Beginners
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.youtube.com/watch?v=4rymD1Hpnho">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>A YouTube video on using data mining in Python.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                Data Mining | Why and What of Data Mining
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.youtube.com/watch?v=0Q7j7sv4rns">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>Youtube video series overview of important concepts in data mining.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
