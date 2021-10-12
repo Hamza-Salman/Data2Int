@@ -6,7 +6,10 @@
 <h1>SUCCESS!</h1>
 <h2>The file was uploaded successfully.</h2>
 <hr/>
+<div id="you-want-lazyload" data-lazyload="&lt;p&gt;Anything you want to lazyload&lt;/p&gt;">
 {% for table in tables %}
-    {{ table|safe }}
+{{ table|safe }}
 {% endfor %}
+</div>
+
 {% endblock %}
