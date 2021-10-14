@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <div class="description">
                             <p>It's great that you've found your data, but now you need to be able to utilize and analyze it. That starts with inputting
-                            the data into the application. This involves a series of steps to send the data from the client to server.</p>
+                            the data into the application. This involves a series of steps to send the data from the client to the server.</p>
 
                             <ol>
                                 <li>Create the webpage</li>
@@ -30,7 +30,7 @@
                                 <li>Grab the filename</li>
                                 <li>Check the file extension</li>
                                 <li>Check for a virus</li>
-                                <li>Manage the data...</li>
+                                <li>Move the data...</li>
                             </ol>
 
                         </div>
@@ -250,7 +250,9 @@
                                 </code>
                             </pre><br>
 
-                            <p>Last step is to upload to the database. This would involve setting up variables such as the host, port, database namem and collection name.
+                            <h3>Moving the data</h3>
+
+                            <p>Last step is to upload to the database. This would involve setting up variables such as the host, port, database name and collection name.
                             Just like the file upload directory, these are best saved as constants. The process is relatively simple for uploading to a MongoDB:
                             You instantiate a MongoClient object using the host and the port number. Then establish the connection using the database and collection names.
                             Finally, you read the file into a data structure before inserting as a row of data.</p>
