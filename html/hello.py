@@ -329,7 +329,7 @@ def donorschoose_projects():
 @app.route("/donorschoose/mapdata")
 def donorschoose_mapdata():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    collection = connection[DBS_NAME]["AllData"]
+    collection = connection[DBS_NAME]["MapData"]
 
     # MAP_FIELDS = {'GEO_CODE (POR)': True, 'GEO_NAME': True, 'DIM: Profile of Census Divisions (2247)': True,
     # 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
@@ -345,6 +345,21 @@ def donorschoose_mapdata():
     # print(json_mapdata)
     return json_mapdata
 
+@app.route("/donorschoose/mapdataupdate")
+def donorschoose_mapadata_geoname():
+
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME]["MapData"]
+    data_filter = {"Dim: Sex (3): Member ID: [1]: Total - Sex" : {"$ne": "0"}}
+
+    mapData = collection.find(data_filter)
+    json_mapdata = []
+    for data in mapData:
+        json_mapdata.append(data)
+    json_mapdata_final = json.dumps(json_mapdata, default=json_util.default)
+    connection.close()
+
+    return json_mapdata_final
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
