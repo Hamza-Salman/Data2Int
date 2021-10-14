@@ -9,14 +9,15 @@ from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
 from uploadData import upload
 from virusScanFile import virus_scan
+from cleanDatabase import clean_database
 
 app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
-# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -64,6 +65,7 @@ def upload_file():
         # If the file extension .csv or .xlsx or .xml
         # Case 1
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
+            clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         
             if not upload_success:
@@ -71,6 +73,7 @@ def upload_file():
 
         # If the file extension .json
         elif extension == ".json":
+            clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             print("Case 2: This file extension is " + extension)
             uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
             with open(app.config["UPLOAD_FOLDER"] + "/" + filename) as json_file:
