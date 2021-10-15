@@ -27,6 +27,10 @@
        aria-controls="pills-geomap" aria-selected="false">Creating Geo Map</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" id="pills-map-tab" data-toggle="pill" href="#pills-map" role="tab"
+       aria-controls="pills-map" aria-selected="false">Map</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" id="pills-file-type-tab" data-toggle="pill" href="#pills-fileType" role="tab" aria-controls="pills-fileTypeInfo" aria-selected="false">File Upload Research</a>
   </li>
   <li class="nav-item">
@@ -135,47 +139,6 @@ def success_file_upload():
             </li>
         </ol>
 
-        <h1>Canada Map Test</h1>
-        <p>This map has clickable elements that will prompt you with the 2016 StatsCan Population data for each province. (NOTE: It takes a long time to load)<br>Use scroll wheel to zoom in and out.</p>
-        <style>
-            .division {
-                fill: #bada55;
-                stroke: black;
-                stroke-width: 0.5;
-            }
-            .selected {
-                fill: lightgray;
-            }
-            .low {
-                fill: lightyellow;
-            }
-            .lowmid {
-                fill: rgb(255, 255, 175);
-            }
-            .mid {
-                fill: rgb(255, 255, 129);
-            }
-            .midhigh {
-                fill: lightsalmon;
-            }
-            .high {
-                fill: salmon;
-            }
-            .extreme {
-                fill: darkred;
-            }
-            #map {
-                border: 1px solid #000000;
-            }
-        </style>
-        <body>
-            <div id="map" style="border:2px black;"></div>
-            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-            <script src="https://d3js.org/d3.v4.min.js"></script>
-            <script src="https://d3js.org/topojson.v1.min.js"></script>
-            <script src="/static/js/hamzaGeoMap.js"></script>
-        </body>
         <h1>HTML for GeoMap</h1>
         <pre>
             <code  class="language-javascript">
@@ -475,6 +438,67 @@ def success_file_upload():
     <hr/>
     <h3>The following is the PowerPoint that walks you through the creation of a GeoMap using D3:</h3>
         <a class="btn btn-primary view-pdf" href="/templates/resources/Data_Patterns_Gantt_Chart.pdf " target="_blank">View PowerPoint</a>
+
+</div>
+<div class="tab-pane fade" id="pills-map" role="tabpanel" aria-labelledby="pills-map-tab">
+    <hr/>
+    <h3>Stats Can Map Operational:</h3>
+    <p>This map has clickable elements that will prompt you with the 2016 StatsCan Population data for each province. (NOTE: It takes a long time to load)<br>Use scroll wheel to zoom in and out.</p>
+    <style>
+        .division {
+            fill: #bada55;
+            stroke: black;
+            stroke-width: 0.5;
+        }
+        .selected {
+            fill: lightgray;
+        }
+        .low {
+            fill: lightyellow;
+        }
+        .lowmid {
+            fill: rgb(255, 255, 175);
+        }
+        .mid {
+            fill: rgb(255, 255, 129);
+        }
+        .midhigh {
+            fill: lightsalmon;
+        }
+        .high {
+            fill: salmon;
+        }
+        .extreme {
+            fill: darkred;
+        }
+        #map {
+            border: 1px solid #000000;
+            max-width: 902px;
+            max-height: 602px;
+        }
+        #tableData {
+            border: 1px solid #000000;
+            max-height: 602px;
+            font-size: small;
+        }
+    </style>
+    <body>
+        <table>
+            <tr>
+                <td>
+                    <div id="map"></div>
+                </td>
+                <td colspan="2">
+                    <div id="tableData" style="overflow-y: scroll;"></div>
+                </td>
+            </tr>
+        </table>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="https://d3js.org/topojson.v1.min.js"></script>
+        <script src="/static/js/hamzaGeoMap.js"></script>
+    </body>
 
 </div>
 <div class="tab-pane fade" id="pills-fileType" role="tabpanel" aria-labelledby="pills-files-tab">

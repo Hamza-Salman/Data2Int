@@ -6,14 +6,16 @@
 
     var svg = d3.select("#map")
         .append("svg")
-        .attr("height", height + margin.top + margin.bottom)
-        .attr("width", width*1.5 + margin.left + margin.right)
+        .attr("height", height/1.5)
+        .attr("width", width)//*1.8
+        .attr("style", "background-color:rgb(202, 223, 230)")
         .append("g")
         .attr("transform", "translate(" + width/1.5 + "," + height/2.5 + ")");
 
     d3.queue()
       .defer(d3.json, "/static/geojson/canada_divisions.json")
       .defer(d3.json, "/donorschoose/mapdata")
+      .defer(d3.json, "/donorschoose/mapdataupdate")
       .await(ready)
 
     var projection = d3.geoMercator()
@@ -23,7 +25,38 @@
     var path = d3.geoPath()
         .projection(projection)
 
-    function ready (error, data, mapData) {
+
+    var tabulate = function (data,columns) {
+        var table = d3.select('#tableData').append('table')
+            var thead = table.append('thead')
+            var tbody = table.append('tbody')
+        
+            thead.append('tr')
+            .selectAll('th')
+                .data(columns)
+                .enter()
+            .append('th')
+                .text(function (d) { return d })
+        
+            var rows = tbody.selectAll('tr')
+                .data(data)
+                .enter()
+            .append('tr')
+        
+            var cells = rows.selectAll('td')
+                .data(function(row) {
+                    return columns.map(function (column) {
+                        return { column: column, value: row[column] }
+                })
+            })
+            .enter()
+            .append('td')
+            .text(function (d) { return d.value })
+        
+        return table;
+    }
+
+    function ready (error, data, mapData, mapUpdates) {
 
         const g = svg.append('g')
 
@@ -31,6 +64,7 @@
 
         console.log(divisions)
         console.log(mapData)
+        console.log(mapUpdates)
 
         g.selectAll(".division")
             .data(divisions)
@@ -131,8 +165,13 @@
                 var divisionId = thisDivision.properties.CDUID
                 var thisData = mapData.find(x => x["GEO_CODE (POR)"] === divisionId) //THIS IS NEEDED
                 var divisonName = thisData.GEO_NAME//THIS IS NEEDED
+                $("#tableData").html("");
+                var columns = ['GEO_NAME', 'DIM: Profile of Census Divisions (2247)','Dim: Sex (3): Member ID: [1]: Total - Sex','Dim: Sex (3): Member ID: [2]: Male','Dim: Sex (3): Member ID: [3]: Female']
+                var div_data = mapUpdates.filter(x => x["GEO_CODE (POR)"] === divisionId)
+                console.log(div_data)
+                tabulate(div_data,columns)
                 var totalPopulation = thisData["Dim: Sex (3): Member ID: [1]: Total - Sex"]//THIS IS NEEDED
-                alert(divisonName + "\nTotal Population: " + totalPopulation)
+                //alert(divisonName + "\nTotal Population: " + totalPopulation)
 
         svg.selectAll(".division")
             .append('title')
