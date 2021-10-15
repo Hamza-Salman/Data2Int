@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+{% block title %}Matplotlib{% endblock %}
+
+{% block content %}
+
+    <h1>Matplotlib</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-visualizations-tab" data-toggle="pill" href="#pills-visualizations"
+               role="tab"
+               aria-controls="pills-visualizations" aria-selected="false">Creating Visualizations</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <p>Matplotlib is a Python library written to help create visualizations. Unlike other similar libraries, Matplotlib
+            is specifically written for Python. It is open source and there have been several contributors that have written portions
+            in C, Objective-C, and JavaScript.</p>
+
+            <p>To install the Matplotlib library, install onto your version of Python from command line using the following
+                command:</p>
+
+            <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                <code class="language-bash">
+                    <span class="command-line-prompt">
+                        <span data-user="root" data-host="localhost"></span>
+                        <span class="token builtin class-name">pip</span> install matplotlib
+                    </span>
+                </code>
+            </pre><br>
+
+            <p>Pyplot is a Matplotlib module that provides a MATLAB like interface. Pyplot provides functions that interact
+                with the figure i.e. creates a figure, decorates the plot with labels, creates plotting area in a figure.
+                It is a pretty extensive module of the library and generally when using Mathplotlib, is a good idea to have a reference
+                directly to pyplot.</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                    </script>
+                </code>
+            </pre><br>
+
+            <p>In Matplotlib there are two key concepts to understand about the library. Figures are objects which can be
+                considered as a box-like container that can hold one or more axes. It is the top-level container for all the plots
+                and is the overall window or page on which everything is drawn.</p>
+
+            <p>Axes are individual plots or graphs and are flexible components for creating sub-plots. A given figure may contain
+                many axes but an axes can only belong to only figure ultimately..</p>
+
+        </div>
+        <div class="tab-pane fade" id="pills-visualizations" role="tabpanel" aria-labelledby="pills-visualizations-tab">
+
+            <h3>Visualizations</h3>
+
+            <p>The Matplotlib library offers a wide variety of graphs, charts, and other visualizations to create with just a few lines of code.
+            The Matplotlib library offers the following visualizations to create:</p>
+
+            <ul>
+                <li>pie charts</li>
+                <li>scatter plots</li>
+                <li>line graphs</li>
+                <li>bar graphs</li>
+                <li>histograms</li>
+                <li>3D plots</li>
+            </ul>
+
+            <h4>Pie Charts</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        # data to display on plots
+                        x = [1, 2, 3, 4]
+
+                        # this will explode the 1st wedge, i.e. will separate the 1st wedge from the chart
+                        e  =(0.1, 0, 0, 0)
+
+                        # This will plot a simple pie chart
+                        plt.pie(x, explode = e)
+
+                        # Title to the plot
+                        plt.title("Pie chart")
+                        plt.show()
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-pie-chart.png" alt="pie chart drawn using matplotlib"><br>
+
+            <h4>Scatter Plots</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        # data to display on plots
+                        x = [3, 1, 3, 12, 2, 4, 4]
+                        y = [3, 2, 1, 4, 5, 6, 7]
+
+                        # This will plot a simple scatter chart
+                        plt.scatter(x, y)
+
+                        # Adding legend to the plot
+                        plt.legend("A")
+
+                        # Title to the plot
+                        plt.title("Scatter chart")
+                        plt.show()
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-scatterplot.png" alt="scatter plot drawn using matplotlib"><br>
+
+            <h4>Line Graphs</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        # data to display on plots
+                        x = [3, 1, 3]
+                        y = [3, 2, 1]
+
+                        # This will plot a simple line chart with elements of x as x axis and y as y axis
+                        plt.plot(x, y)
+                        plt.title("Line Chart")
+
+                        # Adding the legends
+                        plt.legend(["Line"])
+                        plt.show()
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-line-chart.png" alt="line graph drawn using matplotlib"><br>
+
+            <h4>Bar Graphs</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        # data to display on plots
+                        x = [3, 1, 3, 12, 2, 4, 4]
+                        y = [3, 2, 1, 4, 5, 6, 7]
+
+                        # This will plot a simple bar chart
+                        plt.bar(x, y)
+
+                        # Title to the plot
+                        plt.title("Bar Chart")
+
+                        # Adding the legends
+                        plt.legend(["bar"])
+                        plt.show()
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-bar-graph.png" alt="bar graph drawn using matplotlib"><br>
+
+            <h4>Histograms</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        # data to display on plots
+                        x = [1, 2, 3, 4, 5, 6, 7, 4]
+
+                        # This will plot a simple histogram
+                        plt.hist(x, bins = [1, 2, 3, 4, 5, 6, 7])
+
+                        # Title to the plot
+                        plt.title("Histogram")
+
+                        # Adding the legends
+                        plt.legend(["bar"])
+                        plt.show()
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-histogram.png" alt="histogram drawn using matplotlib"><br>
+
+            <h4>3D Plots</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import matplotlib.pyplot as plt
+
+                        x = [1, 2, 3, 4, 5]
+                        y = [1, 4, 9, 16, 25]
+                        z = [1, 8, 27, 64, 125]
+
+                        # Creating the figure object
+                        fig = plt.figure()
+
+                        # keeping the projection = 3d
+                        ax = plt.axes(projection = '3d')
+
+                        # creates the 3d plot
+                        ax.plot3D(z, y, x)
+                    </script>
+                </code>
+            </pre><br>
+
+            <img src="/templates/resources/matplotlib-3d-plot.png" alt="3D plot drawn using matplotlib"><br>
+
+        </div>
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+
+            <div class="accordion" id="accordionGuide-links">
+
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Matplotlib Official Website
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank" href="https://matplotlib.org/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>Official website and documentation for the Matplotlib library</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                Python - Matplotlib Tutorial for Beginners
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.youtube.com/watch?v=qErBw-R2Ybk">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>A 30 min YouTube tutorial on using the Matplotlib library in Python</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse"
+                                    data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                Matplotlib Tutorial - W3Schools
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.w3schools.com/python/matplotlib_intro.asp">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>W3schools documentation on using the Matplotlib library in Python</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

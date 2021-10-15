@@ -144,14 +144,16 @@ def accessing_data():
     # connection.close()
     return render_template('AccessingData.html')
 
-# added new page - DB
+
 @app.route('/MovingData')
 def moving_data():
     return render_template('MovingData.html')
 
+
 @app.route('/FindingData')
 def finding_data():
     return render_template('FindingData.html')
+
 
 @app.route('/new')
 def new():
@@ -311,6 +313,36 @@ def predictive_modeling():
 @app.route('/DataMining')
 def data_mining():
     return render_template('DataMining.html')
+
+
+@app.route('/mathplotlib')
+def mathplotlib():
+    return render_template('matplotlib.html')
+
+
+@app.route('/seaborn')
+def seaborn():
+    return render_template('seaborn.html')
+
+
+@app.route('/bokeh')
+def bokeh():
+    return render_template('bokeh.html')
+
+
+@app.route('/plotly')
+def plotly():
+    return render_template('plotly.html')
+
+
+@app.route('/pydot')
+def pydot():
+    return render_template('pydot.html')
+
+
+@app.route('/charts')
+def charts():
+    return render_template('charts.html')
 
 
 @app.route("/donorschoose/projects")
