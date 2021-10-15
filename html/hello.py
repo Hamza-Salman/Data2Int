@@ -14,8 +14,9 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = {'csv'}
 
-# app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+# app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 # app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 

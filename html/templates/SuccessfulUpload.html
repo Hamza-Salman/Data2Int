@@ -3,9 +3,18 @@
 
 {% block content %}
 
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+  <script>
+    jQuery(document).ready(function($){
+      $(".loader-wrapper").fadeOut(2000);
+    });
+</script> 
 <h1>SUCCESS!</h1>
 <h2>The file was uploaded successfully.</h2>
 <hr/>
+
 {% for table in tables %}
     {{ table|safe }}
 {% endfor %}
