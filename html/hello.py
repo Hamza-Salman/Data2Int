@@ -10,6 +10,7 @@ from jsonUpload import json_upload
 from uploadData import upload
 from virusScanFile import virus_scan
 from cleanDatabase import clean_database
+from analyzeData import analyze_data
 
 app = Flask(__name__)
 
@@ -67,6 +68,7 @@ def upload_file():
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
             clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
