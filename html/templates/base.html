@@ -11,8 +11,11 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
+    
+    <!-- JQuery -->
+    <script src="/static/lib/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/pre-load.css">
     <link rel="stylesheet" href="/static/css/prism.css">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -21,6 +24,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
             integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
             crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -144,31 +148,31 @@
                 <a href="#visualSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Visualizations</a>
                 <ul class="collapse list-unstyled" id="visualSubmenu">
                     <li class="active">
-                        <a href="{{ url_for('mathplotlib') }}">Mathplotlib</a>
+                        <a href="#">Mathplotlib</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('seaborn') }}">Seaborn</a>
+                        <a href="#">Seaborn</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('bokeh') }}">Bokeh</a>
+                        <a href="#">Bokeh</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('plotly') }}">Plotly</a>
+                        <a href="#">Plotly</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('pydot') }}">pydot</a>
+                        <a href="#">pydot</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('d3') }}">D3</a>
+                        <a href="#">D3</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('charts') }}">Charts</a>
+                        <a href="#">Charts</a>
                     </li>
                 </ul>
             </li>
@@ -208,15 +212,15 @@
                     Analysis</a>
                 <ul class="collapse list-unstyled" id="preSubmenu">
                     <li class="active">
-                        <a href="{{ url_for('data_mining')}}">Data Mining</a>
+                        <a href="#">Data Mining</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('predictive_modeling')}}">Predictive Modelling</a>
+                        <a href="#">Predictive Modelling</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('machine_learning')}}">Machine Learning</a>
+                        <a href="#">Machine Learning</a>
                     </li>
                 </ul>
             </li>
@@ -407,6 +411,7 @@
         </div>
     </div>
 </div>
+
 </body>
 
 </html>
