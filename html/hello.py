@@ -345,6 +345,116 @@ def charts():
     return render_template('charts.html')
 
 
+@app.route('/dataframe')
+def dataframe():
+    return render_template('dataframe.html')
+
+
+@app.route('/descriptivestatistics')
+def descriptive_statistics():
+    return render_template('descriptivestatistics.html')
+
+
+@app.route('/histograms')
+def histograms():
+    return render_template('histograms.html')
+
+
+@app.route('/scatterplots')
+def scatterplots():
+    return render_template('scatterplots.html')
+
+
+@app.route('/coefficientofvariance')
+def coefficient_of_variance():
+    return render_template('coefficientofvariance.html')
+
+
+@app.route('/standarddeviation')
+def standard_deviation():
+    return render_template('standarddeviation.html')
+
+
+@app.route('/missingdata')
+def missing_data():
+    return render_template('missingdata.html')
+
+
+@app.route('/outliers')
+def outliers():
+    return render_template('outliers.html')
+
+
+@app.route('/social')
+def social():
+    return render_template('social.html')
+
+
+@app.route('/cost')
+def cost():
+    return render_template('cost.html')
+
+
+@app.route('/customer')
+def customer():
+    return render_template('customer.html')
+
+
+@app.route('/quality')
+def quality():
+    return render_template('quality.html')
+
+
+@app.route('/productionanalysis')
+def production_analysis():
+    return render_template('productionanalysis.html')
+
+
+@app.route('/market')
+def market():
+    return render_template('market.html')
+
+
+@app.route('/corr')
+def corr():
+    return render_template('corr.html')
+
+
+@app.route('/aggr')
+def aggr():
+    return render_template('aggr.html')
+
+
+@app.route('/rank')
+def rank():
+    return render_template('rank.html')
+
+
+@app.route('/time')
+def time():
+    return render_template('time.html')
+
+
+@app.route('/mmap')
+def mmap():
+    return render_template('mmap.html')
+
+
+@app.route('/flow')
+def flow():
+    return render_template('flow.html')
+
+
+@app.route('/regr')
+def regr():
+    return render_template('regr.html')
+
+
+@app.route('/sem')
+def sem():
+    return render_template('sem.html')
+
+
 @app.route("/donorschoose/projects")
 def donorschoose_projects():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
