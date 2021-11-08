@@ -2,7 +2,7 @@ import json
 import os
 
 from bson import json_util
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
 from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
@@ -26,6 +26,8 @@ MONGODB_PORT = 27017
 DBS_NAME = 'donorschoose'
 COLLECTION_NAME = 'projects'
 FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True, 'total_donations': True, '_id': False}
+file_name = ""
+column_list = {}
 
 
 # def max_filesize(filesize):
@@ -61,6 +63,8 @@ def upload_file():
         extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
         collectionName = os.path.splitext(uploaded_file.filename)[0]
+        global file_name
+        file_name = collectionName
 
         # Sanitary check the file extension
         # If the file extension .csv or .xlsx or .xml
@@ -68,7 +72,11 @@ def upload_file():
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
             clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-            analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            analyzed_columns = analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            global column_list
+            column_list = analyzed_columns
+            for analyzed in analyzed_columns.items():
+                print(analyzed)
         
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
@@ -101,7 +109,8 @@ def upload_file():
 
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
         preview_data = getPreviewData(raw_data)
-        return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
+        #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
+        return redirect(url_for('success_file_upload', fileName = file_name))
 
 
 @app.route('/ErrorFileUpload')
@@ -114,9 +123,10 @@ def upload_file_page():
     return render_template('UploadPage.html')
 
 
-@app.route('/SuccessfulUpload')
-def success_file_upload():
-    return render_template('SuccessfulUpload.html')
+@app.route('/SuccessfulUpload/<fileName>')
+def success_file_upload(fileName):
+    print(fileName)
+    return render_template('SuccessfulUpload.html', collectionname=fileName)
 
 
 @app.route('/UploadDev', methods=['POST'])
@@ -397,6 +407,114 @@ def donorschoose_mapadata_geoname():
     connection.close()
 
     return json_mapdata_final
+
+####################################################################################################################
+@app.route("/donorschoose/scatterplot")
+def donorschoose_scatterplot():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME][file_name]
+
+    data = collection.find()
+    
+    json_data = []
+    for data in data:
+        json_data.append(data)
+    json_data = json.dumps(json_data, default=json_util.default)
+    connection.close()
+    # print(json_mapdata)
+    return json_data
+
+####################################################################################################################
+@app.route("/donorschoose/scatterplotmeasures")
+def donorschoose_scatterplot_measures():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME][file_name]
+    var1 = ""
+    var2 = ""
+    xVar = ""
+    yVar = ""
+    ################ var1 & var2 values #################
+    for i in column_list.items():
+        if(i[1]== "measure"):
+            if (var1 == ""):
+                var1 = i[0]
+            else:
+                var2 = i[0]
+
+    if(var1 != ""):
+        var1field = {var1 : True, "_id" : False}
+        var1Val = collection.find(projection=var1field).sort(var1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        for i in var1Val:
+            for j in i.values():
+                var1Min = j
+        var1Val = collection.find(projection=var1field).sort(var1, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        for i in var1Val:
+            for j in i.values():
+                var1Max = j
+    if(var2 != ""):
+        var2field = {var2 : True, "_id" : False}
+        var2Val = collection.find(projection=var2field).sort(var2).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        for i in var2Val:
+            for j in i.values():
+                var2Min = j
+        var2Val = collection.find(projection=var2field).sort(var2, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        for i in var2Val:
+            for j in i.values():
+                var2Max = j
+    ###########################################
+
+    if(var1Max > var2Max):
+        yVar = var1
+        yMax = var1Max
+        yMin = var1Min
+        xVar = var2
+        xMax = var2Max
+        xMin = var2Min
+    else:
+        yVar = var2
+        yMax = var2Max
+        yMin = var2Min
+        xVar = var1
+        xMax = var1Max
+        xMin = var1Min
+
+    ################ z values #################
+    zVar = ""
+    for i in column_list.items():
+        if(i[1]== "largestMeasure"):
+            zVar = i[0]
+
+    zfield = {zVar : True, "_id" : False}
+    zVal = collection.find(projection=zfield).sort(zVar).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    for i in zVal:
+        for j in i.values():
+            zMin = j
+    zVal = collection.find(projection=zfield).sort(zVar, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    for i in zVal:
+        for j in i.values():
+            zMax = j
+    ###########################################
+    print("X: " + xVar + " Max: " + xMax + " Min: " + xMin)
+    print("Y: " + yVar + " Max: " + yMax + " Min: " + yMin)
+    print("Z: " + zVar + " Max: " + zMax + " Min: " + zMin)
+    data = {"x": xVar, "xMin":xMin, "xMax":xMax, "y": yVar, "yMin":yMin, "yMax":yMax,"z": zVar, "zMin":zMin, "zMax":zMax}
+    
+    json_data = json.dumps(data, default=json_util.default)
+    connection.close()
+    return json_data
+####################################################################################################################
+@app.route("/donorschoose/scatterplotdimensions")
+def donorschoose_scatterplot_dimensions():
+
+    dimensions = []
+    for i in column_list.items():
+        if(i[1] == "dimension"):
+            dimensions.append(i[0])
+    json_data = json.dumps(dimensions, default=json_util.default)
+    print(json_data)
+    return json_data
+
+####################################################################################################################
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
