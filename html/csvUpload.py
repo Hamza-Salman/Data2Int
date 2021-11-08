@@ -23,6 +23,8 @@ def csv_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
                 
         collection.insert_many(no_dupes)
     else:
+        print("uploading")
         collection.insert_many(reader)
+        print("done")
     
     connection.close();
