@@ -2,7 +2,11 @@
 {% block title %}Upload Your Data{% endblock%}
 
 {% block content %}
-
+<script src="/static/lib/js/jquery.min.js"></script>
+<div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+  </div>
+</script>
 <h1>Upload A File</h1>
 <h2>Please Select a file to upload using the Choose File button</h2><br><br>
 
@@ -22,6 +26,13 @@
 </form>
 
 <script>
+    $(document).ready(function($){
+        $(".loader-wrapper").hide();
+    });
+    $("#uploadButton").on("click", function() {
+    
+        $(".loader-wrapper").fadeIn(500);
+    });
         function filesize(elem) {
             document.cookie = `filesize=${elem.files[0].size}`;
         }
