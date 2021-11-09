@@ -4,6 +4,7 @@ import os
 from bson import json_util
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from pandas_profiling_report import generate_report
 from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
@@ -109,7 +110,9 @@ def upload_file():
             return render_template("ErrorFileUpload.html")
 
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        preview_data = getPreviewData(raw_data)
+        if(generate_report(raw_data, filename) == False):
+            return render_template("ErrorFileUpload.html")
+
         #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
         return redirect(url_for('success_file_upload', fileName = file_name))
 
@@ -127,7 +130,7 @@ def upload_file_page():
 @app.route('/SuccessfulUpload/<fileName>')
 def success_file_upload(fileName):
     print(fileName)
-    return render_template('SuccessfulUpload.html', collectionname=fileName)
+    return render_template('SuccessfulUpload.html', collection_name=fileName)
 
 
 @app.route('/UploadDev', methods=['POST'])
