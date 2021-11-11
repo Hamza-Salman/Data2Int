@@ -4,6 +4,7 @@ import os
 from bson import json_util
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from pandas_profiling_report import generate_report
 from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
@@ -17,8 +18,8 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-# app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
-app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
+app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 # app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
@@ -109,7 +110,9 @@ def upload_file():
             return render_template("ErrorFileUpload.html")
 
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        preview_data = getPreviewData(raw_data)
+        if(generate_report(raw_data, filename) == False):
+            return render_template("ErrorFileUpload.html")
+
         #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
         return redirect(url_for('success_file_upload', fileName = file_name))
 
@@ -127,7 +130,7 @@ def upload_file_page():
 @app.route('/SuccessfulUpload/<fileName>')
 def success_file_upload(fileName):
     print(fileName)
-    return render_template('SuccessfulUpload.html', collectionname=fileName)
+    return render_template('SuccessfulUpload.html', collection_name=fileName)
 
 
 @app.route('/UploadDev', methods=['POST'])
