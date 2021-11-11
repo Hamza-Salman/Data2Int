@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Standard Deviation{% endblock %}
+
+{% block content %}
+
+    <h1>Standard Deviation</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <hr>
+
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <p>Standard deviation (σ in Greek) is a technique in data science and descriptive analysis used to determine
+                how close or far the data is in relation to the mean. If the data is close
+                in relation to the mean, the standard deviation will be lower. If the data is more dispersed away from
+                the mean, this will lead to a higher
+                standard deviation. It is also used to make comparisons between two data sets, like comparing the
+                temperatures between two cities for a week
+                (in the same temperature scale).</p>
+
+            <img src="standarddeviation.html" alt="standard deviation chart">
+
+            <p>The formula for calculating the standard deviation is: <b>σ = √Σ|x - x̄|<sup>2</sup>/n</b></p>
+
+            <p>There are several steps to calculating the standard deviation:</p>
+
+            <ol>
+                <li>Find the mean(<b>x̄</b>) - Formula: <b>x̄ = Σx/N</b>
+                    <ol type="a">
+                        <li>count up the terms (<b>N</b>)</li>
+                        <li>sum them together (<b>Σx</b>)</li>
+                        <li>divide the sum by the number of terms within the set to find the mean.</li>
+                    </ol>
+                </li>
+                <li>Calculate the sum of squares - Formula: <b>Sum of Squares = Σ(xi + x̄)<sup>2</sup></b>
+                    <ol type="a">
+                        <li>Subtract the value at i (the value at that index) minus the mean.</li>
+                        <li>Exponentiate this number to the power of 2.</li>
+                        <li>Add it to sum.</li>
+                        <li>Repeat steps a to c for each item in the data set.</li>
+                    </ol>
+                </li>
+                <li>Subtract the number of items in the data set by 1, which we'll call <i>n</i>.</li>
+                <li>Divide the sum of squares by n, which gives you the variance.</li>
+                <li>Find the standard deviation by calculating the square root of the variance.</li>
+            </ol>
+
+        </div>
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+            <div class="accordion" id="accordionGuide-links">
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                How to Deal with Missing Data
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.mastersindatascience.org/learning/how-to-deal-with-missing-data/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An article overviewing different types of missing data and techniques for resolving issues that arise.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Data School - How do I handle missing values in pandas?
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="hhttps://www.youtube.com/watch?v=fCMrO_VzeL8">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>A Youtube video covering how to resolve missing data issues in the Python Pandas library.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

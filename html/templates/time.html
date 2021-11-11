@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Time Series{% endblock%}
+
+{% block content %}
+
+
+    <h1>Time Series</h1>
+
+    <hr/>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Time Series</a>
+    </li>
+</ul>
+
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            What is time series analysis?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> Time series analysis is a specific way of analyzing a sequence of data points collected over an interval of time. In time series analysis, analysts record data points at consistent intervals over a set period of time rather than just recording the data points intermittently or randomly. However, this type of analysis is not merely the act of collecting data over time. What sets time series data apart from other data is that the analysis can show how variables change over time. In other words, time is a crucial variable because it shows how the data adjusts over the course of the data points as well as the final results. It provides an additional source of information and a set order of dependencies between the data. Time series analysis typically requires a large number of data points to ensure consistency and reliability. An extensive data set ensures you have a representative sample size and that analysis can cut through noisy data. It also ensures that any trends or patterns discovered are not outliers and can account for seasonal variance. Additionally, time series data can be used for forecasting—predicting future data based on historical data.</p><br>
+                            <p> </p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Why organizations use time series data analysis
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseT" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Time series analysis helps organizations understand the underlying causes of trends or systemic patterns over time. Using data visualizations, business users can see seasonal trends and dig deeper into why these trends occur. With modern analytics platforms, these visualizations can go far beyond line graphs. When organizations analyze data over consistent intervals, they can also use time series forecasting to predict the likelihood of future events. Time series forecasting is part of predictive analytics. It can show likely changes in the data, like seasonality or cyclic behavior, which provides a better understanding of data variables and helps forecast better. For example, Des Moines Public Schools analyzed five years of student achievement data to identify at-risk students and track progress over time. Today’s technology allows us to collect massive amounts of data every day and it’s easier than ever to gather enough consistent data for comprehensive analysis.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            When time series analysis is used and when it isn’t
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Time series analysis is not a new study, despite technology making it easier to access. Many of the recommended texts teaching the subject’s fundamental theories and practices have been around for several decades. And the method itself is even older than that. We have been using time series analysis for thousands of years, all the way back to the ancient studies of planetary movement and navigation. Time series analysis is used for non-stationary data—things that are constantly fluctuating over time or are affected by time. Industries like finance, retail, and economics frequently use time series analysis because currency and sales are always changing. Stock market analysis is an excellent example of time series analysis in action, especially with automated trading algorithms. Likewise, time series analysis is ideal for forecasting weather changes, helping meteorologists predict everything from tomorrow’s weather report to future years of climate change. Examples of time series analysis in action include:</p><br>
+                            <li> Weather data</li><br>
+                            <li> Rainfall measurements</li><br>
+                            <li> Temperature readings</li><br>
+                            <li> Heart rate monitoring (EKG)</li><br>
+                            <li> Brain monitoring (EEG)</li><br>
+                            <li> Quarterly sales</li><br>
+                            <li> Stock prices</li><br>
+                            <li> Automated stock trading</li><br>
+                            <li> Industry forecasts</li><br>
+                            <li> Interest rates</li><br>
+                            <p> Because time series analysis includes many categories or variations of data, analysts sometimes must make complex models. However, analysts can’t account for all variances, and they can’t generalize a specific model to every sample. Models that are too complex or that try to do too many things can lead to lack of fit. Lack of fit or overfitting models lead to those models not distinguishing between random error and true relationships, leaving analysis skewed and forecasts incorrect.</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Classification and considerations
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> While time series data is data collected over time, there are different types of data that describe how and when that time data was recorded. For example:</p><br>
+                            <li> Time series data is data that is recorded over consistent intervals of time.</li><br>
+                            <li> Cross-sectional data consists of several variables recorded at the same <time class=""></time></li><br>
+                            <li> Pooled data is a combination of both time series data and cross-sectional data.</li><br>
+
+                            <p> Further, time series data can be classified into two main categories:</p><br>
+                            <li> <strong>Stock time series data</strong>means measuring attributes at a certain point in time, like a static snapshot of the information as it was.</li><br>
+                            <li> <strong>Flow time series data</strong>means measuring the activity of the attributes over a certain period, which is generally part of the total whole and makes up a portion of the results.</li><br>
+                            <p> In time series data, variations can occur sporadically throughout the data:</p><br>
+                            <li> <strong>Functional analysis </strong>can pick out the patterns and relationships within the data to identify notable events.</li><br>
+                            <li> <strong>Trend analysis </strong>means determining consistent movement in a certain direction. There are two types of trends: deterministic, where we can find the underlying cause, and stochastic, which is random and unexplainable.</li><br>
+                            <li> <strong>Seasonal variation </strong>describes events that occur at specific and regular intervals during the course of a year. Serial dependence occurs when data points close together in time tend to be related.</li><br>
+                            <p> Time series analysis and forecasting models must define the types of data relevant to answering the business question. Once analysts have chosen the relevant data they want to analyze, they choose what types of analysis and techniques are the best fit.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Types of time series analysis
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Even within time series analysis, there are different types and models of analysis that will achieve different results.</p><br>
+                            <li> <strong>Classification: </strong>Identifies and assigns categories to the data.</li><br>
+                            <li> <strong>Curve fitting: </strong>Plots the data along a curve to study the relationships of variables within the data.</li><br>
+                            <li> <strong>Descriptive analysis: </strong>Identifies patterns in time series data, like trends, cycles, or seasonal variation.</li><br>
+                            <li> <strong>Explanative analysis: </strong>Attempts to understand the data and the relationships within it, as well as cause and effect.</li><br>
+                            <li> <strong>Exploratory analysis: </strong>Highlights the main characteristics of the time series data, usually in a visual format.</li><br>
+                            <li> <strong>Forecasting: </strong>Predicts future data. This type is based on historical trends. It uses the historical data as a model for future data, predicting scenarios that could happen along future plot points.</li><br>
+                            <li> <strong>Intervention analysis: </strong>Studies how an event can change the data.</li><br>
+                            <li> <strong>Segmentation: </strong>Splits the data into segments to show the underlying properties of the source information.</li><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+{% endblock %}
