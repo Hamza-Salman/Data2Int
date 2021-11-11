@@ -2,18 +2,19 @@
 {% block title %}Upload Successful{% endblock%}
 
 {% block content %}
-
+<script src="/static/lib/js/jquery.min.js"></script>
 <div class="loader-wrapper">
     <span class="loader"><span class="loader-inner"></span></span>
   </div>
   <script>
-    jQuery(document).ready(function($){
+    $(document).ready(function($){
       $(".loader-wrapper").fadeOut(1500);
     });
-</script> 
+  </script> 
 <h1>SUCCESS!</h1>
-<h2>The file: {{collectionname}} was uploaded successfully.</h2>
+<h2>The file: {{collection_name}} was uploaded successfully.</h2>
 <hr/>
+
 {% for table in tables %}
 {{ table|safe }}
 {% endfor %}
@@ -33,6 +34,7 @@
     }
 </style>
 <script src="/static/js/scatterPlot.js"></script>
+<img src="{{url_for('static', filename='scatter.png')}}" alt="ScatterPlot" style="border: 5px solid black">
 </div>
 
 {% endblock %}

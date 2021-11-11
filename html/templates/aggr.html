@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block title %}Aggregation{% endblock%}
+
+{% block content %}
+
+    <h1>Aggregation</h1>
+
+    <hr/>
+
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Aggregation</a>
+    </li>
+</ul>
+
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            What is Data Aggregation?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> Data aggregation is any process in which data is brought together and conveyed in a summary form. It is typically used prior to the performance of a statistical analysis.</p><br>
+                            <p> The information drawn from the data aggregation and statistical analysis can then be used to tell you all kinds of information about the data you are looking at.</p><br>
+                            <p> In marketing, data aggregation usually comes from your marketing campaigns and the different channels you use to market to your customers.</p><br>
+                            <p> You can aggregate your data from one specific campaign, looking at how it performed over time and with particular cohorts.</p><br>
+                            <p> Ideally, though, you are aggregating the data from each specific campaign to compare them to each other - one grand data aggregation that tells you how your product is being received across channels, populations, and cohorts.</p><br>
+                            <p> Doing so can take a lot of time and effort. Luckily, there are now tons of software available that can do the work for you, so that you aren’t wasting half of your week simply picking through the data.</p><br>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Data Aggregation Example
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> To better understand what data aggregation is and how it works, we’ll look at an example.
+Organizations collect vast amounts of data for their marketing needs. Information about customer interactions, marketing metrics, point of touch, and other insights bring clarity to the companies’ marketing efforts. However, these insights are often misaligned, duplicated, and confusing.</p><br>
+                            <p> Data aggregation helps businesses to cleanse and structure their data in a convenient and accessible way. With a dedicated data warehouse, analysts can access up-to-date information at any moment and manipulate it to uncover new marketing opportunities. As a result, marketers deliver consistent messaging to all their customers, personalize offers, and adjust marketing campaigns.</p><br>
+                            <p> Furthermore, this data can be used across the entire organization. For example, the sales team can verify new leads, while upper management can adjust the marketing strategy and change the marketing budget according to the departments’ performance.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Define the theme
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> When it comes to middleware for marketing analytics, there are three different activities and functions.</p><br>
+                            <p> For short, we refer to them as ETV (Extract, Transform, Visualize). Together, this is the workflow of extracting and preparing data from SaaS applications for analysis.</p><br>
+                            <p> For each of these three steps there is a software layer, meaning there are companies whose sole focus is to help marketers during each of these steps.</p><br>
+                            <li> <strong>Extract </strong>Data extraction layer</li><br>
+                            <li> <strong>Transform  </strong>Data preparation layer</li><br>
+                            <li> <strong>Visualize/Analyze </strong>Visualization and analytics layer</li><br>
+
+
+                            <p> Here at Improvado, we believe it’s important to provide marketers the freedom to work with tools that allow them to integrate and analyze their data without involving engineers.</p><br>
+                            <p> In this article, we are discussing the extraction phase of middleware for analytics — taking all of the data that is stored in your many marketing databases and funneling it into one place for analysis.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
