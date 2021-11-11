@@ -1,2 +1,2 @@
 /__pycache__/*.pyc
-/templates/uploaded_report/*
+*_report.html
