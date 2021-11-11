@@ -2,17 +2,38 @@
 {% block title %}Upload Successful{% endblock%}
 
 {% block content %}
-
+<script src="/static/lib/js/jquery.min.js"></script>
 <div class="loader-wrapper">
     <span class="loader"><span class="loader-inner"></span></span>
   </div>
   <script>
-    jQuery(document).ready(function($){
+    $(document).ready(function($){
       $(".loader-wrapper").fadeOut(1500);
     });
   </script> 
 <h1>SUCCESS!</h1>
 <h2>The file: {{collection_name}} was uploaded successfully.</h2>
 <hr/>
+
+{% for table in tables %}
+{{ table|safe }}
+{% endfor %}
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<div id="scatterplot">
+</div>
+<style>
+    .bubbles {
+      stroke-width: 2px;
+      stroke: white;
+    }
+    .bubbles:hover {
+      stroke: black;
+    }
+</style>
+<script src="/static/js/scatterPlot.js"></script>
+</div>
 
 {% endblock %}
