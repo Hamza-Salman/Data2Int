@@ -705,10 +705,10 @@ def donorschoose_scatterplot_matplotlib():
             temp.set(xlabel=eachx, ylabel=eachy)
 
     try:
-        os.remove("/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/scatter.png")
+        os.remove("/html/static/scatter.png")
     except:
         print("Nothing to remove")
-    fig.savefig('/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/scatter.png')
+    fig.savefig("html/static/scatter.png")
     json_data = json.dumps(columns, default=json_util.default)
     connection.close()
 
