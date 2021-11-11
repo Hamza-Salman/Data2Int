@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Quality Analysis{% endblock%}
+
+{% block content %}
+
+    <h1>Quality Analysis</h1>
+
+    <hr/>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Quality Analysis</a>
+    </li>
+</ul>
+
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+    <hr/>
+
+    <div class="accordion" id="accordionGuide">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Description
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                <div class="card-body">
+                    <div class="description">
+
+                        <p> Data quality is a measure of the condition of data based on factors such as accuracy, completeness, consistency, reliability and whether it's up to date. Measuring data quality levels can help organizations identify data errors that need to be resolved and assess whether the data in their IT systems is fit to serve its intended purpose.<br></p>
+                        <p> The emphasis on data quality in enterprise systems has increased as data processing has become more intricately linked with business operations and organizations increasingly use data analytics to help drive business decisions. Data quality management is a core component of the overall data management process, and data quality improvement efforts are often closely tied to data governance programs that aim to ensure data is formatted and used consistently throughout an organization.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Why data quality is important
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Bad data can have significant business consequences for companies. Poor-quality data is often pegged as the source of operational snafus, inaccurate analytics and ill-conceived business strategies. Examples of the economic damage that data quality problems can cause include added expenses when products are shipped to the wrong customer addresses, lost sales opportunities because of erroneous or incomplete customer records, and fines for improper financial or regulatory compliance reporting.</p><br>
+                            <p> An oft-cited estimate by IBM calculated that the annual cost of data quality issues in the U.S. amounted to $3.1 trillion in 2016. In an article he wrote for the MIT Sloan Management Review in 2017, data quality consultant Thomas Redman estimated that correcting data errors and dealing with the business problems caused by bad data costs companies 15% to 25% of their annual revenue on average.</p><br>
+                            <p> In addition, a lack of trust in data on the part of corporate executives and business managers is commonly cited among the chief impediments to using business intelligence (BI) and analytics tools to improve decision-making in organizations.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            What is good data quality?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Data accuracy is a key attribute of high-quality data. To avoid transaction processing problems in operational systems and faulty results in analytics applications, the data that's used must be correct. Inaccurate data needs to be identified, documented and fixed to ensure that executives, data analysts and other end users are working with good information.</p><br>
+                            <p> Other aspects, or dimensions, that are important elements of good data quality include data completeness, with data sets containing all of the data elements they should; data consistency, where there are no conflicts between the same data values in different systems or data sets; a lack of duplicate data records in databases; data currency, meaning that data has been updated as needed to keep it current; and conformity to the standard data formats created by an organization. Meeting all of these factors helps produce data sets that are reliable and trustworthy.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Define the theme
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> As a first step toward determining their data quality levels, organizations typically perform data asset inventories in which the relative accuracy, uniqueness and validity of data are measured in baseline studies. The established baseline ratings for data sets can then be compared against the data in systems on an ongoing basis to help identify new data quality issues so they can be resolved.</p><br>
+                            <p> Another common step is to create a set of data quality rules based on business requirements for both operational and analytics data. Such rules specify required quality levels in data sets and detail what different data elements need to include so they can be checked for accuracy, consistency and other data quality attributes. After the rules are in place, a data management team typically conducts a data quality assessment to measure the quality of data sets and document data errors and other problems -- a procedure that can be repeated at regular intervals to maintain the highest data quality levels possible.</p><br>
+                            <p> Various methodologies for such assessments have been developed. For example, data managers at UnitedHealth Group's Optum healthcare services subsidiary created the Data Quality Assessment Framework (DQAF) to formalize a method for assessing its data quality. The DQAF provides guidelines for measuring data quality dimensions that include completeness, timeliness, validity, consistency and integrity. Optum has publicized details about the framework as a possible model for other organizations.</p><br>
+                            <p> The International Monetary Fund (IMF), which oversees the global monetary system and lends money to economically troubled nations, has also specified an assessment methodology, similarly known as the Data Quality Assessment Framework. Its framework focuses on accuracy, reliability, consistency and other data quality attributes in the statistical data that member countries need to submit to the IMF.</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Data quality management tools and techniques
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Data quality projects typically also involve several other steps. For example, a data quality management cycle outlined by data management consultant David Loshin begins with identifying and measuring the effect that bad data has on business operations. Next, data quality rules are defined, performance targets for improving relevant data quality metrics are set, and specific data quality improvement processes are designed and put in place.</p><br>
+                            <p> Those processes include data cleansing, or data scrubbing, to fix data errors, plus work to enhance data sets by adding missing values, more up-to-date information or additional records. The results are then monitored and measured against the performance targets, and any remaining deficiencies in data quality provide a starting point for the next round of planned improvements. Such a cycle is intended to ensure that efforts to improve overall data quality continue after individual projects are completed.</p><br>
+                            <p> Software tools specialized for data quality management can match records, delete duplicates, validate new data, establish remediation policies and identify personal data in data sets; they also do data profiling to collect information about data sets and identify possible outlier values. Management consoles for data quality initiatives support creation of data handling rules, discovery of data relationships and automated data transformations that may be part of data quality maintenance efforts.</p><br>
+                            <p> Collaboration and workflow enablement tools have also become more common, providing shared views of corporate data repositories to data quality managers and data stewards, who are charged with overseeing particular data sets. Those tools and data quality improvement processes are often incorporated into data governance programs, which typically use data quality metrics to help demonstrate their business value to companies, and master data management (MDM) initiatives that aim to create central registries of master data on customers, products and supply chains.</p><br>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Benefits of good data quality
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> From a financial standpoint, maintaining high levels of data quality enables organizations to reduce the cost of identifying and fixing bad data in their systems. Companies are also able to avoid operational errors and business process breakdowns that can increase operating expenses and reduce revenues.</p><br>
+                            <p> In addition, good data quality increases the accuracy of analytics applications, which can lead to better business decision-making that boosts sales, improves internal processes and gives organizations a competitive edge over rivals. High-quality data can help expand the use of BI dashboards and analytics tools, as well -- if analytics data is seen as trustworthy, business users are more likely to rely on it instead of basing decisions on gut feelings or their own spreadsheets.</p><br>
+                            <p> Effective data quality management also frees up data management teams to focus on more productive tasks than cleaning up data sets. For example, they can spend more time helping business users and data analysts take advantage of the available data in systems and promoting data quality best practices in business operations to minimize data errors.</p><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        {% endblock %}

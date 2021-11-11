@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Production Analysis{% endblock%}
+
+{% block content %}
+
+    <h1>Production Analysis</h1>
+
+    <hr/>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Production Analysis</a>
+    </li>
+</ul>
+
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+    <hr/>
+
+    <div class="accordion" id="accordionGuide">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        What is Product Analytics?
+                    </button>
+                </h5>
+            </div>
+
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                <div class="card-body">
+                    <div class="description">
+
+                        <p> Product analytics is a robust set of tools that allow product managers and product teams to assess the performance of the digital experiences they build. Product analytics provides critical information to optimize performance, diagnose problems, and correlate customer activity with long-term value.</p><br>
+                        <p> At its most powerful, product analytics tell you exactly what is happening in your product, giving you the how and when and what and where—and even the who—about your users’ behavior. For product teams, product analytics provides critical information and valuable insights. Who is using your product, and how. Which features they use…and don’t use. Where they experience friction. How to diagnose problems, reduce churn, and personalize interaction for users. And also ways to correlate user behaviors with long-term value.</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Why are Product Analytics important?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Products are complex. There are a million decisions when building them. How do you discern which are wrong and which are right? And of all the correct choices, which one is superior?</p><br>
+                            <p> In the heyday of retail, product marketing claimed to be scientific, but John Wanamaker’s quote from that era tells a different story: “Half of my ad budget is wasted—the problem is I don’t know which half.” Now, light years later, companies still are measuring the effectiveness of their software with speculation and guesswork.</p><br>
+                            <p> While millions of successful products have certainly been created with gut instinct and experience, today data science and analytics gives us a smarter, more accurate path to decision-making. For product teams, analytics is a godsend. Rather than having to guess, or to rely on customer interviews when making decisions, you can see in real time how well you’re meeting user needs.</p><br>
+                            <p> You can measure the success of individual features. You can base product decisions on metrics that support your larger business goals. Used properly, analytics can transform your ability to develop ideas and design user experiences. With analytics you’re making solid supportable decisions. At Heap, we like to say that analytics give your product a superpower.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Who uses Product Analytics?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Anyone who needs to make better decisions. Since the data is behavior-based and you’re collecting 100% of the user activity from your website, analytics can provide answers to inquiries from stakeholders everywhere in your company. Simply put: once you have all of the information you need, what questions would you like to ask?</p><br>
+                            <p> <strong>Product managers </strong>can understand what their users do, make data-driven decisions, measure and run experiments, increase activation, conversion, and retention, and craft captivating digital experiences.</p><br>
+                            <p> <strong>Marketers </strong>can see not only which marketing programs (emails, promotions, social posts, campaigns) bring in the most visitors, but which marketing programs bring in the visitors most likely to convert, and most likely to exhibit long-term retention. This information helps marketers direct their efforts and improves product development.</p><br>
+                            <p> <strong>Dev team leaders </strong>an eliminate bugs, fine-tune features, and resolve user friction without deploying additional engineering effort.</p><br>
+                            <p> <strong>UX designers </strong>can learn in detail how people navigate feature sets, see which are popular and which are confusing, and identify roadblocks and key points of abandonment.</p><br>
+                            <p> <strong>Growth managers </strong>can get a complete view of user engagement, so they can define and optimize retention strategies according to business needs.</p><br>
+                            <p> And of course, it’s your customers who ultimately benefit the most, as the thoughtful application of product analytics results in products that are intuitive, easy, and a pleasure to use.</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            What can you do with Product Analytics?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Product analytics are great in many use cases, and for any team, they’re crucial for measuring and systematically improving main product metrics: AARRR, aka the Pirate Metrics.</p><br>
+                            <p> <strong>Acquisition: </strong>Knowing where your customers come from: which channels they favor, which users are the best prospects, and your optimal costs for acquiring each user as a customer.</p><br>
+                            <p> <strong>Activation: </strong>The experiences that a user has with your product on the journey to becoming a paying customer. Each of the breadcrumbs along this “trial trail” is known as a micro-conversion. The point at which users fully connect with your offering and realize its value is called the “Aha! moment”. Product analytics can help you optimize these steps.</p><br>
+                            <p> <strong>Retention: </strong>This is perhaps the most important metric to understand: are customers staying or leaving? Product analytics can help you track users to figure out who’s satisfied, and how to make them happier—as well as who isn’t, and give you clues on how to win them over.</p><br>
+                            <p> <strong>Referral: </strong>The only thing better than a satisfied customer is a whole bunch of them. Are your purchasers talking up your product? Do they post on social media? Or do they drop off? Product analytics lets you create a tracking plan to measure your customer loyalty through their actions.</p><br>
+                            <p> <strong>Revenue: </strong>Ultimately, it’s all about how you make money with your product. Streamlining your sales funnel with product analytics will help you reduce acquisition costs, and increase the value of the customers you retain.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+{% endblock %}

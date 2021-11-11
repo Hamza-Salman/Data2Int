@@ -4,6 +4,7 @@ import os
 from bson import json_util
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from pandas_profiling_report import generate_report
 from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
@@ -22,7 +23,9 @@ ALLOWED_EXTENSIONS = {'csv'}
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
 # app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
-app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
+# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -111,7 +114,9 @@ def upload_file():
 
         donorschoose_scatterplot_matplotlib()
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        preview_data = getPreviewData(raw_data)
+        if(generate_report(raw_data, filename) == False):
+            return render_template("ErrorFileUpload.html")
+
         #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
         return redirect(url_for('success_file_upload', fileName = file_name))
 
@@ -144,7 +149,7 @@ def upload_file_page():
 @app.route('/SuccessfulUpload/<fileName>')
 def success_file_upload(fileName):
     print(fileName)
-    return render_template('SuccessfulUpload.html', collectionname=fileName)
+    return render_template('SuccessfulUpload.html', collection_name=fileName)
 
 
 @app.route('/UploadDev', methods=['POST'])
@@ -376,6 +381,116 @@ def pydot():
 @app.route('/charts')
 def charts():
     return render_template('charts.html')
+
+
+@app.route('/dataframe')
+def dataframe():
+    return render_template('dataframe.html')
+
+
+@app.route('/descriptivestatistics')
+def descriptive_statistics():
+    return render_template('descriptivestatistics.html')
+
+
+@app.route('/histograms')
+def histograms():
+    return render_template('histograms.html')
+
+
+@app.route('/scatterplots')
+def scatterplots():
+    return render_template('scatterplots.html')
+
+
+@app.route('/coefficientofvariance')
+def coefficient_of_variance():
+    return render_template('coefficientofvariance.html')
+
+
+@app.route('/standarddeviation')
+def standard_deviation():
+    return render_template('standarddeviation.html')
+
+
+@app.route('/missingdata')
+def missing_data():
+    return render_template('missingdata.html')
+
+
+@app.route('/outliers')
+def outliers():
+    return render_template('outliers.html')
+
+
+@app.route('/social')
+def social():
+    return render_template('social.html')
+
+
+@app.route('/cost')
+def cost():
+    return render_template('cost.html')
+
+
+@app.route('/customer')
+def customer():
+    return render_template('customer.html')
+
+
+@app.route('/quality')
+def quality():
+    return render_template('quality.html')
+
+
+@app.route('/productionanalysis')
+def production_analysis():
+    return render_template('productionanalysis.html')
+
+
+@app.route('/market')
+def market():
+    return render_template('market.html')
+
+
+@app.route('/corr')
+def corr():
+    return render_template('corr.html')
+
+
+@app.route('/aggr')
+def aggr():
+    return render_template('aggr.html')
+
+
+@app.route('/rank')
+def rank():
+    return render_template('rank.html')
+
+
+@app.route('/time')
+def time():
+    return render_template('time.html')
+
+
+@app.route('/mmap')
+def mmap():
+    return render_template('mmap.html')
+
+
+@app.route('/flow')
+def flow():
+    return render_template('flow.html')
+
+
+@app.route('/regr')
+def regr():
+    return render_template('regr.html')
+
+
+@app.route('/sem')
+def sem():
+    return render_template('sem.html')
 
 
 @app.route("/donorschoose/projects")

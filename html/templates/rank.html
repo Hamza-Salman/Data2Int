@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Ranking{% endblock%}
+
+{% block content %}
+
+    <h1>Ranking</h1>
+
+    <hr/>
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Ranking</a>
+    </li>
+</ul>
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Analysis of ranking data
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> Ranking is one of the simple and efficient data collection techniques to understand individuals' perception and preferences for some items such as products, people, and species. Ranking data are frequently collected when individuals are asked to rank a set of items according to a certain preference criterion. Over the years, many statistical models and methods have been developed for analyzing ranking data. This paper will give a literature review of these models and methods and present the recent advances of the analysis of ranking data.</p><br>
+                            <img src="/templates/resources/ranking.PNG"
+                                                     alt="Create New Project" width="80%" height="80%">
+                            <p> </p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
