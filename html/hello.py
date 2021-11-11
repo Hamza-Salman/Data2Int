@@ -114,7 +114,7 @@ def upload_file():
 
         donorschoose_scatterplot_matplotlib()
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        if(generate_report(raw_data, filename) == False):
+        if(generate_report(raw_data, collectionName) == False):
             return render_template("ErrorFileUpload.html")
 
         #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])

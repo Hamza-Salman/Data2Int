@@ -13,7 +13,7 @@ def generate_report(df, fileName) -> bool:
 
     _title = fileName + " Profiling Report"
     profileReport = ProfileReport(df, title=_title, explorative=True)
-    reportHTML = fileName + "_report.html"
+    reportHTML = "/html/templates/uploaded_report/" + fileName + "_report.html"
     report_file = profileReport.to_file(reportHTML)
     webbrowser.open_new_tab(reportHTML)
     return True
