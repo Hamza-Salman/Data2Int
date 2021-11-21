@@ -1,231 +1,115 @@
-  (function svg1(){
-      var margin = {top: 20, right: 120, bottom: 0, left: 110},
-      width = 825 - margin.left - margin.right,
-      height = 390 - margin.top - margin.bottom;
-  
-  var x = d3.scale.linear()
-      .range([0, width]);
-  
-  var barHeight = 20;
-  
-  var color = d3.scale.ordinal()
-      .range(["green", "#ccc"]);
-  
-  var duration = 200,
-      delay = 80;
-  
-  var partition = d3.layout.partition()
-      .value(function(d) { return d.size; });
-  
-  var xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("top");
-  //kbn
-  var svg1 = d3.select("#graphDiv").append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  //kbn
-  svg1.append("rect")
-      .attr("class", "background")
-      .attr("width", width)
-      .attr("height", height)
-      .on("click", up);
-  //kbn
-  svg1.append("button")
-      .attr("x", 2)
-      .attr("y", 300)
-      .text("Click here")
-      .on("click", up);
-  //kbn
-  svg1.append("g")
-      .attr("class", "x axis");
-  //kbn
-  svg1.append("g")
-      .attr("class", "y axis")
-    .append("line")
-      .attr("y1", "100%");
-  
-  
-  d3.json("/get-data", function(error, root) {
-    //if (error) throw error;
+// set the dimensions and margins of the graph
+var margin1 = {top: 10, right: 30, bottom: 90, left: 40},
+    width1 = 1000 - margin1.left - margin1.right,
+    height1 = 450 - margin1.top - margin1.bottom;
+
+d3.queue()
+    .defer(d3.json, "/donorschoose/manualcharts")
+    .defer(d3.json, "/donorschoose/scatterplotdimensions")
+    .defer(d3.json, "/donorschoose/scatterplot")
+    .await(drawChart)
+
+// append the svg object to the body of the page
+var svg1 = d3.select("#barchart")
+  .append("svg")
+    .attr("width", width1 + margin1.left + margin1.right)
+    .attr("height", height1 + margin1.top + margin1.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin1.left + "," + (margin1.top) + ")");
+
+// Parse the Data
+function drawChart(error, data2, data3, data) {
+    console.log(data2)
+    console.log(data3)
+    xVar = data2.x;
+    xMin = data2.xMin;
+    xMax = data2.xMax;
+    yVar = data2.y;
+    yMin = data2.yMin;
+    yMax = data2.yMax;
+    zVar = data2.z;
+    zMin = data2.zMin;
+    zMax = data2.zMax;
+    //bool1 = true;
+
+    dimensions = data3;
+    //bool2 = true;
+
+    console.log("x: " + xVar);
+    console.log("y: " + yVar);
+    console.log("z: " + zVar);
+
+    // X axis
+    var x = d3.scaleBand()
+    .range([ 0, width1 ])
+    .domain(data.map(function(d) { return d[xVar]; }))
+    .padding(0.2);
+    svg1.append("g")
+    .attr("transform", "translate(0," + height1 + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+
+    // Add Y axis
+    var y = d3.scaleLinear()
+    .domain([0, yMax])
+    .range([ height1, 0]);
+    svg1.append("g")
+    .call(d3.axisLeft(y));
+
+    var tooltip1 = d3.select("#barchart")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "black")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+    .style("color", "white")
+
+    var showTooltip = function(d) {
+        tooltip1
+        .transition()
+        .duration(200)
+        tooltip1
+        .style("opacity", 1)
+        .html(dimensions[0] + " " + d[dimensions[0]] + " " + zVar + ": " + d[zVar])
+        .style("left", (d3.mouse(this)[0]+60) + "px")
+        .style("top", (d3.mouse(this)[1]+60) + "px")
+    }
+    var moveTooltip = function(d) {
+        tooltip1
+        .style("left", (d3.mouse(this)[0]+250) + "px")
+        .style("top", (d3.mouse(this)[1]+670) + "px")
+    }
+    var hideTooltip = function(d) {
+        tooltip1
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+    }
+
+    // Bars
+    svg1.selectAll("mybar")
+    .data(data)
+    .enter()
+    .append("rect")
+        .attr("x", function(d) { return x(d[xVar]); })
+        .attr("width", x.bandwidth())
+        .attr("fill", "#69b3a2")
+        // no bar at the beginning thus:
+        .attr("height", function(d) { return height1 - y(0); }) // always equal to 0
+        .attr("y", function(d) { return y(0); })
+        .on("mouseover", showTooltip )
+        .on("mousemove", moveTooltip )
+        .on("mouseleave", hideTooltip )
     
-    partition.nodes(root);
-    x.domain([0, root.value]).nice();
-    down(root, 0);
-  });
-  
-  function down(d, i) {
-    if (!d.children || this.__transition__) return;
-    var end = duration + d.children.length * delay;
-  
-    // Mark any currently-displayed bars as exiting.
-    //kbn
-    var exit = svg1.selectAll(".enter")
-        .attr("class", "exit");
-  
-    // Entering nodes immediately obscure the clicked-on bar, so hide it.
-    exit.selectAll("rect").filter(function(p) { return p === d; })
-        .style("fill-opacity", 1e-6);
-  
-    // Enter the new bars for the clicked-on data.
-    // Per above, entering bars are immediately visible.
-    var enter = bar(d)
-        .attr("transform", stack(i))
-        .style("opacity", 1);
-  
-    // Have the text fade-in, even though the bars are visible.
-    // Color the bars as parents; they will fade to children if appropriate.
-    enter.select("text").style("fill-opacity", 1e-6);
-    enter.select("rect").style("fill", color(true));
-  
-    // Update the x-scale domain.
-    x.domain([0, d3.max(d.children, function(d) { return d.value; })]).nice();
-  
-    // Update the x-axis.
-    //kbn
-    svg1.selectAll(".x.axis").transition()
-        .duration(duration)
-        .call(xAxis);
-  
-    // Transition entering bars to their new position.
-    var enterTransition = enter.transition()
-        .duration(duration)
-        .delay(function(d, i) { return i * delay; })
-        .attr("transform", function(d, i) { return "translate(0," + barHeight * i * 1.2 + ")"; });
-  
-    // Transition entering text.
-    enterTransition.select("text")
-        .style("fill-opacity", 1);
-  
-    // Transition entering rects to the new x-scale.
-    enterTransition.select("rect")
-        .attr("width", function(d) { return x(d.value); })
-        .style("fill", function(d) { return color(!!d.children); });
-  
-    // Transition exiting bars to fade out.
-    var exitTransition = exit.transition()
-        .duration(duration)
-        .style("opacity", 1e-6)
-        .remove();
-  
-    // Transition exiting bars to the new x-scale.
-    exitTransition.selectAll("rect")
-        .attr("width", function(d) { return x(d.value); });
-  
-    // Rebind the current node to the background.
-    //kbn
-    svg1.select(".background")
-        .datum(d)
-      .transition()
-        .duration(end);
-  
-    d.index = i;
-  }
-  
-  function up(d) {
-    if (!d.parent || this.__transition__) return;
-    var end = duration + d.children.length * delay;
-  
-    // Mark any currently-displayed bars as exiting.
-    //kbn
-    var exit = svg1.selectAll(".enter")
-        .attr("class", "exit");
-  
-    // Enter the new bars for the clicked-on data's parent.
-    var enter = bar(d.parent)
-        .attr("transform", function(d, i) { return "translate(0," + barHeight * i * 1.2 + ")"; })
-        .style("opacity", 1e-6);
-  
-    // Color the bars as appropriate.
-    // Exiting nodes will obscure the parent bar, so hide it.
-    enter.select("rect")
-        .style("fill", function(d) { return color(!!d.children); })
-      .filter(function(p) { return p === d; })
-        .style("fill-opacity", 1e-6);
-  
-    // Update the x-scale domain.
-    x.domain([0, d3.max(d.parent.children, function(d) { return d.value; })]).nice();
-  
-    // Update the x-axis.
-    //kbn
-    svg1.selectAll(".x.axis").transition()
-        .duration(duration)
-        .call(xAxis);
-  
-    // Transition entering bars to fade in over the full duration.
-    var enterTransition = enter.transition()
-        .duration(end)
-        .style("opacity", 1);
-  
-    // Transition entering rects to the new x-scale.
-    // When the entering parent rect is done, make it visible!
-    enterTransition.select("rect")
-        .attr("width", function(d) { return x(d.value); })
-        .each("end", function(p) { if (p === d) d3.select(this).style("fill-opacity", null); });
-  
-    // Transition exiting bars to the parent's position.
-    var exitTransition = exit.selectAll("g").transition()
-        .duration(duration)
-        .delay(function(d, i) { return i * delay; })
-        .attr("transform", stack(d.index));
-  
-    // Transition exiting text to fade out.
-    exitTransition.select("text")
-        .style("fill-opacity", 1e-6);
-  
-    // Transition exiting rects to the new scale and fade to parent color.
-    exitTransition.select("rect")
-        .attr("width", function(d) { return x(d.value); })
-        .style("fill", color(true));
-  
-    // Remove exiting nodes when the last child has finished transitioning.
-    exit.transition()
-        .duration(end)
-        .remove();
-  
-    // Rebind the current parent to the background.
-    //kbn
-    svg1.select(".background")
-        .datum(d.parent)
-      .transition()
-        .duration(end);
-  }
-  
-  // Creates a set of bars for the given data node, at the specified index.
-  function bar(d) {
-    //kbn
-    var bar = svg1.insert("g", ".y.axis")
-        .attr("class", "enter")
-        .attr("transform", "translate(0,5)")
-      .selectAll("g")
-        .data(d.children)
-      .enter().append("g")
-        .style("cursor", function(d) { return !d.children ? null : "pointer"; })
-        .on("click", down);
-  
-    bar.append("text")
-        .attr("x", -6)
-        .attr("y", barHeight / 2)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .text(function(d) { return d.name; });
-  
-    bar.append("rect")
-        .attr("width", function(d) { return x(d.value); })
-        .attr("height", barHeight);
-  
-    return bar;
-  }
-  
-  // A stateful closure for stacking bars horizontally.
-  function stack(i) {
-    var x0 = 0;
-    return function(d) {
-      var tx = "translate(" + x0 + "," + barHeight * i * 1.2 + ")";
-      x0 += x(d.value);
-      return tx;
-    };
-  }})()
-        
+    // Animation
+    svg1.selectAll("rect")
+    .transition()
+    .attr("y", function(d) { return y(d[yVar]); })
+    .attr("height", function(d) { return height1 - y(d[yVar]); })
+    .delay(function(d,i){console.log(i) ; return(i*100)})
+
+}
