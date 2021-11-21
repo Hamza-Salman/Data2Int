@@ -28,12 +28,25 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <div>
-  <iframe src="{{url_for('pandas_generated_report', filename=collection_name)}}" title="Pandas Profiling Report" style="width:1510px;height:600px"></iframe><br>
-  <img src="{{url_for('static', filename=collection_name + '.png')}}" alt="ScatterPlot" style="border: 5px solid black">
-  </iframe>
+    <div id="scatterplot">
+    </div><br>
+    <style>
+        .bubbles {
+          stroke-width: 2px;
+          stroke: white;
+        }
+        .bubbles:hover {
+          stroke: black;
+        }
+    </style><br>
+    <div id="barchart">
+    </div>
+  </div>
+  <script src="/static/js/manualScatterPlot.js"></script>
+  <script src="/static/js/barchart.js"></script>
   <head>
+      <h2>Redraw Visualizations</h2>
     <form action="/get_chart_variables" method="post">
-      <br><br>
       <table>
         <th>
           <label for="x">Choose X variable:</label>
@@ -70,22 +83,11 @@
         zoptions += "<option value='" + array[i] + "'>" + array[i] + "</option>";
       }
       document.getElementById('z').innerHTML = xoptions;
-    </script>
+    </script><br><br><br>
+    <iframe src="{{url_for('pandas_generated_report', filename=collection_name)}}" title="Pandas Profiling Report" style="width:1510px;height:600px"></iframe><br>
+    <img src="{{url_for('static', filename=collection_name + '.png')}}" alt="ScatterPlot" style="border: 5px solid black">
   </head>
   <br><br><br>
-</div>
-<div id="scatterplot">
-</div>
-<style>
-    .bubbles {
-      stroke-width: 2px;
-      stroke: white;
-    }
-    .bubbles:hover {
-      stroke: black;
-    }
-</style>
-<!-- <script src="/static/js/scatterPlot.js"></script> -->
 </div>
 
 
