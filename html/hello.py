@@ -130,6 +130,7 @@ def upload_file():
 
         donorschoose_scatterplot_matplotlib()
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+
         if (generate_report(num_measures, app.config["REPORT_FOLDER"], raw_data, filename) == False):
            return render_template("ErrorFileUpload.html")
 
@@ -851,12 +852,10 @@ def donorschoose_scatterplot_matplotlib():
             temp.set(xlabel=eachx, ylabel=eachy)
 
     try:
-        os.remove('/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/'+ image_name + '.png')
-        #os.remove("/var/www/data2int.com/html/static/scatter.png")
+        os.remove("/html/static/scatter.png")
     except:
         print("Nothing to remove")
-    fig.savefig('/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/'+ image_name + '.png')
-    #fig.savefig('/var/www/data2int.com/html/static/'+ image_name + '.png')
+    fig.savefig("html/static/scatter.png")
     json_data = json.dumps(columns, default=json_util.default)
     connection.close()
 
