@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 
+
 def clean_database(uploaded_file, DB_HOST, DB_PORT, DB_Name):
     COLLECTION_NAME = uploaded_file.split('.')[0]
     # print(COLLECTION_NAME)

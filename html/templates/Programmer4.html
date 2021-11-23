@@ -16,6 +16,12 @@
         <li class="nav-item">
             <a class="nav-link" id="pills-virus-scanning-files-tab" data-toggle="pill" href="#pills-virus-scan"
                role="tab" aria-controls="pills-virus-scan" aria-selected="false">Virus Scanning Files</a></li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-mongo-tab" data-toggle="pill" href="#pills-mongo"
+               role="tab" aria-controls="pills-mongo" aria-selected="false">Setting Data Expiry in MongoDB</a></li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-personal-project-tab" data-toggle="pill" href="#pills-personal-project"
+               role="tab" aria-controls="pills-personal-project" aria-selected="false">Personal Project: Covid-19</a></li>
     </ul>
 
     <div class="tab-content" id="pills-tabContent">
@@ -420,6 +426,147 @@
             <a href="https://www.docconversionapi.com/blog/scan-file-virus-using-python/">Source</a>
             </p>
         </div>
+        <div class="tab-pane fade" id="pills-mongo" role="tabpanel" aria-labelledby="pills-mongo-tab">
+
+            <h2>Setting Data Expiry in MongoDB</h2>
+            <hr>
+
+            <p>Usually when data is inserted into a database, the data is generally considered persistent cause most cases
+            the data is stored permanently in records. However, the drawback of this is storage and memory concerns, as memory isn't
+            an infinite resource. For the Data2Int website, data that is uploaded by users doesn't persist for longer than 24hrs.</p>
+
+            <p>I tried a couple different approaches to this as a developer. I first tried writing a scheduling task within the application,
+            that would call a function at a scheduled time. </p>
+
+            <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                    import schedule
+                    import time
+
+                    from pymongo import MongoClient, errors
+
+
+                    # function to purge the Mongo DB of user uploaded data
+                    def purge_data(db_host=27017, db_port='localhost'):
+
+                    try:
+                        # Establish database connection with MongoDB
+                        connection = MongoClient(db_host, db_port)
+
+                        # Store a list of database names at the current connection
+                        dbs = connection.list_database_names()
+
+                        # Loop through list of database names
+                        for db_count, db in enumerate(dbs):
+
+                        # Grab a list of collection names in the database
+                        collections = connection[db].list_collection_names()
+
+                        for col_count, col in enumerate(collections):
+                        # Grab the collection's name at that index
+                        collection_name = connection[db][col].name
+
+                        # Skip over any collection named 'donorschoose'
+                        if collection_name == 'donorschoose':
+                            continue
+
+                        # TODO: add checks for collections being used by website as static content
+
+                        # drop the database at the index using each string in the list
+                        connection[db].drop_collection(collection_name)
+
+                        print("Purging data.")
+
+                        connection.close()
+
+                    except errors.ConnectionFailure as err:
+                        client = None
+
+                        print("Daily database purge cannot be completed:", err)
+
+                        # schedule a task that will execute this function at midnight everyday
+                        schedule.every().day.at("00:00").do(purge_data)
+
+                        while True:
+                        # Checks for a pending task to run
+                        schedule.run_pending()
+                        time.sleep(1)
+                </script>
+            </code>
+        </pre>
+
+            <p>However, the problem with this approach comes with trying to call this task within the application, as it needs
+            to run on its own, rather than be triggered by a web page event. That was one of the main reasons this approach didn't work.</p>
+
+            <p>After further research and reaching out online for help from others, I learned of TTL Indexes in MongoDB. "TTL indexes are special
+            single-field indexes that MongoDB can use to automatically remove documents after a certain amount of time or specific clock time..." [1].
+            A background thread in mongod runs every 60 seconds; it should be noted that data may persist beyond the 60 second mark depending on the speed
+            of the background process.</p>
+
+            <p>To specify the amount of time you want the data to last, use the <i>create_index</i> function and overload the <i>expiryAfterSeconds</i> property.
+            You can manually specify the time by feeding this value as seconds.</p>
+
+            <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                    from pymongo import MongoClient
+                    import csv
+
+                    connection = MongoClient(DB_HOST, DB_PORT)
+
+                    collection = connection[DB_Name][COLLECTION_NAME]
+                    csvFile = open(path_to_file + "/" + uploaded_file, 'r')
+                    reader = csv.DictReader(csvFile)
+
+                    collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+                    collection.insert_many(reader)
+
+                    connection.close()
+                </script>
+            </code>
+        </pre>
+
+            <p>You can either pass a hardcoded value, like 86400 (the number of seconds in a day). If you need this to happen around a specified time,
+            this is possible, but you would need to calculate the difference in time yourself. You can do this by using a function to return a timedelta,
+            which is exactly the change in the time and using the datetime module in Python. The following example shows
+            you how to calculate the difference in time with midnight in mind.</p>
+
+            <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+                from datetime import datetime, timedelta
+
+
+                def seconds_until_end_of_day():
+                    dt = datetime.utcnow()
+                    tomorrow = dt + timedelta(days=1)
+                    midnight = datetime(year=tomorrow.year, month=tomorrow.month,
+                                        day=tomorrow.day, hour=0, minute=0, second=0)
+
+                    return (midnight - datetime.utcnow()).seconds
+                </script>
+            </code>
+        </pre>
+
+            <p>This is just one of a few ways to calculate the time remaining, but it should be noted that using the
+            UTC timezone value is considered best practice rather, than using the local datetime.</p>
+
+            <p>Source:<a href="https://docs.mongodb.com/manual/core/index-ttl">[1] TTL Indexes</a></p>
+        </div>
+    <div class="tab-pane fade" id="pills-personal-project" role="tabpanel" aria-labelledby="pills-personal-project-tab">
+        <h2>Personal Project: Covid-19</h2>
+        <hr>
+
+        <h3>Preface</h3>
+
+        <p>The purpose of this project will be to analyze Covid-19 trends within the past year and a half, with a focus on trends in Ontario,
+        and possibly a comparison between other Canadian provinces. Topics of interest that I am hoping to cover are case counts per PHU in Ontario over time,
+        vaccination rates compared between Ontario cities/PHUs, case count comparisons between Ontario and other provinces, etc. These visualizations will be used to uncover
+        persisting trends and give an overall analysis of how Ontario has fared the pandemic up to this point. We'll also use this compare between cities/PHUs how they each have
+        fared the pandemic in comparison to each other.</p>
+    </div>
+
     </div>
 
 

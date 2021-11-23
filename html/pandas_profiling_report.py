@@ -22,5 +22,5 @@ def generate_report(num_measures, upload_path, df, fileName) -> bool:
     collectionName = os.path.splitext(fileName)[0]
     reportHTML = upload_path + "/" + collectionName + "_report.html"
     report_file = profileReport.to_file(reportHTML)
-    #webbrowser.open_new_tab(reportHTML)
+    # webbrowser.open_new_tab(reportHTML)
     return True
