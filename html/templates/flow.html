@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Sample Project{% endblock%}
+
+{% block content %}
+
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Flow or Neural Networks</a>
+    </li>
+</ul>
+
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            What Is a Neural Network?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> A neural network is a collection of neurons that take input and, in conjunction with information from other nodes, develop output without programmed rules. Essentially, they solve problems through trial and error.</p><br>
+                            <p> Neural networks are based on human and animal brains. While neural networks are advanced enough to beat human opponents at games like chess and Go, they lack the cognitive abilities of a human toddler and most animals.</p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Neural Network Elements
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> A neural network is made up of densely connected processing nodes, similar to neurons in the brain. Each node may be connected to different nodes in multiple layers above and below it. These nodes move data through the network in a feed-forward fashion, meaning the data moves in only one direction. The node “fires” like a neuron when it passes information to the next node.</p><br>
+                             <p> A simple neural network has an input layer, output layer and one hidden layer between them. A network with more than three layers, including the input and output, is known as a deep learning network. In a deep learning network, each layer of nodes trains on data based on the output from the previous layer. The more layers, the greater the ability to recognize more complex information — based on data from the previous <layers class=""></layers></p><br>
+                             <p> The network makes decisions by assigning each connected node to a number known as a “weight.” The weight represents the value of information assigned to an individual node (i.e., how helpful it is in correctly classifying information). When a node receives information from other nodes, it calculates the total weight or value of the information. If the number exceeds a certain threshold, the information is passed onto the next layer. If the weight is below the threshold, the information is not passed on.</p><br>
+                             <p> In a newly formed neural network, all weights and thresholds are set to random numbers. As training data is fed into the input layer, the weights and thresholds refine to consistently yield correct outputs.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            How Does a Neural Network Work?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Whether it’s biological or artificial, the power of a neural network stems from the way simple neurons are linked to form a complex system greater than the sum of its parts. </p><br>
+                            <p> Each neuron can make simple decisions based on mathematical calculations. Together, many neurons can analyze complex problems and provide accurate answers. A shallow network is composed of an input, hidden layer and output layer. A deep neural network has more than one hidden layer, which increases the complexity of the problems it can analyze.</p><br>
+                            <p> A neural network learns to complete a task by examining labeled training examples. The samples must be labeled so the network can learn to distinguish between items using visual patterns correlated with the labels.</p><br>
+                            <p> A neural network has three functions:</p><br>
+                            <li> Scoring input</li><br>
+                            <li> Calculating loss </li><br>
+                            <li> Updating the model, which begins the process over again</li><br>
+                            <p> A neural network is a corrective feedback loop, giving more weight to data that supports correct guesses and less weight to data that leads to mistakes. A feature known as backpropagation trains the network to identify correct responses and ignore incorrect responses.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            A Few Concrete Examples
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Neural networks are primarily used to classify and cluster raw, unlabeled, real-world data. They work behind the scenes of familiar technology such as online image comparison or financial decision-making tools for large corporations. A neural network can also look for patterns in web browsing histories to develop recommendations for users.</p><br>
+                            <p> Classification</p><br>
+                            <p> Neural networks typically excel at classification tasks, which require labeled datasets for supervised learning. </p><br>
+                            <p> For example, neural networks can find visual patterns in thousands of photos and consistently apply labels at a fast rate. Through training, they become good at solving complex, confusing problems. The data scientist doesn’t have to program the neural network with characteristics to distinguish between dogs and cats; the neural network learns to distinguish the most important features itself. </p><br>
+                            <p> A neural network can learn to classify any data with a label that correlates to information the network can analyze. </p><br>
+                            <p> Clustering</p><br>
+                            <p> While they excel at identifying differences, neural networks also work well for clustering or detecting similarities. A learning neural network can analyze millions of data points and cluster them according to similarities. This can be applied to images, emails, voice messages or news articles.</p><br>
+                            <p> This capability is likewise useful for identifying anomalies, or things that don’t correspond with group characteristics. For example, clustering is used to identify unusual behavior—such as fraud—by identifying data that doesn’t correspond with the most common actions.
+
+Predictive Analytics: Regressions</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFive">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Predictive Analytics: Regressions
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Classification and clustering create a static prediction, such as an image correlating to the label of a dog. That identification won’t change over time. Regression analysis gives neural networks the power to predict future states based on past events. A future event becomes just another data point. </p><br>
+                            <p> For example, the neural network is able to read a string of numbers and predict the next number most likely to occur. It can apply the same analysis to more complex events, such as predicting when a customer may leave a store or when a piece of manufacturing equipment is likely to fail. </p><br>
+                            <p> Regression analysis forms the basis for predictive analytics. By using regression analysis, a data scientist can model the relationship between a dependent variable (the outcome) and one or more independent variables (the input). Regression analysis will reveal any significant relationships between the independent variables and the dependent variable, as well as the strength or weight of that impact. In other words, when the independent variables change, how much and in what way will the dependent variable change?</p><br>
+                            <p> A basic neural network uses linear regression to manage one input and one output. Multiple linear regression comes into play with many input variables. In this case, each node of the network performs multiple linear regression, weighing each data point as it moves through the layers. The net tests the inputs as it tries to reduce error.</p><br>
+                            <p> Each node acts as a switch to allow or block the input of the nodes around it through the network. Non-linear regression moves the input through the network until it reaches the final layer of the net.</p><br>
+                            <p> Neural networks use techniques such as gradient descent and backpropagation to refine their algorithms and find the optimal model for the regression.</p><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingSix">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Application of Neural Networks
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Neural networks are integral to the development of machine learning and artificial intelligence applications. At this point, they don’t approach the cognitive abilities of a 4-year-old child. But, they are being used in self-driving cars, facial recognition, language translations and even artistic endeavors such as creating new colors.</p><br>
+                            <p> The growth of artificial intelligence has been fueled by the lower cost of cloud computing and graphics processing units to manage the flow of images for training. The widespread availability of electronic images and other data already tagged with information makes training easier and faster.</p><br>
+                            <p> The capabilities to classify, cluster and make predictive decisions have boosted the integration of neural networks in science research, advertising, e-commerce, customer service, preventive maintenance and many other disciplines. Neural networks scan images of the night sky looking for new astronomical details. Messaging filters intelligently separate useful and unwanted emails and voice messages. Linked with sensors, a predictive analytics system can predict when a hydraulic pump on a manufacturing machine will need to be serviced before it fails.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+{% endblock %}

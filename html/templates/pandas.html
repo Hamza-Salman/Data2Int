@@ -15,6 +15,16 @@
                aria-controls="pills-description" aria-selected="false">Description</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profiling"
+               role="tab"
+               aria-controls="pills-profiling" aria-selected="false">Pandas Profiler</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-dataframe-tab" data-toggle="pill" href="#pills-dataframe"
+               role="tab"
+               aria-controls="pills-dataframe" aria-selected="false">Data Frames</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
                role="tab"
                aria-controls="pills-links" aria-selected="false">Links</a>
@@ -24,7 +34,7 @@
     <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
              aria-labelledby="pills-description-tab">
-            <p>Pandas is a Python library used to analyze data and work with data sets. The name is derived from both "Panel Data" and "Python Data Analysis".</p>
+            <p>Pandas is a Python library used to analyze data and work with data sets. The name is derived from both "Panel Data" and "Python Data Analysis". <small>[1]</small></p>
 
             <p>Pandas is used to cleanse bad data sets, find correlations, and analyze the dataset using both Data Frames and Series.</p>
 
@@ -58,11 +68,247 @@
 
             <p>Another concept in Pandas are called <strong>DataFrames</strong>. These act similarly to tables and are closely related to Series, much like
                 a column-table relationship in relational databases and are multidimensional arrays. Big data sets can be easily stored inside a Series structure,
-                and the library supports direct conversion from common file types such as both JSON and CSV extensions. The <i>info()</i> method can be used to
+                and the module supports direct conversion from common file types such as both JSON and CSV extensions. The <i>info()</i> method can be used to
                 print info about the dataset, such as total number of columns, rows, non-null values in each column, and datatype of each column, which is extremely
                 useful for knowing if the dataset needs more cleanup.</p>
-        </div>
 
+            <small>Source: [1] <a target="_blank" href="https://www.w3schools.com/python/pandas/pandas_intro.asp">W3Schools - Pandas Introduction</a></small>
+
+        </div>
+        <div class="tab-pane fade" id="pills-profiling" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <p>This module works in conjunction with the Pandas library, and creates a detailed
+            profile report of your dataset. The following information is generated when using
+            the <i>df.profile_report()</i>function:</p>
+
+            <ul>
+                <li>checks the datatypes of the columns</li>
+                <li>Any unique, missing, or frequently occurring values</li>
+                <li>Any duplicate rows of data</li>
+                <li>Quantile statistics</li>
+                <li>mean, median, mode, standard deviation, coefficient of variance</li>
+                <li>creates histograms</li>
+                <li>Underscores correlations between variables within the dataset</li>
+                <li>A textual review of the dataset <small>[1]</small></li>
+            </ul>
+
+            <p>Here is a sample dataset and a corresponding generated report from that dataset:</p>
+
+            <a target="_blank" href="/templates/resources/assignment2.csv">data set</a><br/>
+            <a target="_blank" href="/templates/resources/assignment2_report.html">report</a>
+
+            <pre class="command-line language-bash" data-user="root" data-host="localhost" tabindex="0">
+                <code class="language-bash">
+                    <span class="command-line-prompt">
+                        <span data-user="root" data-host="localhost"></span>
+                        <span class="token builtin class-name">pip</span> install pandas-profiling
+                    </span>
+                </code>
+            </pre><br>
+
+            <p>To use the pandas-profiling module, use the following command in your scripts:</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas_profiling as pp
+
+                    </script>
+                </code>
+            </pre><br>
+
+            <p>Here is an example of how to generate a report:</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import numpy as np
+import pandas as pd
+from uploadData import upload
+from pandas_profiling import ProfileReport
+import pandas as pd
+import webbrowser
+from pymongo import MongoClient
+import os
+
+
+def generate_report(num_measures, upload_path, df, fileName) -> bool:
+    if (df.empty):
+        print("Dataframe is empty")
+        return False
+
+    _title = fileName + " Profiling Report"
+    if num_measures <= 5:
+        profileReport = ProfileReport(df, title=_title, explorative=True)
+    else:
+        profileReport = ProfileReport(df, title=_title, minimal=True)
+
+    collectionName = os.path.splitext(fileName)[0]
+    reportHTML = upload_path + "/" + collectionName + "_report.html"
+    report_file = profileReport.to_file(reportHTML)
+    # webbrowser.open_new_tab(reportHTML)
+    return True
+
+                    </script>
+                </code>
+            </pre><br>
+
+            <small>[1] Source: <a target="_blank" href="https://pandas-profiling.github.io/pandas-profiling/docs/master/rtd/pages/introduction.html">Pandas-Profiling: Introduction</a></small>
+
+
+        </div>
+        <div class="tab-pane fade" id="pills-dataframe" role="tabpanel" aria-labelledby="pills-dataframe-tab">
+
+            <h3>Creating a DataFrame</h3>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+
+                        # multi-dimensional array of data
+                        prices = [[200, 354], [514, 341], [460, 620]]
+
+                        # Specify headers for the table columns and rows
+                        cities = ["Toronto", "Vancouver", "New York"]
+                        airlines = ["Air Canada", "WestJet"]
+
+                        # Create data frame, and print to the console
+                        df = p.DataFrame(prices, index=cities, columns=airlines)
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong>
+            <img src="/html/templates/resources/dataframe-creating.png" alt="output of above code">
+
+            <h3>Missing data</h3>
+
+            <p>If you encounter datasets with missing data, you can use the numpy module to fill in any cells with NaN
+            as a value to what you choose, though most commonly, zero is recommended to avoid contaminating the data.</p>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Replace all NaN values with 0
+                        df.fillna(0)
+
+                        # print
+                        print(df)
+
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-fillna.png" alt="output of above code">
+
+            <p>You can also use the interpolate() function to interpolate these values.</p>
+
+            <p>The other option as well is to drop any NaN values</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Drop all NaN values
+                        df.dropna()
+
+                        # print
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-dropna.png" alt="output of above code">
+
+            <h3>Iteration</h3>
+            <p>You can also loop through a dataset's rows or columns as well. Iterating though a data frame's columns,
+                is fairly straight forward. You can treat the DataFrame as a list, and select a particular index to select a certain column.
+                To iterate and select rows, treat the dataframe like a 2D array and use <i>.iterrows()</i> to loop through.
+            </p>
+
+            <h4>Columns</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                            'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                            'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # export the columns to a list
+                    columns = list(df)
+
+                    for x in columns:
+                        # printing the second column in the list
+                        print(df[x][1])
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-itercols.png" alt="output of above code">
+
+            <h4>Rows</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                    'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                    'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # iterating over rows using iterrows() function
+                    for x, y in df.iterrows():
+                        print(x, y)
+                        print()
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-iterrows.png" alt="output of above code">
+
+            <br/><br/><small>Source: <a target="_blank" href="https://towardsdatascience.com/a-simple-guide-to-pandas-dataframes-b125f64e1453">Towards Data Science: A Simple Guide to Pandas DataFrames</a></small>
+        </div>
         <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
 
             <div class="accordion" id="accordionGuide-links">

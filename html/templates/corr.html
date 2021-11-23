@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}Sample Project{% endblock%}
+
+{% block content %}
+
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Correlations</a>
+    </li>
+</ul>
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            What is correlation analysis?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> Correlation analysis in research is a statistical method used to measure the strength of the linear relationship between two variables and compute their association. Simply put - correlation analysis calculates the level of change in one variable due to the change in the other. A high correlation points to a strong relationship between the two variables, while a low correlation means that the variables are weakly related.</p><br>
+                            <p> When it comes to market research, researchers use correlation analysis to analyze quantitative data collected through research methods like surveys and live polls. They try to identify the relationship, patterns, significant connections, and trends between two variables or datasets. There is a positive correlation between two variabls when an increase in one variable leads to the increase in the other. On the other hand, a negative correlation means that when one variable increases, the other decreases and vice-versa.</p><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Example of correlation analysis
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Correlation between two variables can be either a positive correlation, a negative correlation, or no correlation. Let's look at examples of each of these three types:</p><br>
+                            <li> Positive correlation: A positive correlation between two variables means both the variables move in the same direction. An increase in one variable leads to an increase in the other variable and vice versa.
+For example, spending more time on a treadmill burns more calories.</li><br>
+                            <li> Negative correlation: A negative correlation between two variables means that the variables move in opposite directions. An increase in one variable leads to a decrease in the other variable and vice versa.
+For example, increasing the speed of a vehicle decreases the time you take to reach your destination.</li><br>
+                            <li> Weak/Zero correlation: No correlation exists when one variable does not affect the other.
+For example, there is no correlation between the number of years of school a person has attended and the letters in his/her name.</li><br>
+
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Uses of correlation analysis
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Correlation analysis is used to study practical cases. Here, the researcher can't manipulate individual variables. For example, correlation analysis is used to measure the correlation between the patient's blood pressure and the medication used. Marketers use it to measure the effectiveness of advertising. Researchers measure the increase/decrease in sales due to a specific marketing campaign.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Advantages of correlation analysis
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> The advantages of correlation analysis are:</p><br>
+                            <li> Observe relationships: A correlation helps to identify the absence or presence of a relationship between two variables. It tends to be more relevant to everyday life.</li><br>
+                            <li> A good starting point for research: It proves to be a good starting point when a researcher starts investigating relationships for the first time.</li><br>
+                            <li> Uses for further studies: Researchers can identify the direction and strength of the relationship between two variables and later narrow the findings down in later studies.</li><br>
+                            <li> Simple metrics: Research findings are simple to classify. The findings can range from -1.00 to 1.00. There can be only three potential broad outcomes of the analysis.</li><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% block title %}Data Frame{% endblock %}
+
+{% block content %}
+
+    <h1>Data Frame</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <hr>
+
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <p>Another concept in Pandas are called <strong>DataFrames</strong>. These act similarly to tables and are
+                closely related to Series, much like
+                a column-table relationship in relational databases and are multidimensional arrays. Big data sets can
+                be easily stored inside a Series structure,
+                and the library supports direct conversion from common file types such as both JSON and CSV extensions.
+                The <i>info()</i> method can be used to
+                print info about the dataset, such as total number of columns, rows, non-null values in each column, and
+                datatype of each column, which is extremely
+                useful for knowing if the dataset needs more cleanup.</p>
+
+            <h3>Creating a DataFrame</h3>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+
+                        # multi-dimensional array of data
+                        prices = [[200, 354], [514, 341], [460, 620]]
+
+                        # Specify headers for the table columns and rows
+                        cities = ["Toronto", "Vancouver", "New York"]
+                        airlines = ["Air Canada", "WestJet"]
+
+                        # Create data frame, and print to the console
+                        df = p.DataFrame(prices, index=cities, columns=airlines)
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong>
+            <img src="/html/templates/resources/dataframe-creating.png" alt="output of above code">
+
+            <h3>Missing data</h3>
+
+            <p>If you encounter datasets with missing data, you can use the numpy module to fill in any cells with NaN
+            as a value to what you choose, though most commonly, zero is recommended to avoid contaminating the data.</p>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Replace all NaN values with 0
+                        df.fillna(0)
+
+                        # print
+                        print(df)
+
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-fillna.png" alt="output of above code">
+
+            <p>You can also use the interpolate() function to interpolate these values.</p>
+
+            <p>The other option as well is to drop any NaN values</p>
+
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Drop all NaN values
+                        df.dropna()
+
+                        # print
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-dropna.png" alt="output of above code">
+
+            <h3>Iteration</h3>
+            <p>You can also loop through a dataset's rows or columns as well. Iterating though a data frame's columns,
+                is fairly straight forward. You can treat the DataFrame as a list, and select a particular index to select a certain column.
+                To iterate and select rows, treat the dataframe like a 2D array and use <i>.iterrows()</i> to loop through.
+            </p>
+
+            <h4>Columns</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                            'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                            'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # export the columns to a list
+                    columns = list(df)
+
+                    for x in columns:
+                        # printing the second column in the list
+                        print(df[x][1])
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-itercols.png" alt="output of above code">
+
+            <h4>Rows</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                    'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                    'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # iterating over rows using iterrows() function
+                    for x, y in df.iterrows():
+                        print(x, y)
+                        print()
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/html/templates/resources/dataframe-iterrows.png" alt="output of above code">
+
+            <br/><br/><small>Source: <a target="_blank" href="https://towardsdatascience.com/a-simple-guide-to-pandas-dataframes-b125f64e1453">Towards Data Science: A Simple Guide to Pandas DataFrames</a></small>
+
+
+        </div>
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+            <div class="accordion" id="accordionGuide-links">
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Geeks for Geeks - Data Frames
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.w3schools.com/python/pandas/default.asp">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>Geeks for Geeks free online tutorial and documentation on Data Frames.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                Python Pandas Tutorial - DataFrame and Series Basics
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.youtube.com/watch?v=zmdjNSmRXF4">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>A YouTube tutorial on using DataFrames in the Pandas library.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -16,7 +16,7 @@
         <li class="nav-item">
             <a class="nav-link" id="pills-visualizations-tab" data-toggle="pill" href="#pills-visualizations"
                role="tab"
-               aria-controls="pills-visualizations" aria-selected="false">Creating Visualizations</a>
+               aria-controls="pills-links" aria-selected="false">Visualizations</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
@@ -53,7 +53,7 @@
 
             <p>However, note that the visualization won't actually be displayed on the screen until you call <b>show()</b></p>
 
-            <br>
+            <small>Source: <a target="_blank" href="https://towardsdatascience.com/data-visualization-with-bokeh-in-python-part-one-getting-started-a11655a467d4">Towards Data Science: Data Visualization with Bokeh</a></small>
         </div>
         <div class="tab-pane fade" id="pills-visualizations" role="tabpanel" aria-labelledby="pills-visualizations-tab">
             <h3>Visualizations</h3>
@@ -62,179 +62,131 @@
             The bokeh library offers the following visualizations to create:</p>
 
             <ul>
-                <li>scatter markers</li>
-                <li>scatter plots</li>
                 <li>line graphs</li>
                 <li>bar graphs</li>
-                <li>box plots</li>
-                <li>histograms</li>
+                <li>scatter plots</li>
+                <li>scatter markers</li>
             </ul>
 
-            <h4>Scatter Markers</h4>
+            <h3>Line Graphs</h3>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    from bokeh.plotting import figure, output_notebook, show
+                    # importing the modules
+                    from bokeh.plotting import figure, output_file, show
 
-                    # output to notebook
-                    output_notebook()
+                    output_file('linegraph.html')
 
-                    # create figure
-                    p = figure(plot_width = 400, plot_height = 400)
+                    # instantiating the figure object
+                    graph = figure(title="My First Line Graph")
 
-                    # add a circle renderer with
-                    # size, color and alpha
-                    p.circle([1, 2, 3, 4, 5], [4, 7, 1, 6, 3],
-                        size = 10, color = "navy", alpha = 0.5)
+                    # coordinates of points
+                    x = [3, 1, 2, 6, 5]
+                    y = [1, 2, 3, 4, 5]
 
-                    # show the results
-                    show(p)
+                    # draw the line using the coordinates, add a legend and line color
+                    graph.line(x, y, legend_label="Legend",
+                    line_color="purple")
+
+                    # output the graph
+                    show(graph)
+
                     </script>
                 </code>
-            </pre><br>
+            </pre>
+            <br>
 
-            <img src="/templates/resources/bokeh-scatter-markers.png" alt="scatter markers drawn using bokeh">
+            <img src="/html/templates/resources/bokeh-line-graph.png" alt="line graph generated using code above">
 
-            <h4>Scatter Plots</h4>
+            <h3>Bar Graphs</h3>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    # import necessary modules
-                    from bokeh.charts import Scatter, output_notebook, show
-                    import pandas as pd
+                    # importing the modules
+                    from bokeh.plotting import figure, output_file, show
 
-                    # output to notebook
-                    output_notebook()
+                    output_file('bargraph.html')
 
-                    # read data in dataframe
-                    df = pd.read_csv(r"D:/kaggle / mcdonald / menu.csv")
+                    # instantiating the figure object
+                    bg = figure(title="My First Bar Graph")
 
-                    # create scatter plot
-                    p = Scatter(df, x = "Carbohydrates", y = "Saturated Fat",
-                        title = "Saturated Fat vs Carbohydrates",
-                        xlabel = "Carbohydrates", ylabel = "Saturated Fat",
-                        color = "orange")
+                    # coordinates of points
+                    x = [3, 1, 2, 6, 5]
+                    y = [1, 2, 3, 4, 5]
 
-                    # show the results
-                    show(p)
+                    # create the vertical bars using the coordinates and set a bar thickness
+                    bg.vbar(x, top=y, width=0.5)
+
+                    # output the bar graph to the browser
+                    show(bg)
+
                     </script>
                 </code>
-            </pre><br>
+            </pre>
+            <br>
 
-            <img src="/templates/resources/bokeh-scatter-plot.png" alt="scatter plot drawn using bokeh">
+            <img src="/html/templates/resources/bokeh-bar-graph.png" alt="bar graph generated using code above">
 
-            <h4>Line Graphs</h4>
+            <h3>Scatter Plots</h3>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    # import modules
-                    from bokeh.plotting import figure, output_notebook, show
+                    from bokeh.plotting import figure, output_file, show
+                    import random
 
-                    # output to notebook
-                    output_notebook()
+                    # webpage to output the visualization to
+                    output_file('scatter.html')
 
-                    # create figure
-                    p = figure(plot_width = 400, plot_height = 400)
+                    # Create a figure object and give it a title
+                    plot = figure(title="My First Scatter Plot")
 
-                    # add a line renderer
-                    p.line([1, 2, 3, 4, 5], [3, 1, 2, 6, 5],
-                        line_width = 2, color = "green")
+                    # plot random 100 points with random x,y coordinates
+                    x = [n for n in range(100)]
+                    y = [random.random() + 1 for n in range(100)]
 
-                    # show the results
-                    show(p)
+                    # plotting the graph
+                    plot.scatter(x, y)
+
+                    # displaying the model
+                    show(plot)
+
                     </script>
                 </code>
-            </pre><br>
+            </pre>
+            <br>
 
-            <img src="/templates/resources/bokeh-line-graph.png" alt="line graph drawn using bokeh">
+            <img src="/html/templates/resources/bokeh-scatter-plot.png" alt="scatter plot generated using code above">
 
-            <h4>Bar Graphs</h4>
+            <h3>Scatter Markers</h3>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
+                        # import modules
+                        from bokeh.plotting import figure, show, output_file
 
-                    # import necessary modules
-                    import pandas as pd
-                    from bokeh.charts import Bar, output_notebook, show
+                        # define a webpage to output the visualization to
+                        output_file('scatter.html')
 
-                    # output to notebook
-                    output_notebook()
+                        # create a scatter plot, defining pixel dimensions for height and width
+                        plot = figure(plot_width=300, plot_height=300)
 
-                    # read data in dataframe
-                    df = pd.read_csv(r"D:/kaggle/mcdonald/menu.csv")
+                        # plot points using coordinates, and define a size, color, and alpha value
+                        plot.circle([5, 4, 3, 2, 1], [8, 0, 9, 6, 7],
+                        size=10, color="red", alpha=0.5)
 
-                    # create bar
-                    p = Bar(df, "Category", values = "Calories",
-                        title = "Total Calories by Category",
-                        legend = "top_right")
+                        # output the results
+                        show(plot)
 
-                    # show the results
-                    show(p)
                     </script>
                 </code>
-            </pre><br>
+            </pre>
+            <br>
 
-            <img src="/templates/resources/bokeh-bar-graph.png" alt="bar graph drawn using bokeh">
-
-            <h4>Box Plots</h4>
-
-            <pre>
-                <code class="language-javascript">
-                    <script type="prism-python">
-                    # import necessary modules
-                    from bokeh.charts import BoxPlot, output_notebook, show
-                    import pandas as pd
-
-                    # output to notebook
-                    output_notebook()
-
-                    # read data in dataframe
-                    df = pd.read_csv(r"D:/kaggle / mcdonald / menu.csv")
-
-                    # create bar
-                    p = BoxPlot(df, values = "Protein", label = "Category",
-                        color = "yellow", title = "Protein Summary (grouped by category)",
-                        legend = "top_right")
-
-                    # show the results
-                    show(p)
-                    </script>
-                </code>
-            </pre><br>
-
-            <img src="/templates/resources/bokeh-box-plot.png" alt="box plot drawn using bokeh">
-
-            <h4>Histograms</h4>
-
-            <pre>
-                <code class="language-javascript">
-                    <script type="prism-python">
-                    # import necessary modules
-                    from bokeh.charts import Histogram, output_notebook, show
-                    import pandas as pd
-
-                    # output to notebook
-                    output_notebook()
-
-                    # read data in dataframe
-                    df = pd.read_csv(r"D:/kaggle / mcdonald / menu.csv")
-
-                    # create histogram
-                    p = Histogram(df, values = "Total Fat",
-                        title = "Total Fat Distribution",
-                        color = "navy")
-
-                    # show the results
-                    show(p)
-                    </script>
-                </code>
-            </pre><br>
-
-            <img src="/templates/resources/bokeh-histogram.png" alt="histogram drawn using bokeh">
+            <img src="/html/templates/resources/bokeh-scatter-markers.png" alt="scatter markers plotted using code above">
 
         </div>
         <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">

@@ -17,8 +17,9 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
 # app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
-app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 # app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
 app.config["MAX_FILE_SIZE"] = 10485760
 
@@ -276,6 +277,11 @@ def clusters():
     return render_template('Clusters.html')
 
 
+@app.route('/Jupyter')
+def jupyter():
+    return render_template('jupyter.html')
+
+
 @app.route('/UsefulResources')
 def useful_resources():
     return render_template('UsefulResources.html')
@@ -361,6 +367,116 @@ def charts():
     return render_template('charts.html')
 
 
+@app.route('/dataframe')
+def dataframe():
+    return render_template('dataframe.html')
+
+
+@app.route('/descriptivestatistics')
+def descriptive_statistics():
+    return render_template('descriptivestatistics.html')
+
+
+@app.route('/histograms')
+def histograms():
+    return render_template('histograms.html')
+
+
+@app.route('/scatterplots')
+def scatterplots():
+    return render_template('scatterplots.html')
+
+
+@app.route('/coefficientofvariance')
+def coefficient_of_variance():
+    return render_template('coefficientofvariance.html')
+
+
+@app.route('/standarddeviation')
+def standard_deviation():
+    return render_template('standarddeviation.html')
+
+
+@app.route('/missingdata')
+def missing_data():
+    return render_template('missingdata.html')
+
+
+@app.route('/outliers')
+def outliers():
+    return render_template('outliers.html')
+
+
+@app.route('/social')
+def social():
+    return render_template('social.html')
+
+
+@app.route('/cost')
+def cost():
+    return render_template('cost.html')
+
+
+@app.route('/customer')
+def customer():
+    return render_template('customer.html')
+
+
+@app.route('/quality')
+def quality():
+    return render_template('quality.html')
+
+
+@app.route('/productionanalysis')
+def production_analysis():
+    return render_template('productionanalysis.html')
+
+
+@app.route('/market')
+def market():
+    return render_template('market.html')
+
+
+@app.route('/corr')
+def corr():
+    return render_template('corr.html')
+
+
+@app.route('/aggr')
+def aggr():
+    return render_template('aggr.html')
+
+
+@app.route('/rank')
+def rank():
+    return render_template('rank.html')
+
+
+@app.route('/time')
+def time():
+    return render_template('time.html')
+
+
+@app.route('/mmap')
+def mmap():
+    return render_template('mmap.html')
+
+
+@app.route('/flow')
+def flow():
+    return render_template('flow.html')
+
+
+@app.route('/regr')
+def regr():
+    return render_template('regr.html')
+
+
+@app.route('/sem')
+def sem():
+    return render_template('sem.html')
+
+
 @app.route("/donorschoose/projects")
 def donorschoose_projects():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
@@ -393,6 +509,7 @@ def donorschoose_mapdata():
     # print(json_mapdata)
     return json_mapdata
 
+
 @app.route("/donorschoose/mapdataupdate")
 def donorschoose_mapadata_geoname():
 
@@ -409,6 +526,7 @@ def donorschoose_mapadata_geoname():
 
     return json_mapdata_final
 
+
 ####################################################################################################################
 @app.route("/donorschoose/scatterplot")
 def donorschoose_scatterplot():
@@ -424,6 +542,7 @@ def donorschoose_scatterplot():
     connection.close()
     # print(json_mapdata)
     return json_data
+
 
 ####################################################################################################################
 @app.route("/donorschoose/scatterplotmeasures")
@@ -503,6 +622,8 @@ def donorschoose_scatterplot_measures():
     json_data = json.dumps(data, default=json_util.default)
     connection.close()
     return json_data
+
+
 ####################################################################################################################
 @app.route("/donorschoose/scatterplotdimensions")
 def donorschoose_scatterplot_dimensions():
@@ -515,7 +636,7 @@ def donorschoose_scatterplot_dimensions():
     print(json_data)
     return json_data
 
-####################################################################################################################
 
+####################################################################################################################
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

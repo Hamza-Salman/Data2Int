@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Sample Project{% endblock%}
+
+{% block content %}
+
+
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="pills-pycharm-tab" data-toggle="pill" href="#pills-pycharm" role="tab"
+           aria-controls="pills-pycharm" aria-selected="false">Regressions</a>
+    </li>
+</ul>
+
+<div class="tab-pane fade show active" id="pills-pycharm" role="tabpanel" aria-labelledby="pills-pycharm-tab">
+        <hr/>
+
+        <div class="accordion" id="accordionGuide">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            What is Regression Analysis?
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionGuide">
+                    <div class="card-body">
+                        <div class="description">
+                            <p> Regression analysis is a set of statistical methods used for the estimation of relationships between a dependent variable and one or more independent variables. It can be utilized to assess the strength of the relationship between variables and for modeling the future relationship between them.</p><br>
+                            <p> Regression analysis includes several variations, such as linear, multiple linear, and nonlinear. The most common models are simple linear and multiple linear. Nonlinear regression analysis is commonly used for more complicated data sets in which the dependent and independent variables show a nonlinear relationship.</p><br>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Regression Analysis – Linear Model Assumptions
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Linear regression analysis is based on six fundamental assumptions:</p><br>
+                            <li> The dependent and independent variables show a linear relationship between the slope and the intercept.</li><br>
+                            <li> The independent variable is not random.</li><br>
+                            <li> The value of the residual (error) is zero.</li><br>
+                            <li> The value of the residual (error) is constant across all observations.</li><br>
+                            <li> The value of the residual (error) is not correlated across all observations.</li><br>
+                            <li> The residual (error) values follow the normal distribution.</li><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                           Regression Analysis – Simple Linear Regression
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Simple linear regression is a model that assesses the relationship between a dependent variable and an independent variable. The simple linear model is expressed using the following equation:</p><br>
+                            <p> <strong>Y = a + bX + ϵ</strong></p><br>
+                            <p> Where:</p><br>
+                            <li> Y – Dependent variable</li><br>
+                            <li> X1, X2, X3 – Independent (explanatory) variables</li><br>
+                            <li> a – Intercept</li><br>
+                            <li> b, c, d – Slopes</li><br>
+                            <li> ϵ – Residual (error)</li><br>
+                            <p> Multiple linear regression follows the same conditions as the simple linear model. However, since there are several independent variables in multiple linear analysis, there is another mandatory condition for the model:</p><br>
+                            <li> Non-collinearity: Independent variables should show a minimum correlation with each other. If the independent variables are highly correlated with each other, it will be difficult to assess the true relationships between the dependent and independent variables.</li><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Regression Tools
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="guide">
+
+                            <p> Excel remains a popular tool to conduct basic regression analysis in finance, however, there are many more advanced statistical tools that can be used.</p><br>
+                            <p> Python and R are both powerful coding languages that have become popular for all types of financial modeling, including regression. These techniques form a core part of data science and machine learning where models are trained to detect these relationships in data.</p><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}

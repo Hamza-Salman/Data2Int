@@ -30,7 +30,7 @@
              aria-labelledby="pills-description-tab">
             <p>Matplotlib is a Python library written to help create visualizations. Unlike other similar libraries, Matplotlib
             is specifically written for Python. It is open source and there have been several contributors that have written portions
-            in C, Objective-C, and JavaScript.</p>
+            in C, Objective-C, and JavaScript.<small>[1]</small></p>
 
             <p>To install the Matplotlib library, install onto your version of Python from command line using the following
                 command:</p>
@@ -63,7 +63,12 @@
                 and is the overall window or page on which everything is drawn.</p>
 
             <p>Axes are individual plots or graphs and are flexible components for creating sub-plots. A given figure may contain
-                many axes but an axes can only belong to only figure ultimately..</p>
+                many axes but an axes can only belong to only figure ultimately..<small>[2]</small></p>
+
+
+            <small>Sources: <br>[1]:<a target="_blank" href="https://www.w3schools.com/python/matplotlib_intro.asp">W3Schools - Matplotlib Tutorial Intro</a><br/>
+            [2]:<a target="_blank" href="https://www.w3schools.com/python/matplotlib_intro.asp">Geeks For Geeks - Matplotlib Tutorial</a>
+            </small>
 
         </div>
         <div class="tab-pane fade" id="pills-visualizations" role="tabpanel" aria-labelledby="pills-visualizations-tab">
@@ -79,7 +84,6 @@
                 <li>line graphs</li>
                 <li>bar graphs</li>
                 <li>histograms</li>
-                <li>3D plots</li>
             </ul>
 
             <h4>Pie Charts</h4>
@@ -87,151 +91,141 @@
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    import matplotlib.pyplot as plt
+                    import matplotlib.pyplot as pchart
 
-                        # data to display on plots
-                        x = [1, 2, 3, 4]
+                        # plot points
+                        x = [8, 9, 2, 3]
 
-                        # this will explode the 1st wedge, i.e. will separate the 1st wedge from the chart
+                        # make first wedge pop out (explode)
                         e  =(0.1, 0, 0, 0)
 
                         # This will plot a simple pie chart
-                        plt.pie(x, explode = e)
+                        pchart.pie(x, explode = e)
 
                         # Title to the plot
-                        plt.title("Pie chart")
-                        plt.show()
+                        pchart.title("My first pie chart")
+
+                        # Display the chart
+                        pchart.show()
                     </script>
                 </code>
             </pre><br>
 
-            <img src="/templates/resources/matplotlib-pie-chart.png" alt="pie chart drawn using matplotlib"><br>
+            <img src="/templates/resources/matplotlib-pie-chart.png" alt="pie chart created from above code in matplotlib">
 
             <h4>Scatter Plots</h4>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    import matplotlib.pyplot as plt
+					import matplotlib.pyplot as splot
 
-                        # data to display on plots
-                        x = [3, 1, 3, 12, 2, 4, 4]
-                        y = [3, 2, 1, 4, 5, 6, 7]
+						# plot coordinate points
+						x = [5, 4.2, 2, 3, 6]
+						y = [8.1, 2, 9, 1, 7.5]
 
-                        # This will plot a simple scatter chart
-                        plt.scatter(x, y)
+						# This will plot a simple scatter chart
+						plot.scatter(x, y)
 
-                        # Adding legend to the plot
-                        plt.legend("A")
+						# Adding legend to the plot
+						splot.legend("A")
 
-                        # Title to the plot
-                        plt.title("Scatter chart")
-                        plt.show()
+						# Title to the plot
+						splot.title("My first scatter plot")
+
+						# display the plot
+						splot.show()
                     </script>
                 </code>
             </pre><br>
 
-            <img src="/templates/resources/matplotlib-scatterplot.png" alt="scatter plot drawn using matplotlib"><br>
+            <img src="/templates/resources/matplotlib-scatterplot.png" alt="scatter plot created from above code in matplotlib">
 
             <h4>Line Graphs</h4>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    import matplotlib.pyplot as plt
+                    import matplotlib.pyplot as lg
 
-                        # data to display on plots
-                        x = [3, 1, 3]
-                        y = [3, 2, 1]
+                        # plot coordinate points
+                        x = [8, 1, 9]
+                        y = [4, 1, 6]
 
-                        # This will plot a simple line chart with elements of x as x axis and y as y axis
-                        plt.plot(x, y)
-                        plt.title("Line Chart")
+                        # Create a line graph using the x and y arrays as axes
+                        lg.plot(x, y)
 
-                        # Adding the legends
-                        plt.legend(["Line"])
-                        plt.show()
+                        # Give the graph a title
+                        lg.title("My first line graph")
+
+                        # include a legend
+                        lg.legend(["Line"])
+
+                        # Display the graph
+                        lg.show()
                     </script>
                 </code>
             </pre><br>
 
-            <img src="/templates/resources/matplotlib-line-chart.png" alt="line graph drawn using matplotlib"><br>
+            <img src="/templates/resources/matplotlib-line-chart.png" alt="line graph created from above code in matplotlib">
 
             <h4>Bar Graphs</h4>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    import matplotlib.pyplot as plt
+                    import matplotlib.pyplot as bg
 
-                        # data to display on plots
-                        x = [3, 1, 3, 12, 2, 4, 4]
-                        y = [3, 2, 1, 4, 5, 6, 7]
+                        # plot coordinate points
+                        x = [8, 2, 4, 6, 3]
+                        y = [7, 1, 3, 8, 2]
 
-                        # This will plot a simple bar chart
-                        plt.bar(x, y)
+                        # Create a bar graph
+                        bg.bar(x, y)
 
-                        # Title to the plot
-                        plt.title("Bar Chart")
+                        # Give the graph a title
+                        bg.title("My first bar graph")
 
-                        # Adding the legends
-                        plt.legend(["bar"])
-                        plt.show()
+                        # include a legend
+                        bg.legend(["bar"])
+
+                        # Display the graph
+                        bg.show()
                     </script>
                 </code>
             </pre><br>
 
-            <img src="/templates/resources/matplotlib-bar-graph.png" alt="bar graph drawn using matplotlib"><br>
+            <img src="/templates/resources/matplotlib-bar-graph.png" alt="bar graph created from above code in matplotlib">
 
             <h4>Histograms</h4>
 
             <pre>
                 <code class="language-javascript">
                     <script type="prism-python">
-                    import matplotlib.pyplot as plt
+                    import matplotlib.pyplot as hgram
 
-                        # data to display on plots
-                        x = [1, 2, 3, 4, 5, 6, 7, 4]
+    # data to display on plots
+    x = [ 5, 6, 2, 8, 3, 9 ]
 
-                        # This will plot a simple histogram
-                        plt.hist(x, bins = [1, 2, 3, 4, 5, 6, 7])
+    # data to display on plots
+    x = [5, 6, 2, 8, 3, 9]
 
-                        # Title to the plot
-                        plt.title("Histogram")
+    # This will plot a simple histogram
+    hgram.hist(x, bins=4, edgecolor="black")
 
-                        # Adding the legends
-                        plt.legend(["bar"])
-                        plt.show()
+    # Give a title to the histogram
+    hgram.title( "My first histogram" )
+
+    # include a legend
+    hgram.legend(["bar"])
+
+    # Display the histogram
+    hgram.show()
                     </script>
                 </code>
             </pre><br>
 
-            <img src="/templates/resources/matplotlib-histogram.png" alt="histogram drawn using matplotlib"><br>
-
-            <h4>3D Plots</h4>
-
-            <pre>
-                <code class="language-javascript">
-                    <script type="prism-python">
-                    import matplotlib.pyplot as plt
-
-                        x = [1, 2, 3, 4, 5]
-                        y = [1, 4, 9, 16, 25]
-                        z = [1, 8, 27, 64, 125]
-
-                        # Creating the figure object
-                        fig = plt.figure()
-
-                        # keeping the projection = 3d
-                        ax = plt.axes(projection = '3d')
-
-                        # creates the 3d plot
-                        ax.plot3D(z, y, x)
-                    </script>
-                </code>
-            </pre><br>
-
-            <img src="/templates/resources/matplotlib-3d-plot.png" alt="3D plot drawn using matplotlib"><br>
+            <img src="/templates/resources/matplotlib-histogram.png" alt="histogram created from above code in matplotlib">
 
         </div>
         <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">

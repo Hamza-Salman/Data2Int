@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %}Scatter Plots{% endblock %}
+
+{% block content %}
+
+    <h1>Scatter Plots</h1>
+
+    <hr>
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description"
+               role="tab"
+               aria-controls="pills-description" aria-selected="false">Description</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-links-tab" data-toggle="pill" href="#pills-links"
+               role="tab"
+               aria-controls="pills-links" aria-selected="false">Links</a>
+        </li>
+    </ul>
+
+    <hr>
+
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-description" role="tabpanel"
+             aria-labelledby="pills-description-tab">
+            <img src="/templates/resources/scatterplot.png" alt="scatterplot" align="right"><small>[1]</small></p>
+
+            <p>Also known as a scatter charts or a scatter graph, scatter plot is a visualization that utilizes dots to
+                depict values for two different numeric variables. Each dot has an x (plotted horizontally) and a y value (plotted vertically)
+                that together make up a single point of data. These charts are particularly useful in recognizing
+                correlations between two variables in a set.</p>
+
+            <p>"A scatter plot's primary use is to observe and show relationships between two numeric variables. The dots
+                in a scatter plot not only report the values of individual data points, but also patterns when the data are taken as
+                a whole."<small>[2]</small></p>
+
+            <img src="/templates/resources/scatterplot.gif" alt="scatterplot with a line of best fit"><small>[3]</small>
+            <p>A common best practice with scatter plots is to make use of a trend line or line of best fit when looking at predictive or
+                correlational relationship between variables. A trend line is particularly useful to the plot displaying how the
+                the variables are similar, even in value; this gives a visual indication of how closely related the correlation between
+                the two variables is. They also highlight outlier data a lot more easily as they generally fall
+                further away from the range of the line of best fit.</p>
+
+            <small>Sources: <br>[1] Image from: <a target="_blank" href="https://seaborn.pydata.org/generated/seaborn.scatterplot.html">Seaborn.scatterplot</a>
+                <br>[2] <a target="_blank" href="https://chartio.com/learn/charts/what-is-a-scatter-plot/">Chartio - A Complete Guide to Scatter Plots</a>
+                <br>[3] Image from: <a target="_blank" href="http://www.math.utep.edu/Faculty/yi/CPS5195f09/victor.pdf">Flexible smoothing with B-splines and Penalties or P-splines</a>
+            </small>
+        </div>
+        <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+
+            <div class="accordion" id="accordionGuide-links">
+
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                               Chartio - A Complete Guide to Scatter Plots
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://chartio.com/learn/charts/what-is-a-scatter-plot/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An article going over the use of scatter plots in data science.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                W3Schools - Machine Learning - Scatter Plots
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.w3schools.com/python/python_ml_scatterplot.asp">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>An article using scatter plots in pyplot and incorporating machine learning</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+{% endblock %}
