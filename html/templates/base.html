@@ -8,12 +8,13 @@
 
     <title>Data to Intelligence - {% block title %}{% endblock %}</title>
 
+
+
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     
-    <!-- JQuery -->
-    <script src="/static/lib/js/jquery.min.js"></script>
+ 
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/pre-load.css">
     <link rel="stylesheet" href="/static/css/prism.css">
@@ -25,6 +26,7 @@
             integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
             crossorigin="anonymous"></script>
 
+            
 </head>
 
 <body>
@@ -182,35 +184,31 @@
                     Analysis</a>
                 <ul class="collapse list-unstyled" id="dataSubmenu">
                     <li class="active">
-                        <a href="{{ url_for('corr') }}">Correlations</a>
+                        <a href="{{ url_for('customer') }}">Correlations</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('aggr') }}">Aggregation</a>
+                        <a href="{{ url_for('customer') }}">SEM</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('rank') }}">Ranking</a>
+                        <a href="{{ url_for('social') }}">Social Media</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('time') }}">TimeSeries</a>
+                        <a href="{{ url_for('cost') }}">Cost Analysis</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('mmap') }}">Maps</a>
+                        <a href="{{ url_for('production_analysis') }}">Production Analysis</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('flow') }}">Flow or Neural Networks</a>
+                        <a href="{{ url_for('quality') }}">Quality Analysis</a>
                     </li>
 
                     <li class="active">
-                        <a href="{{ url_for('regr') }}">Regressions</a>
-                    </li>
-
-                    <li class="active">
-                        <a href="{{ url_for('sem') }}">SEM</a>
+                        <a href="{{ url_for('market') }}">Market Analysis</a>
                     </li>
                 </ul>
             </li>
@@ -388,7 +386,7 @@
         <div class="main">
             {% block content %}
             {% endblock %}
-
+       
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
                     crossorigin="anonymous"></script>
@@ -399,10 +397,9 @@
                     integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
                     crossorigin="anonymous"></script>
 
-            <!-- jQuery CDN - Slim version (=without AJAX) -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                    crossorigin="anonymous"></script>
+            
+            <!-- JQuery -->
+             <script src="/static/lib/js/jquery.min.js"></script>
             <!-- Popper.JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
                     integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"

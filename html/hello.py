@@ -1,9 +1,12 @@
 import json
 import os
+import sys
+import logging
 
 from bson import json_util
 from flask import Flask, render_template, request, redirect, url_for
 from pymongo import MongoClient
+from pandas_profiling_report import generate_report
 from prepareData import getPreviewData
 from prepareData import fetchData, getColumnsName
 from jsonUpload import json_upload
@@ -11,32 +14,46 @@ from uploadData import upload
 from virusScanFile import virus_scan
 from cleanDatabase import clean_database
 from analyzeData import analyze_data
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 app = Flask(__name__)
+gunicorn_error_logger = logging.getLogger('gunicorn.error')
+app.logger.handlers.extend(gunicorn_error_logger.handlers)
+app.logger.setLevel(logging.DEBUG)
+
 
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
 # app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
-# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+# app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
+# app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
+app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
 MONGODB_PORT = 27017
 DBS_NAME = 'donorschoose'
 COLLECTION_NAME = 'projects'
-FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True, 'total_donations': True, '_id': False}
+FIELDS = {'school_state': True, 'resource_type': True, 'poverty_level': True, 'date_posted': True,
+          'total_donations': True, '_id': False}
 file_name = ""
 column_list = {}
-
+manual_vars = []
+measure_list = ""
+# sys.stdout = open("/var/www/data2int.com/html/outputconsole.txt", "a")
 
 # def max_filesize(filesize):
 #     if int(filesize) <= app.config["MAX_FILE_SIZE"]:
 #         return true
 #     else:
 #         return false
+
 
 @app.route('/')
 def home():
@@ -65,21 +82,26 @@ def upload_file():
         extension = os.path.splitext(uploaded_file.filename)[1]
         filename = os.path.basename(uploaded_file.filename)
         collectionName = os.path.splitext(uploaded_file.filename)[0]
-        global file_name
-        file_name = collectionName
+        set_filename(collectionName)
 
         # Sanitary check the file extension
         # If the file extension .csv or .xlsx or .xml
         # Case 1
+        measures = ""
+        num_measures = 0
         if extension == ".csv" or extension == ".xlsx" or extension == ".xml":
             clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            upload_success = upload(extension, filename, uploaded_file, app.config["UPLOAD_FOLDER"], duplicatesInput,
+                                    MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             analyzed_columns = analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-            global column_list
-            column_list = analyzed_columns
+            set_columns(analyzed_columns)
             for analyzed in analyzed_columns.items():
-                print(analyzed)
-        
+                if analyzed[1] == "measure" or analyzed[1] == "largestMeasure":
+                    print(analyzed)
+                    measures += analyzed[0] + ","
+                    num_measures += 1
+            measures = measures[:-1]
+            set_measures(measures)
             if not upload_success:
                 return render_template("ErrorFileUpload.html")
 
@@ -109,10 +131,70 @@ def upload_file():
             print("Case 3: This file extension is '" + extension + "'. File upload error")
             return render_template("ErrorFileUpload.html")
 
+        donorschoose_scatterplot_matplotlib()
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
-        preview_data = getPreviewData(raw_data)
-        #return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
-        return redirect(url_for('success_file_upload', fileName = file_name))
+
+        if generate_report(num_measures, app.config["REPORT_FOLDER"], raw_data, filename) is False:
+            return render_template("ErrorFileUpload.html")
+
+        # return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
+        return redirect(url_for('success_file_upload', fileName=file_name, measures=measures))
+
+
+@app.route('/get_chart_variables', methods=['POST'])
+def chart_variables():
+    if request.method == 'POST':
+        measures = get_measures()
+        measure_list = [request.form['x'], request.form['y'], request.form['z']]
+        set_vars(measure_list)
+    return redirect(url_for('create_visualizations', fileName=file_name, measures=measures))
+
+
+@app.route('/Visualizations/<fileName>')
+def create_visualizations(fileName):
+    print(fileName)
+    return render_template('Visualizations.html', collection_name=fileName)
+
+
+def set_vars(vars):
+    global manual_vars
+    manual_vars = vars
+
+
+def get_vars():
+    return manual_vars
+
+
+def set_filename(filename):
+    global file_name
+    file_name = filename
+
+
+def get_filename():
+    return file_name
+
+
+def set_columns(columns):
+    global column_list
+    column_list = columns
+
+
+def get_measures():
+    return measure_list
+
+
+def set_measures(measure_names):
+    global measure_list
+    measure_list = measure_names
+
+
+def get_columns():
+    return column_list
+
+
+@app.route('/pandas_generated_report/<filename>')
+def pandas_generated_report(filename):
+    return render_template('/pandas_reports/' + filename + '_report.html')
 
 
 @app.route('/ErrorFileUpload')
@@ -128,7 +210,7 @@ def upload_file_page():
 @app.route('/SuccessfulUpload/<fileName>')
 def success_file_upload(fileName):
     print(fileName)
-    return render_template('SuccessfulUpload.html', collectionname=fileName)
+    return render_template('SuccessfulUpload.html', collection_name=fileName)
 
 
 @app.route('/UploadDev', methods=['POST'])
@@ -141,7 +223,7 @@ def upload_file_dev():
             return render_template('ErrorFileUpload.html')
 
         uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename))
-        return render_template('SuccessfulUpload.html')
+        return render_template('home.html')
 
 
 @app.route('/UploadDev')
@@ -189,6 +271,7 @@ def index():
 
 @app.route('/map')
 def map():
+    print("on map test")
     return render_template('map.html')
 
 
@@ -499,8 +582,8 @@ def donorschoose_mapdata():
     # 'Dim: Sex (3): Member ID: [1]: Total - Sex': True}
     # projects = collection.find(projection=FIELDS, limit=100000)
 
-    mapData = collection.find({ "DIM: Profile of Census Divisions (2247)": "Population, 2016" })
-    
+    mapData = collection.find({"DIM: Profile of Census Divisions (2247)": "Population, 2016"})
+
     json_mapdata = []
     for data in mapData:
         json_mapdata.append(data)
@@ -512,10 +595,9 @@ def donorschoose_mapdata():
 
 @app.route("/donorschoose/mapdataupdate")
 def donorschoose_mapadata_geoname():
-
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
     collection = connection[DBS_NAME]["MapData"]
-    data_filter = {"Dim: Sex (3): Member ID: [1]: Total - Sex" : {"$ne": "0"}}
+    data_filter = {"Dim: Sex (3): Member ID: [1]: Total - Sex": {"$ne": "0"}}
 
     mapData = collection.find(data_filter)
     json_mapdata = []
@@ -531,10 +613,10 @@ def donorschoose_mapadata_geoname():
 @app.route("/donorschoose/scatterplot")
 def donorschoose_scatterplot():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    collection = connection[DBS_NAME][file_name]
+    collection = connection[DBS_NAME][get_filename()]
 
     data = collection.find()
-    
+
     json_data = []
     for data in data:
         json_data.append(data)
@@ -548,42 +630,61 @@ def donorschoose_scatterplot():
 @app.route("/donorschoose/scatterplotmeasures")
 def donorschoose_scatterplot_measures():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    collection = connection[DBS_NAME][file_name]
+    file_name_call = get_filename()
+    collection = connection[DBS_NAME][file_name_call]
+    app.logger.debug('FILE NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + file_name_call)
     var1 = ""
     var2 = ""
     xVar = ""
     yVar = ""
-    ################ var1 & var2 values #################
-    for i in column_list.items():
-        if(i[1]== "measure"):
-            if (var1 == ""):
+    var1Max = ""
+    var2Max = ""
+    var2Min = ""
+    var1Min = ""
+    # var1 & var2 values
+    columns = get_columns()
+    app.logger.debug("no is a purple dinosaur")
+    for i in columns.items():
+        app.logger.debug(i)
+        if i[1] == "measure":
+            if var1 == "":
                 var1 = i[0]
+                app.logger.debug(
+                    'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
             else:
                 var2 = i[0]
+                app.logger.debug(
+                    'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
 
-    if(var1 != ""):
-        var1field = {var1 : True, "_id" : False}
-        var1Val = collection.find(projection=var1field).sort(var1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    if var1 != "":
+        app.logger.debug('in this if so var1 not null')
+        var1field = {var1: True, "_id": False}
+        var1Val = collection.find(projection=var1field).sort(var1).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
         for i in var1Val:
             for j in i.values():
                 var1Min = j
-        var1Val = collection.find(projection=var1field).sort(var1, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        var1Val = collection.find(projection=var1field).sort(var1, -1).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
         for i in var1Val:
             for j in i.values():
                 var1Max = j
-    if(var2 != ""):
-        var2field = {var2 : True, "_id" : False}
-        var2Val = collection.find(projection=var2field).sort(var2).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    if var2 != "":
+        app.logger.debug('in this if so var2 not null')
+        var2field = {var2: True, "_id": False}
+        var2Val = collection.find(projection=var2field).sort(var2).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
         for i in var2Val:
             for j in i.values():
                 var2Min = j
-        var2Val = collection.find(projection=var2field).sort(var2, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+        var2Val = collection.find(projection=var2field).sort(var2, -1).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
         for i in var2Val:
             for j in i.values():
                 var2Max = j
     ###########################################
 
-    if(var1Max > var2Max):
+    if var1Max > var2Max:
         yVar = var1
         yMax = var1Max
         yMin = var1Min
@@ -600,16 +701,18 @@ def donorschoose_scatterplot_measures():
 
     ################ z values #################
     zVar = ""
-    for i in column_list.items():
-        if(i[1]== "largestMeasure"):
+    zMax = ""
+    for i in columns.items():
+        if i[1] == "largestMeasure":
             zVar = i[0]
 
-    zfield = {zVar : True, "_id" : False}
-    zVal = collection.find(projection=zfield).sort(zVar).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    zfield = {zVar: True, "_id": False}
+    zVal = collection.find(projection=zfield).sort(zVar).collation({'locale': "en_US", 'numericOrdering': True}).limit(1)
     for i in zVal:
         for j in i.values():
             zMin = j
-    zVal = collection.find(projection=zfield).sort(zVar, -1).collation({ 'locale': "en_US", 'numericOrdering': True }).limit(1)
+    zVal = collection.find(projection=zfield).sort(zVar, -1).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
     for i in zVal:
         for j in i.values():
             zMax = j
@@ -617,8 +720,9 @@ def donorschoose_scatterplot_measures():
     print("X: " + xVar + " Max: " + xMax + " Min: " + xMin)
     print("Y: " + yVar + " Max: " + yMax + " Min: " + yMin)
     print("Z: " + zVar + " Max: " + zMax + " Min: " + zMin)
-    data = {"x": xVar, "xMin":xMin, "xMax":xMax, "y": yVar, "yMin":yMin, "yMax":yMax,"z": zVar, "zMin":zMin, "zMax":zMax}
-    
+    data = {"x": xVar, "xMin": xMin, "xMax": xMax, "y": yVar, "yMin": yMin, "yMax": yMax, "z": zVar, "zMin": zMin,
+            "zMax": zMax}
+
     json_data = json.dumps(data, default=json_util.default)
     connection.close()
     return json_data
@@ -627,16 +731,147 @@ def donorschoose_scatterplot_measures():
 ####################################################################################################################
 @app.route("/donorschoose/scatterplotdimensions")
 def donorschoose_scatterplot_dimensions():
+    app.logger.info("test log")
+    #columns = analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+    columns = get_columns()
 
     dimensions = []
-    for i in column_list.items():
-        if(i[1] == "dimension"):
+    for i in columns.items():
+        if (i[1] == "dimension"):
             dimensions.append(i[0])
     json_data = json.dumps(dimensions, default=json_util.default)
-    print(json_data)
+    # print(json_data)
     return json_data
 
 
 ####################################################################################################################
+
+@app.route("/donorschoose/manualcharts")
+def manual_charts():
+
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    file_name_call = get_filename()
+    collection = connection[DBS_NAME][file_name_call]
+
+    measures = get_vars()
+    xVar = measures[0]
+    yVar = measures[1]
+    zVar = measures[2]
+    xMax = ""
+    yMax = ""
+    zMax = ""
+    xMin = ""
+    yMin = ""
+    zMin = ""
+    xField = {xVar:True, "_id":False}
+    yField = {yVar:True, "_id":False}
+    zField = {zVar:True, "_id":False}
+
+    # x values
+    xVal = collection.find(projection=xField).sort(xVar).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in xVal:
+        for j in i.values():
+            xMin = j
+    xVal = collection.find(projection=xField).sort(xVar, -1).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in xVal:
+        for j in i.values():
+            xMax = j
+
+    # y values
+    yVal = collection.find(projection=yField).sort(yVar).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in yVal:
+        for j in i.values():
+            yMin = j
+    yVal = collection.find(projection=yField).sort(yVar, -1).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in yVal:
+        for j in i.values():
+            yMax = j
+
+    # z values
+    zVal = collection.find(projection=zField).sort(zVar).collation(
+            {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in zVal:
+        for j in i.values():
+            zMin = j
+    zVal = collection.find(projection=zField).sort(zVar, -1).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
+    for i in zVal:
+        for j in i.values():
+            zMax = j
+
+    data = {"x": xVar, "xMin": xMin, "xMax": xMax, "y": yVar, "yMin": yMin, "yMax": yMax, "z": zVar, "zMin": zMin,
+            "zMax": zMax}
+
+    json_data = json.dumps(data, default=json_util.default)
+    connection.close()
+    return json_data
+
+####################################################################################################################
+
+@app.route("/donorschoose/scatterplotmatplotlib")
+def donorschoose_scatterplot_matplotlib():
+    columns = get_columns()
+    image_name = get_filename()
+
+    fig = plt.figure()
+
+    np.random.seed(19680801)
+    N = 50
+    xVar = ""
+    yVar = ""
+    area = 10
+    measureList = []
+    plot_counter = 0
+    colors = np.random.rand(N)
+    for i in columns.items():
+        if (i[1] == "measure"):
+            yVar = i[0]
+            measureList.append(i[0])
+        if (i[1] == "largestMeasure"):
+            xVar = i[0]
+            measureList.append(i[0])
+
+    possible_plots = len(measureList) * len(measureList)
+    plot_position = 0
+
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME][file_name]
+
+    for eachx in measureList:
+        for eachy in measureList:
+            plot_counter += 1
+            plotx = 0
+            ploty = 0
+            num_rows = np.ceil(possible_plots / 5)
+            fig.tight_layout()
+            fig.set_size_inches(15, num_rows * 2.5)
+
+            temp = fig.add_subplot(num_rows, 5, plot_counter)
+            XYFIELDS = {eachx: True, eachy: True, "_id": False}
+            xyData = collection.find(projection=XYFIELDS)
+
+            xArray = []
+            yArray = []
+
+            for row in xyData:
+                xArray.append(float(row[eachx]))
+                yArray.append(float(row[eachy]))
+
+            temp.scatter(xArray, yArray, s=area, c="g", alpha=1)
+            temp.set(xlabel=eachx, ylabel=eachy)
+
+    try:
+        os.remove("/html/static/scatter.png")
+    except:
+        print("Nothing to remove")
+    fig.savefig("html/static/scatter.png")
+    json_data = json.dumps(columns, default=json_util.default)
+    connection.close()
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

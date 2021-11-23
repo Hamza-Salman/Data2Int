@@ -21,7 +21,7 @@ def xlsx_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, 
     csvFile = open(path_to_file + "/" + COLLECTION_NAME + ".csv", 'r')
     reader = csv.DictReader(csvFile)
 
-    if (duplicatesInput == "NoDupes"):
+    if duplicatesInput == "NoDupes":
         # print(reader)
         no_dupes = []
         for each in reader:

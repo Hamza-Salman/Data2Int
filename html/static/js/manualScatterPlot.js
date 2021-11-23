@@ -14,7 +14,7 @@ let zMax;
 let dimensions;
 
 d3.queue()
-    .defer(d3.json, "/donorschoose/scatterplotmeasures")
+    .defer(d3.json, "/donorschoose/manualcharts")
     .defer(d3.json, "/donorschoose/scatterplotdimensions")
     .await(drawChart)
 
