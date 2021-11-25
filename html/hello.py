@@ -32,6 +32,9 @@ ALLOWED_EXTENSIONS = {'csv'}
 # app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+
+
+#app.config["REPORT_FOLDER"] = "/var/www/data2int.com/html/templates/pandas_reports"
 app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
 app.config["MAX_FILE_SIZE"] = 10485760
 
@@ -53,9 +56,11 @@ measure_list = ""
 #     else:
 #         return false
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 @app.route('/Upload', methods=['POST'])
 def upload_file():
@@ -106,21 +111,35 @@ def upload_file():
         elif extension == ".json":
             clean_database(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             print("Case 2: This file extension is " + extension)
-            uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            try:
+                os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
+                uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+            except:
+                uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                print("file already exists")
             with open(app.config["UPLOAD_FOLDER"] + "/" + filename) as json_file:
                 json_data = json.load(json_file)
 
             # scan the file for a virus
-            has_virus = virus_scan(uploaded_file, app.config["UPLOAD_FOLDER"])
-
-            # check the scan result
-            if has_virus:
-                # Check if the file exists at the specified directory first before deleting
-                if os.path.exists(app.config["UPLOAD_FOLDER"] + "/" + filename):
-                    os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
-                    return render_template("ErrorFileUpload.html")
+            # has_virus = virus_scan(uploaded_file, app.config["UPLOAD_FOLDER"])
+            #
+            # # check the scan result
+            # if has_virus:
+            #     # Check if the file exists at the specified directory first before deleting
+            #     if os.path.exists(app.config["UPLOAD_FOLDER"] + "/" + filename):
+            #         os.remove(app.config["UPLOAD_FOLDER"] + "/" + filename)
+            #         return render_template("ErrorFileUpload.html")
 
             json_upload(json_data, filename, duplicatesInput, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            analyzed_columns = analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
+            set_columns(analyzed_columns)
+            for analyzed in analyzed_columns.items():
+                if (analyzed[1] == "measure" or analyzed[1] == "largestMeasure"):
+                    print(analyzed)
+                    measures += analyzed[0] + ","
+                    num_measures += 1
+            measures = measures[:-1]
+            set_measures(measures)
             # Json file upload
         # Everything else
         # Render error file upload page
@@ -146,10 +165,12 @@ def chart_variables():
         set_vars(measure_list)
     return redirect(url_for('create_visualizations', fileName=file_name, measures=measures))
 
+
 @app.route('/Visualizations/<fileName>')
 def create_visualizations(fileName):
     print(fileName)
     return render_template('Visualizations.html', collection_name=fileName)
+
 
 def set_vars(vars):
     global manual_vars
@@ -158,6 +179,7 @@ def set_vars(vars):
 
 def get_vars():
     return manual_vars
+
 
 def set_filename(filename):
     global file_name
@@ -176,6 +198,7 @@ def set_columns(columns):
 def get_measures():
     return measure_list
 
+
 def set_measures(measure_names):
     global measure_list
     measure_list = measure_names
@@ -183,6 +206,7 @@ def set_measures(measure_names):
 
 def get_columns():
     return column_list
+
 
 @app.route('/pandas_generated_report/<filename>')
 def pandas_generated_report(filename):
@@ -352,6 +376,11 @@ def clusters():
     return render_template('Clusters.html')
 
 
+@app.route('/Jupyter')
+def jupyter():
+    return render_template('jupyter.html')
+
+
 @app.route('/UsefulResources')
 def useful_resources():
     return render_template('UsefulResources.html')
@@ -407,7 +436,7 @@ def data_mining():
     return render_template('DataMining.html')
 
 
-@app.route('/mathplotlib')
+@app.route('/matplotlib')
 def mathplotlib():
     return render_template('matplotlib.html')
 
@@ -546,6 +575,10 @@ def regr():
 def sem():
     return render_template('sem.html')
 
+@app.route('/PersonalProjectHS')
+def PersonalProjectHS():
+    return render_template('HS_PersonalProject.html')
+
 
 @app.route("/donorschoose/projects")
 def donorschoose_projects():
@@ -619,7 +652,7 @@ def donorschoose_scatterplot_measures():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
     file_name_call = get_filename()
     collection = connection[DBS_NAME][file_name_call]
-    app.logger.debug('FILE NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + file_name_call)
+    app.logger.debug('FILE NAME' + file_name_call)
     var1 = ""
     var2 = ""
     xVar = ""
@@ -637,11 +670,11 @@ def donorschoose_scatterplot_measures():
             if (var1 == ""):
                 var1 = i[0]
                 app.logger.debug(
-                    'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
+                    'column NAME' + i[0])
             else:
                 var2 = i[0]
                 app.logger.debug(
-                    'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
+                    'column NAME' + i[0])
 
     if (var1 != ""):
         app.logger.debug('in this if so var1 not null')
@@ -797,8 +830,8 @@ def manual_charts():
     connection.close()
     return json_data
 
-####################################################################################################################
 
+####################################################################################################################
 @app.route("/donorschoose/scatterplotmatplotlib")
 def donorschoose_scatterplot_matplotlib():
     columns = get_columns()
@@ -852,10 +885,10 @@ def donorschoose_scatterplot_matplotlib():
             temp.set(xlabel=eachx, ylabel=eachy)
 
     try:
-        os.remove("/html/static/scatter.png")
+        os.remove("/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/" + image_name)
     except:
         print("Nothing to remove")
-    fig.savefig("html/static/scatter.png")
+    fig.savefig("/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/static/" + image_name)
     json_data = json.dumps(columns, default=json_util.default)
     connection.close()
 

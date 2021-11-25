@@ -42,7 +42,7 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
 
                 if data_dict not in no_dupes:
                     no_dupes.append(data_dict)
-                
+
             collection.insert_many(no_dupes)
         else:
             for rows in stud:

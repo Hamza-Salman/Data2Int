@@ -15,16 +15,15 @@ def csv_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
     reader = csv.DictReader(csvFile)
 
     if (duplicatesInput == "NoDupes"):
-        #print(reader)
+        # print(reader)
         no_dupes = []
         for each in reader:
             if each not in no_dupes:
                 no_dupes.append(each)
-                
+
         collection.insert_many(no_dupes)
     else:
-        print("uploading")
+        print("Uploading Now")
         collection.insert_many(reader)
-        print("done")
-    
-    connection.close();
+        print("Upload Complete")
+    connection.close()

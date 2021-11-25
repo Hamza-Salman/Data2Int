@@ -58,13 +58,13 @@
 
     function ready (error, data, mapData, mapUpdates) {
 
-        const g = svg.append('g')
-
+        const g = svg.append('g');
+        console.log(data);
         var divisions = topojson.feature(data, data.objects.canada_divisions).features
 
-        console.log(divisions)
-        console.log(mapData)
-        console.log(mapUpdates)
+        console.log(divisions);
+        console.log(mapData);
+        console.log(mapUpdates);
 
         g.selectAll(".division")
             .data(divisions)

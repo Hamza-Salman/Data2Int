@@ -13,7 +13,7 @@ def pandas_profile(uploaded_file, path_to_file, DB_HOST, DB_PORT, DB_Name):
     with open(path_to_file + "/" + uploaded_file) as csv_file:
         csvReader = csv.reader(csv_file, delimiter=',')
         list_of_columns = []
-        #get list of columns 
+        #get list of columns
         for row in csvReader:
             list_of_columns = row
             break
