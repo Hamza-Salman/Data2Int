@@ -244,14 +244,179 @@
 
         </div>
 
-        </div>
-
         <div class="tab-pane fade" id="pills-code" role="tabpanel" aria-labelledby="pills-code-tab">
+            <h3>Getting Started</h3>
+
+            <p>Programming using the Flask engine is fairly simple. After importing the Flask object from the flask module,
+        you will need to set this object equal to '__main__' to get it to run. Within the Flask object, you can use the config property
+        to set any important variables to the application, such as file paths or other constant variables.</p>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import json
+                    import os
+                    import sys
+                    import logging
+
+                    from bson import json_util
+                    from flask import Flask, render_template, request, redirect, url_for
+
+                    app = Flask(__name__)
+
+                    app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+                    app.config["REPORT_FOLDER"] = "/var/www/data2int.com/html/templates/reports"
+
+                    if __name__ == '__main__':
+                        app.run(host='0.0.0.0', port=5000, debug=True)
+                    </script>
+                </code>
+            </pre><br>
+
+        <h3>Creating a Layout</h3>
+            <p>Webpages in Flask use a standard '.html' extension, unlike other popular web frameworks these days. However, it
+            is simple to give your website a common look and feel using Flask. Start out with a base layout that you want your web pages to inherit.
+            This could be named anything. In our case, we called ours 'base.html'. Then inside the main div, you can use the  { % block content %}
+            { % endblock % } to populate content inside that div from your child pages.</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    <!DOCTYPE html>
+                    <html lang="en">
+                    <head>
+                        //Use this to give your webpages a common page naming convention
+                        //the titles from your child pages will populate within the block portion
+                        <title>Data to Intelligence - { % block title %}{ % endblock % }</title>
+                    </head>
+
+                    <body>
+
+                    //Use the url_for function to reference urls created in your Python Flask script
+                    <a href="{{ url_for('home') }}">Home</a>
+
+                    <div class="main">
+                    { % block content %}
+                    //child page content will be automatically populated in here
+                    { % endblock %}
+                    </div>
+
+                    </body>
+                    </script>
+                </code>
+            </pre><br>
+
+        <h3>Creating a webpage</h3>
+            <p>Webpages in Flask need the line { % extends "base.html" %} to be able to use a base layout page.
+            They also need the content to be contained within the { % block content %} and { % endblock %} tags. Otherwise,
+            building a webpage in Flask is differs very little from traditional web development.</p>
+
+            <p>In your Python Flask script, you can also define custom routing for your webpages. To do this, place the annotation
+            @app.route(yourpage) above a function, and then within that function, return the desired webpage using render_template().</p>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+
+                    //HTML
+                    { % extends "base.html" %}
+                    { % block title %}Home{ % endblock %} //Use this to define a subtitle for your webpage
+
+                    { % block content %}
+                    //insert webpage content
+                    { % endblock %}
+
+                    </script>
+                </code>
+            </pre><br>
+
+            <h3>Routing and Request Methods</h3>
+
+            <p>In your Python Flask script, you can also define custom routing for your webpages. To do this, place the annotation
+            @app.route(yourpage) above a function, and then within that function, return the desired webpage using render_template().
+            You can also use the @app.route annotation to define if the page should accept any request methods like GET, POST, PUT, or DELETE.</p>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    //A standard routing that will just produce a '/' and return to the Home page
+                    @app.route('/')
+                    def home():
+                        return render_template('home.html')
+
+                    //A customized route that dynamically populates the url with the filename
+                    @app.route('/SuccessfulUpload/<fileName>')
+                    def success_file_upload(fileName):
+                        print(fileName)
+                        return render_template('SuccessfulUpload.html', collection_name=fileName)
+
+                    //This page expects a POST method incoming; we used this upload files
+                    @app.route('/UploadDev', methods=['POST'])
+                    def upload_file_dev():
+                        if request.method == 'POST':
+                            uploaded_file = request.files['file']
+
+                        if uploaded_file.filename == "":
+                            return render_template('ErrorFileUpload.html')
+
+                        uploaded_file.save(os.path.join(app.config["UPLOAD_FOLDER"], uploaded_file.filename))
+                        return render_template('home.html')
+
+                    </script>
+                </code>
+            </pre><br>
+
 
         </div>
 
         <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
+            <div class="accordion" id="accordionGuide-links">
 
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="false" aria-controls="collapseOne">
+                                Flask Documentation
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://flask.palletsprojects.com/en/2.0.x/">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>Official documentation for the Flask library.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                Learn Flask for Python - Full Tutorial
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                         data-parent="#accordionGuide-links">
+                        <div class="card-body">
+                            <div class="description">
+                                <a target="_blank"
+                                   href="https://www.youtube.com/watch?v=Z1RJmh_OqeA">Link</a>
+                                <p><strong>Description</strong><br></p>
+                                <p>YouTube tutorial on using Flask from freeCodeCamp</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
 
 

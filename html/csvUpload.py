@@ -23,11 +23,11 @@ def csv_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
             if each not in no_dupes:
                 no_dupes.append(each)
 
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(no_dupes)
     else:
         print("uploading")
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(reader)
         print("done")
     

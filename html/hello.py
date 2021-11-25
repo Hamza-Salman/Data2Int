@@ -27,13 +27,14 @@ app.logger.setLevel(logging.DEBUG)
 ALLOWED_EXTENSIONS = {'csv'}
 
 # app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
-# app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
+app.config["REPORT_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/pandas_reports"
 # app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 # app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
-app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
-app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
+# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+# app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -707,7 +708,8 @@ def donorschoose_scatterplot_measures():
             zVar = i[0]
 
     zfield = {zVar: True, "_id": False}
-    zVal = collection.find(projection=zfield).sort(zVar).collation({'locale': "en_US", 'numericOrdering': True}).limit(1)
+    zVal = collection.find(projection=zfield).sort(zVar).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
     for i in zVal:
         for j in i.values():
             zMin = j
@@ -737,7 +739,7 @@ def donorschoose_scatterplot_dimensions():
 
     dimensions = []
     for i in columns.items():
-        if (i[1] == "dimension"):
+        if i[1] == "dimension":
             dimensions.append(i[0])
     json_data = json.dumps(dimensions, default=json_util.default)
     # print(json_data)

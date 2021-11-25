@@ -30,10 +30,10 @@ def xlsx_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, 
 
         print(seconds_until_end_of_day().seconds)
 
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(no_dupes)
     else:
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(reader)
 
     connection.close()
