@@ -44,7 +44,7 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
                 if data_dict not in no_dupes:
                     no_dupes.append(data_dict)
 
-            collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+            collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
             collection.insert_many(no_dupes)
         else:
             for rows in stud:
@@ -52,7 +52,7 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
                 for cols in childTags:
                     data_dict[cols] = rows.find(cols).text
 
-                collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+                collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
                 collection.insert(data_dict)
 
         xml_file.close()  # Close XML file to reduce the risk of being unwarranted modified or read.

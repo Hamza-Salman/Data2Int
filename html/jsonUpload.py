@@ -22,10 +22,10 @@ def json_upload(json_data, uploaded_file, duplicatesInput, DB_HOST, DB_PORT, DB_
             if i not in no_dupes:
                 no_dupes.append(i)
 
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(no_dupes)
     else:
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(json_data)
 
     connection.close()
