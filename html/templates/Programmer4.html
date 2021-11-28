@@ -519,7 +519,7 @@
                     csvFile = open(path_to_file + "/" + uploaded_file, 'r')
                     reader = csv.DictReader(csvFile)
 
-                    collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day().seconds)
+                    collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
                     collection.insert_many(reader)
 
                     connection.close()
@@ -565,15 +565,37 @@
         vaccination rates compared between Ontario cities/PHUs, case count comparisons between Ontario and other provinces, etc. These visualizations will be used to uncover
         persisting trends and give an overall analysis of how Ontario has fared the pandemic up to this point. We'll also use this compare between cities/PHUs how they each have
         fared the pandemic in comparison to each other.</p>
-    </div>
+
+        <style> /* set the CSS */
+        path {
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+        .axis path,
+        .axis line {
+            fill: none;
+            stroke: grey;
+            stroke-width: 1;
+            shape-rendering: crispEdges;
+        }
+
+        .legend {
+            font-size: 16px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+        </style>
+
+        -<div id="charts">
+            <!-- load the d3.js library -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+            <script src="/static/js/markCovidGraphs.js"></script>
+        </div>
 
     </div>
 
-
-
-
-
-
+    </div>
 
 
 
