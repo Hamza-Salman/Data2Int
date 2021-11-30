@@ -616,22 +616,6 @@ def donorschoose_covid_genome_data():
     # print(json_mapdata)
     return json_data
 
-
-#@app.route("/donorschoose/genomemapdataupdate")
-#def donorschoose_mapadata_geoname():
-    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
-    collection = connection[DBS_NAME]["MapData"]
-    data_filter = {"Dim: Sex (3): Member ID: [1]: Total - Sex": {"$ne": "0"}}
-
-    mapData = collection.find(data_filter)
-    json_mapdata = []
-    for data in mapData:
-        json_mapdata.append(data)
-    json_mapdata_final = json.dumps(json_mapdata, default=json_util.default)
-    connection.close()
-
-    return json_mapdata_final
-
 ####################################################################################################################
 @app.route("/donorschoose/scatterplot")
 def donorschoose_scatterplot():
