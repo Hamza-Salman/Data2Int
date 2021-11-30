@@ -280,6 +280,9 @@ def document_library():
 @app.route('/Programmer1')
 def programmer1():
     return render_template('Programmer1.html')
+@app.route('/DBPersonalProject')
+def dbpersonalproject():
+    return render_template('DBPersonalProject.html')
 
 
 @app.route('/Programmer2')
@@ -560,6 +563,7 @@ def donorschoose_projects():
     return json_projects
 
 
+#################################################################################################################
 @app.route("/donorschoose/mapdata")
 def donorschoose_mapdata():
     connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
@@ -595,6 +599,38 @@ def donorschoose_mapadata_geoname():
 
     return json_mapdata_final
 
+####################################################################################################################
+
+@app.route("/donorschoose/covid_genome_data")
+def donorschoose_covid_genome_data():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME]["covid_genome_data"]
+
+    data = collection.find()
+
+    json_data = []
+    for data in data:
+        json_data.append(data)
+    json_data = json.dumps(json_data, default=json_util.default)
+    connection.close()
+    # print(json_mapdata)
+    return json_data
+
+
+#@app.route("/donorschoose/genomemapdataupdate")
+#def donorschoose_mapadata_geoname():
+    connection = MongoClient(MONGODB_HOST, MONGODB_PORT)
+    collection = connection[DBS_NAME]["MapData"]
+    data_filter = {"Dim: Sex (3): Member ID: [1]: Total - Sex": {"$ne": "0"}}
+
+    mapData = collection.find(data_filter)
+    json_mapdata = []
+    for data in mapData:
+        json_mapdata.append(data)
+    json_mapdata_final = json.dumps(json_mapdata, default=json_util.default)
+    connection.close()
+
+    return json_mapdata_final
 
 ####################################################################################################################
 @app.route("/donorschoose/scatterplot")

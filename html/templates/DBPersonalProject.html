@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<title>DB Personal Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/static/css/prism.css">
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="DBPersonalProject" class="w3-bar-item w3-button"><b>DB</b>Personal Project</a>
+    <!-- Float links to the right. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="/" class="w3-bar-item w3-button">Back To Data2Int</a>
+      <a href="mailto:belt0023@algonquinlive.com" class="w3-bar-item w3-button">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1500px;" id="home">
+  <img class="w3-image " src="{{url_for('static', filename='covid_pic.jpg')}}" alt="Architecture" width="1500px" height="800px">
+  <div class="w3-display-middle w3-margin-top w3-center">
+  
+    <h1 class="w3-xxlarge w3-text-white"><span class="w3-padding w3-black w3-opacity-min"><b>COVID-19 Genome Project</b></span>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content w3-padding" style="max-width:1564px">
+
+
+ <!-- About Section -->
+ <class="w3-container w3-padding-32" id="about">
+  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">About</h3>
+  <h4>The goal of this project is to analyza a dataset on the COVID-19 genome and preform data analysis to 
+    essentially determine what kind of patterns this different genomes contain. <br/>
+
+    Dataset I will be using: <a href="https://www.ncbi.nlm.nih.gov/datasets/coronavirus/genomes/">NCBI Dataset</a>
+
+    <br/><br/> 
+    This Dataset contains the coronavirus viral genome and protein sequences in a csv format. I will be analyzing this data to find common patterns and correlations that can provide with more usefull information about the data that I am analyzing.
+
+    <br/> <br/> 
+
+    As a result, we will be showcasing how we can turn raw data into some usefull information that can benefit analysis.
+  </h4>
+
+  <hr/>
+  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">First Step: Pre-Processing</h3>
+  <h4>First we have to analyze the data and figure out which commlums are relevant for analysis.
+  </h4>
+  <img src="{{url_for('static', filename='unprocessed_data_ss.PNG')}}" alt="unprocessed data" width="1300" height="700">
+
+  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Result</h3>
+  <h4>After removing unnecessary collums that are irrelevent for what we are looking for lets continue to the next step.
+  </h4>
+  <img src="{{url_for('static', filename='cleaned_data_ss.PNG')}}" alt="unprocessed data" width="1300" height="700">
+
+  <hr/>
+  <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Second Step: Analysis</h3>
+  <h4>Now lets use the Data 2 Int tool and generate a report using pandas profiling! </h4>
+  <br>
+  <h4>As you can see, there is alot of interesting information that can be discovered thanks to Data2Int report tool that is generated. Very Cool!</h4>
+
+  <iframe src="{{url_for('static', filename='ncbi_datasets.csv_Profiling_Report.html')}}" height="800" width="1200" title="pandas_generated_report"></iframe>
+
+  <!-- Project Section -->
+  <div class="w3-container w3-padding-32" id="projects">
+    <h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">COVID-19 Genome Project</h3>
+
+  <h4>Finnally, lets use d3 and generate a cool vizualizations and plot the data that we selected. Please see the source code attached below so you can see how this was implemented!</h4>
+  </div>
+  <div class="map">
+    <style>
+      .center {
+        margin: auto;
+        width: 73.7%;
+        border: 5px solid #FFFF00;
+      }
+       .country {
+            fill: #bada55;
+            stroke: black;
+            stroke-width: 0.5;
+        }
+        .selected {
+            fill: lightgray;
+        }
+        .low {
+            fill: lightyellow;
+        }
+        .lowmid {
+            fill: rgb(255, 255, 175);
+        }
+        .mid {
+            fill: rgb(255, 255, 129);
+        }
+        .midhigh {
+            fill: lightsalmon;
+        }
+        .high {
+            fill: salmon;
+        }
+        .extreme {
+            fill: darkred;
+        }
+        #map {
+            border: 1px solid #000000;
+            max-width: 1402px;
+            max-height: 912px;
+        }
+        #tableData {
+            border: 1px solid #000000;
+            width: 1800px;
+            font-size: small;
+        }
+        </style>
+        <body>
+          
+            <div id="map" ></div>
+            <div id="tableData"></div>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="https://d3js.org/d3.v4.min.js"></script>
+            <script src="https://d3js.org/topojson.v1.min.js"></script>
+            <script src="/static/js/danteMap.js"></script>
+            </body>
+
+
+  </div>
+</div>
+  
+<hr/>
+ 
+<!-- End page content -->
+</div>
+
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Here is the code I used to generate this visualization</p>
+<br/><br/>
+<pre>
+  <code class="language-javascript">
+      <script type="prism-html-markup">
+        (function() {
+          var margin = {top: 50, left: 50, right: 50, bottom: 50},
+          height = 1010 - margin.top - margin.bottom,
+          width = 1500 - margin.left - margin.right;
+          
+      
+          var svg = d3.select("#map")
+              .append("svg")
+              .attr("height", height)
+              .attr("width", width)//*1.8
+              .attr("style", "background-color:rgb(202, 223, 230)")
+              .append("g")
+              .attr("transform", "translate(" + (width-2100) + "," + (height-1200) + ")");
+      
+          d3.queue()
+            .defer(d3.json, "/static/geojson/worldGeo.topojson")
+            .defer(d3.json, "/donorschoose/covid_genome_data")
+            .await(ready)
+      
+          var projection = d3.geoMercator()
+              .translate([ width, height])
+              .scale(180)
+      
+          var path = d3.geoPath()
+              .projection(projection)
+      
+      
+          var tabulate = function (data,columns) {
+              var table = d3.select('#tableData').append('table')
+                  var thead = table.append('thead')
+                  var tbody = table.append('tbody')
+              
+                  thead.append('tr')
+                  .selectAll('th')
+                      .data(columns)
+                      .enter()
+                  .append('th')
+                      .text(function (d) { return d })
+              
+                  var rows = tbody.selectAll('tr')
+                      .data(data)
+                      .enter()
+                  .append('tr')
+              
+                  var cells = rows.selectAll('td')
+                      .data(function(row) {
+                          return columns.map(function (column) {
+                              return { column: column, value: row[column] }
+                      })
+                  })
+                  .enter()
+                  .append('td')
+                  .text(function (d) { return d.value })
+              
+              return table;
+          }
+      
+          function ready (error, data, mapData) {
+              console.log(data)
+              const g = svg.append('g')
+      
+              var countries = topojson.feature(data, data.objects.worldGeo).features
+              
+              console.log(countries)
+              console.log(mapData)
+              
+              g.selectAll(".country")
+                  .data(countries)
+                  .enter().append("path")
+                  .attr("class", "country")
+                  .attr("d", path)
+                  .attr("Country", function(d) {
+                      return d.properties.sovereignt; 
+                  })
+                  .attr("colorClass", "test")
+                  .classed("low", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                      console.log(thisCountry)
+                      console.log(countryId)
+                      console.log(mapData.Country)
+                      try {
+                      var thisData = mapData.filter(x => x["Country"] === countryId).length
+      
+                      console.log(thisData)
+                      if (thisData < 1) {
+                          this.setAttribute("colorClass", "low")
+                          return true
+                      }else {
+                          return false
+                      }
+                      } catch {
+                              console.log("not found")
+                              return true;
+                      }
+                      
+                  })
+                  .classed("lowmid", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                     // console.log(mapData.filter(x => x == thisCountry).length)
+                      var countryId = thisCountry.properties.sovereignt
+                      try {
+                         // var data = mapData.filter(x => x == thisCountry).length
+                         var thisData = mapData.filter(x => x["Country"]  === countryId).length
+      
+                          if (thisData > 1 && thisData < 500) {
+                              this.setAttribute("colorClass", "lowmid")
+                              return true
+                          }else {
+                              return false
+                          }
+                          } catch {
+                                  console.log("not found")
+                                  return true;
+                          }
+                          
+                  })
+                  .classed("mid", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                      try {
+                          var thisData = mapData.filter(x => x["Country"]  === countryId).length
+                          if (thisData > 500 && thisData < 1000) {
+                              this.setAttribute("colorClass", "mid")
+                              return true
+                          }else {
+                              return false
+                          }
+                          } catch {
+                                  console.log("not found")
+                                  return true;
+                          }
+                          
+                  })
+                  .classed("midhigh", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                      try {
+                          var thisData = mapData.filter(x => x["Country"]  === countryId).length
+                          if (thisData > 1000 && thisData < 2000) {
+                              this.setAttribute("colorClass", "midhigh")
+                              return true
+                          }else {
+                              return false
+                          }
+                          } catch {
+                                  console.log("not found")
+                                  return true;
+                          }
+                          
+                  })
+                  .classed("high", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                      try {
+                          var thisData = mapData.filter(x => x["Country"]  === countryId).length
+                          if (thisData > 2000 && thisData < 5000) {
+                              this.setAttribute("colorClass", "high")
+                              return true
+                          }else {
+                              return false
+                          }
+                          } catch {
+                                  console.log("not found")
+                                  return true;
+                          }
+                          
+                  })
+                  .classed("extreme", function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                      try {
+                         var thisData = mapData.filter(x => x["Country"]  === countryId).length
+                         
+                          if (thisData > 5000) {
+                              this.setAttribute("colorClass", "extreme")
+                              return true
+                          }else {
+                              return false
+                          }
+                          } catch {
+                                  console.log("not found")
+                                  return true;
+                          }
+                          
+                  })
+                  .on('mouseenter', function(d){
+                      d3.select(this).classed("low", false)
+                      d3.select(this).classed("lowmid", false)
+                      d3.select(this).classed("mid", false)
+                      d3.select(this).classed("midhigh", false)
+                      d3.select(this).classed("high", false)
+                      d3.select(this).classed("extreme", false)
+                      d3.select(this).classed("selected", true)
+                  })
+                  .on('mouseout', function(d){
+                      d3.select(this).classed(this.getAttribute("colorClass"), true)
+                      d3.select(this).classed("selected", false)
+                  })
+                  .on('click', function(d) {
+                      var thisCountry = countries.find(x => x.properties.sovereignt == this.getAttribute("Country"))
+                      var countryId = thisCountry.properties.sovereignt
+                     
+                          console.log(mapData.filter(x => x["Country"] === countryId))
+                      //var thisData = mapData.find(x => x["Country"] === countryId) //THIS IS NEEDED
+                       $("#tableData").html("");
+                       var columns = ['Nucleotide_Accession', 'Species_Taxonomy_Id','Species_Name','Virus_Genus','Virus_Family', 'Isolate_Name','Nucleotide_Length', 'Sequence_Type','Nuc_Completeness', 'Continent', 'Country', 'City', 'Host_Taxonomy_ID']
+                       var country_data = mapData.filter(x => x["Country"] === countryId)
+                       tabulate(country_data,columns)
+      
+      
+              svg.selectAll(".country")
+                  .append('title')
+                  .text(d => d.properties.sovereignt)
+              svg.call(d3.zoom().on('zoom', () => {
+                  g.attr('transform', d3.event.transform)
+              }))
+      
+          })
+          }
+      })();
+      </script>
+  </code>
+</pre>
+<script src="/static/js/prism-whitespace.js"></script>
+</footer>
+
+</body>
+</html>
