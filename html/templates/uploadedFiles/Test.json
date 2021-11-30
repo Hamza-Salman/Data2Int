@@ -1,0 +1,32 @@
+[
+  {
+    "_id": 6,
+    "name": "Daniel Blake",
+    "class": "student",
+    "level": 5
+  },
+  {
+    "_id": 7,
+    "name": "Kaiden Toph",
+    "class": "student",
+    "level": 5
+  },
+  {
+    "_id": 8,
+    "name": "Harry Samuel",
+    "class": "student",
+    "level": 5
+  },
+  {
+    "_id": 9,
+    "name": "Michael Grover",
+    "class": "student",
+    "level": 5
+  },
+  {
+    "_id": 10,
+    "name": "Brandon Lee",
+    "class": "student",
+    "level": 5
+  }
+]

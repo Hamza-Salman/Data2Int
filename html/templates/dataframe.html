@@ -36,6 +36,159 @@
                 datatype of each column, which is extremely
                 useful for knowing if the dataset needs more cleanup.</p>
 
+            <h3>Creating a DataFrame</h3>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+
+                        # multi-dimensional array of data
+                        prices = [[200, 354], [514, 341], [460, 620]]
+
+                        # Specify headers for the table columns and rows
+                        cities = ["Toronto", "Vancouver", "New York"]
+                        airlines = ["Air Canada", "WestJet"]
+
+                        # Create data frame, and print to the console
+                        df = p.DataFrame(prices, index=cities, columns=airlines)
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong>
+            <img src="/templates/resources/dataframe-creating.png" alt="output of above code">
+
+            <h3>Missing data</h3>
+
+            <p>If you encounter datasets with missing data, you can use the numpy module to fill in any cells with NaN
+            as a value to what you choose, though most commonly, zero is recommended to avoid contaminating the data.</p>
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Replace all NaN values with 0
+                        df.fillna(0)
+
+                        # print
+                        print(df)
+
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/templates/resources/dataframe-fillna.png" alt="output of above code">
+
+            <p>You can also use the interpolate() function to interpolate these values.</p>
+
+            <p>The other option as well is to drop any NaN values</p>
+
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                        import pandas as p
+                        import numpy as n
+
+                        # multi-dimensional array of data
+                        prices = {'Toronto':[200, 354, n.nan, 725],
+                                    'Vancouver': [514, 341, 560, n.nan],
+                                    'New York':[n.nan, 420, 460, 620]}
+
+                        airlines = ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"]
+
+                        # Create data frame
+                        df = p.DataFrame(prices, index=airlines)
+
+                        # Drop all NaN values
+                        df.dropna()
+
+                        # print
+                        print(df)
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/templates/resources/dataframe-dropna.png" alt="output of above code">
+
+            <h3>Iteration</h3>
+            <p>You can also loop through a dataset's rows or columns as well. Iterating though a data frame's columns,
+                is fairly straight forward. You can treat the DataFrame as a list, and select a particular index to select a certain column.
+                To iterate and select rows, treat the dataframe like a 2D array and use <i>.iterrows()</i> to loop through.
+            </p>
+
+            <h4>Columns</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                            'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                            'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # export the columns to a list
+                    columns = list(df)
+
+                    for x in columns:
+                        # printing the second column in the list
+                        print(df[x][1])
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/templates/resources/dataframe-itercols.png" alt="output of above code">
+
+            <h4>Rows</h4>
+
+            <pre>
+                <code class="language-javascript">
+                    <script type="prism-python">
+                    import pandas as p
+
+                    # data dictionary
+                    data = {'city': ["Ottawa", "Toronto", "Vancouver", "New York"],
+                    'airline': ["Air Canada", "WestJet", "Porter Airlines", "Air Transat"],
+                    'price': [510, 420, 380, 298]}
+
+                    # create the frame using the data dictionary
+                    df = p.DataFrame(data)
+
+                    # iterating over rows using iterrows() function
+                    for x, y in df.iterrows():
+                        print(x, y)
+                        print()
+                    </script>
+                </code>
+            </pre>
+
+            <br/><strong>Output:</strong><br/>
+            <img src="/templates/resources/dataframe-iterrows.png" alt="output of above code">
+
+            <br/><br/><small>Source: <a target="_blank" href="https://towardsdatascience.com/a-simple-guide-to-pandas-dataframes-b125f64e1453">Towards Data Science: A Simple Guide to Pandas DataFrames</a></small>
+
+
         </div>
         <div class="tab-pane fade" id="pills-links" role="tabpanel" aria-labelledby="pills-links-tab">
             <div class="accordion" id="accordionGuide-links">

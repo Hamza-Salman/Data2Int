@@ -26,13 +26,15 @@ app.logger.setLevel(logging.DEBUG)
 
 ALLOWED_EXTENSIONS = {'csv'}
 
-#app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+# app.config["UPLOAD_FOLDER"] = "/var/www/data2int.com/html/templates/uploadedFiles"
+app.config["UPLOAD_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/uploadedFiles"
+app.config["REPORT_FOLDER"] = "C:/Users/Mark/PycharmProjects/Data2Int/html/templates/pandas_reports"
 # app.config["UPLOAD_FOLDER"] = "H:/Project 2/uploaded_files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
 # app.config["UPLOAD_FOLDER"] = "H:/School/New Semester/Data2Int/Test-File/Uploaded-Files"
 # app.config["UPLOAD_FOLDER"] = "C:/Users/dante/Desktop/PROJECT CLASS/data2int/Data2Int/html/templates/dante"
-app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
-app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
+# app.config["UPLOAD_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/uploaded_files"
+# app.config["REPORT_FOLDER"] = "/mnt/c/Users/Hamza/Desktop/Data2Int-GitHub/Data2Int/html/templates/pandas_reports"
 app.config["MAX_FILE_SIZE"] = 10485760
 
 MONGODB_HOST = 'localhost'
@@ -45,7 +47,7 @@ file_name = ""
 column_list = {}
 manual_vars = []
 measure_list = ""
-#sys.stdout = open("/var/www/data2int.com/html/outputconsole.txt", "a")
+# sys.stdout = open("/var/www/data2int.com/html/outputconsole.txt", "a")
 
 # def max_filesize(filesize):
 #     if int(filesize) <= app.config["MAX_FILE_SIZE"]:
@@ -53,9 +55,11 @@ measure_list = ""
 #     else:
 #         return false
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 @app.route('/Upload', methods=['POST'])
 def upload_file():
@@ -93,7 +97,7 @@ def upload_file():
             analyzed_columns = analyze_data(filename, app.config["UPLOAD_FOLDER"], MONGODB_HOST, MONGODB_PORT, DBS_NAME)
             set_columns(analyzed_columns)
             for analyzed in analyzed_columns.items():
-                if (analyzed[1] == "measure" or analyzed[1] == "largestMeasure"):
+                if analyzed[1] == "measure" or analyzed[1] == "largestMeasure":
                     print(analyzed)
                     measures += analyzed[0] + ","
                     num_measures += 1
@@ -131,8 +135,8 @@ def upload_file():
         donorschoose_scatterplot_matplotlib()
         raw_data = fetchData(collectionName, MONGODB_HOST, MONGODB_PORT, DBS_NAME)
 
-        if (generate_report(num_measures, app.config["REPORT_FOLDER"], raw_data, filename) == False):
-           return render_template("ErrorFileUpload.html")
+        if generate_report(num_measures, app.config["REPORT_FOLDER"], raw_data, filename) is False:
+            return render_template("ErrorFileUpload.html")
 
         # return render_template('SuccessfulUpload.html', tables=[preview_data.to_html(classes='data', header='true')])
         return redirect(url_for('success_file_upload', fileName=file_name, measures=measures))
@@ -146,10 +150,12 @@ def chart_variables():
         set_vars(measure_list)
     return redirect(url_for('create_visualizations', fileName=file_name, measures=measures))
 
+
 @app.route('/Visualizations/<fileName>')
 def create_visualizations(fileName):
     print(fileName)
     return render_template('Visualizations.html', collection_name=fileName)
+
 
 def set_vars(vars):
     global manual_vars
@@ -158,6 +164,7 @@ def set_vars(vars):
 
 def get_vars():
     return manual_vars
+
 
 def set_filename(filename):
     global file_name
@@ -176,6 +183,7 @@ def set_columns(columns):
 def get_measures():
     return measure_list
 
+
 def set_measures(measure_names):
     global measure_list
     measure_list = measure_names
@@ -184,9 +192,10 @@ def set_measures(measure_names):
 def get_columns():
     return column_list
 
+
 @app.route('/pandas_generated_report/<filename>')
 def pandas_generated_report(filename):
-    return render_template('/pandas_reports/'+ filename +'_report.html')
+    return render_template('/pandas_reports/' + filename + '_report.html')
 
 
 @app.route('/ErrorFileUpload')
@@ -353,6 +362,11 @@ def paraquet():
 @app.route('/Clusters')
 def clusters():
     return render_template('Clusters.html')
+
+
+@app.route('/Jupyter')
+def jupyter():
+    return render_template('jupyter.html')
 
 
 @app.route('/UsefulResources')
@@ -648,13 +662,13 @@ def donorschoose_scatterplot_measures():
     var2Max = ""
     var2Min = ""
     var1Min = ""
-    ################ var1 & var2 values #################
+    # var1 & var2 values
     columns = get_columns()
     app.logger.debug("no is a purple dinosaur")
     for i in columns.items():
         app.logger.debug(i)
-        if (i[1] == "measure"):
-            if (var1 == ""):
+        if i[1] == "measure":
+            if var1 == "":
                 var1 = i[0]
                 app.logger.debug(
                     'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
@@ -663,7 +677,7 @@ def donorschoose_scatterplot_measures():
                 app.logger.debug(
                     'column NAMEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE' + i[0])
 
-    if (var1 != ""):
+    if var1 != "":
         app.logger.debug('in this if so var1 not null')
         var1field = {var1: True, "_id": False}
         var1Val = collection.find(projection=var1field).sort(var1).collation(
@@ -676,7 +690,7 @@ def donorschoose_scatterplot_measures():
         for i in var1Val:
             for j in i.values():
                 var1Max = j
-    if (var2 != ""):
+    if var2 != "":
         app.logger.debug('in this if so var2 not null')
         var2field = {var2: True, "_id": False}
         var2Val = collection.find(projection=var2field).sort(var2).collation(
@@ -691,7 +705,7 @@ def donorschoose_scatterplot_measures():
                 var2Max = j
     ###########################################
 
-    if (var1Max > var2Max):
+    if var1Max > var2Max:
         yVar = var1
         yMax = var1Max
         yMin = var1Min
@@ -710,11 +724,12 @@ def donorschoose_scatterplot_measures():
     zVar = ""
     zMax = ""
     for i in columns.items():
-        if (i[1] == "largestMeasure"):
+        if i[1] == "largestMeasure":
             zVar = i[0]
 
     zfield = {zVar: True, "_id": False}
-    zVal = collection.find(projection=zfield).sort(zVar).collation({'locale': "en_US", 'numericOrdering': True}).limit(1)
+    zVal = collection.find(projection=zfield).sort(zVar).collation(
+        {'locale': "en_US", 'numericOrdering': True}).limit(1)
     for i in zVal:
         for j in i.values():
             zMin = j
@@ -744,7 +759,7 @@ def donorschoose_scatterplot_dimensions():
 
     dimensions = []
     for i in columns.items():
-        if (i[1] == "dimension"):
+        if i[1] == "dimension":
             dimensions.append(i[0])
     json_data = json.dumps(dimensions, default=json_util.default)
     # print(json_data)
