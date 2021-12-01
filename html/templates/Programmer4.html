@@ -266,8 +266,8 @@
                     use the X-ApplicationID and X-SecretKey you wrote down earlier as strings in the header.
                 </li>
                 <pre>
-            <code class="language-javascript">
-                <script type="prism-python">
+                    <code class="language-javascript">
+                        <script type="prism-python">
                 import requests
                 import json
 
@@ -561,12 +561,11 @@
         <h3>Preface</h3>
 
         <p>The purpose of this project will be to analyze Covid-19 trends within the past year and a half, with a focus on trends in Ontario,
-        and possibly a comparison between other Canadian provinces. Topics of interest that I am hoping to cover are case counts per PHU in Ontario over time,
-        vaccination rates compared between Ontario cities/PHUs, case count comparisons between Ontario and other provinces, etc. These visualizations will be used to uncover
-        persisting trends and give an overall analysis of how Ontario has fared the pandemic up to this point. We'll also use this compare between cities/PHUs how they each have
-        fared the pandemic in comparison to each other.</p>
+        and a small comparison between other Canadian provinces. Topics of interest that I will cover are ICU admissions due to Covid-19 in Ontario,
+        vaccination rates across Ontario, case count comparisons between Ontario and other provinces, etc. These visualizations will be used to uncover
+        persisting trends and give an overall analysis of how Ontario has fared the pandemic up to this point.</p>
 
-        <style> /* set the CSS */
+        <style>
         path {
             stroke: steelblue;
             stroke-width: 2;
@@ -587,11 +586,520 @@
         }
         </style>
 
-        -<div id="charts">
+        <h4>Visualizing the Data</h4>
+        <div id="charts">
             <!-- load the d3.js library -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
             <script src="/static/js/markCovidGraphs.js"></script>
         </div>
+
+        <small><b>Data Sources: </b><br/>
+            Figure 1 and 2: <a target="_blank" href="https://data.ontario.ca/dataset/status-of-covid-19-cases-in-ontario/resource/ed270bb8-340b-41f9-a7c6-e8ef587e6d11">
+                Status of COVID-19 cases in Ontario</a><br/>
+            Figure 3: <a target="_blank" href="https://health-infobase.canada.ca/covid-19/">Areas in Canada with cases of COVID-19 as of November 29, 2021</a><br/>
+            Figure 4: <a target="_blank" href="https://data.ontario.ca/dataset/covid-19-vaccine-data-in-ontario/resource/8a89caa9-511c-4568-af89-7f2174b4378c">Ontario COVID-19 Vaccine data</a><br/>
+        </small>
+
+        <h4><br/>Analyzing the Data</h4>
+        <p>Figure 1 is a line graph displaying how many patients which are being admitted to the ICU due to Covid-19
+            across the province. The relationship between the data in this graph shows the fluctuation in admissions
+            over time since the pandemic began. It’s important to note that this metric was only starting to be tracked
+            as of May 2020, which explains the sharp increase in admissions from 0 in March and April 2020 to ~250 case
+            spike in May 2020. Largely through 2020, Ontario was able to keep the ICU admissions under control, until
+            about December 2020, when cases began to sharply increase and continued to do so into the beginning of 2021.
+            This spike can be attributed to gatherings over the Christmas and New Years holidays, as well as low uptake
+            of the vaccine at the time due to limited supplies available at the time. This spike in ICU counts can be
+            correlated with the stats in Figure 2, which also shows a sharp increase in ICU admissions due to Covid-19
+            beginning in December 2020  and by January 2, 2021, Ontario reported 3,363 new COVID-19 cases, "the most in
+            one day since the pandemic began." [1]</p>
+
+        <p>In early 2021, the province endured an even worse time keeping case counts and ICU admissions under control. The
+            province had enforced its 2nd strict province-wide lockdown, by December 26, 2020, which had been escalated
+            to a stay-at-home order by January 14, 2021.[1] By mid-February, the province had made a rash decision to lift the
+            stay-at-home order in most PHUs and reopen the province, despite many warnings from top health officials.
+            However, vaccine supply was still limited to mainly seniors and LTC residents. As well, the Alpha variant
+            was beginning to spread rapidly in areas that were open. "The combination of that optimism from a successful
+            lockdown leading to governments wanting to reopen and the background of these variants of concern emerging,
+            plus, delays in the vaccine arrival is setting up really this perfect storm for a massive third wave,”
+            said Dr. Brooks Fallis, a critical care physician in Toronto".[2] This forced the province to enact it’s third
+            province-wide lockdown and stay-at-home order which was in effect from April 3, 2021 to mid-June 2021. Palin
+            writes, with reference to Wave 2, "Restrictions were lifted too early, and some provincial governments failed
+            to bring in policies like paid sick leave that would suppress workplace outbreaks."[3] By late April, ICU
+            admissions spiked to ~900 patients being admitted to the ICU. Figure 2, shows a sharp increase from about 300,000
+            total cases at the start of 2021 to over 500,000 cases by April 2021.</p>
+
+        <p>Thankfully with a combination of stringent public health measures and increased vaccine availability. The
+            cases finally began to start plummeting around May 2021, and by July 2021, "over 77 per cent of the population
+            in Ontario ages 12 and over have received one dose of a COVID-19 vaccine and over 50 per cent have received a second dose"[4],
+            and the ICU steadily declining, the province entered Stage 3 of Reopening. Figure 4 shows the rate of vaccination Ontario
+            with both first and second doses. We largely see the curve stay flat until about late April, which is when key demographics,
+            like 40 and older were eligible for the increased supply of vaccines available. This also correlates to how sharply the ICU
+            admissions due to Covid-19 start to plummet in early May, as seen in Figure 1, because that's how long it takes for a person to gain
+            immunity from a first dose of either mRNA vaccine, "which takes 2 weeks after vaccination for the body to build protection (immunity)
+            against the virus." [5]</p>
+
+        <p>In Figure 2, since May 2021, we’ve seen a relatively flattening of new Covid-19 case counts in Ontario,
+            seeing only about an increase of about 100,000 cases over the past 6 months compared to over to about a 200,000
+            increase in reported cases, between April and June. This can largely be attributed to the rapid vaccine uptake in the province,
+            as well as the vaccines being more widely available since then. While the first year of the pandemic (March 2020 to April 2021)
+            sees the relationship between case counts and ICU admissions to Covid-19 as closely linked, adding vaccines to the equation seems to have largely
+            decoupled this relationship so far. Ontario saw a small increase in cases from August to October, due to the
+            circulation of the more transmissible Delta variant, but the province has since remained open with ICU admissions being significantly
+            lowered, compared to the spike in Wave 3, during Spring 2021.</p>
+
+        <p>Figure 3 shows a comparison of total Covid-19 cases to date across all provinces, as well as the Canadian
+            population as a whole. Looking objectively, Ontario is the clear leader to this point for Covid-19 cases;
+            there are several reasons for potentially for this:</p>
+
+        <ol>
+            <li>Ontario has the highest population per of any province or territory in Canada at 14,759,431 as of the
+                beginning of 2021, behind Quebec with a population of 8,579,370 people. This results in more cases in
+                general as well as more lengthy vaccine rollout to the general population. [6]</li>
+            <li>For most of the pandemic, the Conservative government offered little support to ailing business and
+                individuals struggling financially, such as no paid-sick leave for those needing to isolate,
+                in the middle of the third provincial lockdown. After a year of pandemic and calls from both opposition
+                government and top medical officials, the Ford government re-instituted 3 paid sick days, which "pays up
+                to $200 per day for workers taking time off due to being sick, displaying Covid-19 symptoms, need
+                vaccination, or experiencing mental health issues. [7]</li>
+            <li>The Ontario vaccine rollout program prioritized individuals by age for eligibility for the vaccine
+                at a staggered pace. The reasoning for not moving to essential workers immediately was justified by
+                "that most COVID-19 hospitalizations and deaths involve people over 50". [8] However, with the introduction
+                of more transmissible variants like Alpha and Delta, the program overlooked populations that were at
+                higher risk of contracting the virus, like public facing workers. By choosing this strategy,
+                this decision drove community spread more than it should’ve.</li>
+        </ol>
+
+        <p>However, Ontario and Quebec follow largely similar trajectories, being the highest populated provinces as well
+            as being geographic neighbors. While they do have a slightly lower total count, it’s clear that the provinces
+            with the highest populations were hit the hardest by the pandemic in general.</p>
+
+        <h4>Conclusion</h4>
+
+        <p> While Ontario did have a rocky start to 2021 managing the virus, the province has rebounded from the third wave,
+            keeping the province open and limiting new public health restrictions, other than the implementation of proof of vaccination.
+            However, with many of the population either past or approaching the 6 month mark past an individual’s 2nd dose of Covid-19 vaccine,
+            t will be interesting to see if the waning immunity will contribute to another large spike in ICU admissions.
+            As well, the discovery of a new variant of concern recently by the WHO, labelled Omicron, on November 26, 2021,[9] it is very difficult to
+            predict the future of this pandemic and how long the human race has until the virus can be considered endemic.
+            Overall, Ontario has been the hardest hit province by the pandemic. While there have been questionable decisions
+            made which did heavily impact this trajectory, like prematurely lifting the 2nd stay-at-home order before vaccine
+            uptake was well underway in the population, the leaders have done a good job of shifting strategies and
+            keeping both the ICU admissions and case counts to a manageable level up to this point.</p>
+
+        <small><b>Sources: </b><br/>
+             [1] Global News <a target="_blank" href="https://globalnews.ca/news/6859636/ontario-coronavirus-timeline/">
+                A timeline of COVID-19 in Ontario</a><br/>
+             [2] Global News <a target="_blank" href="https://globalnews.ca/news/7641757/canada-coronavirus-third-wave-explainer/">
+                ‘Perfect storm’: Is Canada headed for a third wave of COVID-19?</a><br/>
+             [3] CBC News Canada <a target="_blank" href="https://www.cbc.ca/news/canada/canadas-inevitable-third-wave-ontario-alberta-1.6008176">
+                Why warnings of a deadly 3rd wave in Canada may have gone unheeded</a><br/>
+             [4] Ontario Newsroom <a target="_blank" href="https://news.ontario.ca/en/release/1000501/ontario-moving-to-step-three-of-roadmap-to-reopen-on-july-16">
+                Ontario Moving to Step Three of Roadmap to Reopen on July 16</a><br/>
+             [5] Centres for Disease Control and Prevention <a target="_blank" href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/keythingstoknow.html">
+                Key Things to Know About COVID-19 Vaccines</a><br/>
+             [6] Statistics Canada<a target="_blank" href="https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000901">
+                Table 17-10-0009-01  Population estimates, quarterly</a><br/>
+             [7] CBC News Toronto <a target="_blank" href="https://www.cbc.ca/news/canada/toronto/ontario-paid-sick-leave-covid-19-april-28-2021-1.6005192">
+                Ontario details plan for 3 paid sick days after a year of mounting pressure</a><br/>
+             [8] CBC News Ottawa <a target="_blank" href="https://www.cbc.ca/news/canada/ottawa/ottawa-gatineau-covid19-vaccines-april22-1.5988537">
+                The Ottawa area's weekly COVID-19 vaccine checkup: April 22</a><br/>
+             [9] World Economic Forum <a target="_blank" href="https://www.weforum.org/agenda/2021/11/omicron-covid-19-variant-everything-we-know-so-far/">
+                Everything we know so far about the Omicron COVID-19 variant</a><br/>
+        </small>
+
+        <h5><br/>How I Did It:</h5>
+
+        <ol>
+            <li>After doing researching and finding appropriate datasets, I extracted the columns of data I needed to separate .csv files,
+            since you can't read from the same file at separate points.</li>
+            <li>Below is the the D3.js script I used to generate the four graphs:</li>
+        </ol>
+
+        <pre>
+            <code class="language-javascript">
+                <script type="prism-python">
+// Set the dimensions of the canvas / graph
+var	margin = {top: 30, right: 20, bottom: 30, left: 70},
+	width = 800 - margin.left - margin.right,
+	height = 440 - margin.top - margin.bottom;
+
+// Parse the date / time
+var	parseDate = d3.time.format("%Y-%m-%d").parse;
+
+var parseDateTime = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+
+// Set the ranges
+var	x = d3.time.scale().range([0, width]);
+var	y = d3.scale.linear().range([height, 0]);
+
+// Define the axes
+var	xAxis = d3.svg.axis().scale(x)
+	.orient("bottom").ticks(5);
+
+var	yAxis = d3.svg.axis().scale(y)
+	.orient("left").ticks(8);
+
+// Define the line
+var	valueline = d3.svg.line()
+	.x(function(d) { return x(d.Reported_Date); })
+	.y(function(d) { return y(d.Total_ICU_Covid_19); });
+
+var valueline2 = d3.svg.line()
+	.x(function(d) { return x(d.Reported_Date); })
+	.y(function(d) { return y(d.Total_Cases); })
+
+var valueline3 = d3.svg.line()
+	.x(function(d) { return x(d.date); })
+	.y(function(d) { return y(d.numconf); })
+
+var oneDoseVaccinatedLine = d3.svg.line()
+	.x(function(d) { return x(d.report_date); })
+	.y(function(d) { return y(d.total_individuals_at_least_one); })
+
+var twoDosesVaccinatedLine = d3.svg.line()
+	.x(function(d) { return x(d.report_date); })
+	.y(function(d) { return y(d.total_individuals_fully_vaccinated); })
+
+// Adds the svg canvas
+var	chart1 = d3.select("#charts")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("/static/js/datasources/ontarioicucovid.csv", function(error, data) {
+	data.forEach(function(d) {
+		d.Reported_Date = parseDate(d.Reported_Date);
+		d.Total_ICU_Covid_19 = +d.Total_ICU_Covid_19;
+	});
+
+	// Scale the range of the data
+	x.domain(d3.extent(data, function(d) { return d.Reported_Date; }));
+	y.domain([0, d3.max(data, function(d) { return d.Total_ICU_Covid_19; })]);
+
+	// Add the valueline path.
+	chart1.append("path")
+		.attr("class", "line")
+		.attr("d", valueline(data));
+
+	// Add the X Axis
+	chart1.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	chart1.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
+
+	chart1.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Figure 1: Ontario ICU Admissions Due to Covid-19");
+
+	  // text label for the y axis
+  	chart1.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("ICU Count");
+
+});
+
+// Adds the svg canvas
+var	chart2 = d3.select("#charts")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
+
+
+// Get the data
+d3.csv("/static/js/datasources/totalcases.csv", function(error, data) {
+	data.forEach(function(d) {
+		d.Reported_Date= parseDate(d.Reported_Date);
+		d.Total_Cases = +d.Total_Cases;
+	});
+
+	// Scale the range of the data
+	x.domain(d3.extent(data, function(d) { return d.Reported_Date; }));
+	y.domain([0, d3.max(data, function(d) { return d.Total_Cases; })]);
+
+	// Add the valueline path.
+	chart2.append("path")
+		.attr("class", "line")
+		.attr("d", valueline2(data));
+
+	// Add the X Axis
+	chart2.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	chart2.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
+
+	chart2.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Figure 2: Total Covid-19 Cases in Ontario");
+
+	// text label for the y axis
+  	chart2.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - (margin.left+30))
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Case Count");
+});
+
+// Set the dimensions of the canvas / graph
+var	chart3margin = {top: 30, right: 120, bottom: 30, left: 70},
+	chart3width = 800 - chart3margin.left - chart3margin.right,
+	chart3height = 440 - chart3margin.top - chart3margin.bottom;
+
+// Set the ranges
+x = d3.time.scale().range([0, chart3width]);
+y = d3.scale.linear().range([chart3height, 0]);
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(8);
+
+// Define the line
+var caseline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.numconf); });
+
+// Adds the svg canvas
+var chart3 = d3.select("#charts")
+    .append("svg")
+        .attr("width", chart3width + chart3margin.left + chart3margin.right + 100 )
+        .attr("height", chart3height + chart3margin.top + chart3margin.bottom)
+    .append("g")
+        .attr("transform",
+              "translate(" + (chart3margin.left + 30) +"," + chart3margin.top + ")");
+
+chart3.selectAll("svg").attr("id", function(d,i) { return i; });
+
+// Get the data
+d3.csv("/static/js/datasources/canadaconfirmedcases.csv", function(error, data) {
+    data.forEach(function(d) {
+		d.date = parseDate(d.date);
+		d.numconf = +d.numconf;
+    });
+
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.numconf; })]);
+
+    // Nest the entries by symbol
+    var dataNest = d3.nest()
+        .key(function(d) {return d.prname;})
+        .entries(data);
+
+    var color = d3.scale.category20b();   // set the colour scale
+
+    var legendSpace = chart3width / dataNest.length; // spacing for legend
+
+    // Loop through each symbol / key
+    dataNest.forEach(function(d,i) {
+
+        chart3.append("path")
+            .attr("class", "line")
+            .style("stroke", function() { // Add the colours dynamically
+                return d.color = color(d.key); })
+            .attr("d", caseline(d.values));
+
+        // Add the Legend
+        chart3.append("text")
+            .attr("x", 700) // spacing
+            .attr("y", i*(legendSpace/2))
+            .attr("class", "legend")    // style the legend
+            .style("fill", function() { // dynamic colours
+                return d.color = color(d.key); })
+            .text(d.key);
+
+    });
+
+    // Add the X Axis
+    chart3.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + chart3height + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    chart3.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+    chart3.append("text")
+        .attr("x", (chart3width / 2))
+        .attr("y", 0 - (chart3margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Figure 3: Covid-19 Cases Across Canada and All Provinces");
+
+
+	  // text label for the y axis
+  	chart3.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - (chart3margin.left + 30))
+      .attr("x",0 - (chart3height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Covid-19 Case Counts");
+
+});
+// Define the axes
+var	xAxis = d3.svg.axis().scale(x)
+	.orient("bottom").ticks(5);
+
+var	yAxis = d3.svg.axis().scale(y)
+	.orient("left").ticks(8);
+
+// Adds the svg canvas
+var	chart4 = d3.select("#charts")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
+
+
+// Get the data
+d3.csv("/static/js/datasources/covid_vaccine_doses_stats.csv", function(error, data) {
+	data.forEach(function(d) {
+		d.report_date = parseDateTime(d.report_date);
+		d.total_individuals_at_least_one = +d.total_individuals_at_least_one;
+		d.total_individuals_fully_vaccinated = +d.total_individuals_fully_vaccinated;
+	});
+
+	// Scale the range of the data
+	x.domain(d3.extent(data, function(d) { return d.report_date; }));
+	y.domain([0, d3.max(data, function(d) { return d.total_individuals_at_least_one; })],
+		[0, d3.max(data, function(d) { return d.total_individuals_fully_vaccinated; })]);
+
+	// Add the valueline path.
+	chart4.append("path")
+		.attr("class", "line")
+		.attr("d", oneDoseVaccinatedLine(data));
+
+	chart4.append("path")
+		.attr("class", "line")
+		.style("stroke", "red")
+		.attr("d", twoDosesVaccinatedLine(data))
+
+	// Add the Legend
+	chart4.append("text")
+            .attr("x", 240) // spacing
+            .attr("y", 100)
+            .attr("class", "legend")    // style the legend
+            .style("fill", "steelblue")
+            .text("First Doses");
+
+	// Add the Legend
+	chart4.append("text")
+            .attr("x", 410) // spacing
+            .attr("y", 200)
+            .attr("class", "legend")    // style the legend
+            .style("fill", "red")
+            .text("Second Doses");
+
+	// Add the X Axis
+	chart4.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	chart4.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
+
+	chart4.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Figure 4: Vaccination Rates in Ontario");
+
+	// text label for the y axis
+  	chart4.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - (margin.left+50))
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Doses administered");
+});
+
+
+                        </script>
+                    </code>
+                </pre>
+        <ol start="3">
+            <li>I then added this HTML to my programmer page which d3 generates to through my script. Note that you can use
+                script tags to contain the JavaScript directly in the HTML. I put it in a separate .js file to make debugging easier
+                and as a personal decision.</li>
+        </ol>
+
+    <pre>
+        <code  class="language-javascript">
+            <script type="prism-html-markup">
+
+                    <style>
+                    path {
+                    stroke: steelblue;
+                    stroke-width: 2;
+                    fill: none;
+                    }
+
+                    .axis path,
+
+                    .axis line {
+                    fill: none;
+                    stroke: grey;
+                    stroke-width: 1;
+                    shape-rendering: crispEdges;
+                    }
+
+                    .legend {
+                    font-size: 16px;
+                    font-weight: bold;
+                    text-anchor: middle;
+                    }
+                    </style>
+
+
+                  <div id="charts">
+                        <script src="https://d3js.org/d3.v4.min.js">< /script>
+                        <script src="/static/js/markCovidGraphs.js">< /script>
+                  </div>
+            </script>
+        </code>
+    </pre>
+
 
     </div>
 

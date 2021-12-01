@@ -6,6 +6,8 @@ var	margin = {top: 30, right: 20, bottom: 30, left: 70},
 // Parse the date / time
 var	parseDate = d3.time.format("%Y-%m-%d").parse;
 
+var parseDateTime = d3.time.format("%Y-%m-%dT%H:%M:%S").parse;
+
 // Set the ranges
 var	x = d3.time.scale().range([0, width]);
 var	y = d3.scale.linear().range([height, 0]);
@@ -29,6 +31,14 @@ var valueline2 = d3.svg.line()
 var valueline3 = d3.svg.line()
 	.x(function(d) { return x(d.date); })
 	.y(function(d) { return y(d.numconf); })
+
+var oneDoseVaccinatedLine = d3.svg.line()
+	.x(function(d) { return x(d.report_date); })
+	.y(function(d) { return y(d.total_individuals_at_least_one); })
+
+var twoDosesVaccinatedLine = d3.svg.line()
+	.x(function(d) { return x(d.report_date); })
+	.y(function(d) { return y(d.total_individuals_fully_vaccinated); })
 
 // Adds the svg canvas
 var	chart1 = d3.select("#charts")
@@ -239,4 +249,87 @@ d3.csv("/static/js/datasources/canadaconfirmedcases.csv", function(error, data) 
       .style("text-anchor", "middle")
       .text("Covid-19 Case Counts");
 
+});
+// Define the axes
+var	xAxis = d3.svg.axis().scale(x)
+	.orient("bottom").ticks(5);
+
+var	yAxis = d3.svg.axis().scale(y)
+	.orient("left").ticks(8);
+
+// Adds the svg canvas
+var	chart4 = d3.select("#charts")
+	.append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	.append("g")
+		.attr("transform", "translate(" + (margin.left + 50) + "," + margin.top + ")");
+
+
+// Get the data
+d3.csv("/static/js/datasources/covid_vaccine_doses_stats.csv", function(error, data) {
+	data.forEach(function(d) {
+		d.report_date = parseDateTime(d.report_date);
+		d.total_individuals_at_least_one = +d.total_individuals_at_least_one;
+		d.total_individuals_fully_vaccinated = +d.total_individuals_fully_vaccinated;
+	});
+
+	// Scale the range of the data
+	x.domain(d3.extent(data, function(d) { return d.report_date; }));
+	y.domain([0, d3.max(data, function(d) { return d.total_individuals_at_least_one; })],
+		[0, d3.max(data, function(d) { return d.total_individuals_fully_vaccinated; })]);
+
+	// Add the valueline path.
+	chart4.append("path")
+		.attr("class", "line")
+		.attr("d", oneDoseVaccinatedLine(data));
+
+	chart4.append("path")
+		.attr("class", "line")
+		.style("stroke", "red")
+		.attr("d", twoDosesVaccinatedLine(data))
+
+	// Add the Legend
+	chart4.append("text")
+            .attr("x", 240) // spacing
+            .attr("y", 100)
+            .attr("class", "legend")    // style the legend
+            .style("fill", "steelblue")
+            .text("First Doses");
+
+	// Add the Legend
+	chart4.append("text")
+            .attr("x", 410) // spacing
+            .attr("y", 200)
+            .attr("class", "legend")    // style the legend
+            .style("fill", "red")
+            .text("Second Doses");
+
+	// Add the X Axis
+	chart4.append("g")
+		.attr("class", "x axis")
+		.attr("transform", "translate(0," + height + ")")
+		.call(xAxis);
+
+	// Add the Y Axis
+	chart4.append("g")
+		.attr("class", "y axis")
+		.call(yAxis);
+
+	chart4.append("text")
+        .attr("x", (width / 2))
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")
+        .style("font-size", "16px")
+        .style("text-decoration", "underline")
+        .text("Figure 4: Vaccination Rates in Ontario");
+
+	// text label for the y axis
+  	chart4.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - (margin.left+50))
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Doses administered");
 });

@@ -1,5 +1,6 @@
 from pymongo import MongoClient, collection
 import json
+import random
 
 from calcDeleteTime import seconds_until_end_of_day
 
@@ -14,6 +15,11 @@ def json_upload(json_data, uploaded_file, duplicatesInput, DB_HOST, DB_PORT, DB_
     if json_data == "":
         return ""
 
+    index_num = random.randint(0, 10000)
+    index_name = "expire_date_time_" + str(index_num)
+
+    print(index_name)
+
 
     if (duplicatesInput == "NoDupes"):
         no_dupes = []
@@ -22,10 +28,10 @@ def json_upload(json_data, uploaded_file, duplicatesInput, DB_HOST, DB_PORT, DB_
             if i not in no_dupes:
                 no_dupes.append(i)
 
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
+        collection.create_index(index_name, expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(no_dupes)
     else:
-        collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
+        collection.create_index(index_name, expireAfterSeconds=seconds_until_end_of_day())
         collection.insert_many(json_data)
 
     connection.close()
