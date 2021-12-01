@@ -1,6 +1,8 @@
 import xml.etree.ElementTree as ET
 from calcDeleteTime import seconds_until_end_of_day
 
+import random
+
 from pymongo import MongoClient
 
 
@@ -12,6 +14,9 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
     connection = MongoClient(DB_HOST, DB_PORT)
 
     collection = connection[DB_Name][COLLECTION_NAME]
+
+    index_num = random.randint(0, 10000)
+    index_name = "expire_date_time_" + str(index_num)
 
     with open(path_to_file + "/" + uploaded_file) as xml_file:  # Open targeted file
         tree = ET.parse(path_to_file + "/" + uploaded_file)
@@ -44,7 +49,7 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
                 if data_dict not in no_dupes:
                     no_dupes.append(data_dict)
 
-            collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
+            collection.create_index(index_name, expireAfterSeconds=seconds_until_end_of_day())
             collection.insert_many(no_dupes)
         else:
             for rows in stud:
@@ -52,7 +57,7 @@ def xml_upload(uploaded_file, path_to_file, duplicatesInput, DB_HOST, DB_PORT, D
                 for cols in childTags:
                     data_dict[cols] = rows.find(cols).text
 
-                collection.create_index("expire_date_time", expireAfterSeconds=seconds_until_end_of_day())
+                collection.create_index(index_name, expireAfterSeconds=seconds_until_end_of_day())
                 collection.insert(data_dict)
 
         xml_file.close()  # Close XML file to reduce the risk of being unwarranted modified or read.
